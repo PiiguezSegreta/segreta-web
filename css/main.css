@@ -157,14 +157,20 @@ section {
   color: var(--cream);
   border: 1px solid #967B38;
 }
-.btn-primary:hover { opacity: 0.85; }
+.btn-primary:hover {
+  background-color: #967B38;
+  border-color: #967B38;
+}
 
 .btn-outline {
   background-color: #6E1717;
   color: var(--cream);
   border: 1px solid #967B38;
 }
-.btn-outline:hover { opacity: 0.85; }
+.btn-outline:hover {
+  background-color: #967B38;
+  border-color: #967B38;
+}
 
 .btn-ghost {
   background-color: #6E1717;
@@ -172,7 +178,10 @@ section {
   border: 1px solid #967B38;
   padding: 0.75rem 2rem;
 }
-.btn-ghost:hover { opacity: 0.85; }
+.btn-ghost:hover {
+  background-color: #967B38;
+  border-color: #967B38;
+}
 
 .btn-burgundy {
   background-color: var(--burgundy);
@@ -237,7 +246,7 @@ section {
 }
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--cream);
+  color: #967B38;
 }
 
 .nav-right {
@@ -735,6 +744,10 @@ section {
   overflow: hidden;
 }
 
+.brands-section .marquee-track {
+  overflow: visible;
+}
+
 .brands-section .label {
   text-align: center;
   display: block;
@@ -759,18 +772,17 @@ section {
 }
 
 .marquee-inner img {
-  height: 36px;
+  height: 52px;
   width: auto;
   object-fit: contain;
-  opacity: 0.65;
-  filter: grayscale(1) brightness(3);
+  opacity: 0.75;
   transition: opacity var(--duration) var(--ease),
-              filter var(--duration) var(--ease);
+              transform var(--duration) var(--ease);
 }
 
 .marquee-inner img:hover {
   opacity: 1;
-  filter: grayscale(0) brightness(1);
+  transform: scale(1.18);
 }
 
 @keyframes marquee-scroll {
