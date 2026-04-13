@@ -1,0 +1,62 @@
+{
+  "nav": {
+    "nosotros": "About",
+    "experiencias": "Experiences",
+    "partners": "Partners",
+    "reservar": "Reserve"
+  },
+  "home": {
+    "hero_location": "Vitacura · Santiago",
+    "hero_taglines": [
+      "Neapolitan pizza. Craft cocktails.",
+      "A place worth finding.",
+      "Vitacura's best-kept secret."
+    ],
+    "hero_cta_carta": "View Menu",
+    "hero_cta_reservar": "Reserve a Table",
+    "hero_cta_delivery": "Delivery",
+    "espiritu_label": "The Spirit",
+    "espiritu_title": "A secret worth sharing",
+    "espiritu_p1": "Segreta was born in a garage, hands deep in dough and a simple idea: do things right. Neapolitan pizza baked in a wood-fired oven, craft cocktails that surprise, and an atmosphere that makes you want to stay.",
+    "espiritu_p2": "We don't follow trends. We prefer the timeless, the authentic, what's meant to be savored slowly. That's the secret.",
+    "esp_label": "Specialties",
+    "esp_title": "What defines us",
+    "esp_pizza_title": "Neapolitan Pizza",
+    "esp_pizza_desc": "48h fermented dough, wood-fired oven at 400°C. Neapolitan tradition in every bite.",
+    "esp_cocteles_title": "Craft Cocktails",
+    "esp_cocteles_desc": "Unique, creative and well-executed cocktails. Our bar is the heart of the place.",
+    "esp_ambiente_title": "Unique Atmosphere",
+    "esp_ambiente_desc": "Mysterious, warm and full of character. A place that reveals itself over time.",
+    "frase": "Coming back was always part of the plan",
+    "brands_label": "Brands that accompany us",
+    "cta_label": "Reservations",
+    "cta_title": "Coming back was always part of the plan",
+    "cta_desc": "Reserve your table or plan your next event with us.",
+    "cta_reservar": "Reserve a Table",
+    "cta_evento": "Plan an Event",
+    "cta_carta": "View Menu",
+    "cta_delivery": "Delivery"
+  },
+  "footer": {
+    "nav_title": "Navigation",
+    "inicio": "Home",
+    "nosotros": "About",
+    "experiencias": "Experiences",
+    "partners": "Partners",
+    "carta": "Menu",
+    "delivery": "Delivery",
+    "reserva": "Reserve",
+    "contact_title": "Contact",
+    "tel_reservas": "+56 9 7630 1208",
+    "tel_delivery": "+56 9 9316 8620",
+    "hours_title": "Hours",
+    "hours": {
+      "lunes": "6:00 PM – 12:00 AM",
+      "martes": "1:00 PM – 1:00 AM",
+      "miercolsab": "1:00 PM – 2:00 AM",
+      "viernes": "1:00 PM – 3:00 AM",
+      "domingo": "1:00 PM – 10:00 PM"
+    },
+    "copyright": "Segreta Pizza & Bar — Arqueado de Barrera SA"
+  }
+}

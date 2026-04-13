@@ -1,0 +1,63 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Pretty URLs: /nosotros → /nosotros.html
+[[redirects]]
+  from = "/nosotros"
+  to = "/nosotros.html"
+  status = 200
+
+[[redirects]]
+  from = "/experiencias"
+  to = "/experiencias.html"
+  status = 200
+
+[[redirects]]
+  from = "/partners"
+  to = "/partners.html"
+  status = 200
+
+[[redirects]]
+  from = "/reservas"
+  to = "/reservas.html"
+  status = 200
+
+[[redirects]]
+  from = "/reservas_segreta"
+  to = "/reservas-segreta.html"
+  status = 200
+
+[[redirects]]
+  from = "/delivery"
+  to = "/delivery.html"
+  status = 200
+
+[[redirects]]
+  from = "/confirmacion_segreta"
+  to = "/confirmacion.html"
+  status = 200
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache agresivo para assets estáticos
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
