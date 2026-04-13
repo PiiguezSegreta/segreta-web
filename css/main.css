@@ -9,9 +9,9 @@
 /* ── 2. Variables de diseño ───────────────────────────────── */
 :root {
   /* Paleta de color */
-  --noir:          hsl(0, 0%, 3%);      /* #080808 — fondo principal */
-  --noir-mid:      hsl(0, 0%, 7%);      /* #121212 — fondo cards */
-  --noir-light:    hsl(0, 0%, 12%);     /* #1e1e1e — bordes, hover fondo */
+  --noir:          #000000;             /* negro puro — fondo principal */
+  --noir-mid:      #0a0a0a;             /* casi negro — fondo cards */
+  --noir-light:    #141414;             /* bordes, hover fondo */
   --ochre:         hsl(38, 44%, 40%);   /* dorado oscuro — acento principal */
   --ochre-light:   hsl(38, 44%, 55%);   /* dorado claro — hover, links */
   --ochre-dim:     hsl(38, 44%, 40%, 0.15); /* ochre muy suave para bordes */
@@ -153,9 +153,9 @@ section {
 }
 
 .btn-primary {
-  background-color: var(--ochre);
+  background-color: #6E1717;
   color: var(--cream);
-  border: 1px solid var(--ochre);
+  border: 1px solid #967B38;
 }
 .btn-primary:hover { opacity: 0.85; }
 
@@ -222,7 +222,7 @@ section {
 }
 
 .nav-logo img {
-  height: 34px;
+  height: 38px;
   width: auto;
 }
 
@@ -481,9 +481,9 @@ section {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    hsl(0, 0%, 3%, 0.45) 0%,
-    hsl(0, 0%, 3%, 0.6) 50%,
-    hsl(0, 0%, 3%, 0.85) 100%
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.45) 50%,
+    rgba(0, 0, 0, 0.75) 100%
   );
 }
 
@@ -740,13 +740,15 @@ section {
   height: 36px;
   width: auto;
   object-fit: contain;
-  opacity: 0.5;
-  filter: brightness(0) invert(1);
-  transition: opacity var(--duration) var(--ease);
+  opacity: 0.55;
+  filter: grayscale(1) brightness(5);
+  transition: opacity var(--duration) var(--ease),
+              filter var(--duration) var(--ease);
 }
 
 .marquee-inner img:hover {
   opacity: 1;
+  filter: grayscale(0) brightness(1.1);
 }
 
 @keyframes marquee-scroll {
