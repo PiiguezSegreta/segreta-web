@@ -767,22 +767,23 @@ section {
 .marquee-inner {
   display: flex;
   align-items: center;
-  gap: 4rem;
-  padding-inline: 2rem;
+  gap: 5rem;
+  padding-inline: 2.5rem;
 }
 
 .marquee-inner img {
-  height: 52px;
+  height: 64px;
   width: auto;
+  max-width: 140px;
   object-fit: contain;
-  opacity: 0.75;
+  opacity: 0.8;
   transition: opacity var(--duration) var(--ease),
               transform var(--duration) var(--ease);
 }
 
 .marquee-inner img:hover {
   opacity: 1;
-  transform: scale(1.18);
+  transform: scale(1.2);
 }
 
 @keyframes marquee-scroll {
