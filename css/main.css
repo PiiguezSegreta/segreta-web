@@ -523,9 +523,10 @@ section {
 }
 
 .hero-logo {
+  display: block;
   margin-inline: auto;
   margin-bottom: 2rem;
-  max-width: 220px;
+  max-width: none;
 }
 
 .hero-location {
