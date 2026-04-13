@@ -128,7 +128,7 @@
 
       <!-- Isotipo -->
       <a href="/" class="nav-logo" aria-label="Segreta — Inicio">
-        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:38px;width:auto;" />
+        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:56px;width:auto;" />
       </a>
 
       <!-- Links (desktop) -->
@@ -141,14 +141,13 @@
       <!-- Derecha -->
       <div class="nav-right">
         <!-- Selector de idioma -->
-        <div class="lang-selector" aria-label="Seleccionar idioma">
-          <button class="lang-btn active" data-lang="es" aria-label="Español">ES</button>
-          <span class="lang-separator">|</span>
-          <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
-          <span class="lang-separator">|</span>
-          <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
-          <span class="lang-separator">|</span>
-          <button class="lang-btn" data-lang="it" aria-label="Italiano">IT</button>
+        <div class="lang-selector">
+          <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+            <option value="it">Italiano</option>
+          </select>
         </div>
 
         <!-- CTA -->
@@ -183,7 +182,7 @@
         src="/assets/img/segreta-logo.png"
         alt="Segreta Pizza &amp; Bar"
         class="hero-logo fade-up fade-up-1"
-        style="height:auto;width:clamp(260px,30vw,420px);"
+        style="height:auto;width:clamp(320px,40vw,560px);"
       />
       <p class="hero-location fade-up fade-up-2" data-i18n="home.hero_location">Vitacura · Santiago</p>
 
@@ -196,10 +195,12 @@
       </div>
 
       <div class="hero-actions fade-up fade-up-4">
-        <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="home.hero_cta_carta">Ver Carta</a>
-        <a href="/reservas" class="btn btn-primary" data-i18n="home.hero_cta_reservar">Reservar Mesa</a>
-        <a href="/delivery" class="btn btn-ghost" data-i18n="home.hero_cta_delivery">Delivery</a>
-        <a href="/experiencias#eventos" class="btn btn-ghost" data-i18n="home.hero_cta_evento">Agenda tu Evento</a>
+        <div class="hero-actions-row">
+          <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="home.hero_cta_carta">Ver Carta</a>
+          <a href="/reservas" class="btn btn-primary" data-i18n="home.hero_cta_reservar">Reservar Mesa</a>
+          <a href="/delivery" class="btn btn-ghost" data-i18n="home.hero_cta_delivery">Delivery</a>
+        </div>
+        <a href="/experiencias#eventos" class="btn btn-ghost btn-full" data-i18n="home.hero_cta_evento">Agenda tu Evento</a>
       </div>
     </div>
   </section>

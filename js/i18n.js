@@ -72,9 +72,14 @@ function applyTranslations() {
   // Atributo lang del html
   document.documentElement.lang = currentLang;
 
-  // Actualizar botones de idioma activo
+  // Actualizar botones de idioma activo (por si quedan en alguna página)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
+  });
+
+  // Actualizar select de idioma
+  document.querySelectorAll('.lang-select').forEach(sel => {
+    sel.value = currentLang;
   });
 }
 
@@ -97,9 +102,14 @@ async function initI18n() {
   translations = await loadTranslations(currentLang);
   applyTranslations();
 
-  // Conectar botones de idioma
+  // Conectar botones de idioma (legacy)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLang(btn.dataset.lang));
+  });
+
+  // Conectar select de idioma
+  document.querySelectorAll('.lang-select').forEach(sel => {
+    sel.addEventListener('change', () => setLang(sel.value));
   });
 }
 
