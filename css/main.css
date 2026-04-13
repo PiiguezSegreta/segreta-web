@@ -212,6 +212,7 @@ section {
 }
 
 .nav-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -219,6 +220,13 @@ section {
   max-width: var(--container);
   margin-inline: auto;
   padding-inline: var(--gutter);
+}
+
+/* Links centrados absolutamente respecto al nav completo */
+.nav-links {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav-logo {
@@ -234,6 +242,7 @@ section {
   display: flex;
   align-items: center;
   gap: 2.5rem;
+  /* el centrado lo maneja el bloque position:absolute de arriba */
 }
 
 .nav-links a {
@@ -767,19 +776,21 @@ section {
 .marquee-inner {
   display: flex;
   align-items: center;
-  gap: 5rem;
-  padding-inline: 2.5rem;
+  gap: 6rem;
+  padding-inline: 3rem;
 }
 
 .marquee-inner img {
-  height: 64px;
+  height: 96px;
   width: auto;
-  max-width: 140px;
+  max-width: 180px;
   object-fit: contain;
-  opacity: 0.8;
+  opacity: 0.85;
   transition: opacity var(--duration) var(--ease),
               transform var(--duration) var(--ease);
 }
+
+/* Mistral se mantiene en su tamaño original via inline style en el HTML */
 
 .marquee-inner img:hover {
   opacity: 1;
