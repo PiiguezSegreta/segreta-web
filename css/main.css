@@ -378,7 +378,8 @@ section {
 }
 
 .footer-brand img {
-  height: 30px;
+  height: auto;
+  width: 140px;
   margin-bottom: 1.25rem;
 }
 
@@ -1232,8 +1233,8 @@ section {
   background: linear-gradient(
     to bottom,
     hsla(0, 0%, 3%, 0.1) 0%,
-    hsla(0, 0%, 3%, 0.5) 55%,
-    hsla(0, 0%, 3%, 0.92) 100%
+    hsla(0, 0%, 3%, 0.6) 60%,
+    hsla(0, 0%, 3%, 1.0) 100%
   );
 }
 
@@ -1248,12 +1249,18 @@ section {
 
 .nos-hero-content .label {
   margin-bottom: 1rem;
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
 }
 
 .nos-hero-content h1 {
   color: var(--cream);
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-size: clamp(3rem, 8vw, 6.5rem);
   font-weight: 300;
+  text-align: center;
   line-height: 1.1;
 }
 
@@ -1305,8 +1312,9 @@ section {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    hsla(0, 0%, 3%, 0.0) 30%,
-    hsla(0, 0%, 3%, 0.85) 100%
+    hsla(0, 0%, 3%, 0.0) 20%,
+    hsla(0, 0%, 3%, 0.7) 65%,
+    hsla(0, 0%, 3%, 1.0) 100%
   );
 }
 
@@ -1322,6 +1330,8 @@ section {
 
 .nos-fullimg-content .label {
   margin-bottom: 0.75rem;
+  display: block;
+  text-align: center;
 }
 
 .nos-fullimg-content h2 {
@@ -1329,6 +1339,7 @@ section {
   font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 300;
   line-height: 1.15;
+  text-align: center;
 }
 
 /* Cita */
@@ -1342,7 +1353,7 @@ section {
   font-style: italic;
   font-weight: 300;
   font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-  color: var(--ocre);
+  color: var(--ochre-light);
   text-align: center;
   max-width: 760px;
   margin-inline: auto;
@@ -1358,9 +1369,9 @@ section {
 
 .nos-trabaja {
   text-align: center;
-  padding-top: 2.5rem;
-  border-top: 1px solid hsla(0, 0%, 100%, 0.08);
-  margin-top: 1rem;
+  margin-top: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
