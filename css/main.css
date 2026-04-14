@@ -1203,3 +1203,235 @@ section {
     direction: ltr;
   }
 }
+
+/* ── Nosotros ─────────────────────────────────────────────── */
+
+/* Hero */
+.nos-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  overflow: hidden;
+}
+
+.nos-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.nos-hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 3%, 0.1) 0%,
+    hsla(0, 0%, 3%, 0.5) 55%,
+    hsla(0, 0%, 3%, 0.92) 100%
+  );
+}
+
+.nos-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.nos-hero-content .label {
+  margin-bottom: 1rem;
+}
+
+.nos-hero-content h1 {
+  color: var(--cream);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Historia */
+.nos-historia {
+  background: var(--noir);
+  padding-block: var(--section-py);
+}
+
+.nos-historia-inner {
+  max-width: 768px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.nos-historia-inner p {
+  color: var(--cream-dim);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.85;
+  margin-bottom: 1.75rem;
+  text-align: center;
+}
+
+/* Full-image sections (El Alma, La Familia) */
+.nos-fullimg {
+  position: relative;
+  height: 60vh;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.nos-fullimg-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.nos-fullimg-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 3%, 0.0) 30%,
+    hsla(0, 0%, 3%, 0.85) 100%
+  );
+}
+
+.nos-fullimg-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.nos-fullimg-content .label {
+  margin-bottom: 0.75rem;
+}
+
+.nos-fullimg-content h2 {
+  color: var(--cream);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+/* Cita */
+.nos-cita {
+  background: var(--noir);
+  padding-block: clamp(4rem, 8vw, 7rem);
+}
+
+.nos-cita blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  color: var(--ocre);
+  text-align: center;
+  max-width: 760px;
+  margin-inline: auto;
+  line-height: 1.6;
+  padding-inline: var(--gutter);
+}
+
+/* Familia texto */
+.nos-familia-texto {
+  background: var(--noir);
+  padding-block: var(--section-py);
+}
+
+.nos-trabaja {
+  text-align: center;
+  padding-top: 2.5rem;
+  border-top: 1px solid hsla(0, 0%, 100%, 0.08);
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nos-trabaja .label {
+  letter-spacing: 0.2em;
+}
+
+/* Ubicación */
+.nos-ubicacion {
+  background: var(--noir);
+  padding-block: var(--section-py);
+}
+
+.nos-ubicacion .section-header {
+  margin-bottom: 2.5rem;
+}
+
+.nos-ubicacion .section-header h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+}
+
+.nos-mapa {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.nos-mapa iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+.nos-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+.nos-ctas-row {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.nos-ctas-row .btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* btn-burgundy si no está definido */
+.btn-burgundy {
+  background-color: var(--burgundy);
+  color: var(--cream);
+  border: 1px solid var(--burgundy);
+}
+.btn-burgundy:hover { opacity: 0.85; }
+
+@media (max-width: 600px) {
+  .nos-ctas-row {
+    flex-direction: column;
+  }
+  .nos-mapa {
+    aspect-ratio: 4 / 3;
+  }
+}
