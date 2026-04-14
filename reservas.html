@@ -11,11 +11,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css?v=8" />
+  <link rel="stylesheet" href="/css/main.css?v=9" />
 </head>
 <body>
 
-  <!-- NAV (igual en todas las páginas) -->
   <nav class="site-nav">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="Segreta — Inicio">
@@ -35,7 +34,7 @@
             <option value="it">🇮🇹 IT</option>
           </select>
         </div>
-        <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
+        <a href="/reservas" class="btn btn-primary active" data-i18n="nav.reservar">Reservar</a>
         <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -49,19 +48,25 @@
     <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
-  <!-- HERO -->
+  <!-- ══════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════ -->
   <section class="page-hero">
     <div class="hero-bg" style="background-image: url('/assets/img/segreta-bar.jpg');"></div>
     <div class="page-hero-content">
       <span class="label">Reservas</span>
       <h1>Reserva tu Mesa</h1>
-      <p style="margin-top:0.5rem; color: var(--cream-dim); font-size:0.9rem;">Alonso de Córdova 3080, Vitacura · +56 9 7630 1208</p>
+      <p style="margin-top:0.75rem; color:var(--cream-dim); font-size:0.85rem; letter-spacing:0.05em;">
+        Alonso de Córdova 3080, Vitacura &nbsp;·&nbsp; <a href="tel:+56976301208" style="color:var(--ocre);">+56 9 7630 1208</a>
+      </p>
     </div>
   </section>
 
-  <!-- IFRAME COVERMANAGER -->
+  <!-- ══════════════════════════════════════════════════════
+       IFRAME COVERMANAGER
+  ══════════════════════════════════════════════════════ -->
   <section style="padding-block: 0; background: var(--noir-mid);">
-    <div class="iframe-container" style="min-height: 700px;">
+    <div class="iframe-container" style="min-height:700px;">
       <iframe
         src="https://www.covermanager.com/reservation/module_restaurant/restaurante-segreta-pizzeria/spanish"
         title="Sistema de reservas Segreta"
@@ -71,7 +76,61 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══════════════════════════════════════════════════════
+       INFO: HORARIOS + CONTACTO + EVENTOS
+  ══════════════════════════════════════════════════════ -->
+  <section style="background: var(--noir); padding-block: var(--section-py);">
+    <div class="container">
+      <div class="reservas-info-grid">
+
+        <!-- Horarios -->
+        <div class="reservas-info-block reveal">
+          <span class="label">Horarios</span>
+          <div class="divider"></div>
+          <table class="horarios-table horarios-table-lg">
+            <tbody>
+              <tr><td>Lunes</td><td>18:00 – 00:00</td></tr>
+              <tr><td>Martes</td><td>13:00 – 01:00</td></tr>
+              <tr><td>Miércoles – Sábado</td><td>13:00 – 02:00</td></tr>
+              <tr><td>Viernes</td><td>13:00 – 03:00</td></tr>
+              <tr><td>Domingo</td><td>13:00 – 22:00</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Contacto directo -->
+        <div class="reservas-info-block reveal">
+          <span class="label">Contacto Directo</span>
+          <div class="divider"></div>
+          <p style="color:var(--cream-dim); margin-bottom:1.5rem;">¿Prefieres reservar por teléfono o tienes una consulta? Contáctanos directo.</p>
+          <address style="font-style:normal;">
+            <p style="margin-bottom:0.75rem;">
+              <span style="color:var(--ocre); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;">Reservas Mesa</span><br />
+              <a href="tel:+56976301208" style="color:var(--cream); font-size:1.1rem;">+56 9 7630 1208</a>
+            </p>
+            <p style="margin-bottom:0.75rem;">
+              <span style="color:var(--ocre); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;">Delivery</span><br />
+              <a href="tel:+56993168620" style="color:var(--cream); font-size:1.1rem;">+56 9 9316 8620</a>
+            </p>
+            <p>
+              <span style="color:var(--ocre); font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase;">Ubicación</span><br />
+              <span style="color:var(--cream);">Alonso de Córdova 3080, Vitacura</span>
+            </p>
+          </address>
+        </div>
+
+        <!-- Eventos -->
+        <div class="reservas-info-block reveal">
+          <span class="label">¿Tienes un Evento?</span>
+          <div class="divider"></div>
+          <p style="color:var(--cream-dim); margin-bottom:1.5rem;">Cumpleaños, cenas corporativas, celebraciones privadas o activaciones de marca. Contamos con el espacio y el equipo para hacerlo bien.</p>
+          <a href="/experiencias#eventos" class="btn btn-outline" style="display:inline-block;">Cotizar Evento</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
