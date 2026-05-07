@@ -16,7 +16,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: 'Bad Request' };
   }
 
-  const { nombre, email, email_confirm, telefono, mensaje } = body;
+  const { nombre, email, email_confirm, telefono, tipo_evento, fecha, personas, mensaje } = body;
 
   // Validaciones básicas
   if (!nombre || !email || !mensaje) {
@@ -38,9 +38,12 @@ exports.handler = async (event) => {
   const emailBody = `
 Nuevo contacto desde segreta.cl — Formulario de Eventos
 
-Nombre: ${nombre}
-Email: ${email}
-Teléfono: ${telefono || 'No indicado'}
+Nombre:        ${nombre}
+Email:         ${email}
+Teléfono:      ${telefono || 'No indicado'}
+Tipo de evento: ${tipo_evento || 'No indicado'}
+Fecha tentativa: ${fecha || 'No indicada'}
+N° de personas: ${personas || 'No indicado'}
 
 Mensaje:
 ${mensaje}

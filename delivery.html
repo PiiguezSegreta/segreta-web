@@ -6,11 +6,12 @@
   <title>Delivery | Segreta Pizza &amp; Bar — Vitacura, Santiago</title>
   <meta name="description" content="Pide tu pizza napolitana a domicilio desde Segreta Pizza &amp; Bar, Vitacura, Santiago de Chile." />
   <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://www.segreta.cl/delivery" />
   <link rel="icon" href="/assets/img/segreta-isotipo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css?v=8" />
+  <link rel="stylesheet" href="/css/main.css?v=19" />
   <style>
     /* Escala especial para tablet: el iframe de Nubefood necesita 1366px de ancho mínimo */
     @media (min-width: 768px) and (max-width: 1023px) {
@@ -22,7 +23,7 @@
 
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/assets/img/segreta-logo.png" alt="Segreta" width="160" height="34" /></a>
+      <a href="/" class="nav-logo" aria-label="Segreta — Inicio"><img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" /></a>
       <ul class="nav-links">
         <li><a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
@@ -30,7 +31,7 @@
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
-          <select class="lang-select" aria-label="Idioma">
+          <select class="lang-select" aria-label="Idioma" onchange="if(window.i18n)window.i18n.setLang(this.value)">
             <option value="es">🇨🇱 ES</option>
             <option value="en">🇺🇸 EN</option>
             <option value="pt">🇧🇷 PT</option>
@@ -53,10 +54,10 @@
 
   <!-- HERO -->
   <section class="page-hero">
-    <div class="hero-bg" style="background-image: url('/assets/img/carrito-segreta.jpg');"></div>
+    <div class="hero-bg" style="background-image: url('/assets/img/pizza-napolitana.webp');"></div>
     <div class="page-hero-content">
-      <span class="label">Delivery</span>
-      <h1>Pide a Domicilio</h1>
+      <span class="label" data-i18n="delivery.hero_label">Delivery</span>
+      <h1 data-i18n="delivery.hero_title">Pide a Domicilio</h1>
       <p style="margin-top:0.5rem; color: var(--cream-dim); font-size:0.9rem;">+56 9 9316 8620</p>
     </div>
   </section>
@@ -79,7 +80,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="/assets/img/segreta-logo.png" alt="Segreta" width="140" height="30" loading="lazy" />
-          <p>Pizza napolitana auténtica y coctelería de autor en Vitacura, Santiago de Chile.</p>
+          <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a href="https://www.instagram.com/segretapizzeria" class="social-link" target="_blank" rel="noopener">↗ @segretapizzeria</a>
         </div>
         <div class="footer-col">
@@ -94,7 +95,7 @@
         <div class="footer-col">
           <h5 data-i18n="footer.contact_title">Contacto</h5>
           <address>
-            <strong>Delivery</strong>
+            <strong data-i18n="common.footer_delivery_label">Delivery</strong>
             <a href="tel:+56993168620">+56 9 9316 8620</a><br /><br />
             Alonso de Córdova 3080<br />Vitacura, Santiago
           </address>
@@ -103,22 +104,25 @@
           <h5 data-i18n="footer.hours_title">Horarios</h5>
           <table class="horarios-table">
             <tbody>
-              <tr><td>Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
-              <tr><td>Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
-              <tr><td>Mié – Sáb</td><td data-i18n="footer.hours.miercolsab">13:00 – 02:00</td></tr>
-              <tr><td>Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
-              <tr><td>Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
+              <tr><td data-i18n="footer.day.lunes">Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
+              <tr><td data-i18n="footer.day.martes">Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
+              <tr><td data-i18n="footer.day.miercoles">Miércoles</td><td data-i18n="footer.hours.miercoles">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.jueves">Jueves</td><td data-i18n="footer.hours.jueves">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.viernes">Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
+              <tr><td data-i18n="footer.day.sabado">Sábado</td><td data-i18n="footer.hours.sabado">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.domingo">Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© <span id="footer-year"></span> Segreta Pizza &amp; Bar</p>
-        <p>Vitacura, Santiago de Chile</p>
+        <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar</span></p>
+        <p data-i18n="common.footer_bottom_city">Vitacura, Santiago de Chile</p>
       </div>
     </div>
   </footer>
 
+  <script src="/js/translations.js?v=2"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>

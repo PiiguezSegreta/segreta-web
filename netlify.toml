@@ -61,3 +61,8 @@
   for = "/js/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/translations/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

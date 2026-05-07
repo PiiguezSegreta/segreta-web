@@ -7,17 +7,27 @@
   <meta name="description" content="Conoce la historia de Segreta Pizza &amp; Bar en Vitacura. Pizza napolitana artesanal, horno a leña y una propuesta gastronómica única en Santiago de Chile." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.segreta.cl/nosotros" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.segreta.cl/nosotros" />
+  <meta property="og:title" content="Nosotros | Segreta Pizza &amp; Bar – Nuestra Historia" />
+  <meta property="og:description" content="Conoce la historia de Segreta Pizza &amp; Bar en Vitacura. Pizza napolitana artesanal, horno a leña y una propuesta gastronómica única en Santiago de Chile." />
+  <meta property="og:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
+  <meta property="og:image:width" content="1400" />
+  <meta property="og:image:height" content="1044" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
   <link rel="icon" href="/assets/img/segreta-isotipo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css?v=9" />
+  <link rel="preload" as="image" href="/assets/img/nosotros-hero-pizza.webp" />
+  <link rel="stylesheet" href="/css/main.css?v=19" />
 </head>
 <body>
 
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/assets/img/segreta-logo.png" alt="Segreta" width="160" height="34" /></a>
+      <a href="/" class="nav-logo" aria-label="Segreta — Inicio"><img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" /></a>
       <ul class="nav-links">
         <li><a href="/nosotros" class="active" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
@@ -25,7 +35,7 @@
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
-          <select class="lang-select" aria-label="Idioma">
+          <select class="lang-select" aria-label="Idioma" onchange="if(window.i18n)window.i18n.setLang(this.value)">
             <option value="es">🇨🇱 ES</option>
             <option value="en">🇺🇸 EN</option>
             <option value="pt">🇧🇷 PT</option>
@@ -40,20 +50,20 @@
     </div>
   </nav>
   <nav class="nav-drawer">
-    <a href="/nosotros">Nosotros</a>
-    <a href="/experiencias">Experiencias</a>
-    <a href="/partners">Partners</a>
-    <a href="/reservas" class="btn btn-primary">Reservar</a>
+    <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
+    <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
+    <a href="/partners" data-i18n="nav.partners">Partners</a>
+    <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
   <!-- ══════════════════════════════════════════════════════
        HERO
   ══════════════════════════════════════════════════════ -->
   <section class="nos-hero">
-    <div class="nos-hero-bg" style="background-image: url('/assets/img/nosotros-hero-pizza.jpg'); background-position: 30% center;"></div>
+    <div class="nos-hero-bg" style="background-image: url('/assets/img/nosotros-hero-pizza.webp'); background-position: 30% center;"></div>
     <div class="nos-hero-content">
-      <span class="label">Nuestra Historia</span>
-      <h1>Un secreto que vale<br />la pena compartir</h1>
+      <span class="label" data-i18n="nosotros.hero_label">Nuestra Historia</span>
+      <h1 data-i18n="nosotros.hero_title">Un secreto que vale<br />la pena compartir</h1>
     </div>
   </section>
 
@@ -62,9 +72,9 @@
   ══════════════════════════════════════════════════════ -->
   <section class="nos-historia">
     <div class="nos-historia-inner">
-      <p class="reveal">Hay historias que comienzan con una receta; la nuestra empezó con un horno construido a mano en un garage. En medio del fuego, la harina y largas conversaciones, entendimos que no estábamos creando solo pizza, sino una experiencia marcada por el respeto a los tiempos, la dedicación por los detalles y una búsqueda constante de calidad. Lo que desde la intuición y la pasión pronto empezó a crecer, y el garage quedó chico.</p>
-      <p class="reveal">Así surgió nuestra etapa de eventos bajo un principio que nos acompañó siempre: "Nos vemos en los mejores lugares". Festivales, matrimonios, ferias y celebraciones privadas se transformaron en escenarios naturales para llevar nuestra cocina más lejos y consolidar una identidad propia, donde el fuego reunía personas y creaba momentos memorables.</p>
-      <p class="reveal">Con el tiempo, el paso siguiente fue inevitable. Después de recorrer los mejores lugares, decidimos crear el nuestro. Así nació Segreta en Alonso de Córdova, un espacio que reúne el espíritu artesanal del garage, la experiencia de los eventos y el compromiso permanente por ofrecer algo más que buena gastronomía. Hoy, Segreta es un punto de encuentro donde la cocina y la coctelería en constante evolución son el punto de partida para que las personas se reúnan, compartan y construyan nuevas historias alrededor de la mesa.</p>
+      <p class="reveal" data-i18n="nosotros.historia_p1">Hay historias que comienzan con una receta; la nuestra empezó con un horno construido a mano en un garage. En medio del fuego, la harina y largas conversaciones, entendimos que no estábamos creando solo pizza, sino una experiencia marcada por el respeto a los tiempos, la dedicación por los detalles y una búsqueda constante de calidad. Lo que desde la intuición y la pasión pronto empezó a crecer, y el garage quedó chico.</p>
+      <p class="reveal" data-i18n="nosotros.historia_p2">Así surgió nuestra etapa de eventos bajo un principio que nos acompañó siempre: "Nos vemos en los mejores lugares". Festivales, matrimonios, ferias y celebraciones privadas se transformaron en escenarios naturales para llevar nuestra cocina más lejos y consolidar una identidad propia, donde el fuego reunía personas y creaba momentos memorables.</p>
+      <p class="reveal" data-i18n="nosotros.historia_p3">Con el tiempo, el paso siguiente fue inevitable. Después de recorrer los mejores lugares, decidimos crear el nuestro. Así nació Segreta en Alonso de Córdova, un espacio que reúne el espíritu artesanal del garage, la experiencia de los eventos y el compromiso permanente por ofrecer algo más que buena gastronomía. Hoy, Segreta es un punto de encuentro donde la cocina y la coctelería en constante evolución son el punto de partida para que las personas se reúnan, compartan y construyan nuevas historias alrededor de la mesa.</p>
     </div>
   </section>
 
@@ -72,10 +82,10 @@
        EL ALMA — imagen + título
   ══════════════════════════════════════════════════════ -->
   <section class="nos-fullimg reveal">
-    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/oven.jpg');"></div>
+    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/oven.webp');"></div>
     <div class="nos-fullimg-content">
-      <span class="label">El Alma</span>
-      <h2>Hecho con pasión.<br />Servido con amor.</h2>
+      <span class="label" data-i18n="nosotros.alma_label">El Alma</span>
+      <h2 data-i18n="nosotros.alma_title">Hecho con pasión.<br />Servido con amor.</h2>
     </div>
   </section>
 
@@ -85,7 +95,7 @@
   <section class="nos-cita">
     <div class="container">
       <blockquote class="reveal">
-        "Segreta no es solo un restaurante. Es un punto de encuentro donde la buena gastronomía y el mejor ambiente de Santiago se encuentran para compartir."
+        <span data-i18n="nosotros.cita">"Segreta no es solo un restaurante. Es un punto de encuentro donde la buena gastronomía y el mejor ambiente de Santiago se encuentran para compartir."</span>
       </blockquote>
     </div>
   </section>
@@ -94,20 +104,50 @@
        LA FAMILIA — imagen + texto + CTA reclutamiento
   ══════════════════════════════════════════════════════ -->
   <section class="nos-fullimg nos-familia reveal">
-    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/team-uniforme.jpg');"></div>
+    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/team-uniforme.webp');"></div>
     <div class="nos-fullimg-content">
-      <span class="label">La Familia</span>
-      <h2>Un equipo<br />comprometido</h2>
+      <span class="label" data-i18n="nosotros.familia_label">La Familia</span>
+      <h2 data-i18n="nosotros.familia_title">Un equipo<br />comprometido</h2>
     </div>
   </section>
 
   <section class="nos-familia-texto">
     <div class="nos-historia-inner">
-      <p class="reveal">Detrás de cada mesa, cada pizza y cada cocktail, hay personas. La Familia Segreta está compuesta por anfitriones, garzones, cocina y gerencia que entienden que la experiencia no termina en el plato: comienza en la bienvenida y se construye en cada detalle.</p>
-      <p class="reveal">Creemos en la hospitalidad como parte esencial de nuestra identidad. En un servicio cercano, atento y genuino. En un equipo que trabaja con pasión para que cada visita se sienta distinta, pero siempre familiar.</p>
+      <p class="reveal" data-i18n="nosotros.familia_p1">Detrás de cada mesa, cada pizza y cada cocktail, hay personas. La Familia Segreta está compuesta por anfitriones, garzones, cocina y gerencia que entienden que la experiencia no termina en el plato: comienza en la bienvenida y se construye en cada detalle.</p>
+      <p class="reveal" data-i18n="nosotros.familia_p2">Creemos en la hospitalidad como parte esencial de nuestra identidad. En un servicio cercano, atento y genuino. En un equipo que trabaja con pasión para que cada visita se sienta distinta, pero siempre familiar.</p>
       <div class="nos-trabaja reveal">
-        <span class="label">Trabaja con Nosotros</span>
-        <a href="https://tally.so/r/mJakVJ" class="btn btn-primary" target="_blank" rel="noopener">Postula Aquí</a>
+        <span class="label" data-i18n="nosotros.trabaja_label">Trabaja con Nosotros</span>
+        <a href="https://tally.so/r/mJakVJ" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="nosotros.trabaja_btn">Postula Aquí</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       MEDIOS DE PAGO
+  ══════════════════════════════════════════════════════ -->
+  <section class="medios-pago-section">
+    <div class="medios-pago-bg" style="background-image: url('/assets/img/local-lleno-arriba.webp');"></div>
+    <div class="medios-pago-overlay"></div>
+    <div class="container" style="position: relative; z-index: 1;">
+      <div class="section-header reveal">
+        <span class="label" data-i18n="nosotros.pago_label">Medios de Pago</span>
+        <h2 data-i18n="nosotros.pago_title">Pensado para todos nuestros visitantes</h2>
+        <p style="text-align: center; margin-inline: auto; margin-top: 1rem; max-width: 60ch;" data-i18n="nosotros.pago_desc">En Segreta queremos que cada cliente viva la experiencia sin fricciones. Por eso ampliamos nuestros medios de pago para acoger a quienes nos visitan desde Brasil y al público corporativo de Vitacura.</p>
+      </div>
+      <div class="medios-pago-grid reveal">
+        <!-- Pix -->
+        <div class="medios-pago-card">
+          <img src="/assets/img/logo-commpix-isotipo.webp" alt="Comm.Pix isotipo" loading="lazy" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 0.5rem;" />
+          <img src="/assets/img/logo-commpix-logo.webp" alt="Comm.Pix" loading="lazy" style="height: 56px; width: auto; object-fit: contain;" />
+          <span class="label" style="margin-top: 1.75rem; display: block; text-align: center;" data-i18n="nosotros.pago_pix_label">Para nuestros visitantes brasileños</span>
+          <p data-i18n="nosotros.pago_pix_desc">Aceptamos pagos con Pix en todos nuestros horarios de apertura. Paga al instante desde tu banco brasileño y disfruta de Segreta como si estuvieras en casa.</p>
+        </div>
+        <!-- Amipass -->
+        <div class="medios-pago-card">
+          <img src="/assets/img/logo-amipass.webp" alt="Amipass" loading="lazy" style="height: 80px; width: auto; object-fit: contain;" />
+          <span class="label" style="margin-top: 1.75rem; display: block; text-align: center;" data-i18n="nosotros.pago_amipass_label">Para nuestros almuerzos corporativos</span>
+          <p data-i18n="nosotros.pago_amipass_desc">Aceptamos pagos con Amipass en nuestro horario de almuerzo, de 13:00 a 16:00 hrs, de Martes a Jueves. Pensado para que el mundo corporativo disfrute de un almuerzo memorable.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -118,8 +158,8 @@
   <section class="nos-ubicacion">
     <div class="container">
       <div class="section-header reveal">
-        <span class="label">Ubicación</span>
-        <h2>Ven a conocernos.</h2>
+        <span class="label" data-i18n="nosotros.ubicacion_label">Ubicación</span>
+        <h2 data-i18n="nosotros.ubicacion_title">Ven a conocernos.</h2>
       </div>
       <div class="nos-mapa reveal">
         <iframe
@@ -132,11 +172,12 @@
       </div>
       <div class="nos-ctas reveal">
         <div class="nos-ctas-row">
-          <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener">Ver Carta</a>
-          <a href="/reservas" class="btn btn-primary">Reservar Mesa</a>
-          <a href="/delivery" class="btn btn-outline">Delivery</a>
+          <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="nosotros.btn_carta">Ver Carta</a>
+          <a href="/reservas" class="btn btn-primary" data-i18n="nosotros.btn_reservar">Reservar Mesa</a>
+          <a href="/delivery" class="btn btn-outline" data-i18n="nosotros.btn_delivery">Delivery</a>
         </div>
-        <a href="/experiencias#eventos" class="btn btn-primary btn-full">Agenda tu Evento</a>
+        <a href="/experiencias#eventos" class="btn btn-primary btn-full" data-i18n="nosotros.btn_evento">Agenda tu Evento</a>
+        <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" class="btn btn-primary btn-full" target="_blank" rel="noopener noreferrer" data-i18n="nosotros.btn_tarjeta">Descarga tu Tarjeta Segreta</a>
       </div>
     </div>
   </section>
@@ -146,7 +187,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="/assets/img/segreta-logo.png" alt="Segreta" width="140" height="30" loading="lazy" />
-          <p>Pizza napolitana auténtica y coctelería de autor en Vitacura, Santiago de Chile.</p>
+          <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a href="https://www.instagram.com/segretapizzeria" class="social-link" target="_blank" rel="noopener">↗ @segretapizzeria</a>
         </div>
         <div class="footer-col">
@@ -164,9 +205,9 @@
         <div class="footer-col">
           <h5 data-i18n="footer.contact_title">Contacto</h5>
           <address>
-            <strong>Reservas</strong>
+            <strong data-i18n="common.footer_reservas_label">Reservas</strong>
             <a href="tel:+56976301208">+56 9 7630 1208</a><br /><br />
-            <strong>Delivery</strong>
+            <strong data-i18n="common.footer_delivery_label">Delivery</strong>
             <a href="tel:+56993168620">+56 9 9316 8620</a><br /><br />
             Alonso de Córdova 3080<br />Vitacura, Santiago
           </address>
@@ -175,22 +216,25 @@
           <h5 data-i18n="footer.hours_title">Horarios</h5>
           <table class="horarios-table">
             <tbody>
-              <tr><td>Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
-              <tr><td>Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
-              <tr><td>Mié – Sáb</td><td data-i18n="footer.hours.miercolsab">13:00 – 02:00</td></tr>
-              <tr><td>Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
-              <tr><td>Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
+              <tr><td data-i18n="footer.day.lunes">Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
+              <tr><td data-i18n="footer.day.martes">Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
+              <tr><td data-i18n="footer.day.miercoles">Miércoles</td><td data-i18n="footer.hours.miercoles">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.jueves">Jueves</td><td data-i18n="footer.hours.jueves">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.viernes">Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
+              <tr><td data-i18n="footer.day.sabado">Sábado</td><td data-i18n="footer.hours.sabado">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.domingo">Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar — Arqueado de Barrera SpA</span></p>
-        <p>Vitacura, Santiago de Chile</p>
+        <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar</span></p>
+        <p data-i18n="common.footer_bottom_city">Vitacura, Santiago de Chile</p>
       </div>
     </div>
   </footer>
 
+  <script src="/js/translations.js?v=2"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>

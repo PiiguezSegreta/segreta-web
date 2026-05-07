@@ -23,9 +23,9 @@
   <meta property="og:url" content="https://www.segreta.cl" />
   <meta property="og:title" content="Segreta Pizza &amp; Bar | Pizza Napolitana Vitacura · Santiago" />
   <meta property="og:description" content="Pizza napolitana auténtica, coctelería de autor y experiencia gastronómica premium en Vitacura, Santiago. Esquina Alonso de Córdova con Nueva Costanera." />
-  <meta property="og:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
+  <meta property="og:image:width" content="1400" />
+  <meta property="og:image:height" content="1044" />
   <meta property="og:image:alt" content="Segreta Pizza &amp; Bar – Restaurante lleno en Vitacura, Santiago" />
 
   <!-- Twitter Card -->
@@ -33,7 +33,7 @@
   <meta name="twitter:site" content="@segretapizzabar" />
   <meta name="twitter:title" content="Segreta Pizza &amp; Bar | Pizza Napolitana Vitacura · Santiago" />
   <meta name="twitter:description" content="Pizza napolitana auténtica, coctelería de autor y experiencia gastronómica premium en Vitacura, Santiago." />
-  <meta name="twitter:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.png" />
+  <meta name="twitter:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
 
   <!-- Geo / Local SEO -->
   <meta name="geo.region" content="CL-RM" />
@@ -47,22 +47,35 @@
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "name": "Segreta Pizza & Bar",
-    "image": "https://www.segreta.cl/assets/img/hero-restaurant.jpg",
+    "description": "Pizza napolitana contemporánea, coctelería de autor y experiencia gastronómica en Vitacura, Santiago de Chile. Esquina Alonso de Córdova con Nueva Costanera.",
+    "image": [
+      "https://www.segreta.cl/assets/img/hero-restaurant.webp",
+      "https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg"
+    ],
     "url": "https://www.segreta.cl",
     "telephone": "+56976301208",
-    "servesCuisine": ["Italian", "Pizza", "Cocktail Bar"],
+    "servesCuisine": ["Pizza Napoletana", "Coctelería de Autor", "Gastronomía Italiana"],
     "priceRange": "$$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Alonso de Córdova 3080",
       "addressLocality": "Vitacura",
       "addressRegion": "Región Metropolitana",
+      "postalCode": "7630000",
       "addressCountry": "CL"
     },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": -33.3975,
       "longitude": -70.5975
+    },
+    "hasMap": "https://maps.google.com/?q=Segreta+Pizzer%C3%ADa,+Alonso+de+C%C3%B3rdova+3080,+Vitacura",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "500",
+      "bestRating": "5",
+      "worstRating": "1"
     },
     "openingHoursSpecification": [
       {
@@ -97,8 +110,12 @@
       }
     ],
     "menu": "https://gour.media/segreta/",
+    "reservations": "https://www.segreta.cl/reservas",
+    "currenciesAccepted": "CLP",
+    "paymentAccepted": "Cash, Credit Card, Debit Card, Pix, Amipass",
     "sameAs": [
-      "https://www.instagram.com/segretapizzeria"
+      "https://www.instagram.com/segretapizzeria",
+      "https://www.tripadvisor.com/Restaurant_Review-g294305-d23857118-Reviews-Segreta_Pizzeria-Santiago_Santiago_Metropolitan_Region.html"
     ]
   }
   </script>
@@ -112,8 +129,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
+  <!-- Preload hero image (LCP) -->
+  <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" />
+
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css?v=8" />
+  <link rel="stylesheet" href="/css/main.css?v=19" />
 </head>
 
 <body>
@@ -128,7 +148,7 @@
 
       <!-- Isotipo -->
       <a href="/" class="nav-logo" aria-label="Segreta — Inicio">
-        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:56px;width:auto;" />
+        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" />
       </a>
 
       <!-- Links (desktop) -->
@@ -142,7 +162,7 @@
       <div class="nav-right">
         <!-- Selector de idioma -->
         <div class="lang-selector">
-          <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma">
+          <select class="lang-select" id="lang-select" aria-label="Seleccionar idioma" onchange="if(window.i18n)window.i18n.setLang(this.value)">
             <option value="es">🇨🇱 ES</option>
             <option value="en">🇺🇸 EN</option>
             <option value="pt">🇧🇷 PT</option>
@@ -175,10 +195,11 @@
        HERO
   ══════════════════════════════════════════════════════ -->
   <section class="hero" aria-label="Hero principal">
-    <div class="hero-bg" style="background-image: url('/assets/img/hero-restaurant.jpg');" role="img" aria-label="Interior del restaurante Segreta en Vitacura"></div>
+    <div class="hero-bg" style="background-image: url('/assets/img/hero-restaurant.webp');" role="img" aria-label="Interior del restaurante Segreta en Vitacura"></div>
 
     <div class="hero-content">
       <div class="hero-stack">
+        <h1 class="sr-only">Segreta Pizza &amp; Bar — Pizza Napolitana y Coctelería de Autor en Vitacura, Santiago</h1>
         <img
           src="/assets/img/segreta-logo.png"
           alt="Segreta Pizza &amp; Bar"
@@ -190,7 +211,8 @@
         <!-- Tagline rotativa — el JS la maneja; data-taglines se actualiza vía i18n -->
         <div
           class="hero-tagline fade-up fade-up-3"
-          data-taglines='["Pizza napolitana. Coctelería de autor.","Un lugar que vale la pena encontrar."]'
+          data-i18n-taglines="home.hero_taglines"
+          data-taglines='["Pizza napolitana. Coctelería de autor.","Un lugar que vale la pena encontrar.","El secreto mejor guardado de Vitacura."]'
         >
           <span>Pizza napolitana. Coctelería de autor.</span>
         </div>
@@ -202,6 +224,7 @@
             <a href="/delivery" class="btn btn-ghost" data-i18n="home.hero_cta_delivery">Delivery</a>
           </div>
           <a href="/experiencias#eventos" class="btn btn-ghost btn-full" data-i18n="home.hero_cta_evento">Agenda tu Evento</a>
+          <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" class="btn btn-ghost btn-full" target="_blank" rel="noopener noreferrer" data-i18n="home.btn_tarjeta">Descarga tu Tarjeta Segreta</a>
         </div>
       </div>
     </div>
@@ -222,7 +245,7 @@
         </div>
         <div class="espiritu-image reveal">
           <img
-            src="/assets/img/oven.jpg"
+            src="/assets/img/oven.webp"
             alt="Horno a leña de Segreta Pizza &amp; Bar, Vitacura"
             width="600"
             height="750"
@@ -249,7 +272,7 @@
       <!-- Pizza Napolitana -->
       <article class="esp-card reveal">
         <img
-          src="/assets/img/pizza-napolitana.jpg"
+          src="/assets/img/pizza-napolitana.webp"
           alt="Pizza napolitana de Segreta, Vitacura"
           width="600"
           height="800"
@@ -257,14 +280,14 @@
         />
         <div class="esp-card-overlay">
           <h3 data-i18n="home.esp_pizza_title">Pizza Napolitana</h3>
-          <p data-i18n="home.esp_pizza_desc">Masa fermentada 48h, horno a leña a 400°C. La tradición napolitana en cada bocado.</p>
+          <p data-i18n="home.esp_pizza_desc">Tradición italiana elevada con técnica moderna y libertad creativa, respetando la magia de una masa bien hidratada y el fuego intenso del horno napolitano.</p>
         </div>
       </article>
 
       <!-- Coctelería de Autor -->
       <article class="esp-card reveal">
         <img
-          src="/assets/img/cocktail-autor.jpg"
+          src="/assets/img/cocktail-autor.webp"
           alt="Coctelería de autor en Segreta Pizza &amp; Bar"
           width="600"
           height="800"
@@ -272,14 +295,14 @@
         />
         <div class="esp-card-overlay">
           <h3 data-i18n="home.esp_cocteles_title">Coctelería de Autor</h3>
-          <p data-i18n="home.esp_cocteles_desc">Cocktails únicos, creativos y bien ejecutados. Nuestra barra es el corazón del local.</p>
+          <p data-i18n="home.esp_cocteles_desc">Cócteles artesanales con destilados premium y técnicas de mixología contemporánea que acompañan el ritmo y la experiencia Segreta.</p>
         </div>
       </article>
 
       <!-- Ambiente Único -->
       <article class="esp-card reveal">
         <img
-          src="/assets/img/ambiente-unico.jpg"
+          src="/assets/img/ambiente-unico.webp"
           alt="Ambiente único del restaurante Segreta en Vitacura"
           width="600"
           height="800"
@@ -287,7 +310,7 @@
         />
         <div class="esp-card-overlay">
           <h3 data-i18n="home.esp_ambiente_title">Ambiente Único</h3>
-          <p data-i18n="home.esp_ambiente_desc">Misterioso, cálido y con carácter. Un lugar que se descubre con el tiempo.</p>
+          <p data-i18n="home.esp_ambiente_desc">Un espacio cálido, íntimo y lleno de energía. Donde la mesa se comparte y las copas se alargan, ubicado en la mejor esquina del sector oriente de Santiago.</p>
         </div>
       </article>
     </div>
@@ -311,25 +334,25 @@
     <span class="label" data-i18n="home.brands_label">Marcas que nos acompañan</span>
     <div class="marquee-track" aria-hidden="true">
       <div class="marquee-inner">
-        <img src="/assets/img/logo-mistral.png"        alt="Mistral"           loading="lazy" style="height:48px;" />
-        <img src="/assets/img/logo-johnnie-walker.png" alt="Johnnie Walker"    loading="lazy" />
-        <img src="/assets/img/logo-royal.png"          alt="Royal Guard"       loading="lazy" />
-        <img src="/assets/img/logo-tanqueray.png"      alt="Tanqueray"         loading="lazy" />
-        <img src="/assets/img/logo-cocacola.png"       alt="Coca-Cola"         loading="lazy" />
-        <img src="/assets/img/logo-santa-rita.png"     alt="Santa Rita"        loading="lazy" />
-        <img src="/assets/img/logo-espiritu-andes.png" alt="Espíritu de los Andes" loading="lazy" />
-        <img src="/assets/img/logo-redbull.png"        alt="Red Bull"          loading="lazy" />
-        <img src="/assets/img/logo-don-julio.png"      alt="Don Julio"         loading="lazy" />
-        <img src="/assets/img/logo-austral.png"        alt="Austral"           loading="lazy" />
-        <img src="/assets/img/logo-aperol.png"         alt="Aperol"            loading="lazy" />
-        <img src="/assets/img/logo-loa.png"            alt="LOA"               loading="lazy" />
-        <img src="/assets/img/logo-licor43.png"        alt="Licor 43"          loading="lazy" />
-        <img src="/assets/img/logo-ramazzotti.png"     alt="Ramazzotti"        loading="lazy" />
-        <img src="/assets/img/logo-schweppes.png"      alt="Schweppes"         loading="lazy" />
-        <img src="/assets/img/logo-andina.png"         alt="Andina"            loading="lazy" />
-        <img src="/assets/img/logo-ccu.png"            alt="CCU"               loading="lazy" />
-        <img src="/assets/img/logo-pisquera-chile.png" alt="Pisquera de Chile" loading="lazy" />
-        <img src="/assets/img/logo-diageo.png"         alt="Diageo"            loading="lazy" />
+        <img src="/assets/img/logo-mistral.webp"        alt="Mistral"           loading="lazy" style="height:48px;" />
+        <img src="/assets/img/logo-johnnie-walker.webp" alt="Johnnie Walker"    loading="lazy" />
+        <img src="/assets/img/logo-royal.webp"          alt="Royal Guard"       loading="lazy" />
+        <img src="/assets/img/logo-tanqueray.webp"      alt="Tanqueray"         loading="lazy" />
+        <img src="/assets/img/logo-cocacola.webp"       alt="Coca-Cola"         loading="lazy" />
+        <img src="/assets/img/logo-santa-rita.webp"     alt="Santa Rita"        loading="lazy" />
+        <img src="/assets/img/logo-espiritu-andes.webp" alt="Espíritu de los Andes" loading="lazy" />
+        <img src="/assets/img/logo-redbull.webp"        alt="Red Bull"          loading="lazy" />
+        <img src="/assets/img/logo-don-julio.webp"      alt="Don Julio"         loading="lazy" />
+        <img src="/assets/img/logo-austral.webp"        alt="Austral"           loading="lazy" />
+        <img src="/assets/img/logo-aperol.webp"         alt="Aperol"            loading="lazy" />
+        <img src="/assets/img/logo-loa.webp"            alt="LOA"               loading="lazy" />
+        <img src="/assets/img/logo-licor43.webp"        alt="Licor 43"          loading="lazy" />
+        <img src="/assets/img/logo-ramazzotti.webp"     alt="Ramazzotti"        loading="lazy" />
+        <img src="/assets/img/logo-schweppes.webp"      alt="Schweppes"         loading="lazy" />
+        <img src="/assets/img/logo-andina.webp"         alt="Andina"            loading="lazy" />
+        <img src="/assets/img/logo-ccu.webp"            alt="CCU"               loading="lazy" />
+        <img src="/assets/img/logo-pisquera-chile.webp" alt="Pisquera de Chile" loading="lazy" />
+        <img src="/assets/img/logo-diageo.webp"         alt="Diageo"            loading="lazy" />
       </div>
     </div>
   </section>
@@ -338,7 +361,7 @@
        CTA FINAL
   ══════════════════════════════════════════════════════ -->
   <section class="cta-final">
-    <div class="hero-bg" style="background-image: url('/assets/img/segreta-noche-lleno.png');" role="img" aria-label="Segreta lleno en la noche"></div>
+    <div class="hero-bg" style="background-image: url('/assets/img/segreta-noche-lleno.jpg');" role="img" aria-label="Segreta lleno en la noche"></div>
     <div class="container">
       <div class="cta-final-content reveal">
         <span class="label" data-i18n="home.cta_label">Reservas</span>
@@ -351,6 +374,7 @@
             <a href="/delivery" class="btn btn-ghost" data-i18n="home.hero_cta_delivery">Delivery</a>
           </div>
           <a href="/experiencias#eventos" class="btn btn-ghost btn-full" data-i18n="home.cta_evento">Agenda tu Evento</a>
+          <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" class="btn btn-ghost btn-full" target="_blank" rel="noopener noreferrer" data-i18n="home.btn_tarjeta">Descarga tu Tarjeta Segreta</a>
         </div>
       </div>
     </div>
@@ -366,7 +390,7 @@
         <!-- Marca -->
         <div class="footer-brand">
           <img src="/assets/img/segreta-logo.png" alt="Segreta Pizza &amp; Bar" loading="lazy" />
-          <p>Pizza napolitana auténtica y coctelería de autor en Vitacura, Santiago de Chile.</p>
+          <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a
             href="https://www.instagram.com/segretapizzeria"
             class="social-link"
@@ -396,10 +420,10 @@
         <div class="footer-col">
           <h5 data-i18n="footer.contact_title">Contacto</h5>
           <address>
-            <strong>Reservas</strong>
+            <strong data-i18n="common.footer_reservas_label">Reservas</strong>
             <a href="tel:+56976301208" data-i18n="footer.tel_reservas">+56 9 7630 1208</a>
             <br /><br />
-            <strong>Delivery</strong>
+            <strong data-i18n="common.footer_delivery_label">Delivery</strong>
             <a href="tel:+56993168620" data-i18n="footer.tel_delivery">+56 9 9316 8620</a>
             <br /><br />
             Alonso de Córdova 3080<br />
@@ -413,23 +437,31 @@
           <table class="horarios-table" aria-label="Horarios de atención">
             <tbody>
               <tr>
-                <td>Lunes</td>
+                <td data-i18n="footer.day.lunes">Lunes</td>
                 <td data-i18n="footer.hours.lunes">18:00 – 00:00</td>
               </tr>
               <tr>
-                <td>Martes</td>
+                <td data-i18n="footer.day.martes">Martes</td>
                 <td data-i18n="footer.hours.martes">13:00 – 01:00</td>
               </tr>
               <tr>
-                <td>Mié – Sáb</td>
-                <td data-i18n="footer.hours.miercolsab">13:00 – 02:00</td>
+                <td data-i18n="footer.day.miercoles">Miércoles</td>
+                <td data-i18n="footer.hours.miercoles">13:00 – 02:00</td>
               </tr>
               <tr>
-                <td>Viernes</td>
+                <td data-i18n="footer.day.jueves">Jueves</td>
+                <td data-i18n="footer.hours.jueves">13:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td data-i18n="footer.day.viernes">Viernes</td>
                 <td data-i18n="footer.hours.viernes">13:00 – 03:00</td>
               </tr>
               <tr>
-                <td>Domingo</td>
+                <td data-i18n="footer.day.sabado">Sábado</td>
+                <td data-i18n="footer.hours.sabado">13:00 – 02:00</td>
+              </tr>
+              <tr>
+                <td data-i18n="footer.day.domingo">Domingo</td>
                 <td data-i18n="footer.hours.domingo">13:00 – 22:00</td>
               </tr>
             </tbody>
@@ -439,13 +471,14 @@
       </div><!-- /footer-grid -->
 
       <div class="footer-bottom">
-        <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar — Arqueado de Barrera SpA</span></p>
-        <p>Vitacura, Santiago de Chile</p>
+        <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar</span></p>
+        <p data-i18n="common.footer_bottom_city">Vitacura, Santiago de Chile</p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
+  <script src="/js/translations.js?v=2"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>

@@ -1,7 +1,7 @@
 /**
  * Segreta — Sistema i18n
- * Carga el JSON de traducciones y actualiza todos los elementos
- * que tienen atributos data-i18n o data-i18n-placeholder.
+ * Lee traducciones desde SEGRETA_TRANSLATIONS (js/translations.js).
+ * Funciona tanto en file:// como en servidor HTTP — sin fetch.
  */
 
 const SUPPORTED = ['es', 'en', 'pt', 'it'];
@@ -22,18 +22,14 @@ function detectLang() {
 }
 
 /**
- * Carga el JSON de traducciones para el idioma dado.
+ * Carga las traducciones para el idioma dado desde el objeto global.
  */
-async function loadTranslations(lang) {
-  try {
-    const res = await fetch(`/translations/${lang}.json`);
-    if (!res.ok) throw new Error(`No se encontró ${lang}.json`);
-    return await res.json();
-  } catch (err) {
-    console.warn(`i18n: fallback a "${DEFAULT}". Error:`, err.message);
-    const res = await fetch(`/translations/${DEFAULT}.json`);
-    return await res.json();
+function loadTranslations(lang) {
+  if (typeof SEGRETA_TRANSLATIONS === 'undefined') {
+    console.error('i18n: SEGRETA_TRANSLATIONS no está definido. Verifica que translations.js está cargado antes de i18n.js.');
+    return SEGRETA_TRANSLATIONS?.[DEFAULT] || {};
   }
+  return SEGRETA_TRANSLATIONS[lang] || SEGRETA_TRANSLATIONS[DEFAULT] || {};
 }
 
 /**
@@ -69,13 +65,19 @@ function applyTranslations() {
     if (val !== null) el.setAttribute('aria-label', val);
   });
 
+  // Hero taglines (array — actualiza data-taglines y el span visible)
+  document.querySelectorAll('[data-i18n-taglines]').forEach(el => {
+    const key = el.dataset.i18nTaglines;
+    const val = resolve(key);
+    if (Array.isArray(val) && val.length) {
+      el.dataset.taglines = JSON.stringify(val);
+      const span = el.querySelector('span');
+      if (span) span.textContent = val[0];
+    }
+  });
+
   // Atributo lang del html
   document.documentElement.lang = currentLang;
-
-  // Actualizar botones de idioma activo (por si quedan en alguna página)
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === currentLang);
-  });
 
   // Actualizar select de idioma
   document.querySelectorAll('.lang-select').forEach(sel => {
@@ -86,26 +88,21 @@ function applyTranslations() {
 /**
  * Cambia el idioma, guarda en localStorage y re-aplica.
  */
-async function setLang(lang) {
+function setLang(lang) {
   if (!SUPPORTED.includes(lang)) return;
   currentLang = lang;
   localStorage.setItem(STORAGE_KEY, lang);
-  translations = await loadTranslations(lang);
+  translations = loadTranslations(lang);
   applyTranslations();
 }
 
 /**
  * Inicializa i18n al cargar la página.
  */
-async function initI18n() {
+function initI18n() {
   currentLang = detectLang();
-  translations = await loadTranslations(currentLang);
+  translations = loadTranslations(currentLang);
   applyTranslations();
-
-  // Conectar botones de idioma (legacy)
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.addEventListener('click', () => setLang(btn.dataset.lang));
-  });
 
   // Conectar select de idioma
   document.querySelectorAll('.lang-select').forEach(sel => {
@@ -114,6 +111,12 @@ async function initI18n() {
 }
 
 // Exposición global para uso inline
-window.i18n = { setLang, getCurrentLang: () => currentLang };
+window.i18n = { setLang, getCurrentLang: () => currentLang, t: (key) => resolve(key) || '' };
 
-document.addEventListener('DOMContentLoaded', initI18n);
+// Los scripts están al final del body — el DOM ya existe cuando este código corre.
+// Usamos DOMContentLoaded como fallback por si acaso.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initI18n);
+} else {
+  initI18n();
+}

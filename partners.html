@@ -7,17 +7,26 @@
   <meta name="description" content="Trabaja con Segreta Pizza &amp; Bar. Alianzas estratégicas con marcas que entienden el valor de la experiencia. Vitacura, Santiago de Chile." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.segreta.cl/partners" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.segreta.cl/partners" />
+  <meta property="og:title" content="Partners | Segreta Pizza &amp; Bar — Marcas Aliadas" />
+  <meta property="og:description" content="Trabaja con Segreta Pizza &amp; Bar. Alianzas estratégicas con marcas que entienden el valor de la experiencia. Vitacura, Santiago de Chile." />
+  <meta property="og:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
+  <meta property="og:image:width" content="1400" />
+  <meta property="og:image:height" content="1044" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
   <link rel="icon" href="/assets/img/segreta-isotipo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css?v=8" />
+  <link rel="stylesheet" href="/css/main.css?v=19" />
 </head>
 <body>
 
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/assets/img/segreta-logo.png" alt="Segreta" width="160" height="34" /></a>
+      <a href="/" class="nav-logo" aria-label="Segreta — Inicio"><img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" /></a>
       <ul class="nav-links">
         <li><a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
@@ -25,7 +34,7 @@
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
-          <select class="lang-select" aria-label="Idioma">
+          <select class="lang-select" aria-label="Idioma" onchange="if(window.i18n)window.i18n.setLang(this.value)">
             <option value="es">🇨🇱 ES</option>
             <option value="en">🇺🇸 EN</option>
             <option value="pt">🇧🇷 PT</option>
@@ -40,27 +49,185 @@
     </div>
   </nav>
   <nav class="nav-drawer">
-    <a href="/nosotros">Nosotros</a>
-    <a href="/experiencias">Experiencias</a>
-    <a href="/partners">Partners</a>
-    <a href="/reservas" class="btn btn-primary">Reservar</a>
+    <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
+    <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
+    <a href="/partners" data-i18n="nav.partners">Partners</a>
+    <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="hero-bg" style="background-image: url('/assets/img/partners-hero.jpg');"></div>
-    <div class="page-hero-content">
-      <span class="label">Marcas Aliadas</span>
-      <h1>El ADN de nuestras experiencias</h1>
+  <!-- ══════════════════════════════════════════════════════
+       HERO — pantalla completa
+  ══════════════════════════════════════════════════════ -->
+  <section class="partners-hero">
+    <div class="partners-hero-bg" style="background-image: url('/assets/img/partners-hero.webp');"></div>
+    <div class="partners-hero-content">
+      <span class="label fade-up fade-up-1" data-i18n="partners.hero_label">Marcas Aliadas</span>
+      <h1 class="fade-up fade-up-2" data-i18n="partners.hero_title">El ADN de<br />nuestras experiencias</h1>
     </div>
   </section>
 
-  <!-- Contenido pendiente — Etapa 5 -->
+  <!-- ══════════════════════════════════════════════════════
+       INTRO — 3 párrafos
+  ══════════════════════════════════════════════════════ -->
+  <section class="partners-intro">
+    <div class="partners-intro-inner">
+      <p class="reveal" data-i18n="partners.intro_p1">La experiencia Segreta no se construye en solitario. Detrás de cada cocktail, cada pizza y cada noche memorable, hay una red de marcas aliadas, proveedores de excelencia y socios estratégicos que comparten nuestra obsesión por la calidad y el detalle.</p>
+      <p class="reveal" data-i18n="partners.intro_p2">Cada uno de nuestros partners ha sido elegido cuidadosamente: desde las destilerías que nos proveen los mejores spirits, hasta las bodegas que seleccionan los vinos que acompañan nuestra carta. Desde las marcas de bebidas que elevan nuestra barra, hasta los insumos premium que hacen posible cada creación de nuestra cocina.</p>
+      <p class="reveal" data-i18n="partners.intro_p3">No se trata solo de abastecer un restaurante. Se trata de co-crear una experiencia. Nuestros aliados entienden que en Segreta cada producto tiene un propósito, cada marca tiene un espacio y cada colaboración suma al estándar que nos define. Juntos, hacemos posible que cada visita sea única, auténtica e inolvidable.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       MARCAS PRINCIPALES — 8 logos (4×2)
+  ══════════════════════════════════════════════════════ -->
   <section style="background: var(--noir); padding-block: var(--section-py);">
     <div class="container">
-      <p style="text-align:center; color: var(--cream-dim); font-style: italic;">
-        — Grid de logos y formulario de partnership se construyen en la Etapa 5. —
-      </p>
+      <div class="logos-section-header reveal">
+        <span class="label" data-i18n="partners.main_label">Alianzas Estratégicas</span>
+        <h2 style="color: var(--cream); margin-top: 0.75rem; margin-bottom: 0;" data-i18n="partners.main_title">Marcas que son parte</h2>
+        <div class="divider-ochre"></div>
+      </div>
+    </div>
+    <div class="logos-main-grid reveal">
+      <div class="logo-main-card logo-main-card--mistral">
+        <img src="/assets/img/logo-mistral.webp" alt="Mistral" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-johnnie-walker.webp" alt="Johnnie Walker" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-royal.webp" alt="Royal Guard" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-tanqueray.webp" alt="Tanqueray" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-cocacola.webp" alt="Coca-Cola" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-santa-rita.webp" alt="Santa Rita" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-espiritu-andes.webp" alt="Espíritu de los Andes" loading="lazy" />
+      </div>
+      <div class="logo-main-card">
+        <img src="/assets/img/logo-redbull.webp" alt="Red Bull" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       MARCAS SECUNDARIAS — 8 logos (4×2)
+  ══════════════════════════════════════════════════════ -->
+  <section class="logos-secondary-section">
+    <div class="container">
+      <div class="logos-secondary-header reveal">
+        <span class="label" data-i18n="partners.secondary_label">También nos acompañan</span>
+        <div class="divider-ochre"></div>
+      </div>
+    </div>
+    <div class="logos-secondary-grid reveal">
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-don-julio.webp" alt="Don Julio" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-austral.webp" alt="Austral" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-aperol.webp" alt="Aperol" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-loa.webp" alt="LOA" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-licor43.webp" alt="Licor 43" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-ramazzotti.webp" alt="Ramazzotti" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-schweppes.webp" alt="Schweppes" loading="lazy" />
+      </div>
+      <div class="logo-secondary-card">
+        <img src="/assets/img/logo-welcomeback.webp" alt="Welcome Back" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       GRANDES PROVEEDORES — 4 logos altos
+  ══════════════════════════════════════════════════════ -->
+  <section class="proveedores-section">
+    <div class="container">
+      <div class="logos-section-header reveal">
+        <span class="label" data-i18n="partners.proveedores_label">Respaldo</span>
+        <h2 style="color: var(--cream); margin-top: 0.75rem; margin-bottom: 0;" data-i18n="partners.proveedores_title">Grandes Proveedores</h2>
+        <div class="divider-ochre"></div>
+      </div>
+      <div class="proveedores-grid reveal">
+        <div class="proveedor-card">
+          <img src="/assets/img/logo-ccu.webp" alt="CCU" loading="lazy" />
+        </div>
+        <div class="proveedor-card">
+          <img src="/assets/img/logo-andina.webp" alt="Andina Chile" loading="lazy" />
+        </div>
+        <div class="proveedor-card">
+          <img src="/assets/img/logo-pisquera-chile.webp" alt="Pisquera de Chile" loading="lazy" />
+        </div>
+        <div class="proveedor-card">
+          <img src="/assets/img/logo-diageo.webp" alt="Diageo" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CONVERSEMOS — formulario con fondo imagen
+  ══════════════════════════════════════════════════════ -->
+  <section class="conversemos-section" id="contacto">
+    <div class="conversemos-bg" style="background-image: url('/assets/img/pizzero.webp');"></div>
+    <div class="conversemos-inner">
+
+      <div class="conversemos-header reveal">
+        <span class="label" data-i18n="partners.contacto_label">Hazte Parte</span>
+        <h2 data-i18n="partners.contacto_title">Conversemos</h2>
+        <p data-i18n="partners.contacto_desc">Estamos siempre abiertos a conocer nuevos proveedores de calidad, inversores de experiencia y marcas que compartan nuestra visión. Si tienes un producto, servicio o propuesta que pueda sumar al ADN Segreta, queremos escucharte.</p>
+      </div>
+
+      <div class="form-wrapper reveal">
+        <form id="form-partners" novalidate>
+          <div class="form-group">
+            <label for="nombre" data-i18n="partners.form_nombre_label">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" data-i18n-placeholder="partners.form_nombre_ph" required maxlength="100" />
+          </div>
+          <div class="form-group">
+            <label for="empresa" data-i18n="partners.form_empresa_label">Empresa o Proyecto *</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa o proyecto" data-i18n-placeholder="partners.form_empresa_ph" required maxlength="200" />
+          </div>
+          <div class="form-group">
+            <label for="telefono" data-i18n="partners.form_tel_label">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678" data-i18n-placeholder="partners.form_tel_ph" maxlength="20" />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="partners.form_email_label">Correo electrónico *</label>
+            <input type="email" id="email" name="email" placeholder="tu@email.com" data-i18n-placeholder="partners.form_email_ph" required maxlength="255" />
+          </div>
+          <div class="form-group">
+            <label for="email_confirm" data-i18n="partners.form_email_confirm_label">Repetir correo *</label>
+            <input type="email" id="email_confirm" name="email_confirm" placeholder="Confirma tu correo" data-i18n-placeholder="partners.form_email_confirm_ph" required maxlength="255" autocomplete="off" />
+            <span class="form-error" data-i18n="partners.form_email_error">Los emails no coinciden.</span>
+          </div>
+          <div class="form-group">
+            <label for="mensaje" data-i18n="partners.form_mensaje_label">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Describe tu propuesta, producto o servicio." data-i18n-placeholder="partners.form_mensaje_ph" required maxlength="1000" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;" data-i18n="partners.form_btn">Enviar propuesta</button>
+        </form>
+        <div class="form-success" style="margin-top: 1.5rem;">
+          <p style="color: var(--cream); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; text-align: center; max-width: none;" data-i18n="partners.form_success">Recibimos tu propuesta. Te contactaremos si hay una oportunidad de trabajar juntos.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -69,7 +236,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="/assets/img/segreta-logo.png" alt="Segreta" width="140" height="30" loading="lazy" />
-          <p>Pizza napolitana auténtica y coctelería de autor en Vitacura, Santiago de Chile.</p>
+          <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a href="https://www.instagram.com/segretapizzeria" class="social-link" target="_blank" rel="noopener">↗ @segretapizzeria</a>
         </div>
         <div class="footer-col">
@@ -87,9 +254,9 @@
         <div class="footer-col">
           <h5 data-i18n="footer.contact_title">Contacto</h5>
           <address>
-            <strong>Reservas</strong>
+            <strong data-i18n="common.footer_reservas_label">Reservas</strong>
             <a href="tel:+56976301208">+56 9 7630 1208</a><br /><br />
-            <strong>Delivery</strong>
+            <strong data-i18n="common.footer_delivery_label">Delivery</strong>
             <a href="tel:+56993168620">+56 9 9316 8620</a><br /><br />
             Alonso de Córdova 3080<br />Vitacura, Santiago
           </address>
@@ -98,22 +265,25 @@
           <h5 data-i18n="footer.hours_title">Horarios</h5>
           <table class="horarios-table">
             <tbody>
-              <tr><td>Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
-              <tr><td>Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
-              <tr><td>Mié – Sáb</td><td data-i18n="footer.hours.miercolsab">13:00 – 02:00</td></tr>
-              <tr><td>Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
-              <tr><td>Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
+              <tr><td data-i18n="footer.day.lunes">Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
+              <tr><td data-i18n="footer.day.martes">Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
+              <tr><td data-i18n="footer.day.miercoles">Miércoles</td><td data-i18n="footer.hours.miercoles">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.jueves">Jueves</td><td data-i18n="footer.hours.jueves">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.viernes">Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
+              <tr><td data-i18n="footer.day.sabado">Sábado</td><td data-i18n="footer.hours.sabado">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.domingo">Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="footer-bottom">
         <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar</span></p>
-        <p>Vitacura, Santiago de Chile</p>
+        <p data-i18n="common.footer_bottom_city">Vitacura, Santiago de Chile</p>
       </div>
     </div>
   </footer>
 
+  <script src="/js/translations.js?v=2"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>

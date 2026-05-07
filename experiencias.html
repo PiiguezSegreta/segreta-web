@@ -3,21 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Experiencias &amp; Eventos | Segreta Pizza &amp; Bar — Vitacura</title>
-  <meta name="description" content="Galería, activaciones semanales y eventos en Segreta Pizza &amp; Bar, Vitacura. Reserva tu evento privado o empresarial con nosotros." />
+  <title>Experiencias | Segreta Pizza &amp; Bar – Eventos y Galería</title>
+  <meta name="description" content="Descubre las experiencias en Segreta: eventos privados, música en vivo, activaciones semanales y nuestra galería. Vive noches únicas en Vitacura, Santiago." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://www.segreta.cl/experiencias" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.segreta.cl/experiencias" />
+  <meta property="og:title" content="Experiencias | Segreta Pizza &amp; Bar – Eventos y Galería" />
+  <meta property="og:description" content="Descubre las experiencias en Segreta: eventos privados, música en vivo, activaciones semanales y nuestra galería. Vive noches únicas en Vitacura, Santiago." />
+  <meta property="og:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
+  <meta property="og:image:width" content="1400" />
+  <meta property="og:image:height" content="1044" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://www.segreta.cl/assets/img/segreta-noche-lleno.jpg" />
   <link rel="icon" href="/assets/img/segreta-isotipo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/main.css?v=8" />
+  <link rel="preload" as="image" href="/assets/img/events-hero.webp" />
+  <link rel="stylesheet" href="/css/main.css?v=19" />
 </head>
 <body>
 
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo"><img src="/assets/img/segreta-logo.png" alt="Segreta" width="160" height="34" /></a>
+      <a href="/" class="nav-logo" aria-label="Segreta — Inicio"><img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" /></a>
       <ul class="nav-links">
         <li><a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" class="active" data-i18n="nav.experiencias">Experiencias</a></li>
@@ -25,7 +35,7 @@
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
-          <select class="lang-select" aria-label="Idioma">
+          <select class="lang-select" aria-label="Idioma" onchange="if(window.i18n)window.i18n.setLang(this.value)">
             <option value="es">🇨🇱 ES</option>
             <option value="en">🇺🇸 EN</option>
             <option value="pt">🇧🇷 PT</option>
@@ -40,33 +50,433 @@
     </div>
   </nav>
   <nav class="nav-drawer">
-    <a href="/nosotros">Nosotros</a>
-    <a href="/experiencias">Experiencias</a>
-    <a href="/partners">Partners</a>
-    <a href="/reservas" class="btn btn-primary">Reservar</a>
+    <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
+    <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
+    <a href="/partners" data-i18n="nav.partners">Partners</a>
+    <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="hero-bg" style="background-image: url('/assets/img/events-hero.jpg');"></div>
-    <div class="page-hero-content">
-      <span class="label">Experiencias</span>
-      <h1>Más que una cena,<br />una experiencia</h1>
+  <!-- ══════════════════════════════════════════════════════
+       HERO — pantalla completa
+  ══════════════════════════════════════════════════════ -->
+  <section class="exp-hero">
+    <div class="exp-hero-bg" style="background-image: url('/assets/img/events-hero.webp');"></div>
+    <div class="exp-hero-content">
+      <span class="label fade-up fade-up-1" data-i18n="exp.hero_label">Eventos y Experiencias</span>
+      <h1 class="fade-up fade-up-2" data-i18n="exp.hero_title">Vive Segreta</h1>
+      <p class="exp-hero-desc fade-up fade-up-3" data-i18n="exp.hero_desc">Descubre nuestras activaciones especiales, eventos exclusivos y experiencias diseñadas para crear momentos inolvidables.</p>
     </div>
   </section>
 
-  <!-- Contenido pendiente — Etapa 5 -->
+  <!-- ══════════════════════════════════════════════════════
+       GALERÍA — carrusel horizontal
+  ══════════════════════════════════════════════════════ -->
   <section style="background: var(--noir); padding-block: var(--section-py);">
     <div class="container">
-      <p style="text-align:center; color: var(--cream-dim); font-style: italic;">
-        — Galería, activaciones y formulario de eventos se construyen en la Etapa 5. —
-      </p>
+      <div class="section-header reveal" style="margin-bottom: 2.5rem;">
+        <span class="label" data-i18n="exp.gallery_label">Galería</span>
+      </div>
+    </div>
+    <div class="gallery-carousel-wrapper">
+      <button class="carousel-arrow carousel-arrow-prev" aria-label="Anterior">&#8249;</button>
+      <div class="gallery-carousel-track" id="gallery-carousel">
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-barman.webp" alt="Barman Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-pizza-burrata.webp" alt="Pizza burrata artesanal" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dv5a3421.webp" alt="Noche en Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-postre.webp" alt="Postre artesanal Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-musica.webp" alt="Música en vivo" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc00329.webp" alt="Velada en Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-lleno.webp" alt="Noche llena en Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-burrata-royal.webp" alt="Burrata con Royal" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-segundo-piso.webp" alt="Segundo piso privado" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc0370.webp" alt="Ambiente Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-barman-vitacura.webp" alt="Barman en barra Vitacura" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-espresso-martini.webp" alt="Espresso Martini Cîroc" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-noche-lleno.webp" alt="Vista nocturna Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dv5a3269.webp" alt="Activación Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-mistral.webp" alt="Cocktail Mistral" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-golden-mule.webp" alt="Golden Mule" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-ph-12.webp" alt="Interior del restaurante" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-milanesa-parmigiana.webp" alt="Milanesa parmigiana" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc-0269.webp" alt="Clientes disfrutando" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-piscolas-arriba.webp" alt="Piscolas en Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc0139.webp" alt="Noche Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-entrana-gnocci.webp" alt="Entraña con Gnocci Pesto" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc00737.webp" alt="Ambiente social Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-tiradito-pomelo.webp" alt="Tiradito de pomelo" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc00740.webp" alt="Velada especial" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-mezcalita-reposado.webp" alt="Mezcalita Reposado" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/segreta-bar.webp" alt="Barra Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc00714.webp" alt="Clientes en Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-dsc05390.webp" alt="Ensalada Segreta" loading="lazy" />
+        </div>
+        <div class="gallery-carousel-item">
+          <img src="/assets/img/gallery-tanqueray-sin-alcohol.webp" alt="Tanqueray Sin Alcohol" loading="lazy" />
+        </div>
+      </div>
+      <button class="carousel-arrow carousel-arrow-next" aria-label="Siguiente">&#8250;</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       ACTIVACIONES SEMANALES — 6 cards (3×2)
+  ══════════════════════════════════════════════════════ -->
+  <section style="background: var(--noir); padding-block: var(--section-py);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label" data-i18n="exp.activaciones_label">Programa Semanal</span>
+        <h2 data-i18n="exp.activaciones_title">Activaciones</h2>
+        <p style="text-align: center; margin-inline: auto; margin-top: 0.75rem; max-width: 55ch;" data-i18n="exp.activaciones_desc">En Segreta no existen días normales. Cada jornada tiene identidad propia y está diseñada para transformar una simple salida en una experiencia distinta.</p>
+      </div>
+    </div>
+    <div class="activaciones-grid" style="margin-top: 3rem;">
+      <!-- Lunes -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/activacion-lucky-monday.webp" alt="Lucky Monday — Lunes en Segreta" loading="lazy" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.lunes_dia">🎲 Lunes</span>
+          <div class="activacion-nombre" data-i18n="exp.lunes_nombre">Lucky Monday</div>
+          <p class="activacion-desc" data-i18n="exp.lunes_desc">Antes de pedir, tira el dado: puedes ganar 50% off en Whisky Sour, Vino, Cocktail, Pizza de regalo… o nada. Una experiencia lúdica e inesperada.</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.lunes_horario">⏰ 18:00 – 23:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.lunes_regla">Regla: Deben seguir @segretapizzeria en Instagram, hacer un video tirando el dado y subirlo etiquetando a Segreta si ganan.</span>
+          </div>
+        </div>
+      </div>
+      <!-- Martes -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/martes-para-ellas.webp" alt="Martes para Ellas" loading="lazy" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.martes_dia">🌸 Martes</span>
+          <div class="activacion-nombre" data-i18n="exp.martes_nombre">Martes para Ellas</div>
+          <p class="activacion-desc" data-i18n="exp.martes_desc">Bienvenidas todas las mujeres a la mesa con un cóctel de autor de cortesía para empezar la noche como corresponde.</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.martes_horario">⏰ 18:00 – 22:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.martes_regla">Regla: La persona debe ser mujer y consumir algo en el local Segreta para acceder a un cóctel de cortesía, no repetible ni canjeable.</span>
+          </div>
+        </div>
+      </div>
+      <!-- Miércoles -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/activacion-miercoles-social.webp" alt="Miércoles Social" loading="lazy" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.miercoles_dia">🚦 Miércoles</span>
+          <div class="activacion-nombre" data-i18n="exp.miercoles_nombre">Miércoles Social</div>
+          <p class="activacion-desc" data-i18n="exp.miercoles_desc">Vive el Semáforo Social todos los miércoles. Primero elige tu mood social: 🟢 Social, 🟡 Low Profile o 🔴 No participa; luego juega, rompe el hielo y si la química fluye entre mesas: Shots de cortesía!</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.miercoles_horario">⏰ 18:00 – 00:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.miercoles_regla">Regla: Una ficha por mesa para lograr hacer match.</span>
+          </div>
+        </div>
+      </div>
+      <!-- Viernes -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/viernes-schop.webp" alt="Viernes de Schop" loading="lazy" style="object-position: top;" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.viernes_dia">🍺 Viernes</span>
+          <div class="activacion-nombre" data-i18n="exp.viernes_nombre">Viernes de Schop</div>
+          <p class="activacion-desc" data-i18n="exp.viernes_desc">Te recibimos todos los Viernes after office con un "Merecido Relajo" Royal Guard de 330cc para cerrar la semana como corresponde.</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.viernes_horario">⏰ 13:00 – 17:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.viernes_regla">Regla: Consumir algo de la carta en el local Segreta.</span>
+          </div>
+        </div>
+      </div>
+      <!-- Sábado -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/activacion-sabado-goldenhr.webp" alt="Golden Hours Segreta" loading="lazy" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.sabado_dia">✨ Sábado</span>
+          <div class="activacion-nombre" data-i18n="exp.sabado_nombre">Golden Hours</div>
+          <p class="activacion-desc" data-i18n="exp.sabado_desc">La mejor combinación del sábado: música en vivo y las mejores promociones con Licor 43 para disfrutar el golden hour como se merece.</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.sabado_horario">🍹 Carajillos 2×1: 13:00 – 19:00 | 🎷 Música en vivo: 15:00 – 18:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.sabado_regla">Regla: Consumir algo de la carta en el local Segreta.</span>
+          </div>
+        </div>
+      </div>
+      <!-- Domingo -->
+      <div class="activacion-card reveal">
+        <img src="/assets/img/activacion-bossa-sunday.webp" alt="Bossa Sundays" loading="lazy" />
+        <div class="activacion-overlay">
+          <span class="activacion-dia" data-i18n="exp.domingo_dia">🎵 Domingo</span>
+          <div class="activacion-nombre" data-i18n="exp.domingo_nombre">Bossa Sundays</div>
+          <p class="activacion-desc" data-i18n="exp.domingo_desc">Domingos con música bossa nova en vivo, ambiente relajado y una carta especial de coctelería en base a Gin Tanqueray Bossa Nova para acompañar la tarde sin apuro.</p>
+          <div class="activacion-meta">
+            <span class="activacion-horario" data-i18n="exp.domingo_horario">⏰ 15:00 – 18:00 hrs</span>
+            <span class="activacion-regla" data-i18n="exp.domingo_regla">Regla: Consumir algo de la carta en el local Segreta.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       EVENTOS — acordeón + categorías + frase
+  ══════════════════════════════════════════════════════ -->
+  <section class="eventos-section" id="eventos">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="label" data-i18n="exp.eventos_label">Eventos</span>
+        <h2 data-i18n="exp.eventos_title">Eventos privados y<br />personalizados</h2>
+        <p style="text-align: center; margin-inline: auto; margin-top: 1rem; max-width: 65ch;" data-i18n="exp.eventos_desc">En Segreta organizamos eventos de todo tipo: cumpleaños exclusivos, activaciones de marca, catas especiales, fiestas temáticas y cenas corporativas. Cada evento es diseñado a medida tanto en el local como fuera de él.</p>
+      </div>
+
+      <!-- Bloques acordeón -->
+      <div class="eventos-blocks reveal">
+
+        <!-- Bloque A: En Segreta -->
+        <div class="evento-block" id="block-en-segreta">
+          <div class="evento-block-cover">
+            <img src="/assets/img/en-segreta.webp" alt="Eventos en Segreta" loading="lazy" />
+            <div class="evento-cover-overlay">
+              <span class="label" data-i18n="exp.en_segreta_label">En el local</span>
+              <h3 data-i18n="exp.en_segreta_title">En Segreta</h3>
+              <button class="evento-toggle-btn" data-target="body-en-segreta" data-i18n="exp.en_segreta_btn">Más información</button>
+            </div>
+          </div>
+          <div class="evento-block-body" id="body-en-segreta">
+            <div class="evento-block-body-inner">
+              <p data-i18n="exp.en_segreta_p1">En Segreta contamos con espacios diseñados para cada tipo de celebración. La terraza del primer piso es el escenario ideal para eventos sociales con energía y ambiente, mientras que para encuentros más privados y exclusivos ofrecemos la nueva Camera Segreta y todo el segundo piso con posibilidad de personalización total.</p>
+              <p data-i18n="exp.en_segreta_p2">Cumpleaños, celebraciones más íntimas, eventos corporativos, lanzamientos y activaciones de marca encuentran aquí el espacio perfecto para convertirse en una experiencia memorable.</p>
+              <div class="mini-carousel-wrapper">
+                <div class="mini-carousel" id="mc-ensegreta">
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/segreta-noche-lleno.jpg" alt="Evento nocturno en salón principal" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/segreta-activacion.webp" alt="Activación corporativa en Segreta" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/segreta-2do-piso.webp" alt="Segundo piso privado" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/gallery-dsc-0269-b.webp" alt="Clientes en Segreta" loading="lazy" />
+                  </div>
+                </div>
+                <button class="mini-carousel-arrow mini-carousel-arrow--prev" data-target="mc-ensegreta" aria-label="Anterior">&#8249;</button>
+                <button class="mini-carousel-arrow mini-carousel-arrow--next" data-target="mc-ensegreta" aria-label="Siguiente">&#8250;</button>
+              </div>
+              <div class="evento-block-cta">
+                <a href="#celebra" class="btn btn-primary" data-i18n="exp.en_segreta_cta">Agenda tu evento</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bloque B: Fuera del local -->
+        <div class="evento-block" id="block-fuera-local">
+          <div class="evento-block-cover">
+            <img src="/assets/img/eventos-fuera.webp" alt="Eventos fuera del local" loading="lazy" />
+            <div class="evento-cover-overlay">
+              <span class="label" data-i18n="exp.fuera_label">Fuera del local</span>
+              <h3 data-i18n="exp.fuera_title">Donde tú quieras</h3>
+              <button class="evento-toggle-btn" data-target="body-fuera-local" data-i18n="exp.fuera_btn">Más información</button>
+            </div>
+          </div>
+          <div class="evento-block-body" id="body-fuera-local">
+            <div class="evento-block-body-inner">
+              <p data-i18n="exp.fuera_p1">La experiencia Segreta no se queda en el local. La llevamos donde tú la necesites. Nuestro carrito móvil, barras de coctelería y producción gastronómica están diseñados para transformar empresas, ferias, festivales y lanzamientos de marca en verdaderos puntos de encuentro.</p>
+              <p data-i18n="exp.fuera_p2">Con posibilidad de branding colaborativo, activaciones en terreno y propuestas a medida, convertimos cada espacio en una extensión auténtica de Segreta: buena energía, cocina de alto estándar y una puesta en escena que no pasa desapercibida.</p>
+              <div class="mini-carousel-wrapper">
+                <div class="mini-carousel" id="mc-fuera">
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/eventos-fuera-b.webp" alt="Evento fuera del local" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/comida-segreta.webp" alt="Catering fuera del local" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/segreta-eventos-3.webp" alt="Montaje Segreta al aire libre" loading="lazy" />
+                  </div>
+                  <div class="mini-carousel-item">
+                    <img src="/assets/img/evento-segreta-2.webp" alt="Evento corporativo fuera del local" loading="lazy" />
+                  </div>
+                </div>
+                <button class="mini-carousel-arrow mini-carousel-arrow--prev" data-target="mc-fuera" aria-label="Anterior">&#8249;</button>
+                <button class="mini-carousel-arrow mini-carousel-arrow--next" data-target="mc-fuera" aria-label="Siguiente">&#8250;</button>
+              </div>
+              <div class="evento-block-cta">
+                <a href="#celebra" class="btn btn-primary" data-i18n="exp.fuera_cta">Agenda tu evento</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.eventos-blocks -->
+
+      <!-- Cuadrícula de categorías -->
+      <div class="categorias-grid reveal">
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_cumpleanos">Cumpleaños</a>
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_corporativos">Corporativos</a>
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_activaciones">Activaciones</a>
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_lanzamientos">Lanzamientos</a>
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_ferias">Ferias y Festivales</a>
+        <a href="#celebra" class="categoria-item" data-i18n="exp.cat_personalizados">Personalizados</a>
+      </div>
+
+    </div><!-- /.container -->
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       CLUB SEGRETA — Red Pass
+  ══════════════════════════════════════════════════════ -->
+  <section class="club-segreta-section reveal">
+    <div class="container">
+      <div class="club-segreta-card">
+        <div class="club-segreta-inner">
+          <!-- Texto -->
+          <div class="club-segreta-text">
+            <span class="label" style="color: var(--ochre);" data-i18n="exp.club_label">Red Pass</span>
+            <h2 data-i18n="exp.club_title">Únete al Club Segreta</h2>
+            <p data-i18n="exp.club_p1">Al inscribirte en el programa de Segreta Pizzería, acumulas puntos con cada compra desde tu Tarjeta Segreta "Red Pass".</p>
+            <p data-i18n="exp.club_p2">Cuando alcanzas ciertos niveles, subes en el rango de tarjetas al mismo tiempo que desbloqueas recompensas y beneficios exclusivos que puedes canjear en el local.</p>
+            <div class="club-segreta-wallets">
+              <span class="label" style="display: block; margin-bottom: 1.25rem; color: var(--ochre);" data-i18n="exp.club_disponible">Disponible en</span>
+              <div class="club-segreta-wallet-icons">
+                <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" target="_blank" rel="noopener noreferrer">
+                  <img src="/assets/img/apple-wallet.png" alt="Add to Apple Wallet" loading="lazy" />
+                </a>
+                <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" target="_blank" rel="noopener noreferrer">
+                  <img src="/assets/img/google-wallet.png" alt="Add to Google Wallet" loading="lazy" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- QR -->
+          <div class="club-segreta-qr">
+            <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" target="_blank" rel="noopener noreferrer">
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red&bgcolor=ffffff&color=000000&margin=10" alt="QR Code Club Segreta" loading="lazy" style="width: 260px; height: 260px;" />
+            </a>
+            <span class="label" style="display: block; text-align: center; margin-top: 1rem; color: var(--ochre);" data-i18n="exp.club_escanea">Escanea y únete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FRASE DESTACADA
+  ══════════════════════════════════════════════════════ -->
+  <section class="frase-segreta reveal" style="background: var(--noir-mid);">
+    <p data-i18n="exp.frase">"Nos vemos en los mejores lugares."</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       FORMULARIO — Celebra con Nosotros #celebra
+  ══════════════════════════════════════════════════════ -->
+  <section id="celebra" class="exp-celebra">
+    <div class="exp-celebra-bg" style="background-image: url('/assets/img/events-hero.webp');"></div>
+    <div class="exp-celebra-inner">
+
+      <div class="section-header reveal">
+        <span class="label" data-i18n="exp.celebra_label">Celebra con Nosotros</span>
+        <h2 data-i18n="exp.celebra_title">¿Quieres celebrar<br />algo especial?</h2>
+        <p data-i18n="exp.celebra_desc">Contáctanos y organiza tu cumpleaños, evento corporativo o celebración privada en Segreta.</p>
+      </div>
+
+      <div class="form-wrapper reveal">
+        <form id="form-contacto" novalidate>
+          <div class="form-group">
+            <label for="nombre" data-i18n="exp.form_nombre_label">Nombre *</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre *" data-i18n-placeholder="exp.form_nombre_ph" required maxlength="100" />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="exp.form_email_label">Correo electrónico *</label>
+            <input type="email" id="email" name="email" placeholder="Email *" data-i18n-placeholder="exp.form_email_ph" required maxlength="255" />
+          </div>
+          <div class="form-group">
+            <label for="email_confirm" data-i18n="exp.form_email_confirm_label">Repetir correo *</label>
+            <input type="email" id="email_confirm" name="email_confirm" placeholder="Repite correo *" data-i18n-placeholder="exp.form_email_confirm_ph" required maxlength="255" autocomplete="off" />
+            <span class="form-error" data-i18n="exp.form_email_error">Los emails no coinciden.</span>
+          </div>
+          <div class="form-group">
+            <label for="telefono" data-i18n="exp.form_tel_label">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" data-i18n-placeholder="exp.form_tel_ph" maxlength="20" />
+          </div>
+          <div class="form-group">
+            <label for="mensaje" data-i18n="exp.form_mensaje_label">Mensaje *</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Mensaje *" data-i18n-placeholder="exp.form_mensaje_ph" required maxlength="1000" rows="5"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;" data-i18n="exp.form_btn">Enviar mensaje</button>
+        </form>
+        <div class="form-success" style="margin-top: 1.5rem;">
+          <p style="color: var(--cream); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; text-align: center; max-width: none;" data-i18n="exp.form_success">Recibimos tu mensaje. El equipo de eventos te contactará en breve.</p>
+        </div>
+      </div>
+
+      <div class="nos-ctas reveal" style="margin-top: 1.75rem;">
+        <div class="nos-ctas-row">
+          <a href="https://gour.media/segreta/" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="exp.cta_carta">Ver Carta</a>
+          <a href="https://www.covermanager.com/reservation/module_restaurant/restaurante-segreta-pizzeria/spanish#" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="exp.cta_reservar">Reservar Mesa</a>
+          <a href="/delivery" class="btn btn-primary" data-i18n="exp.cta_delivery">Delivery</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- Lightbox -->
   <div class="lightbox" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
-    <button class="lightbox-close" aria-label="Cerrar">✕</button>
+    <button class="lightbox-close" aria-label="Cerrar">&#10005;</button>
     <img class="lightbox-img" src="" alt="" />
   </div>
 
@@ -75,7 +485,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="/assets/img/segreta-logo.png" alt="Segreta" width="140" height="30" loading="lazy" />
-          <p>Pizza napolitana auténtica y coctelería de autor en Vitacura, Santiago de Chile.</p>
+          <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a href="https://www.instagram.com/segretapizzeria" class="social-link" target="_blank" rel="noopener">↗ @segretapizzeria</a>
         </div>
         <div class="footer-col">
@@ -93,9 +503,9 @@
         <div class="footer-col">
           <h5 data-i18n="footer.contact_title">Contacto</h5>
           <address>
-            <strong>Reservas</strong>
+            <strong data-i18n="common.footer_reservas_label">Reservas</strong>
             <a href="tel:+56976301208">+56 9 7630 1208</a><br /><br />
-            <strong>Delivery</strong>
+            <strong data-i18n="common.footer_delivery_label">Delivery</strong>
             <a href="tel:+56993168620">+56 9 9316 8620</a><br /><br />
             Alonso de Córdova 3080<br />Vitacura, Santiago
           </address>
@@ -104,24 +514,95 @@
           <h5 data-i18n="footer.hours_title">Horarios</h5>
           <table class="horarios-table">
             <tbody>
-              <tr><td>Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
-              <tr><td>Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
-              <tr><td>Mié – Sáb</td><td data-i18n="footer.hours.miercolsab">13:00 – 02:00</td></tr>
-              <tr><td>Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
-              <tr><td>Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
+              <tr><td data-i18n="footer.day.lunes">Lunes</td><td data-i18n="footer.hours.lunes">18:00 – 00:00</td></tr>
+              <tr><td data-i18n="footer.day.martes">Martes</td><td data-i18n="footer.hours.martes">13:00 – 01:00</td></tr>
+              <tr><td data-i18n="footer.day.miercoles">Miércoles</td><td data-i18n="footer.hours.miercoles">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.jueves">Jueves</td><td data-i18n="footer.hours.jueves">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.viernes">Viernes</td><td data-i18n="footer.hours.viernes">13:00 – 03:00</td></tr>
+              <tr><td data-i18n="footer.day.sabado">Sábado</td><td data-i18n="footer.hours.sabado">13:00 – 02:00</td></tr>
+              <tr><td data-i18n="footer.day.domingo">Domingo</td><td data-i18n="footer.hours.domingo">13:00 – 22:00</td></tr>
             </tbody>
           </table>
         </div>
       </div>
       <div class="footer-bottom">
         <p>© <span id="footer-year"></span> <span data-i18n="footer.copyright">Segreta Pizza &amp; Bar</span></p>
-        <p>Vitacura, Santiago de Chile</p>
+        <p data-i18n="common.footer_bottom_city">Vitacura, Santiago de Chile</p>
       </div>
     </div>
   </footer>
 
+  <script src="/js/translations.js?v=2"></script>
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
-  <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* ── Galería: flechas del carrusel ──────────────────────── */
+    const track = document.getElementById('gallery-carousel');
+    const btnPrev = document.querySelector('.carousel-arrow-prev');
+    const btnNext = document.querySelector('.carousel-arrow-next');
+
+    if (track && btnPrev && btnNext) {
+      const scrollStep = () => Math.round(track.offsetWidth * 0.75);
+      btnPrev.addEventListener('click', () => track.scrollBy({ left: -scrollStep(), behavior: 'smooth' }));
+      btnNext.addEventListener('click', () => track.scrollBy({ left: scrollStep(), behavior: 'smooth' }));
+
+      // Drag para scroll en desktop
+      let isDown = false, startX, scrollLeft;
+      track.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+      });
+      track.addEventListener('mouseleave', () => isDown = false);
+      track.addEventListener('mouseup', () => isDown = false);
+      track.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        track.scrollLeft = scrollLeft - (x - startX);
+      });
+    }
+
+    /* ── Lightbox para carrusel de galería y mini carruseles ── */
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+
+    document.querySelectorAll('.gallery-carousel-item, .mini-carousel-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        if (!img || !lightbox || !lightboxImg) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    /* ── Acordeón de eventos ────────────────────────────────── */
+    document.querySelectorAll('.evento-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const body = document.getElementById(targetId);
+        if (!body) return;
+        const isOpen = body.classList.toggle('open');
+        const closeText = (window.i18n && window.i18n.t('exp.cerrar')) || 'Cerrar';
+        const openText  = (window.i18n && window.i18n.t(btn.dataset.i18n)) || 'Más información';
+        btn.textContent = isOpen ? closeText : openText;
+      });
+    });
+
+    /* ── Flechas mini carruseles ────────────────────────────── */
+    document.querySelectorAll('.mini-carousel-arrow').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const track = document.getElementById(btn.dataset.target);
+        if (!track) return;
+        const step = track.querySelector('.mini-carousel-item')?.offsetWidth + 4 || 224;
+        const dir = btn.classList.contains('mini-carousel-arrow--prev') ? -step : step;
+        track.scrollBy({ left: dir, behavior: 'smooth' });
+      });
+    });
+  </script>
 </body>
 </html>
