@@ -837,44 +837,37 @@ section {
   padding-block: var(--section-py);
 }
 
-.almuerzo-fotos {
+.almuerzo-header-desc {
+  text-align: center;
+  margin-inline: auto;
+  margin-top: 0.75rem;
+  max-width: 58ch;
+  color: var(--cream-dim);
+}
+
+.almuerzo-exp-grid {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 4px;
-  height: 480px;
-  margin-block: 3rem;
-  overflow: hidden;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 4rem;
+  align-items: start;
 }
 
-.almuerzo-foto-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.almuerzo-exp-info {
+  position: sticky;
+  top: 5.5rem;
 }
 
-.almuerzo-foto-side {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.almuerzo-info-block {
+  padding-block: 2rem;
 }
 
-.almuerzo-foto-side img {
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
+.almuerzo-info-block:first-child {
+  padding-top: 0;
 }
 
-.almuerzo-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem;
-  margin-top: 3.5rem;
-  padding-top: 3rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
+.almuerzo-info-block + .almuerzo-info-block {
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .almuerzo-info-block .label {
@@ -906,26 +899,32 @@ section {
 .almuerzo-ctas {
   display: flex;
   gap: 1rem;
-  justify-content: center;
-  margin-top: 2.75rem;
+  margin-top: 2.25rem;
   flex-wrap: wrap;
 }
 
+.almuerzo-exp-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.almuerzo-exp-photos img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
 @media (max-width: 900px) {
-  .almuerzo-fotos {
+  .almuerzo-exp-grid {
     grid-template-columns: 1fr;
-    height: auto;
+    gap: 2.5rem;
   }
-  .almuerzo-foto-main img {
-    height: 320px;
+  .almuerzo-exp-info {
+    position: static;
   }
-  .almuerzo-foto-side {
-    flex-direction: row;
-    height: 220px;
-  }
-  .almuerzo-info {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .almuerzo-ctas {
+    justify-content: flex-start;
   }
 }
 
