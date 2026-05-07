@@ -38,6 +38,17 @@
   to = "/confirmacion.html"
   status = 200
 
+# API → Netlify Functions
+[[redirects]]
+  from = "/api/send-contact"
+  to = "/.netlify/functions/send-contact"
+  status = 200
+
+[[redirects]]
+  from = "/api/send-partner"
+  to = "/.netlify/functions/send-partner"
+  status = 200
+
 # Headers de seguridad
 [[headers]]
   for = "/*"
