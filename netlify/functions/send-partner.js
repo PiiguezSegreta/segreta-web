@@ -2,6 +2,7 @@
  * Netlify Function: send-partner
  * Maneja el formulario de Brand Partnership (/partners)
  * Destinatarios: daniel@segreta.cl, admin@segreta.cl
+ * También registra el lead en Google Sheets vía Make webhook
  */
 
 exports.handler = async (event) => {
@@ -18,7 +19,6 @@ exports.handler = async (event) => {
 
   const { nombre, empresa, telefono, email, email_confirm, mensaje } = body;
 
-  // Validaciones básicas
   if (!nombre || !email || !mensaje) {
     return { statusCode: 400, body: 'Campos requeridos faltantes' };
   }
@@ -38,10 +38,10 @@ exports.handler = async (event) => {
   const emailBody = `
 Nuevo mensaje desde segreta.cl — Brand Partnership
 
-Nombre: ${nombre}
+Nombre:             ${nombre}
 Empresa / Proyecto: ${empresa || 'No indicado'}
-Email: ${email}
-Teléfono: ${telefono || 'No indicado'}
+Email:              ${email}
+Teléfono:           ${telefono || 'No indicado'}
 
 Mensaje:
 ${mensaje}
@@ -67,6 +67,29 @@ ${mensaje}
       const err = await res.text();
       console.error('Resend error:', err);
       return { statusCode: 502, body: 'Error al enviar el email' };
+    }
+
+    const resendData = await res.json();
+
+    // Registrar en Google Sheets vía Make webhook
+    const SHEETS_WEBHOOK = process.env.SHEETS_PARTNER_WEBHOOK_URL;
+    if (SHEETS_WEBHOOK) {
+      try {
+        await fetch(SHEETS_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            resend_id: resendData.id || '',
+            nombre,
+            empresa:  empresa  || '',
+            email,
+            telefono: telefono || '',
+            mensaje,
+          }),
+        });
+      } catch (sheetErr) {
+        console.error('Sheets webhook error:', sheetErr);
+      }
     }
 
     return { statusCode: 200, body: JSON.stringify({ ok: true }) };
