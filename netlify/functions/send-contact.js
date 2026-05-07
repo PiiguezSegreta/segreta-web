@@ -58,7 +58,7 @@ ${mensaje}
       },
       body: JSON.stringify({
         from: 'Segreta Web <no-reply@segreta.cl>',
-        to: ['reservas@segreta.cl', 'daniel@segreta.cl', 'ignacio@segreta.cl'],
+        to: ['reservas@segreta.cl', 'daniel@segreta.cl', 'pedro@segreta.cl'],
         reply_to: email,
         subject: `Contacto Web: ${nombre}`,
         text: emailBody,
