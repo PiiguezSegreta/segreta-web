@@ -1,7 +1,8 @@
 /**
  * Netlify Function: send-contact
  * Maneja el formulario de cotización de eventos (/experiencias)
- * Destinatarios: reservas@segreta.cl, daniel@segreta.cl, ignacio@segreta.cl
+ * Destinatarios: reservas@segreta.cl, daniel@segreta.cl, pedro@segreta.cl
+ * También registra el lead en Google Sheets vía Apps Script webhook
  */
 
 exports.handler = async (event) => {
@@ -18,7 +19,6 @@ exports.handler = async (event) => {
 
   const { nombre, email, email_confirm, telefono, tipo_evento, fecha, personas, mensaje } = body;
 
-  // Validaciones básicas
   if (!nombre || !email || !mensaje) {
     return { statusCode: 400, body: 'Campos requeridos faltantes' };
   }
@@ -38,12 +38,12 @@ exports.handler = async (event) => {
   const emailBody = `
 Nuevo contacto desde segreta.cl — Formulario de Eventos
 
-Nombre:        ${nombre}
-Email:         ${email}
-Teléfono:      ${telefono || 'No indicado'}
-Tipo de evento: ${tipo_evento || 'No indicado'}
+Nombre:          ${nombre}
+Email:           ${email}
+Teléfono:        ${telefono || 'No indicado'}
+Tipo de evento:  ${tipo_evento || 'No indicado'}
 Fecha tentativa: ${fecha || 'No indicada'}
-N° de personas: ${personas || 'No indicado'}
+N° de personas:  ${personas || 'No indicado'}
 
 Mensaje:
 ${mensaje}
@@ -69,6 +69,32 @@ ${mensaje}
       const err = await res.text();
       console.error('Resend error:', err);
       return { statusCode: 502, body: 'Error al enviar el email' };
+    }
+
+    const resendData = await res.json();
+
+    // Registrar en Google Sheets vía Apps Script
+    const SHEETS_WEBHOOK = process.env.SHEETS_WEBHOOK_URL;
+    if (SHEETS_WEBHOOK) {
+      try {
+        await fetch(SHEETS_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            resend_id: resendData.id || '',
+            nombre,
+            email,
+            telefono:    telefono    || '',
+            tipo_evento: tipo_evento || '',
+            fecha:       fecha       || '',
+            personas:    personas    || '',
+            mensaje,
+          }),
+        });
+      } catch (sheetErr) {
+        // No interrumpe el flujo si el sheet falla
+        console.error('Sheets webhook error:', sheetErr);
+      }
     }
 
     return { statusCode: 200, body: JSON.stringify({ ok: true }) };
