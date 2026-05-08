@@ -16,9 +16,6 @@
   border-width: 0;
 }
 
-/* ── 1. Google Fonts ──────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap');
-
 /* ── 2. Variables de diseño ───────────────────────────────── */
 :root {
   /* Paleta de color */
