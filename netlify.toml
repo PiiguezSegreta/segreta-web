@@ -38,11 +38,11 @@
   to = "/confirmacion.html"
   status = 200
 
-# Formulario de postulación (oculta URL de Tally)
+# Trabaja con nosotros (Tally embebido en página propia)
 [[redirects]]
   from = "/trabaja"
-  to = "https://tally.so/r/mJakVJ"
-  status = 302
+  to = "/trabaja.html"
+  status = 200
 
 # API → Netlify Functions
 [[redirects]]
