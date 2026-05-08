@@ -743,10 +743,27 @@ section {
   }
   .esp-card {
     aspect-ratio: 16/9;
+    cursor: pointer;
   }
+  /* texto oculto por defecto en mobile — se revela con tap (.is-active vía JS) */
   .esp-card p {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  .esp-card.is-active img {
+    transform: scale(1.06);
+  }
+  .esp-card.is-active .esp-card-overlay {
+    background: linear-gradient(
+      to top,
+      hsl(0, 0%, 3%, 0.95) 0%,
+      hsl(0, 0%, 3%, 0.6) 60%,
+      hsl(0, 0%, 3%, 0.2) 100%
+    );
+  }
+  .esp-card.is-active p {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 }
 
@@ -1713,11 +1730,29 @@ section {
   }
   .activacion-card {
     aspect-ratio: 4/3;
+    cursor: pointer;
   }
+  /* texto oculto por defecto en mobile — tap activa .is-active vía JS */
   .activacion-desc,
   .activacion-meta {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  .activacion-card.is-active img {
+    transform: scale(1.05);
+  }
+  .activacion-card.is-active .activacion-overlay {
+    background: linear-gradient(
+      to top,
+      hsl(0, 0%, 3%, 0.97) 0%,
+      hsl(0, 0%, 3%, 0.55) 60%,
+      hsl(0, 0%, 3%, 0.1) 100%
+    );
+  }
+  .activacion-card.is-active .activacion-desc,
+  .activacion-card.is-active .activacion-meta {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
   }
 }
 
@@ -2818,5 +2853,95 @@ section {
   .exp-celebra-ctas .btn {
     flex: none;
     width: 100%;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE FIXES GLOBALES
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Overlays de hero: gradiente más agresivo en mobile ── */
+@media (max-width: 768px) {
+  .hero-bg::after {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.2) 0%,
+      rgba(0,0,0,0.55) 55%,
+      rgba(0,0,0,1.0) 85%,
+      rgba(0,0,0,1.0) 100%
+    );
+  }
+  .nos-hero-bg::after,
+  .nos-fullimg-bg::after,
+  .exp-hero-bg::after,
+  .partners-hero-bg::after {
+    background: linear-gradient(
+      to bottom,
+      hsla(0,0%,3%,0.05) 0%,
+      hsla(0,0%,3%,0.6) 60%,
+      hsla(0,0%,3%,1.0) 82%,
+      hsla(0,0%,3%,1.0) 100%
+    );
+  }
+  /* Asegurar fondo oscuro por si el gradiente tiene gap */
+  .nos-fullimg {
+    background: var(--noir);
+  }
+}
+
+/* ── Experiencias hero: desplazar imagen a la derecha ──── */
+@media (max-width: 768px) {
+  .exp-hero-bg {
+    background-position: 68% center;
+  }
+}
+
+/* ── Almuerzo section: rediseño mobile ─────────────────── */
+@media (max-width: 900px) {
+  .almuerzo-exp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+
+  /* Fotos primero, info después */
+  .almuerzo-exp-photos {
+    order: -1;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 10px;
+    padding: 0 var(--gutter) 1.25rem;
+    margin: 0 calc(-1 * var(--gutter));
+  }
+  .almuerzo-exp-photos::-webkit-scrollbar { display: none; }
+
+  .almuerzo-exp-photos img {
+    flex: 0 0 auto;
+    width: 72vw;
+    max-width: 260px;
+    height: 190px;
+    border-radius: 3px;
+    scroll-snap-align: start;
+    cursor: pointer;
+  }
+
+  /* Info section debajo de las fotos */
+  .almuerzo-exp-info {
+    position: static;
+    margin-top: 2.5rem;
+  }
+
+  /* Solo mostrar "Reservar mesa" en mobile */
+  .almuerzo-phone-btn {
+    display: none;
+  }
+
+  .almuerzo-ctas {
+    justify-content: flex-start;
   }
 }

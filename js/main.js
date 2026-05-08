@@ -125,6 +125,36 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => observer.observe(el));
   }
 
+  /* ── Mobile touch: esp-card tap reveal ──────────────────────── */
+  document.querySelectorAll('.esp-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const wasActive = card.classList.contains('is-active');
+      document.querySelectorAll('.esp-card').forEach(c => c.classList.remove('is-active'));
+      if (!wasActive) card.classList.add('is-active');
+    });
+  });
+
+  /* ── Mobile touch: activacion-card tap reveal ─────────────── */
+  document.querySelectorAll('.activacion-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const wasActive = card.classList.contains('is-active');
+      document.querySelectorAll('.activacion-card').forEach(c => c.classList.remove('is-active'));
+      if (!wasActive) card.classList.add('is-active');
+    });
+  });
+
+  /* ── Almuerzo photos: lightbox on tap ────────────────────── */
+  if (lightbox && lightboxImg) {
+    document.querySelectorAll('.almuerzo-exp-photos img').forEach(img => {
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt || '';
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  }
+
   /* ── Formularios: validación + envío vía Netlify Function ─── */
   initForm('form-contacto', '/api/send-contact');
   initForm('form-partners', '/api/send-partner');
