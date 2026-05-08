@@ -502,10 +502,11 @@ section {
   height: 100svh;
   min-height: 600px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   text-align: center;
   padding-top: var(--nav-h);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
   overflow: hidden;
 }
 
@@ -517,15 +518,21 @@ section {
   background-repeat: no-repeat;
 }
 
+/* Muestra la parte superior del restaurante — gente en mesas */
+.hero > .hero-bg {
+  background-position: center 30%;
+}
+
 .hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0.45) 50%,
-    rgba(0, 0, 0, 0.75) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.08) 35%,
+    rgba(0, 0, 0, 0.6) 68%,
+    rgba(0, 0, 0, 0.9) 100%
   );
 }
 
@@ -677,7 +684,7 @@ section {
 
 .esp-card {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   overflow: hidden;
   cursor: pointer;
 }
@@ -702,9 +709,8 @@ section {
   padding: 2rem;
   background: linear-gradient(
     to top,
-    hsl(0, 0%, 3%, 0.9) 0%,
-    hsl(0, 0%, 3%, 0.3) 60%,
-    transparent 100%
+    rgba(0, 0, 0, 0.28) 0%,
+    transparent 42%
   );
   transition: background var(--duration) var(--ease);
 }
@@ -721,6 +727,9 @@ section {
 .esp-card h3 {
   color: var(--ochre);
   margin-bottom: 0.5rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .esp-card p {
@@ -732,6 +741,7 @@ section {
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
+.esp-card:hover h3,
 .esp-card:hover p {
   opacity: 1;
   transform: translateY(0);
@@ -742,10 +752,11 @@ section {
     grid-template-columns: 1fr;
   }
   .esp-card {
-    aspect-ratio: 16/9;
+    aspect-ratio: 4/5;
     cursor: pointer;
   }
-  /* texto oculto por defecto en mobile — se revela con tap (.is-active vía JS) */
+  /* texto oculto por defecto — se revela con scroll (IntersectionObserver) */
+  .esp-card h3,
   .esp-card p {
     opacity: 0;
     transform: translateY(8px);
@@ -761,6 +772,7 @@ section {
       hsl(0, 0%, 3%, 0.2) 100%
     );
   }
+  .esp-card.is-active h3,
   .esp-card.is-active p {
     opacity: 1;
     transform: translateY(0);
@@ -1366,7 +1378,8 @@ section {
   background: linear-gradient(
     to bottom,
     hsla(0, 0%, 3%, 0.1) 0%,
-    hsla(0, 0%, 3%, 0.6) 60%,
+    hsla(0, 0%, 3%, 0.5) 50%,
+    hsla(0, 0%, 3%, 1.0) 78%,
     hsla(0, 0%, 3%, 1.0) 100%
   );
 }
@@ -1446,8 +1459,9 @@ section {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    hsla(0, 0%, 3%, 0.0) 20%,
-    hsla(0, 0%, 3%, 0.7) 65%,
+    hsla(0, 0%, 3%, 0.05) 0%,
+    hsla(0, 0%, 3%, 0.5) 50%,
+    hsla(0, 0%, 3%, 1.0) 75%,
     hsla(0, 0%, 3%, 1.0) 100%
   );
 }
@@ -1611,7 +1625,7 @@ section {
 
 .activacion-card {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 1/1;
   overflow: hidden;
 }
 
@@ -1635,9 +1649,8 @@ section {
   padding: 2rem;
   background: linear-gradient(
     to top,
-    hsl(0, 0%, 3%, 0.92) 0%,
-    hsl(0, 0%, 3%, 0.3) 55%,
-    transparent 100%
+    rgba(0, 0, 0, 0.28) 0%,
+    transparent 38%
   );
   transition: background var(--duration) var(--ease);
 }
@@ -1659,6 +1672,9 @@ section {
   text-transform: uppercase;
   color: var(--ochre-light);
   margin-bottom: 0.4rem;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
 }
 
 .activacion-nombre {
@@ -1667,6 +1683,9 @@ section {
   font-weight: 300;
   color: var(--cream);
   line-height: 1.2;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
 
 .activacion-desc {
@@ -1679,6 +1698,8 @@ section {
   max-width: none;
 }
 
+.activacion-card:hover .activacion-dia,
+.activacion-card:hover .activacion-nombre,
 .activacion-card:hover .activacion-desc {
   opacity: 1;
   transform: translateY(0);
@@ -1729,10 +1750,12 @@ section {
     grid-template-columns: repeat(2, 1fr);
   }
   .activacion-card {
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     cursor: pointer;
   }
-  /* texto oculto por defecto en mobile — tap activa .is-active vía JS */
+  /* texto oculto por defecto — se revela con scroll (IntersectionObserver) */
+  .activacion-dia,
+  .activacion-nombre,
   .activacion-desc,
   .activacion-meta {
     opacity: 0;
@@ -1749,6 +1772,8 @@ section {
       hsl(0, 0%, 3%, 0.1) 100%
     );
   }
+  .activacion-card.is-active .activacion-dia,
+  .activacion-card.is-active .activacion-nombre,
   .activacion-card.is-active .activacion-desc,
   .activacion-card.is-active .activacion-meta {
     opacity: 1;
@@ -1761,7 +1786,7 @@ section {
     grid-template-columns: 1fr;
   }
   .activacion-card {
-    aspect-ratio: 16/9;
+    aspect-ratio: 4/5;
   }
 }
 
@@ -1872,8 +1897,9 @@ section {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    hsla(0, 0%, 3%, 0.15) 0%,
-    hsla(0, 0%, 3%, 0.55) 55%,
+    hsla(0, 0%, 3%, 0.1) 0%,
+    hsla(0, 0%, 3%, 0.5) 50%,
+    hsla(0, 0%, 3%, 1.0) 78%,
     hsla(0, 0%, 3%, 1.0) 100%
   );
 }
@@ -2234,8 +2260,9 @@ section {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    hsla(0, 0%, 3%, 0.1) 0%,
-    hsla(0, 0%, 3%, 0.45) 55%,
+    hsla(0, 0%, 3%, 0.05) 0%,
+    hsla(0, 0%, 3%, 0.45) 50%,
+    hsla(0, 0%, 3%, 1.0) 78%,
     hsla(0, 0%, 3%, 1.0) 100%
   );
 }
@@ -2669,6 +2696,7 @@ section {
 /* ── 34. Medios de Pago (Nosotros) ────────────────────────── */
 .medios-pago-section {
   position: relative;
+  background: var(--noir);
   padding-block: var(--section-py);
   overflow: hidden;
 }
@@ -2684,7 +2712,12 @@ section {
 .medios-pago-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.78);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.82) 60%,
+    rgba(0, 0, 0, 1.0) 100%
+  );
 }
 
 .medios-pago-grid {
@@ -2860,17 +2893,21 @@ section {
    MOBILE FIXES GLOBALES
    ═══════════════════════════════════════════════════════════ */
 
-/* ── Overlays de hero: gradiente más agresivo en mobile ── */
+/* ── Hero home: gradiente en mobile (contenido abajo, gente visible arriba) */
 @media (max-width: 768px) {
   .hero-bg::after {
     background: linear-gradient(
       to bottom,
-      rgba(0,0,0,0.2) 0%,
-      rgba(0,0,0,0.55) 55%,
-      rgba(0,0,0,1.0) 85%,
-      rgba(0,0,0,1.0) 100%
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0.12) 35%,
+      rgba(0,0,0,0.72) 68%,
+      rgba(0,0,0,0.95) 100%
     );
   }
+}
+
+/* ── Overlays de hero: gradiente más agresivo en mobile ── */
+@media (max-width: 768px) {
   .nos-hero-bg::after,
   .nos-fullimg-bg::after,
   .exp-hero-bg::after,
@@ -2878,25 +2915,26 @@ section {
     background: linear-gradient(
       to bottom,
       hsla(0,0%,3%,0.05) 0%,
-      hsla(0,0%,3%,0.6) 60%,
-      hsla(0,0%,3%,1.0) 82%,
+      hsla(0,0%,3%,0.55) 50%,
+      hsla(0,0%,3%,1.0) 72%,
       hsla(0,0%,3%,1.0) 100%
     );
   }
-  /* Asegurar fondo oscuro por si el gradiente tiene gap */
-  .nos-fullimg {
+  /* Fondo sólido para evitar gap entre imagen y siguiente sección */
+  .nos-fullimg,
+  .nos-hero {
     background: var(--noir);
   }
 }
 
-/* ── Experiencias hero: desplazar imagen a la derecha ──── */
+/* ── Experiencias hero: mover imagen a la izquierda en mobile ── */
 @media (max-width: 768px) {
   .exp-hero-bg {
-    background-position: 68% center;
+    background-position: 20% center;
   }
 }
 
-/* ── Almuerzo section: rediseño mobile ─────────────────── */
+/* ── Almuerzo section: rediseño mobile (formato galería) ─────── */
 @media (max-width: 900px) {
   .almuerzo-exp-grid {
     display: flex;
@@ -2905,7 +2943,7 @@ section {
     margin-top: 2rem;
   }
 
-  /* Fotos primero, info después */
+  /* Fotos primero, info después — scroll horizontal contenido */
   .almuerzo-exp-photos {
     order: -1;
     flex-direction: row;
@@ -2914,20 +2952,20 @@ section {
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    gap: 10px;
-    padding: 0 var(--gutter) 1.25rem;
-    margin: 0 calc(-1 * var(--gutter));
+    gap: 4px;
+    touch-action: pan-x;
+    overscroll-behavior-x: contain;
   }
   .almuerzo-exp-photos::-webkit-scrollbar { display: none; }
 
   .almuerzo-exp-photos img {
     flex: 0 0 auto;
-    width: 72vw;
-    max-width: 260px;
-    height: 190px;
-    border-radius: 3px;
+    width: clamp(220px, 70vw, 320px);
+    height: clamp(160px, 52vw, 240px);
+    border-radius: 0;
     scroll-snap-align: start;
     cursor: pointer;
+    object-fit: cover;
   }
 
   /* Info section debajo de las fotos */

@@ -125,23 +125,19 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => observer.observe(el));
   }
 
-  /* ── Mobile touch: esp-card tap reveal ──────────────────────── */
-  document.querySelectorAll('.esp-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const wasActive = card.classList.contains('is-active');
-      document.querySelectorAll('.esp-card').forEach(c => c.classList.remove('is-active'));
-      if (!wasActive) card.classList.add('is-active');
-    });
-  });
-
-  /* ── Mobile touch: activacion-card tap reveal ─────────────── */
-  document.querySelectorAll('.activacion-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const wasActive = card.classList.contains('is-active');
-      document.querySelectorAll('.activacion-card').forEach(c => c.classList.remove('is-active'));
-      if (!wasActive) card.classList.add('is-active');
-    });
-  });
+  /* ── Cards: reveal al scrollear en touch, hover en desktop ───── */
+  if (window.matchMedia('(hover: none)').matches) {
+    const observeCards = (selector) => {
+      const cards = document.querySelectorAll(selector);
+      if (!cards.length) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => e.target.classList.toggle('is-active', e.isIntersecting));
+      }, { threshold: 0.5 });
+      cards.forEach(c => io.observe(c));
+    };
+    observeCards('.esp-card');
+    observeCards('.activacion-card');
+  }
 
   /* ── Almuerzo photos: lightbox on tap ────────────────────── */
   if (lightbox && lightboxImg) {
