@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cartaToggle && cartaCategorias) {
     cartaToggle.addEventListener('click', () => {
       const isOpen = cartaCategorias.classList.toggle('open');
-      cartaToggle.textContent = isOpen ? 'Cerrar carta' : 'Explorar la carta';
+      cartaToggle.textContent = isOpen ? 'Cerrar carta' : 'Explorar Recomendaciones';
       if (isOpen) {
         cartaCategorias.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
