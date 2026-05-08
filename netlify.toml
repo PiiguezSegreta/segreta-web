@@ -38,6 +38,12 @@
   to = "/confirmacion.html"
   status = 200
 
+# Carta — Recomendaciones de Autor
+[[redirects]]
+  from = "/carta"
+  to = "/carta.html"
+  status = 200
+
 # Trabaja con nosotros (Tally embebido en página propia)
 [[redirects]]
   from = "/trabaja"
