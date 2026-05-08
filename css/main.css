@@ -1966,13 +1966,13 @@ section {
 }
 
 .logo-main-card {
-  flex: 0 0 calc(25% - 0.75px);
+  flex: 0 0 calc(20% - 0.8px);
   background: var(--noir-mid);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.5rem;
-  aspect-ratio: 4/3;
+  padding: 1.5rem 1.25rem;
+  aspect-ratio: 3/2;
   position: relative;
   cursor: default;
   overflow: hidden;
@@ -2020,9 +2020,9 @@ section {
 }
 
 .logo-main-card img {
-  height: 110px;
+  height: 65px;
   width: auto;
-  max-width: 260px;
+  max-width: 140px;
   object-fit: contain;
   opacity: 0.9;
   transition: transform var(--duration) var(--ease),
@@ -2031,8 +2031,8 @@ section {
 
 /* Mistral es landscape */
 .logo-main-card--mistral img {
-  height: 130px;
-  max-width: 340px;
+  height: 80px;
+  max-width: 190px;
 }
 
 .logo-main-card:hover img {
@@ -2217,7 +2217,7 @@ section {
 /* Responsive logos */
 @media (max-width: 900px) {
   .logo-main-card {
-    flex: 0 0 calc(50% - 0.5px);
+    flex: 0 0 calc(33.33% - 0.67px);
   }
   .logos-secondary-grid,
   .proveedores-grid {
@@ -2226,6 +2226,9 @@ section {
 }
 
 @media (max-width: 480px) {
+  .logo-main-card {
+    flex: 0 0 calc(50% - 0.5px);
+  }
   .logos-secondary-grid {
     grid-template-columns: repeat(2, 1fr);
   }
