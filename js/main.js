@@ -125,18 +125,36 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => observer.observe(el));
   }
 
-  /* ── Cards: reveal al scrollear en touch, hover en desktop ───── */
+  /* ── Cards: reveal al scrollear en touch — solo la card centrada activa ── */
   if (window.matchMedia('(hover: none)').matches) {
-    const observeCards = (selector) => {
-      const cards = document.querySelectorAll(selector);
+    const espCards = [...document.querySelectorAll('.esp-card')];
+    const actCards = [...document.querySelectorAll('.activacion-card')];
+
+    const activateCenter = (cards) => {
       if (!cards.length) return;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.target.classList.toggle('is-active', e.isIntersecting));
-      }, { threshold: 0.5 });
-      cards.forEach(c => io.observe(c));
+      const vh = window.innerHeight;
+      const zoneTop = vh * 0.25;
+      const zoneBot = vh * 0.75;
+      let best = null, bestOverlap = 0;
+      cards.forEach(card => {
+        const r = card.getBoundingClientRect();
+        const overlap = Math.max(0, Math.min(r.bottom, zoneBot) - Math.max(r.top, zoneTop));
+        if (overlap > bestOverlap) { bestOverlap = overlap; best = card; }
+      });
+      cards.forEach(c => c.classList.toggle('is-active', c === best && bestOverlap > 0));
     };
-    observeCards('.esp-card');
-    observeCards('.activacion-card');
+
+    let rafId;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        activateCenter(espCards);
+        activateCenter(actCards);
+      });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   /* ── Almuerzo photos: lightbox on tap ────────────────────── */
