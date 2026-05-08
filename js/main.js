@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ── Nuestra Carta: toggle + tap en mobile ───────────────── */
+  /* ── Nuestra Carta: toggle ────────────────────────────────── */
   const cartaToggle = document.getElementById('carta-toggle');
   const cartaCategorias = document.getElementById('carta-categorias');
   if (cartaToggle && cartaCategorias) {
@@ -182,14 +182,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Tap en mobile: activar/desactivar overlay en carta-item
-  document.querySelectorAll('.carta-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const wasActive = item.classList.contains('is-active');
-      document.querySelectorAll('.carta-item.is-active').forEach(i => i.classList.remove('is-active'));
-      if (!wasActive) item.classList.add('is-active');
+  /* ── Carta tracks: activar card centrada en scroll horizontal (touch) ── */
+  if (window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.carta-track').forEach(track => {
+      const activateCenterCard = () => {
+        const cards = [...track.querySelectorAll('.carta-item')];
+        if (!cards.length) return;
+        const trackRect = track.getBoundingClientRect();
+        const zoneLeft = trackRect.left + trackRect.width * 0.15;
+        const zoneRight = trackRect.left + trackRect.width * 0.85;
+        let best = null, bestOverlap = 0;
+        cards.forEach(card => {
+          const r = card.getBoundingClientRect();
+          const overlap = Math.max(0, Math.min(r.right, zoneRight) - Math.max(r.left, zoneLeft));
+          if (overlap > bestOverlap) { bestOverlap = overlap; best = card; }
+        });
+        cards.forEach(c => c.classList.toggle('is-active', c === best && bestOverlap > 0));
+      };
+
+      let rafId;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(activateCenterCard);
+      }, { passive: true });
+      activateCenterCard();
     });
-  });
+  }
 
   /* ── Formularios: validación + envío vía Netlify Function ─── */
   initForm('form-contacto', '/api/send-contact');
