@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/assets/img/nosotros-hero-pizza.webp" />
-  <link rel="stylesheet" href="/css/main.css?v=24" />
+  <link rel="stylesheet" href="/css/main.css?v=25" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,6 +135,408 @@
         <a href="https://tally.so/r/mJakVJ" class="btn btn-primary" target="_blank" rel="noopener" data-i18n="nosotros.trabaja_btn">Postula Aquí</a>
       </div>
     </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       NUESTRA CARTA
+  ══════════════════════════════════════════════════════ -->
+  <section class="carta-section">
+    <div class="container">
+      <div class="section-header reveal" style="text-align: center;">
+        <span class="label">Nuestra Carta</span>
+        <h2>Recomendaciones de autor</h2>
+        <p>Lo que no te puedes ir sin probar. Una selección de nuestros platos y cocteles favoritos, pensada para quienes vienen por primera vez y para quienes ya nos conocen.</p>
+      </div>
+      <div style="text-align: center;">
+        <button id="carta-toggle" class="btn btn-outline carta-toggle-btn">Explorar la carta</button>
+      </div>
+    </div>
+
+    <div class="carta-categorias" id="carta-categorias">
+
+      <!-- ── Piqueos del Mar ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">Del Mar</span>
+          <h3>Piqueos del Mar</h3>
+          <p>Lo mejor del océano, interpretado con técnica italiana y espíritu latinoamericano.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-tiradito-tropical.webp" alt="Tiradito Tropical" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Tiradito Tropical</h4>
+                <p>Salmón en leche de tigre de maracuyá, aceite de cilantro y perlas de aguacate.</p>
+                <span class="carta-precio">$12.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-ceviche-tradicional.webp" alt="Ceviche Tradicional" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Ceviche Tradicional</h4>
+                <p>Corvina marinada en limón, coriandro fresco, ají amarillo y choclo crocante.</p>
+                <span class="carta-precio">$11.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-empanadas-ostion.webp" alt="Empanadas de Ostión" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Empanadas de Ostión</h4>
+                <p>Empanadas crujientes de ostión salteado con mantequilla, ajo y parmesano.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-machas-parmesana.webp" alt="Machas a la Parmesana" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Machas a la Parmesana</h4>
+                <p>Machas al horno con mantequilla de hierbas y queso parmesano gratinado.</p>
+                <span class="carta-precio">$13.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-tartaro-salmon.webp" alt="Tártaro de Salmón" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Tártaro de Salmón</h4>
+                <p>Tártaro de salmón con aguacate, sésamo tostado, sriracha y wonton crocante.</p>
+                <span class="carta-precio">$14.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Piqueos de la Tierra ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">De la Tierra</span>
+          <h3>Piqueos de la Tierra</h3>
+          <p>Ingredientes de temporada, técnica de fuego y el sabor de las cosas bien hechas.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-burrata-frita.webp" alt="Burrata Frita" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Burrata Frita</h4>
+                <p>Burrata apanada, tomate asado, pesto de albahaca y reducción de balsámico.</p>
+                <span class="carta-precio">$13.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-croquetas-prosciutto.webp" alt="Croquetas de Prosciutto" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Croquetas de Prosciutto</h4>
+                <p>Croquetas cremosas de prosciutto di Parma con alioli de limón.</p>
+                <span class="carta-precio">$9.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-entrana-gnocci.webp" alt="Entraña con Gnocci" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Entraña con Gnocci</h4>
+                <p>Entraña a la parrilla con gnocci al ragù de hongos y mantequilla noisette.</p>
+                <span class="carta-precio">$18.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-gran-filetto.webp" alt="Gran Filetto" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Gran Filetto</h4>
+                <p>Lomo liso sellado, espuma de papa, hongos salteados y jus de carne.</p>
+                <span class="carta-precio">$22.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-provoleta.webp" alt="Provoleta" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Provoleta</h4>
+                <p>Provoleta a la parrilla con chimichurri de hierbas frescas y aceite de oliva.</p>
+                <span class="carta-precio">$9.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-malaya.webp" alt="Malaya" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Malaya</h4>
+                <p>Malaya braseada 8 horas, puré rústico de papa y chimichurri ahumado.</p>
+                <span class="carta-precio">$16.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Pizzas ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">Del Horno</span>
+          <h3>Pizzas</h3>
+          <p>Masa madre de larga fermentación, horno a leña y los mejores ingredientes importados. El corazón de Segreta.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-degustacion.webp" alt="Degustación" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Degustación</h4>
+                <p>Cuatro porciones de especialidades de la casa para explorar y compartir.</p>
+                <span class="carta-precio">$18.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-la-segreta.webp" alt="La Segreta" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>La Segreta</h4>
+                <p>Tomate San Marzano, fior di latte, prosciutto crudo, rúcula y parmesano.</p>
+                <span class="carta-precio">$17.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-maremonti.webp" alt="Mare Monti" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Mare Monti</h4>
+                <p>Tomate, mozzarella, camarones salteados, hongos porcini y aceite de trufa.</p>
+                <span class="carta-precio">$19.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-orientale.webp" alt="Orientale" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Orientale</h4>
+                <p>Tomate, mozzarella, salame picante, aceitunas taggiasca y ají verde encurtido.</p>
+                <span class="carta-precio">$16.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-prosperare.webp" alt="Prosperare" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Prosperare</h4>
+                <p>Crema de mascarpone, panceta crujiente, hongos portobello y queso fontina.</p>
+                <span class="carta-precio">$17.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-rilasciata.webp" alt="Rilasciata" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Rilasciata</h4>
+                <p>Masa madre larga fermentación, pomodoro fresco, burrata, albahaca y AOVE.</p>
+                <span class="carta-precio">$18.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-speziata.webp" alt="Speziata" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Speziata</h4>
+                <p>Tomate, mozzarella, nduja calabrese, miel de acacia y peperoncino.</p>
+                <span class="carta-precio">$17.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-pizza-uragano.webp" alt="Uragano" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Uragano</h4>
+                <p>Tomate, mozzarella, carne especiada, jalapeño fresco y mayonesa trufada.</p>
+                <span class="carta-precio">$16.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Ensaladas ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">Del Jardín</span>
+          <h3>Ensaladas</h3>
+          <p>Frescas, completas e inspiradas en la huerta italiana. Para quienes saben que una buena ensalada lo es todo.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-insalata-amalfi.webp" alt="Insalata Amalfi" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Insalata Amalfi</h4>
+                <p>Rúcula, burrata, tomates cherry confitados, limón amalfi y pistachos tostados.</p>
+                <span class="carta-precio">$11.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-cesar-italia.webp" alt="César Italia" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>César Italia</h4>
+                <p>Lechuga romana, pollo grillado, anchoas del cantábrico, parmesano y crutones.</p>
+                <span class="carta-precio">$12.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-insalata-daniele.webp" alt="Insalata Daniele" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Insalata Daniele</h4>
+                <p>Espinaca baby, frambuesas, nueces caramelizadas, queso de cabra y vinagreta.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Bar / Coctelería ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">De la Barra</span>
+          <h3>Bar &amp; Coctelería</h3>
+          <p>Cocteles de autor que acompañan la experiencia. Creatividad, técnica y sabor en cada trago.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-carajillo.webp" alt="Carajillo" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Carajillo</h4>
+                <p>Espresso con Licor 43, servido sobre hielo con espuma de leche.</p>
+                <span class="carta-precio">$8.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-dorato.webp" alt="Dorato" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Dorato</h4>
+                <p>Pisco, Aperol, jugo de naranja, maracuyá y foam de limón.</p>
+                <span class="carta-precio">$9.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-espresso-martini.webp" alt="Espresso Martini" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Espresso Martini</h4>
+                <p>Vodka premium, licor de café, espresso doble y sirope de vainilla.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-piscola.webp" alt="Piscola" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Piscola</h4>
+                <p>Pisco selección, Coca-Cola, lima y hielo. Simple y perfecto.</p>
+                <span class="carta-precio">$7.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-porn-star-martini.webp" alt="Porn Star Martini" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Porn Star Martini</h4>
+                <p>Vodka, licor de maracuyá, vainilla, lima y copa de espumante lateral.</p>
+                <span class="carta-precio">$11.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-schop-royal.webp" alt="Schop Royal" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Schop Royal</h4>
+                <p>Cerveza artesanal de la casa, estilo lager premium servida en copa fría.</p>
+                <span class="carta-precio">$7.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-spicy-kiwi.webp" alt="Spicy Kiwi" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Spicy Kiwi</h4>
+                <p>Gin, kiwi fresco, jengibre, jalapeño encurtido y soda de pomelo.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-strawberry-fizz.webp" alt="Strawberry Fizz" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Strawberry Fizz</h4>
+                <p>Vodka, frutilla macerada, jugo de limón, azúcar de caña y soda.</p>
+                <span class="carta-precio">$9.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-stura-di-bosco.webp" alt="Stura di Bosco" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Stura di Bosco</h4>
+                <p>Gin de botánicas, frutos del bosque, tónica premium y ramita de romero.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-tropical-gin.webp" alt="Tropical Gin" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Tropical Gin</h4>
+                <p>Gin premium, mango, lima, lychee y tónica de flor de saúco.</p>
+                <span class="carta-precio">$10.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Café y Postres ── -->
+      <div class="carta-categoria reveal">
+        <div class="carta-categoria-header">
+          <span class="label">El Final</span>
+          <h3>Café &amp; Postres</h3>
+          <p>El cierre perfecto. Dulce, reconfortante y hecho en casa.</p>
+        </div>
+        <div class="carta-track-wrapper">
+          <div class="carta-track">
+            <div class="carta-item">
+              <img src="/assets/img/carta-brookie.webp" alt="Brookie" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Brookie</h4>
+                <p>Brownie y cookie recién horneados, helado de vainilla y caramelo salado.</p>
+                <span class="carta-precio">$7.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-cafe-helato.webp" alt="Café Helato" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Café Helato</h4>
+                <p>Espresso vertido sobre helado de vainilla artesanal.</p>
+                <span class="carta-precio">$6.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-churros.webp" alt="Churros" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Churros</h4>
+                <p>Churros caseros con chocolate belga caliente y azúcar de canela.</p>
+                <span class="carta-precio">$7.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-copa-segreta.webp" alt="Copa Segreta" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Copa Segreta</h4>
+                <p>Crema pastelera, frutos rojos, merengue tostado y coulis de frutilla.</p>
+                <span class="carta-precio">$8.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-dolce-vita.webp" alt="Dolce Vita" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Dolce Vita</h4>
+                <p>Panna cotta de vainilla con coulis de frutos del bosque y galleta de mantequilla.</p>
+                <span class="carta-precio">$7.900</span>
+              </div>
+            </div>
+            <div class="carta-item">
+              <img src="/assets/img/carta-tiramisu.webp" alt="Tiramisú" loading="lazy" />
+              <div class="carta-overlay">
+                <h4>Tiramisú</h4>
+                <p>Clásico italiano con mascarpone, espresso y cacao amargo. Hecho en casa.</p>
+                <span class="carta-precio">$8.900</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /carta-categorias -->
   </section>
 
   <!-- ══════════════════════════════════════════════════════

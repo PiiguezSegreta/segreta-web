@@ -2890,6 +2890,184 @@ section {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   NUESTRA CARTA — Sección recomendaciones nosotros.html
+   ═══════════════════════════════════════════════════════════ */
+
+.carta-section {
+  background: var(--noir);
+  padding-block: var(--section-py);
+}
+
+.carta-section .section-header p {
+  max-width: 60ch;
+  margin-inline: auto;
+  margin-top: 1rem;
+}
+
+.carta-toggle-btn {
+  margin-top: 2.5rem;
+  min-width: 220px;
+}
+
+/* Categorías: ocultas por defecto, se revelan con JS */
+.carta-categorias {
+  display: none;
+  margin-top: 4rem;
+}
+.carta-categorias.open {
+  display: block;
+}
+
+.carta-categoria {
+  margin-bottom: 5rem;
+}
+.carta-categoria:last-child {
+  margin-bottom: 0;
+}
+
+.carta-categoria-header {
+  padding-inline: var(--gutter);
+  max-width: var(--container);
+  margin-inline: auto;
+  margin-bottom: 1.75rem;
+}
+.carta-categoria-header .label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.carta-categoria-header h3 {
+  color: var(--cream);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+.carta-categoria-header p {
+  color: var(--cream-dim);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 55ch;
+}
+
+/* Track del carrusel (mismo patrón que gallery-carousel) */
+.carta-track-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.carta-track {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: grab;
+  padding-inline-start: var(--gutter);
+  padding-inline-end: var(--gutter);
+}
+.carta-track:active { cursor: grabbing; }
+.carta-track::-webkit-scrollbar { display: none; }
+
+/* Cada ítem de carta */
+.carta-item {
+  flex-shrink: 0;
+  width: clamp(200px, 26vw, 300px);
+  height: clamp(250px, 33vw, 380px);
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+  cursor: zoom-in;
+}
+
+.carta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+  display: block;
+}
+
+.carta-item:hover img {
+  transform: scale(1.07);
+}
+
+/* Overlay con info del plato */
+.carta-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.94) 0%,
+    rgba(0, 0, 0, 0.55) 55%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+
+.carta-item:hover .carta-overlay,
+.carta-item.is-active .carta-overlay {
+  opacity: 1;
+}
+.carta-item.is-active img {
+  transform: scale(1.07);
+}
+
+.carta-overlay h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+  color: var(--ochre-light);
+  margin-bottom: 0.35rem;
+  line-height: 1.2;
+}
+
+.carta-overlay p {
+  font-size: 0.78rem;
+  color: var(--cream-dim);
+  line-height: 1.5;
+  margin-bottom: 0.65rem;
+  max-width: none;
+}
+
+.carta-precio {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 600px) {
+  .carta-item {
+    width: clamp(180px, 70vw, 260px);
+    height: clamp(220px, 85vw, 320px);
+  }
+  .carta-overlay {
+    opacity: 1;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.4) 55%,
+      transparent 100%
+    );
+  }
+  .carta-item.is-active .carta-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.96) 0%,
+      rgba(0, 0, 0, 0.65) 60%,
+      transparent 100%
+    );
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
    MOBILE FIXES GLOBALES
    ═══════════════════════════════════════════════════════════ */
 

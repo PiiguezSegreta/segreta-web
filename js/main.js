@@ -169,6 +169,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ── Nuestra Carta: toggle + tap en mobile ───────────────── */
+  const cartaToggle = document.getElementById('carta-toggle');
+  const cartaCategorias = document.getElementById('carta-categorias');
+  if (cartaToggle && cartaCategorias) {
+    cartaToggle.addEventListener('click', () => {
+      const isOpen = cartaCategorias.classList.toggle('open');
+      cartaToggle.textContent = isOpen ? 'Cerrar carta' : 'Explorar la carta';
+      if (isOpen) {
+        cartaCategorias.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  // Tap en mobile: activar/desactivar overlay en carta-item
+  document.querySelectorAll('.carta-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const wasActive = item.classList.contains('is-active');
+      document.querySelectorAll('.carta-item.is-active').forEach(i => i.classList.remove('is-active'));
+      if (!wasActive) item.classList.add('is-active');
+    });
+  });
+
   /* ── Formularios: validación + envío vía Netlify Function ─── */
   initForm('form-contacto', '/api/send-contact');
   initForm('form-partners', '/api/send-partner');
