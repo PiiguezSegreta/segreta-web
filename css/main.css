@@ -2906,7 +2906,8 @@ section {
 
 .carta-toggle-btn {
   margin-top: 2.5rem;
-  min-width: 220px;
+  width: 280px;
+  max-width: 90vw;
 }
 
 /* Categorías: ocultas por defecto, se revelan con JS */
