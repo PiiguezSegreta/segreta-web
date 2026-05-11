@@ -184,13 +184,15 @@
   <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" /></noscript>
 
   <!-- Preload hero image (LCP) -->
-  <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" />
+  <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" fetchpriority="high" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css?v=30" />
+  <link rel="stylesheet" href="/css/main.css?v=31" />
 </head>
 
 <body>
@@ -205,7 +207,7 @@
 
       <!-- Isotipo -->
       <a href="/" class="nav-logo" aria-label="Segreta — Inicio">
-        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" style="height:73px;width:auto;" />
+        <img src="/assets/img/segreta-isotipo.png" alt="Segreta Pizza &amp; Bar" width="45" height="73" style="height:73px;width:auto;" fetchpriority="high" />
       </a>
 
       <!-- Links (desktop) -->
@@ -430,7 +432,7 @@
        CTA FINAL
   ══════════════════════════════════════════════════════ -->
   <section class="cta-final">
-    <div class="hero-bg" style="background-image: url('/assets/img/segreta-noche-lleno.jpg');" role="img" aria-label="Segreta lleno en la noche"></div>
+    <div class="hero-bg" style="background-image: url('/assets/img/segreta-noche-lleno.webp');" role="img" aria-label="Segreta lleno en la noche"></div>
     <div class="container">
       <div class="cta-final-content reveal">
         <span class="label" data-i18n="home.cta_label">Reservas</span>
@@ -456,7 +458,7 @@
 
         <!-- Marca -->
         <div class="footer-brand">
-          <img src="/assets/img/segreta-logo.png" alt="Segreta Pizza &amp; Bar" loading="lazy" />
+          <img src="/assets/img/segreta-logo.png" alt="Segreta Pizza &amp; Bar" width="140" height="50" loading="lazy" />
           <p data-i18n="common.footer_brand_desc">Pizza napolitana contemporánea, coctelería de autor y experiencia en Vitacura, Santiago de Chile.</p>
           <a
             href="https://www.instagram.com/segretapizzeria"
@@ -471,7 +473,7 @@
 
         <!-- Navegación -->
         <div class="footer-col">
-          <h5 data-i18n="footer.nav_title">Navegación</h5>
+          <h3 data-i18n="footer.nav_title">Navegación</h3>
           <ul role="list">
             <li><a href="/" data-i18n="footer.inicio">Inicio</a></li>
             <li><a href="/nosotros" data-i18n="footer.nosotros">Nosotros</a></li>
@@ -485,7 +487,7 @@
 
         <!-- Contacto -->
         <div class="footer-col">
-          <h5 data-i18n="footer.contact_title">Contacto</h5>
+          <h3 data-i18n="footer.contact_title">Contacto</h3>
           <address>
             <strong data-i18n="common.footer_reservas_label">Reservas</strong>
             <a href="tel:+56976301208" data-i18n="footer.tel_reservas">+56 9 7630 1208</a>
@@ -501,7 +503,7 @@
 
         <!-- Horarios -->
         <div class="footer-col">
-          <h5 data-i18n="footer.hours_title">Horarios</h5>
+          <h3 data-i18n="footer.hours_title">Horarios</h3>
           <table class="horarios-table" aria-label="Horarios de atención">
             <tbody>
               <tr>
