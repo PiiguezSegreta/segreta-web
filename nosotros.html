@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" /></noscript>
   <link rel="preload" as="image" href="/assets/img/nosotros-hero-pizza.webp" />
-  <link rel="stylesheet" href="/css/main.css?v=36" />
+  <link rel="stylesheet" href="/css/main.css?v=37" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -166,7 +166,7 @@
 
   <section class="nos-marcas-cuerpo">
     <div class="container">
-      <p class="reveal" style="max-width: 60ch; margin-inline: auto; text-align: center; color: var(--cream-dim); margin-bottom: 1.5rem;">La experiencia Segreta no se construye en solitario. Detrás de cada cocktail, cada pizza y cada noche memorable hay una red de marcas aliadas que comparten nuestra obsesión por la calidad y el detalle.</p>
+      <p class="reveal nos-marcas-desc">La experiencia Segreta no se construye en solitario. Detrás de cada cocktail, cada pizza y cada noche memorable hay una red de marcas aliadas que comparten nuestra obsesión por la calidad y el detalle.</p>
       <div class="nos-marcas-btns reveal">
         <button class="btn btn-outline nos-marcas-toggle" data-target="marcas-logos" aria-expanded="false">Conoce nuestras marcas</button>
         <button class="btn btn-ghost nos-marcas-toggle" data-target="marcas-form" aria-expanded="false">¿Eres una marca? Hazte parte</button>
@@ -174,7 +174,7 @@
 
       <!-- Panel 1: Logos -->
       <div class="nos-expand-panel" id="marcas-logos" aria-hidden="true">
-        <div class="logos-section-header reveal" style="margin-top: 2.5rem;">
+        <div class="logos-section-header reveal">
           <span class="label">Alianzas Estratégicas</span>
           <div class="divider-ochre"></div>
         </div>
@@ -192,7 +192,7 @@
           <div class="logo-main-card"><img src="/assets/img/logo-schweppes.webp" alt="Schweppes" loading="lazy" /></div>
           <div class="logo-main-card"><img src="/assets/img/logo-licor43.webp" alt="Licor 43" loading="lazy" /></div>
         </div>
-        <div class="logos-section-header reveal" style="margin-top: 3rem;">
+        <div class="logos-section-header logos-section-proveedores reveal">
           <span class="label">Grandes Proveedores</span>
           <div class="divider-ochre"></div>
         </div>
@@ -206,8 +206,8 @@
 
       <!-- Panel 2: Formulario -->
       <div class="nos-expand-panel" id="marcas-form" aria-hidden="true">
-        <div class="form-wrapper" style="margin-top: 2.5rem; max-width: 600px; margin-inline: auto;">
-          <p style="color: var(--cream-dim); text-align: center; margin-bottom: 1.5rem; max-width: 48ch; margin-inline: auto;">Estamos siempre abiertos a conocer nuevos proveedores de calidad, marcas y socios estratégicos que compartan nuestra visión. Si tienes una propuesta que pueda sumar al ADN Segreta, queremos escucharte.</p>
+        <div class="form-wrapper">
+          <p class="form-intro">Estamos siempre abiertos a conocer nuevos proveedores de calidad, marcas y socios estratégicos que compartan nuestra visión. Si tienes una propuesta que pueda sumar al ADN Segreta, queremos escucharte.</p>
           <form id="form-partners" novalidate>
             <div class="form-group">
               <label for="nombre">Nombre *</label>
@@ -234,10 +234,10 @@
               <label for="mensaje">Mensaje *</label>
               <textarea id="mensaje" name="mensaje" placeholder="Describe tu propuesta, producto o servicio." required maxlength="1000" rows="5"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;">Enviar propuesta</button>
+            <button type="submit" class="btn btn-primary btn-submit-full">Enviar propuesta</button>
           </form>
-          <div class="form-success" style="margin-top: 1.5rem;">
-            <p style="color: var(--cream); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; text-align: center;">Recibimos tu propuesta. Si hay un fit real, te escribimos.</p>
+          <div class="form-success">
+            <p>Recibimos tu propuesta. Si hay un fit real, te escribimos.</p>
           </div>
         </div>
       </div>
@@ -250,24 +250,24 @@
   <section class="medios-pago-section">
     <div class="medios-pago-bg" style="background-image: url('/assets/img/local-lleno-arriba.webp');"></div>
     <div class="medios-pago-overlay"></div>
-    <div class="container" style="position: relative; z-index: 1;">
+    <div class="container">
       <div class="section-header reveal">
         <span class="label" data-i18n="nosotros.pago_label">Medios de Pago</span>
         <h2 data-i18n="nosotros.pago_title">Pensado para todos nuestros visitantes</h2>
-        <p style="text-align: center; margin-inline: auto; margin-top: 1rem; max-width: 60ch;" data-i18n="nosotros.pago_desc">En Segreta queremos que cada cliente viva la experiencia sin fricciones. Por eso ampliamos nuestros medios de pago para acoger a quienes nos visitan desde Brasil y al público corporativo de Vitacura.</p>
+        <p data-i18n="nosotros.pago_desc">En Segreta queremos que cada cliente viva la experiencia sin fricciones. Por eso ampliamos nuestros medios de pago para acoger a quienes nos visitan desde Brasil y al público corporativo de Vitacura.</p>
       </div>
       <div class="medios-pago-grid reveal">
         <!-- Pix -->
         <div class="medios-pago-card">
-          <img src="/assets/img/logo-commpix-isotipo.webp" alt="Comm.Pix isotipo" loading="lazy" style="height: 48px; width: auto; object-fit: contain; margin-bottom: 0.5rem;" />
-          <img src="/assets/img/logo-commpix-logo.webp" alt="Comm.Pix" loading="lazy" style="height: 56px; width: auto; object-fit: contain;" />
-          <span class="label" style="margin-top: 1.75rem; display: block; text-align: center;" data-i18n="nosotros.pago_pix_label">Para nuestros visitantes brasileños</span>
+          <img src="/assets/img/logo-commpix-isotipo.webp" alt="Comm.Pix isotipo" loading="lazy" class="medios-pago-logo-sm" />
+          <img src="/assets/img/logo-commpix-logo.webp" alt="Comm.Pix" loading="lazy" class="medios-pago-logo-md" />
+          <span class="label" data-i18n="nosotros.pago_pix_label">Para nuestros visitantes brasileños</span>
           <p data-i18n="nosotros.pago_pix_desc">Aceptamos pagos con Pix en todos nuestros horarios de apertura. Paga al instante desde tu banco brasileño y disfruta de Segreta como si estuvieras en casa.</p>
         </div>
         <!-- Amipass -->
         <div class="medios-pago-card">
-          <img src="/assets/img/logo-amipass.webp" alt="Amipass" loading="lazy" style="height: 80px; width: auto; object-fit: contain;" />
-          <span class="label" style="margin-top: 1.75rem; display: block; text-align: center;" data-i18n="nosotros.pago_amipass_label">Para nuestros almuerzos corporativos</span>
+          <img src="/assets/img/logo-amipass.webp" alt="Amipass" loading="lazy" class="medios-pago-logo-lg" />
+          <span class="label" data-i18n="nosotros.pago_amipass_label">Para nuestros almuerzos corporativos</span>
           <p data-i18n="nosotros.pago_amipass_desc">Aceptamos pagos con Amipass en nuestro horario de almuerzo, de 13:00 a 16:00 hrs, de Martes a Jueves. Pensado para que el mundo corporativo disfrute de un almuerzo memorable.</p>
         </div>
       </div>

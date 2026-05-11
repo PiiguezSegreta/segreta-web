@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" /></noscript>
   <link rel="preload" as="image" href="/assets/img/events-hero.webp" />
-  <link rel="stylesheet" href="/css/main.css?v=36" />
+  <link rel="stylesheet" href="/css/main.css?v=37" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -280,15 +280,15 @@
   <!-- ══════════════════════════════════════════════════════
        ACTIVACIONES SEMANALES — 6 cards (3×2)
   ══════════════════════════════════════════════════════ -->
-  <section id="activaciones" style="background: var(--noir); padding-block: var(--section-py);">
+  <section id="activaciones">
     <div class="container">
       <div class="section-header reveal">
         <span class="label" data-i18n="exp.activaciones_label">Programa Semanal</span>
         <h2 data-i18n="exp.activaciones_title">Activaciones</h2>
-        <p style="text-align: center; margin-inline: auto; margin-top: 0.75rem; max-width: 55ch;" data-i18n="exp.activaciones_desc">En Segreta no existen días normales. Cada jornada tiene identidad propia y está diseñada para transformar una simple salida en una experiencia distinta.</p>
+        <p data-i18n="exp.activaciones_desc">En Segreta no existen días normales. Cada jornada tiene identidad propia y está diseñada para transformar una simple salida en una experiencia distinta.</p>
       </div>
     </div>
-    <div class="activaciones-grid" style="margin-top: 3rem;">
+    <div class="activaciones-grid">
       <!-- Lunes -->
       <div class="activacion-card reveal">
         <img src="/assets/img/activacion-lucky-monday.webp" alt="Lucky Monday — Lunes en Segreta" loading="lazy" />
@@ -368,7 +368,7 @@
         </div>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 3rem; padding-bottom: 0.5rem;">
+    <div class="activaciones-cta">
       <a href="/reservas" class="btn btn-primary">Reservar Mesa</a>
     </div>
   </section>
@@ -454,7 +454,7 @@
       <div class="section-header reveal">
         <span class="label" data-i18n="exp.eventos_label">Eventos</span>
         <h2 data-i18n="exp.eventos_title">Eventos privados y<br />personalizados</h2>
-        <p style="text-align: center; margin-inline: auto; margin-top: 1rem; max-width: 65ch;" data-i18n="exp.eventos_desc">En Segreta organizamos eventos de todo tipo: cumpleaños exclusivos, activaciones de marca, catas especiales, fiestas temáticas y cenas corporativas. Cada evento es diseñado a medida tanto en el local como fuera de él.</p>
+        <p data-i18n="exp.eventos_desc">En Segreta organizamos eventos de todo tipo: cumpleaños exclusivos, activaciones de marca, catas especiales, fiestas temáticas y cenas corporativas. Cada evento es diseñado a medida tanto en el local como fuera de él.</p>
       </div>
 
       <!-- Bloques acordeón -->
@@ -568,7 +568,7 @@
   <!-- ══════════════════════════════════════════════════════
        FRASE DESTACADA
   ══════════════════════════════════════════════════════ -->
-  <section class="frase-segreta reveal" style="background: var(--noir-mid);">
+  <section class="frase-segreta reveal">
     <p data-i18n="exp.frase">"Nos vemos en los mejores lugares."</p>
   </section>
 
@@ -581,12 +581,12 @@
         <div class="club-segreta-inner">
           <!-- Texto -->
           <div class="club-segreta-text">
-            <span class="label" style="color: var(--ochre);" data-i18n="exp.club_label">Red Pass</span>
+            <span class="label club-label-ochre" data-i18n="exp.club_label">Red Pass</span>
             <h2 data-i18n="exp.club_title">Únete al Club Segreta</h2>
             <p data-i18n="exp.club_p1">Al inscribirte en el programa de Segreta Pizzería, acumulas puntos con cada compra desde tu Tarjeta Segreta "Red Pass".</p>
             <p data-i18n="exp.club_p2">Cuando alcanzas ciertos niveles, subes en el rango de tarjetas al mismo tiempo que desbloqueas recompensas y beneficios exclusivos que puedes canjear en el local.</p>
             <div class="club-segreta-wallets">
-              <span class="label" style="display: block; margin-bottom: 1.25rem; color: var(--ochre);" data-i18n="exp.club_disponible">Disponible en</span>
+              <span class="label club-disponible-label" data-i18n="exp.club_disponible">Disponible en</span>
               <div class="club-segreta-wallet-icons">
                 <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" target="_blank" rel="noopener noreferrer">
                   <img src="/assets/img/apple-wallet.png" alt="Add to Apple Wallet" loading="lazy" />
@@ -600,9 +600,9 @@
           <!-- QR -->
           <div class="club-segreta-qr">
             <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" target="_blank" rel="noopener noreferrer">
-              <img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red&bgcolor=ffffff&color=000000&margin=10" alt="QR Code Club Segreta" loading="lazy" style="width: 260px; height: 260px;" />
+              <img src="https://api.qrserver.com/v1/create-qr-code/?size=360x360&data=https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red&bgcolor=ffffff&color=000000&margin=10" alt="QR Code Club Segreta" loading="lazy" class="club-qr" />
             </a>
-            <span class="label" style="display: block; text-align: center; margin-top: 1rem; color: var(--ochre);" data-i18n="exp.club_escanea">Escanea y únete</span>
+            <span class="label club-scan-label" data-i18n="exp.club_escanea">Escanea y únete</span>
           </div>
         </div>
       </div>
@@ -645,10 +645,10 @@
             <label for="mensaje" data-i18n="exp.form_mensaje_label">Mensaje *</label>
             <textarea id="mensaje" name="mensaje" placeholder="Mensaje *" data-i18n-placeholder="exp.form_mensaje_ph" required maxlength="1000" rows="5"></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;" data-i18n="exp.form_btn">Enviar mensaje</button>
+          <button type="submit" class="btn btn-primary btn-submit-full" data-i18n="exp.form_btn">Enviar mensaje</button>
         </form>
-        <div class="form-success" style="margin-top: 1.5rem;">
-          <p style="color: var(--cream); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; text-align: center; max-width: none;" data-i18n="exp.form_success">Recibimos tu mensaje. El equipo de eventos te contactará en breve.</p>
+        <div class="form-success">
+          <p data-i18n="exp.form_success">Recibimos tu mensaje. El equipo de eventos te contactará en breve.</p>
         </div>
       </div>
 
@@ -658,9 +658,9 @@
   <!-- ══════════════════════════════════════════════════════
        GALERÍA — carrusel horizontal
   ══════════════════════════════════════════════════════ -->
-  <section style="background: var(--noir); padding-block: var(--section-py);">
+  <section class="exp-galeria">
     <div class="container">
-      <div class="section-header reveal" style="margin-bottom: 2.5rem;">
+      <div class="section-header reveal">
         <span class="label" data-i18n="exp.gallery_label">Galería</span>
       </div>
     </div>

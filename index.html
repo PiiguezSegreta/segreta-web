@@ -192,7 +192,7 @@
   <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" fetchpriority="high" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css?v=36" />
+  <link rel="stylesheet" href="/css/main.css?v=37" />
 </head>
 
 <body>
@@ -322,8 +322,8 @@
     <div class="nos-fullimg-content reveal">
       <span class="label">Activaciones</span>
       <h2>Cada día pasa algo distinto</h2>
-      <p style="max-width: 50ch; margin-inline: auto; margin-top: 0.75rem; color: var(--cream-dim); text-align: center;">Diseñamos una experiencia diferente para cada día de la semana. Porque en Segreta no existen los días sin historia.</p>
-      <div style="text-align: center; margin-top: 2rem;">
+      <p class="activaciones-teaser-desc">Diseñamos una experiencia diferente para cada día de la semana. Porque en Segreta no existen los días sin historia.</p>
+      <div class="activaciones-teaser-cta">
         <a href="/experiencias#activaciones" class="btn btn-outline">Ver activaciones completas</a>
       </div>
     </div>
@@ -346,6 +346,8 @@
       <article class="esp-card reveal">
         <img
           src="/assets/img/pizza-napolitana.webp"
+          srcset="/assets/img/pizza-napolitana-800.webp 800w, /assets/img/pizza-napolitana.webp 1200w"
+          sizes="(max-width: 768px) 100vw, 33vw"
           alt="Pizza napolitana de Segreta, Vitacura"
           width="600"
           height="800"
