@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /confirmacion
-Disallow: /delivery
 
 Sitemap: https://www.segreta.cl/sitemap.xml
