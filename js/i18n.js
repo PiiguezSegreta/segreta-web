@@ -18,7 +18,9 @@ function detectLang() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored && SUPPORTED.includes(stored)) return stored;
   const browser = (navigator.language || '').slice(0, 2).toLowerCase();
-  return SUPPORTED.includes(browser) ? browser : DEFAULT;
+  // Solo auto-detectar PT e IT — el resto cae a español (restaurante chileno)
+  const autoDetect = ['pt', 'it'];
+  return autoDetect.includes(browser) ? browser : DEFAULT;
 }
 
 /**
