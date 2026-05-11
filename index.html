@@ -192,7 +192,7 @@
   <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" fetchpriority="high" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css?v=31" />
+  <link rel="stylesheet" href="/css/main.css?v=34" />
 </head>
 
 <body>
@@ -214,8 +214,8 @@
       <ul class="nav-links" role="list">
         <li><a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
-        <li><a href="/partners" data-i18n="nav.partners">Partners</a></li>
         <li><a href="/carta" data-i18n="nav.carta">Carta</a></li>
+        <li><a href="/delivery" data-i18n="nav.delivery">Delivery</a></li>
       </ul>
 
       <!-- Derecha -->
@@ -247,8 +247,8 @@
   <nav class="nav-drawer" aria-label="Menú mobile">
     <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
     <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
-    <a href="/partners" data-i18n="nav.partners">Partners</a>
     <a href="/carta" data-i18n="nav.carta">Carta</a>
+    <a href="/delivery" data-i18n="nav.delivery">Delivery</a>
     <a href="/reservas" data-i18n="nav.reservar" class="btn btn-primary">Reservar</a>
   </nav>
 
@@ -281,7 +281,7 @@
         <div class="hero-actions fade-up fade-up-4">
           <div class="hero-actions-row">
             <a href="/reservas" class="btn btn-primary" data-i18n="home.hero_cta_reservar">Reservar Mesa</a>
-            <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="home.hero_cta_carta">Ver Carta</a>
+            <a href="/carta" class="btn btn-outline" data-i18n="home.hero_cta_carta">Ver Carta</a>
           </div>
         </div>
       </div>
@@ -310,6 +310,21 @@
             loading="lazy"
           />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       ACTIVACIONES — teaser
+  ══════════════════════════════════════════════════════ -->
+  <section class="activaciones-teaser">
+    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/mago-activaciones.webp'); background-position: center 25%;"></div>
+    <div class="nos-fullimg-content reveal">
+      <span class="label">Activaciones</span>
+      <h2>Cada día pasa algo distinto</h2>
+      <p style="max-width: 50ch; margin-inline: auto; margin-top: 0.75rem; color: var(--cream-dim); text-align: center;">Diseñamos una experiencia diferente para cada día de la semana. Porque en Segreta no existen los días sin historia.</p>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="/experiencias#activaciones" class="btn btn-outline">Ver activaciones completas</a>
       </div>
     </div>
   </section>
@@ -443,7 +458,6 @@
             <a href="/reservas" class="btn btn-primary" data-i18n="home.cta_reservar">Reservar Mesa</a>
             <a href="/experiencias#eventos" class="btn btn-outline" data-i18n="home.cta_evento">Agenda tu Evento</a>
           </div>
-          <a href="/delivery" class="btn btn-ghost btn-full" data-i18n="home.hero_cta_delivery">Delivery</a>
         </div>
       </div>
     </div>
@@ -478,7 +492,6 @@
             <li><a href="/" data-i18n="footer.inicio">Inicio</a></li>
             <li><a href="/nosotros" data-i18n="footer.nosotros">Nosotros</a></li>
             <li><a href="/experiencias" data-i18n="footer.experiencias">Experiencias</a></li>
-            <li><a href="/partners" data-i18n="footer.partners">Partners</a></li>
             <li><a href="/carta" data-i18n="footer.carta">Carta</a></li>
             <li><a href="/delivery" data-i18n="footer.delivery">Delivery</a></li>
             <li><a href="/reservas" data-i18n="footer.reserva">Reserva</a></li>

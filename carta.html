@@ -50,7 +50,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" /></noscript>
   <link rel="preload" as="image" href="/assets/img/tiradito-pomelo-hero.webp" />
-  <link rel="stylesheet" href="/css/main.css?v=31" />
+  <link rel="stylesheet" href="/css/main.css?v=34" />
 </head>
 <body>
   <!-- Google Tag Manager (noscript) -->
@@ -64,8 +64,8 @@
       <ul class="nav-links">
         <li><a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
-        <li><a href="/partners" data-i18n="nav.partners">Partners</a></li>
         <li><a href="/carta" class="active" data-i18n="nav.carta">Carta</a></li>
+        <li><a href="/delivery" data-i18n="nav.delivery">Delivery</a></li>
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
@@ -86,8 +86,8 @@
   <nav class="nav-drawer">
     <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
     <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
-    <a href="/partners" data-i18n="nav.partners">Partners</a>
     <a href="/carta" class="active" data-i18n="nav.carta">Carta</a>
+    <a href="/delivery" data-i18n="nav.delivery">Delivery</a>
     <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
@@ -112,6 +112,9 @@
         <div class="divider divider-center"></div>
         <h2 style="margin-bottom: 1.25rem;">Lo que no te puedes ir sin probar</h2>
         <p style="max-width: 62ch; margin-inline: auto; color: var(--cream-dim);">Esta no es la carta completa — es una selección hecha por la casa. Un recorrido por los platos y cocteles que mejor representan lo que es Segreta: desde los piqueos del mar hasta el cierre en la barra. Pensada para quienes vienen por primera vez y para quienes ya nos conocen y siguen descubriendo.</p>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener">Ver carta completa →</a>
+        </div>
       </div>
     </div>
 
@@ -125,6 +128,7 @@
           <p>Lo mejor del océano, interpretado con técnica italiana y espíritu latinoamericano.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-ceviche-tradicional.webp" alt="Ceviche Tradicional" loading="lazy" />
@@ -175,6 +179,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -186,6 +191,7 @@
           <p>Ingredientes de temporada, técnica de fuego y el sabor de las cosas bien hechas.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-burrata-frita.webp" alt="Burrata Frita Frutale" loading="lazy" />
@@ -236,6 +242,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -247,6 +254,7 @@
           <p>Masa madre de larga fermentación, horno a leña y los mejores ingredientes importados. El corazón de Segreta.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-pizza-uragano.webp" alt="Uragano" loading="lazy" />
@@ -313,6 +321,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -331,6 +340,7 @@
           <p>Frescas, completas e inspiradas en la huerta italiana. Para quienes saben que una buena ensalada lo es todo.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-insalata-amalfi.webp" alt="Insalata Costa Amalfi" loading="lazy" />
@@ -365,6 +375,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -376,6 +387,7 @@
           <p>Cocteles de autor que acompañan la experiencia. Creatividad, técnica y sabor en cada trago.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-stura-di-bosco.webp" alt="Stura di Bosco" loading="lazy" />
@@ -458,6 +470,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -469,6 +482,7 @@
           <p>El cierre perfecto. Dulce, reconfortante y hecho en casa.</p>
         </div>
         <div class="carta-track-wrapper">
+          <button class="carta-arrow carta-arrow--prev" type="button" aria-label="Anterior">&#8249;</button>
           <div class="carta-track">
             <div class="carta-item">
               <img src="/assets/img/carta-cafe-helato.webp" alt="Café Gelatto" loading="lazy" />
@@ -519,6 +533,7 @@
               </div>
             </div>
           </div>
+          <button class="carta-arrow carta-arrow--next" type="button" aria-label="Siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -547,7 +562,6 @@
             <li><a href="/" data-i18n="footer.inicio">Inicio</a></li>
             <li><a href="/nosotros" data-i18n="footer.nosotros">Nosotros</a></li>
             <li><a href="/experiencias" data-i18n="footer.experiencias">Experiencias</a></li>
-            <li><a href="/partners" data-i18n="footer.partners">Partners</a></li>
             <li><a href="/carta" data-i18n="footer.carta">Carta</a></li>
             <li><a href="/delivery" data-i18n="footer.delivery">Delivery</a></li>
             <li><a href="/reservas" data-i18n="footer.reserva">Reserva</a></li>
@@ -590,5 +604,23 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+  <script>
+  (function(){
+    document.querySelectorAll('.carta-track-wrapper').forEach(function(wrapper){
+      var track = wrapper.querySelector('.carta-track');
+      var prev = wrapper.querySelector('.carta-arrow--prev');
+      var next = wrapper.querySelector('.carta-arrow--next');
+      var itemW = function(){ var i = track.querySelector('.carta-item'); return i ? i.offsetWidth + parseInt(getComputedStyle(track).gap||24) : 280; };
+      if(prev) prev.addEventListener('click', function(){ track.scrollBy({left: -itemW(), behavior:'smooth'}); });
+      if(next) next.addEventListener('click', function(){ track.scrollBy({left:  itemW(), behavior:'smooth'}); });
+      var updateArrows = function(){
+        if(prev) prev.style.opacity = track.scrollLeft <= 4 ? '0.3' : '1';
+        if(next) next.style.opacity = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4 ? '0.3' : '1';
+      };
+      track.addEventListener('scroll', updateArrows, {passive:true});
+      updateArrows();
+    });
+  })();
+  </script>
 </body>
 </html>

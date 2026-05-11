@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" media="print" onload="this.media='all'" />
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Red+Hat+Display:wght@300;400;500;600&display=swap" /></noscript>
   <link rel="preload" as="image" href="/assets/img/nosotros-hero-pizza.webp" />
-  <link rel="stylesheet" href="/css/main.css?v=31" />
+  <link rel="stylesheet" href="/css/main.css?v=34" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,8 +60,8 @@
       <ul class="nav-links">
         <li><a href="/nosotros" class="active" data-i18n="nav.nosotros">Nosotros</a></li>
         <li><a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a></li>
-        <li><a href="/partners" data-i18n="nav.partners">Partners</a></li>
         <li><a href="/carta" data-i18n="nav.carta">Carta</a></li>
+        <li><a href="/delivery" data-i18n="nav.delivery">Delivery</a></li>
       </ul>
       <div class="nav-right">
         <div class="lang-selector">
@@ -82,8 +82,8 @@
   <nav class="nav-drawer">
     <a href="/nosotros" data-i18n="nav.nosotros">Nosotros</a>
     <a href="/experiencias" data-i18n="nav.experiencias">Experiencias</a>
-    <a href="/partners" data-i18n="nav.partners">Partners</a>
     <a href="/carta" data-i18n="nav.carta">Carta</a>
+    <a href="/delivery" data-i18n="nav.delivery">Delivery</a>
     <a href="/reservas" class="btn btn-primary" data-i18n="nav.reservar">Reservar</a>
   </nav>
 
@@ -154,6 +154,97 @@
   </section>
 
   <!-- ══════════════════════════════════════════════════════
+       MARCAS — imagen fullwidth + sección expandable
+  ══════════════════════════════════════════════════════ -->
+  <section class="nos-fullimg" id="marcas">
+    <div class="nos-fullimg-bg" style="background-image: url('/assets/img/partners-hero.webp'); background-position: center 40%;"></div>
+    <div class="nos-fullimg-content">
+      <span class="label">Marcas Aliadas</span>
+      <h2>El ADN de nuestras experiencias</h2>
+    </div>
+  </section>
+
+  <section class="nos-marcas-cuerpo">
+    <div class="container">
+      <p class="reveal" style="max-width: 60ch; margin-inline: auto; text-align: center; color: var(--cream-dim); margin-bottom: 1.5rem;">La experiencia Segreta no se construye en solitario. Detrás de cada cocktail, cada pizza y cada noche memorable hay una red de marcas aliadas que comparten nuestra obsesión por la calidad y el detalle.</p>
+      <div class="nos-marcas-btns reveal">
+        <button class="btn btn-outline nos-marcas-toggle" data-target="marcas-logos" aria-expanded="false">Conoce nuestras marcas</button>
+        <button class="btn btn-ghost nos-marcas-toggle" data-target="marcas-form" aria-expanded="false">¿Eres una marca? Hazte parte</button>
+      </div>
+
+      <!-- Panel 1: Logos -->
+      <div class="nos-expand-panel" id="marcas-logos" aria-hidden="true">
+        <div class="logos-section-header reveal" style="margin-top: 2.5rem;">
+          <span class="label">Alianzas Estratégicas</span>
+          <div class="divider-ochre"></div>
+        </div>
+        <div class="logos-main-grid reveal">
+          <div class="logo-main-card logo-main-card--mistral"><img src="/assets/img/logo-mistral.webp" alt="Mistral" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-johnnie-walker.webp" alt="Johnnie Walker" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-royal.webp" alt="Royal Guard" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-tanqueray.webp" alt="Tanqueray" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-cocacola.webp" alt="Coca-Cola" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-santa-rita.webp" alt="Santa Rita" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-espiritu-andes.webp" alt="Espíritu de los Andes" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-redbull.webp" alt="Red Bull" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-don-julio.webp" alt="Don Julio" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-loa.webp" alt="LOA" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-schweppes.webp" alt="Schweppes" loading="lazy" /></div>
+          <div class="logo-main-card"><img src="/assets/img/logo-licor43.webp" alt="Licor 43" loading="lazy" /></div>
+        </div>
+        <div class="logos-section-header reveal" style="margin-top: 3rem;">
+          <span class="label">Grandes Proveedores</span>
+          <div class="divider-ochre"></div>
+        </div>
+        <div class="proveedores-grid reveal">
+          <div class="proveedor-card"><img src="/assets/img/logo-ccu.webp" alt="CCU" loading="lazy" /></div>
+          <div class="proveedor-card"><img src="/assets/img/logo-andina.webp" alt="Andina Chile" loading="lazy" /></div>
+          <div class="proveedor-card"><img src="/assets/img/logo-pisquera-chile.webp" alt="Pisquera de Chile" loading="lazy" /></div>
+          <div class="proveedor-card"><img src="/assets/img/logo-diageo.webp" alt="Diageo" loading="lazy" /></div>
+        </div>
+      </div>
+
+      <!-- Panel 2: Formulario -->
+      <div class="nos-expand-panel" id="marcas-form" aria-hidden="true">
+        <div class="form-wrapper" style="margin-top: 2.5rem; max-width: 600px; margin-inline: auto;">
+          <p style="color: var(--cream-dim); text-align: center; margin-bottom: 1.5rem; max-width: 48ch; margin-inline: auto;">Estamos siempre abiertos a conocer nuevos proveedores de calidad, marcas y socios estratégicos que compartan nuestra visión. Si tienes una propuesta que pueda sumar al ADN Segreta, queremos escucharte.</p>
+          <form id="form-partners" novalidate>
+            <div class="form-group">
+              <label for="nombre">Nombre *</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required maxlength="100" />
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa o Proyecto *</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa o proyecto" required maxlength="200" />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678" maxlength="20" />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico *</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required maxlength="255" />
+            </div>
+            <div class="form-group">
+              <label for="email_confirm">Repetir correo *</label>
+              <input type="email" id="email_confirm" name="email_confirm" placeholder="Confirma tu correo" required maxlength="255" autocomplete="off" />
+              <span class="form-error">Los emails no coinciden.</span>
+            </div>
+            <div class="form-group">
+              <label for="mensaje">Mensaje *</label>
+              <textarea id="mensaje" name="mensaje" placeholder="Describe tu propuesta, producto o servicio." required maxlength="1000" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.25rem;">Enviar propuesta</button>
+          </form>
+          <div class="form-success" style="margin-top: 1.5rem;">
+            <p style="color: var(--cream); font-family: var(--font-serif); font-style: italic; font-size: 1.1rem; text-align: center;">Recibimos tu propuesta. Si hay un fit real, te escribimos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
        MEDIOS DE PAGO
   ══════════════════════════════════════════════════════ -->
   <section class="medios-pago-section">
@@ -205,10 +296,7 @@
         <div class="nos-ctas-row">
           <a href="https://gour.media/segreta/" class="btn btn-outline" target="_blank" rel="noopener" data-i18n="nosotros.btn_carta">Ver Carta</a>
           <a href="/reservas" class="btn btn-primary" data-i18n="nosotros.btn_reservar">Reservar Mesa</a>
-          <a href="/delivery" class="btn btn-outline" data-i18n="nosotros.btn_delivery">Delivery</a>
         </div>
-        <a href="/experiencias#eventos" class="btn btn-primary btn-full" data-i18n="nosotros.btn_evento">Agenda tu Evento</a>
-        <a href="https://app.welcomeback.io/business/5pKH3ejkQx5cV2zu1U6d0k/download-card/red" class="btn btn-primary btn-full" target="_blank" rel="noopener noreferrer" data-i18n="nosotros.btn_tarjeta">Descarga tu Tarjeta Segreta</a>
       </div>
     </div>
   </section>
@@ -227,7 +315,6 @@
             <li><a href="/" data-i18n="footer.inicio">Inicio</a></li>
             <li><a href="/nosotros" data-i18n="footer.nosotros">Nosotros</a></li>
             <li><a href="/experiencias" data-i18n="footer.experiencias">Experiencias</a></li>
-            <li><a href="/partners" data-i18n="footer.partners">Partners</a></li>
             <li><a href="/carta" data-i18n="footer.carta">Carta</a></li>
             <li><a href="/delivery" data-i18n="footer.delivery">Delivery</a></li>
             <li><a href="/reservas" data-i18n="footer.reserva">Reserva</a></li>
@@ -270,5 +357,24 @@
   <script src="/js/i18n.js"></script>
   <script src="/js/main.js"></script>
   <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+  <script>
+  (function(){
+    document.querySelectorAll('.nos-marcas-toggle').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var targetId = btn.getAttribute('data-target');
+        var panel = document.getElementById(targetId);
+        var isOpen = panel.classList.contains('is-open');
+        document.querySelectorAll('.nos-expand-panel').forEach(function(p){ p.classList.remove('is-open'); p.setAttribute('aria-hidden','true'); });
+        document.querySelectorAll('.nos-marcas-toggle').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+        if(!isOpen){
+          panel.classList.add('is-open');
+          panel.setAttribute('aria-hidden','false');
+          btn.setAttribute('aria-expanded','true');
+          panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+        }
+      });
+    });
+  })();
+  </script>
 </body>
 </html>

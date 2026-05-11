@@ -4,6 +4,8 @@ const SEGRETA_TRANSLATIONS = {
       "nosotros": "Nosotros",
       "experiencias": "Experiencias",
       "partners": "Partners",
+      "carta": "Carta",
+      "delivery": "Delivery",
       "reservar": "Reservar"
     },
     "common": {
