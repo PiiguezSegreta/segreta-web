@@ -2415,7 +2415,11 @@ section {
     width: 260px;
     height: 190px;
   }
-  .carousel-arrow { display: none; }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
 }
 
 /* ── 30. Experiencias — Eventos acordeón ─────────────────── */
@@ -3449,7 +3453,13 @@ section {
 .carta-arrow:hover { background: var(--ochre); border-color: var(--ochre); }
 .carta-arrow--prev { left: 0.5rem; }
 .carta-arrow--next { right: 0.5rem; }
-@media (max-width: 767px) { .carta-arrow { display: none; } }
+@media (max-width: 767px) {
+  .carta-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}
 
 /* ══════════════════════════════════════════════════════
    P10 — Estilos migrados desde inline HTML a clases
@@ -3593,6 +3603,40 @@ section {
 .club-disponible-label { display: block; margin-bottom: 1.25rem; color: var(--ochre); }
 .club-qr { width: 260px; height: 260px; }
 .club-scan-label { display: block; text-align: center; margin-top: 1rem; color: var(--ochre); }
+
+/* ── Almuerzo photos wrapper (flechas solo en mobile) ── */
+.almuerzo-photos-wrapper {
+  position: relative;
+}
+
+.almuerzo-arrow {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .almuerzo-arrow {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.65);
+    border: 1px solid var(--ochre-dim);
+    color: var(--cream);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: background var(--duration) var(--ease);
+  }
+  .almuerzo-arrow:hover { background: var(--ochre); }
+  .almuerzo-arrow--prev { left: 0.4rem; }
+  .almuerzo-arrow--next { right: 0.4rem; }
+}
 
 /* ══════════════════════════════════════════════════════
    P13 — Imágenes responsivas: versión 800w en mobile
