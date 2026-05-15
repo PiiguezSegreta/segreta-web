@@ -2976,7 +2976,12 @@ section {
   max-width: var(--container);
   margin-inline: auto;
   margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
+.carta-header-left { flex: 1; min-width: 0; }
 .carta-categoria-header .label {
   display: block;
   margin-bottom: 0.5rem;
@@ -2992,6 +2997,35 @@ section {
   font-size: 0.9rem;
   line-height: 1.7;
   max-width: 55ch;
+}
+.carta-ver-mas {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ochre);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0.72;
+  border-bottom: 1px solid rgba(150,123,56,0.3);
+  padding-bottom: 2px;
+  transition: opacity var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease);
+}
+.carta-ver-mas:hover {
+  opacity: 1;
+  color: var(--ochre-light);
+  border-bottom-color: var(--ochre-light);
+}
+@media (max-width: 640px) {
+  .carta-categoria-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
 }
 
 /* Track del carrusel (mismo patrón que gallery-carousel) */
