@@ -207,7 +207,7 @@
   <link rel="preload" as="image" href="/assets/img/hero-restaurant.webp" fetchpriority="high" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css?v=39" />
+  <link rel="stylesheet" href="/css/main.css?v=40" />
 </head>
 
 <body>
@@ -455,8 +455,26 @@
         <div class="divider divider-center"></div>
         <h2>Lo que dicen los que volvieron</h2>
       </div>
-      <script src="https://elfsightcdn.com/platform.js" async></script>
-      <div class="elfsight-app-f1f8ccb0-d036-4e7c-9657-bdbf594a4961" data-elfsight-app-lazy></div>
+
+      <div class="reviews-rating">
+        <span class="reviews-stars">★★★★★</span>
+        <span class="reviews-score" id="reviews-score">4.8</span>
+        <span class="reviews-count" id="reviews-count">· 1.814 reseñas en Google</span>
+      </div>
+
+      <div class="reviews-grid" id="reviews-grid" aria-live="polite" aria-label="Reseñas de clientes">
+        <div class="review-card review-skeleton" aria-hidden="true"></div>
+        <div class="review-card review-skeleton" aria-hidden="true"></div>
+        <div class="review-card review-skeleton" aria-hidden="true"></div>
+      </div>
+
+      <a href="https://www.google.com/maps/search/?api=1&query=Segreta+Pizza+%26+Bar&query_place_id=ChIJC_9ArM7PYpYRE1eAysJIdWA"
+         class="reviews-cta-link"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Ver todas las reseñas de Segreta en Google Maps">
+        Ver todas las reseñas en Google ↗
+      </a>
     </div>
   </section>
 

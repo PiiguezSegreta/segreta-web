@@ -235,6 +235,42 @@ document.addEventListener('DOMContentLoaded', () => {
     showBtn();
   })();
 
+  /* ── Reseñas Google Places ────────────────────────────────── */
+  (async function loadReviews() {
+    const grid    = document.getElementById('reviews-grid');
+    const scoreEl = document.getElementById('reviews-score');
+    const countEl = document.getElementById('reviews-count');
+    if (!grid) return;
+
+    try {
+      const res = await fetch('/api/get-reviews');
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+
+      if (data.rating && scoreEl)
+        scoreEl.textContent = Number(data.rating).toFixed(1);
+      if (data.userRatingCount && countEl)
+        countEl.textContent = '· ' + data.userRatingCount.toLocaleString('es-CL') + ' reseñas en Google';
+
+      if (!data.reviews?.length) { grid.style.display = 'none'; return; }
+
+      grid.innerHTML = data.reviews.map(r => {
+        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+        const text  = r.text.length > 240
+          ? r.text.slice(0, 240).trimEnd() + '…'
+          : r.text;
+        return `<div class="review-card">
+          <div class="review-card-stars" aria-label="${r.rating} de 5 estrellas">${stars}</div>
+          <p class="review-card-text">&ldquo;${text}&rdquo;</p>
+          <div class="review-card-author">${r.author}${r.relativeTime ? ' · ' + r.relativeTime : ''}</div>
+        </div>`;
+      }).join('');
+
+    } catch {
+      grid.style.display = 'none';
+    }
+  })();
+
   /* ── Formularios: validación + envío vía Netlify Function ─── */
   initForm('form-contacto', '/api/send-contact');
   initForm('form-partners', '/api/send-partner');

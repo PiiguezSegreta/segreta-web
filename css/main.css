@@ -3307,6 +3307,23 @@ section {
 }
 .reviews-cta-link:hover { color: var(--cream); border-color: rgba(237,237,237,0.3); }
 
+.review-skeleton {
+  min-height: 160px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0.03) 25%,
+    rgba(255,255,255,0.07) 50%,
+    rgba(255,255,255,0.03) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.6s infinite;
+}
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .review-skeleton { animation: none; }
+}
+
 @media (max-width: 768px) {
   .reviews-grid { grid-template-columns: 1fr; }
 }
