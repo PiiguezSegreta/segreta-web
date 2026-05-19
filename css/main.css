@@ -3710,7 +3710,7 @@ section {
   .page-hero .hero-bg {
     background-image: url('/assets/img/tiradito-pomelo-hero-800.webp') !important;
   }
-  .reservas-hero-bg {
+  .page-hero .hero-bg.reservas-hero-bg {
     background-image: url('/assets/img/segreta-bar.webp') !important;
   }
 }
