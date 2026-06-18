@@ -1,1 +1,4 @@
 /partners  /nosotros  301
+
+# Portal de Salón (oculto, acceso por PIN) — fuerza barra final para que carguen los assets
+/salon  /salon/  301
