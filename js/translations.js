@@ -17,7 +17,7 @@ const SEGRETA_TRANSLATIONS = {
     "home": {
       "hero_location": "Vitacura · Santiago",
       "hero_taglines": [
-        "Pizza napolitana. Coctelería de autor.",
+        "Pizza napolitana contemporánea. Coctelería de autor.",
         "Un lugar que vale la pena encontrar.",
         "El secreto mejor guardado de Vitacura."
       ],
