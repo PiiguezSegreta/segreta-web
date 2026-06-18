@@ -112,6 +112,10 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 .catkids{margin-left:15px;border-left:1px solid var(--line);padding-left:3px;}
 .catwrap.lvl1>.catrow .clbl{font-size:13px;}
 .catwrap.lvl2>.catrow .clbl{font-size:12.5px;color:var(--mute);}
+.docactions{display:flex;gap:10px;margin-bottom:12px;}
+.docbtn{flex:1;text-align:center;background:var(--rojo);color:#fff;text-decoration:none;font-weight:600;font-size:13px;padding:11px;border-radius:10px;}
+.docbtn.alt{background:#fff;color:var(--rojo);border:1px solid var(--rojo);}
+.docframe{width:100%;height:68vh;border:1px solid var(--line);border-radius:12px;background:#fff;}
 .filterlbl{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 7px 2px;}
 .dish{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin-bottom:10px;}
 .dish .dcat{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);font-weight:700;}
@@ -317,8 +321,19 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 
     <h2 class="vt" style="margin-top:22px">Documentos oficiales</h2>
     <div class="vsub">Tócalos para abrir o descargar el PDF.</div>
-    <a class="linkrow dl" href="assets/docs/reglas-del-juego.pdf" target="_blank" rel="noopener" download>📄 Reglas del Juego · Ranking<span class="arr">⤓</span></a><a class="linkrow dl" href="assets/docs/manual-garzones-runners.pdf" target="_blank" rel="noopener" download>📄 Manual de Garzones y Runners<span class="arr">⤓</span></a><a class="linkrow dl" href="assets/docs/manual-anfitrionas.pdf" target="_blank" rel="noopener" download>📄 Manual de Anfitrionas<span class="arr">⤓</span></a><a class="linkrow dl" href="assets/docs/normas-protocolo-evaluacion.pdf" target="_blank" rel="noopener" download>📄 Normas, Protocolo y Evaluación<span class="arr">⤓</span></a><a class="linkrow dl" href="assets/docs/carta-ingredientes.pdf" target="_blank" rel="noopener" download>📄 La Carta y sus Ingredientes<span class="arr">⤓</span></a>
+    <div class="linkrow dl" onclick="openDoc('reglas-del-juego','Reglas del Juego · Ranking')">📄 Reglas del Juego · Ranking<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('manual-garzones-runners','Manual de Garzones y Runners')">📄 Manual de Garzones y Runners<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('manual-anfitrionas','Manual de Anfitrionas')">📄 Manual de Anfitrionas<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('normas-protocolo-evaluacion','Normas, Protocolo y Evaluación')">📄 Normas, Protocolo y Evaluación<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('carta-ingredientes','La Carta y sus Ingredientes')">📄 La Carta y sus Ingredientes<span class="arr">›</span></div>
     <div class="linkrow" onclick="changeName()" style="color:var(--mute);margin-top:8px">↺ No soy <span id="notMe">—</span><span class="arr">›</span></div>
+  </section>
+
+  <!-- VISOR DE DOCUMENTO -->
+  <section class="view" id="v-doc">
+    <h2 class="vt" id="docTitle">Documento</h2>
+    <div class="docactions">
+      <a class="docbtn" id="docOpen" target="_blank" rel="noopener">Abrir en pestaña ↗</a>
+      <a class="docbtn alt" id="docDl" download>Descargar ⤓</a>
+    </div>
+    <iframe class="docframe" id="docFrame" title="Documento"></iframe>
+    <p class="note" style="margin-top:10px">¿No se ve el PDF? Usa «Abrir en pestaña». Para volver, toca la flecha ‹ de arriba.</p>
   </section>
 
   <!-- NAV -->
@@ -427,14 +442,22 @@ let navStack=[],current='hoy';
 function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
-  const navV=(v==='estudiar')?'carta':v;
+  const navV=(v==='estudiar')?'carta':(v==='doc'?'mi':v);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
   window.scrollTo({top:0,behavior:'instant'});
 }
 function go(v){ if(v!==current){navStack.push(current);current=v;} showView(v); }   // drill-in (con historial)
 function goRoot(v){ navStack=[];current=v;showView(v); }                                // tab inferior (raíz)
-function back(){ current=navStack.pop()||'hoy';showView(current); }
+function back(){ const f=$('docFrame'); if(current==='doc'&&f) f.src='about:blank'; current=navStack.pop()||'hoy';showView(current); }
+function openDoc(sl,label){
+  const url='assets/docs/'+sl+'.pdf';
+  $('docTitle').textContent=label;
+  $('docFrame').src=url;
+  $('docOpen').href=url;
+  $('docDl').href=url; $('docDl').setAttribute('download',label+'.pdf');
+  go('doc');
+}
 function buildPicker(){
   $('nameGrid').innerHTML=ROSTER.map(r=>`<div class="namebtn" onclick='pickName(${JSON.stringify(r)})'>${r.name}</div>`).join('');
 }
