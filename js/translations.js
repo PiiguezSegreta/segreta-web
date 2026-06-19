@@ -227,13 +227,13 @@ const SEGRETA_TRANSLATIONS = {
         "domingo": "Domingo"
       },
       "hours": {
-        "lunes": "18:00 – 00:00",
-        "martes": "13:00 – 01:00",
-        "miercoles": "13:00 – 02:00",
-        "jueves": "13:00 – 02:00",
-        "viernes": "13:00 – 03:00",
-        "sabado": "13:00 – 02:00",
-        "domingo": "13:00 – 22:00"
+        "lunes": "18:00 – 23:30",
+        "martes": "13:00 – 00:30",
+        "miercoles": "13:00 – 01:30",
+        "jueves": "13:00 – 01:30",
+        "viernes": "13:00 – 02:30",
+        "sabado": "13:00 – 01:30",
+        "domingo": "14:00 – 22:30"
       },
       "copyright": "Segreta Pizza & Bar"
     }
@@ -464,13 +464,13 @@ const SEGRETA_TRANSLATIONS = {
         "domingo": "Sunday"
       },
       "hours": {
-        "lunes": "18:00 – 00:00",
-        "martes": "13:00 – 01:00",
-        "miercoles": "13:00 – 02:00",
-        "jueves": "13:00 – 02:00",
-        "viernes": "13:00 – 03:00",
-        "sabado": "13:00 – 02:00",
-        "domingo": "13:00 – 22:00"
+        "lunes": "18:00 – 23:30",
+        "martes": "13:00 – 00:30",
+        "miercoles": "13:00 – 01:30",
+        "jueves": "13:00 – 01:30",
+        "viernes": "13:00 – 02:30",
+        "sabado": "13:00 – 01:30",
+        "domingo": "14:00 – 22:30"
       },
       "copyright": "Segreta Pizza & Bar"
     }
@@ -701,13 +701,13 @@ const SEGRETA_TRANSLATIONS = {
         "domingo": "Domingo"
       },
       "hours": {
-        "lunes": "18:00 – 00:00",
-        "martes": "13:00 – 01:00",
-        "miercoles": "13:00 – 02:00",
-        "jueves": "13:00 – 02:00",
-        "viernes": "13:00 – 03:00",
-        "sabado": "13:00 – 02:00",
-        "domingo": "13:00 – 22:00"
+        "lunes": "18:00 – 23:30",
+        "martes": "13:00 – 00:30",
+        "miercoles": "13:00 – 01:30",
+        "jueves": "13:00 – 01:30",
+        "viernes": "13:00 – 02:30",
+        "sabado": "13:00 – 01:30",
+        "domingo": "14:00 – 22:30"
       },
       "copyright": "Segreta Pizza & Bar"
     }
@@ -938,13 +938,13 @@ const SEGRETA_TRANSLATIONS = {
         "domingo": "Domenica"
       },
       "hours": {
-        "lunes": "18:00 – 00:00",
-        "martes": "13:00 – 01:00",
-        "miercoles": "13:00 – 02:00",
-        "jueves": "13:00 – 02:00",
-        "viernes": "13:00 – 03:00",
-        "sabado": "13:00 – 02:00",
-        "domingo": "13:00 – 22:00"
+        "lunes": "18:00 – 23:30",
+        "martes": "13:00 – 00:30",
+        "miercoles": "13:00 – 01:30",
+        "jueves": "13:00 – 01:30",
+        "viernes": "13:00 – 02:30",
+        "sabado": "13:00 – 01:30",
+        "domingo": "14:00 – 22:30"
       },
       "copyright": "Segreta Pizza & Bar"
     }
