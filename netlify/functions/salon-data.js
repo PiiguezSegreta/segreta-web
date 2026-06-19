@@ -8,9 +8,9 @@
  */
 
 const SHEETS = {
-  ranking:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vStxcmn-t72xAwQz9oGm9FOUVNzkCq1tdO-ydfJ5FNdED_i2fc82iZBF7vvM3OE8w/pub?gid=445853915&single=true&output=csv',
-  grupal:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vStxcmn-t72xAwQz9oGm9FOUVNzkCq1tdO-ydfJ5FNdED_i2fc82iZBF7vvM3OE8w/pub?gid=1293215392&single=true&output=csv',
-  anuncios: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vStxcmn-t72xAwQz9oGm9FOUVNzkCq1tdO-ydfJ5FNdED_i2fc82iZBF7vvM3OE8w/pub?gid=734478404&single=true&output=csv',
+  ranking:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSllQw1AZKA8M-UyXTAEIf5nQjZnq1Ozde82oeB9h-xKKdxrnj6NJQ9yqj_47tz4HFtYkEfjtyHJgrG/pub?gid=445853915&single=true&output=csv',
+  grupal:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSllQw1AZKA8M-UyXTAEIf5nQjZnq1Ozde82oeB9h-xKKdxrnj6NJQ9yqj_47tz4HFtYkEfjtyHJgrG/pub?gid=1293215392&single=true&output=csv',
+  anuncios: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSllQw1AZKA8M-UyXTAEIf5nQjZnq1Ozde82oeB9h-xKKdxrnj6NJQ9yqj_47tz4HFtYkEfjtyHJgrG/pub?gid=734478404&single=true&output=csv',
 };
 
 exports.handler = async () => {

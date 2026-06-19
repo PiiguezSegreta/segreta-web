@@ -6,7 +6,8 @@
  * (Netlify → Site settings → Environment variables), nunca en el cliente.
  */
 
-const APPS_URL = process.env.SALON_FEEDBACK_URL || '';
+const APPS_URL = process.env.SALON_FEEDBACK_URL ||
+  'https://script.google.com/macros/s/AKfycbypv1XOhwVSdhnALxeT_AT0lPU6OMPHs52gac7K3KOwD5zGDPs7pD3N7Ti7g-2oqNLn/exec';
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
