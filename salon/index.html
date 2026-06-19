@@ -462,14 +462,14 @@ async function loadLive(){
       .sort((x,y)=>y.pts-x.pts);
     if(live.length){ DEMO=live; isLive=true; }
     const gv=lbl=>{ const row=gr.find(r=>r[0]&&r[0].trim().toLowerCase().startsWith(lbl)); return row?(row[1]||'').trim():''; };
-    GRUPAL={ventaCumple:gv('¿cumple venta'),resNuevas:numCL(gv('reseñas nuevas')),resMeta:numCL(gv('meta de reseñas')),cumplida:gv('¿meta grupal')};
+    GRUPAL={ventaMeta:numCL(gv('meta de venta')),ventaCumple:gv('¿cumple venta'),resNuevas:numCL(gv('reseñas nuevas')),resMeta:numCL(gv('meta de reseñas')),cumplida:gv('¿meta grupal')};
     const av=an.map(r=>(r[0]||'').trim()).filter(x=>x&&!x.includes('AVISO DEL DÍA')&&!x.toLowerCase().startsWith('escribe aquí'));
     if(av.length) AVISO=av[av.length-1];
     if(isLive) document.querySelectorAll('.demoflag').forEach(e=>e.style.display='none');
   }catch(e){ isLive=false; }
 }
 function renderGrupal(){
-  const vMeta=200000000;
+  const vMeta=(GRUPAL&&GRUPAL.ventaMeta)?GRUPAL.ventaMeta:200000000;
   const ventaTotal=DEMO.reduce((s,r)=>s+(r.venta||0),0);   // suma venta de garzones del ranking
   const rMeta=(GRUPAL&&GRUPAL.resMeta)?GRUPAL.resMeta:100;
   const rNuevas=GRUPAL?GRUPAL.resNuevas:0;
