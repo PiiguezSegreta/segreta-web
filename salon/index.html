@@ -155,6 +155,14 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 .dlbtn{display:flex;align-items:center;justify-content:center;gap:7px;background:var(--rojo);color:#fff;text-decoration:none;font-weight:600;font-size:14px;padding:13px;border-radius:12px;margin-top:12px;}
 .dlbtn:active{background:var(--rojod);}
 .linkrow.dl{text-decoration:none;} .linkrow .arr{color:var(--ocre);font-size:17px;}
+.fbtext{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:inherit;font-size:14px;color:var(--text);background:#fff;resize:vertical;min-height:96px;}
+.fbtext:focus{outline:none;border-color:var(--ocre);}
+.fbanon{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);margin:11px 0;cursor:pointer;}
+.fbanon input{width:17px;height:17px;accent-color:var(--rojo);}
+.fbsend{width:100%;background:var(--rojo);color:#fff;border:none;border-radius:12px;padding:13px;font-family:inherit;font-weight:600;font-size:14px;cursor:pointer;}
+.fbsend:active{background:var(--rojod);} .fbsend:disabled{opacity:.6;}
+.fbmsg{font-size:13px;text-align:center;margin-top:10px;min-height:18px;}
+.fbmsg.ok{color:#3F6B22;font-weight:600;} .fbmsg.err{color:#B23B1E;}
 .abadge{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:20px;white-space:nowrap;}
 .abadge.viva{background:#E3EFD9;color:#3F6B22;} .abadge.gestion{background:#F6E5C9;color:#9A6A12;} .abadge.pronto{background:#ECEAE6;color:#5C564E;}
 .concurso{background:linear-gradient(150deg,#1d3a5c,#13263d);color:#E8EEF6;border:none;}
@@ -382,6 +390,18 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     <h2 class="vt" style="margin-top:22px">Documentos oficiales</h2>
     <div class="vsub">Tócalos para abrir o descargar el PDF.</div>
     <div class="linkrow dl" onclick="openDoc('reglas-del-juego','Reglas del Juego · Ranking')">📄 Reglas del Juego · Ranking<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('manual-garzones-runners','Manual de Garzones y Runners')">📄 Manual de Garzones y Runners<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('manual-anfitrionas','Manual de Anfitrionas')">📄 Manual de Anfitrionas<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('normas-protocolo-evaluacion','Normas, Protocolo y Evaluación')">📄 Normas, Protocolo y Evaluación<span class="arr">›</span></div><div class="linkrow dl" onclick="openDoc('carta-ingredientes','La Carta y sus Ingredientes')">📄 La Carta y sus Ingredientes<span class="arr">›</span></div>
+
+    <h2 class="vt" style="margin-top:24px">Observaciones, Feedback e Ideas</h2>
+    <div class="vsub">Tu espacio para mejorar Segreta.</div>
+    <div class="card">
+      <p style="font-size:13px;line-height:1.5;margin-bottom:7px">¿Qué mejorarías — del portal, del servicio, del día a día? Tus ideas, molestias y sugerencias nos sirven para mejorar de verdad. Escribe con honestidad, todo suma.</p>
+      <p style="font-size:11.5px;color:var(--mute);margin-bottom:11px">🔒 Esto lo lee solo gerencia y jefaturas. Tus compañeros no lo ven.</p>
+      <textarea id="fbText" class="fbtext" rows="5" placeholder="Escribe aquí lo que quieras contarnos…"></textarea>
+      <label class="fbanon"><input type="checkbox" id="fbAnon"> Enviar de forma anónima</label>
+      <button class="fbsend" id="fbSend" onclick="sendFeedback()">Enviar</button>
+      <div class="fbmsg" id="fbMsg"></div>
+    </div>
+
     <div class="linkrow" onclick="changeName()" style="color:var(--mute);margin-top:8px">↺ No soy <span id="notMe">—</span><span class="arr">›</span></div>
   </section>
 
@@ -483,6 +503,22 @@ function renderGrupal(){
   $('grStatus').textContent=ok?'¡Meta cumplida!':'En curso';
 }
 function renderAviso(){ if(AVISO) $('aviso').textContent=AVISO; }
+async function sendFeedback(){
+  const t=($('fbText').value||'').trim();
+  const msg=$('fbMsg');
+  if(!t){ msg.textContent='Escribe un mensaje antes de enviar.'; msg.className='fbmsg err'; return; }
+  const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
+  const anon=$('fbAnon').checked;
+  const btn=$('fbSend'); btn.disabled=true; btn.textContent='Enviando…'; msg.textContent='';
+  try{
+    const r=await fetch('/.netlify/functions/salon-feedback',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({garzon:anon?'':(g.name||''),mensaje:t,anon:anon})});
+    if(!r.ok) throw new Error('http');
+    $('fbText').value=''; $('fbAnon').checked=false;
+    msg.textContent='¡Gracias por tu mensaje!'; msg.className='fbmsg ok';
+  }catch(e){ msg.textContent='No se pudo enviar, intenta de nuevo en un momento.'; msg.className='fbmsg err'; }
+  btn.disabled=false; btn.textContent='Enviar';
+}
 function buildTagFilter(){
   $('tagFilter').innerHTML=TAGS.map(t=>`<div class="tagchip" data-t="${t}" onclick="toggleTag('${t}')">${t}</div>`).join('');
 }
