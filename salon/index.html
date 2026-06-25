@@ -170,6 +170,8 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 .concurso p{font-size:13px;line-height:1.5;margin-top:6px;}
 /* qr */
 .qrwrap{text-align:center;} .qrwrap img{width:100%;max-width:300px;border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.14);}
+.qrh{font-family:'Belgan';font-size:18px;color:var(--rojo);margin-bottom:2px;}
+.qrp{font-size:12.5px;color:var(--mute);margin-bottom:10px;}
 /* ranking */
 .metacard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px;}
 .metacard .gtop{font-family:'Belgan';font-size:16px;color:var(--rojo);margin-bottom:8px;}
@@ -252,7 +254,7 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
       <p style="font-size:13.5px;line-height:1.5" id="aviso">Bienvenido al portal. Aquí la jefatura dejará el aviso del día — reemplaza el caos del WhatsApp.</p>
     </div>
     <div class="qbtns">
-      <div class="qbtn" onclick="go('mi')"><div class="qi">🎟️</div><div class="ql">Mi QR Welcome Back</div></div>
+      <div class="qbtn" onclick="go('qrs')"><div class="qi">🎟️</div><div class="ql">QRs</div></div>
       <div class="qbtn" onclick="go('ranking')"><div class="qi">🏆</div><div class="ql">Mi posición</div></div>
       <div class="qbtn" onclick="go('carta')"><div class="qi">🍕</div><div class="ql">Qué empujar hoy</div></div>
       <div class="qbtn" onclick="go('marcas')"><div class="qi">🤝</div><div class="ql">Alianzas y activaciones</div></div>
@@ -381,11 +383,7 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     </div>
     <div class="card"><div class="eyebrow">Para subir</div><p style="font-size:13px;line-height:1.5" id="miTip">—</p></div>
 
-    <h2 class="vt" style="margin-top:22px">Mi QR Welcome Back</h2>
-    <div class="vsub">Muéstralo al cliente para sumar tu tarjeta.</div>
-    <div class="qrwrap"><img id="miQR" src="" alt="Mi QR"></div>
-    <a class="dlbtn" id="qrDownload" download>⤓ Descargar mi QR (PNG)</a>
-    <p class="note">Guárdalo en tu teléfono para tenerlo siempre a mano.</p>
+    <div class="linkrow" onclick="go('qrs')" style="margin-top:18px">🎟️ Mis QRs <span style="color:var(--mute);font-weight:400">· Welcome Back · Google · TripAdvisor</span><span class="arr">›</span></div>
 
     <h2 class="vt" style="margin-top:22px">Documentos oficiales</h2>
     <div class="vsub">Tócalos para abrir o descargar el PDF.</div>
@@ -403,6 +401,25 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     </div>
 
     <div class="linkrow" onclick="changeName()" style="color:var(--mute);margin-top:8px">↺ No soy <span id="notMe">—</span><span class="arr">›</span></div>
+  </section>
+
+  <!-- QRs -->
+  <section class="view" id="v-qrs">
+    <h2 class="vt">QRs</h2>
+    <div class="vsub">Muéstrale al cliente el QR que corresponda.</div>
+
+    <div class="qrh">Welcome Back · tu QR</div>
+    <div class="qrp">Para que el cliente se registre y sume <b>tu</b> tarjeta.</div>
+    <div class="qrwrap"><img id="miQR" src="" alt="Mi QR Welcome Back"></div>
+    <a class="dlbtn" id="qrDownload" download>⤓ Descargar mi QR (PNG)</a>
+
+    <div class="qrh" style="margin-top:26px">Reseña en Google</div>
+    <div class="qrp">Pídela al cierre, cuando el cliente está contento.</div>
+    <div class="qrwrap"><img src="assets/qr/google-reviews.jpg" alt="QR Google Reviews"></div>
+
+    <div class="qrh" style="margin-top:26px">Reseña en TripAdvisor</div>
+    <div class="qrp">La que más suma a la meta del equipo.</div>
+    <div class="qrwrap"><img src="assets/qr/tripadvisor.jpg" alt="QR TripAdvisor"></div>
   </section>
 
   <!-- VISOR DE DOCUMENTO -->
@@ -484,7 +501,7 @@ async function loadLive(){
       .sort((x,y)=>y.pts-x.pts);
     if(live.length){ DEMO=live; isLive=true; }
     const gv=lbl=>{ const row=gr.find(r=>r[0]&&r[0].trim().toLowerCase().startsWith(lbl)); return row?(row[1]||'').trim():''; };
-    GRUPAL={ventaMeta:numCL(gv('meta de venta')),ventaCumple:gv('¿cumple venta'),resNuevas:numCL(gv('reseñas nuevas')),resMeta:numCL(gv('meta de reseñas')),cumplida:gv('¿meta grupal')};
+    GRUPAL={ventaTotal:numCL(gv('venta total del mes')),ventaMeta:numCL(gv('meta de venta')),ventaCumple:gv('¿cumple venta'),resNuevas:numCL(gv('reseñas nuevas')),resMeta:numCL(gv('meta de reseñas')),cumplida:gv('¿meta grupal')};
     const av=an.map(r=>(r[0]||'').trim()).filter(x=>x&&!x.includes('AVISO DEL DÍA')&&!x.toLowerCase().startsWith('escribe aquí'));
     if(av.length) AVISO=av[av.length-1];
     if(isLive) document.querySelectorAll('.demoflag').forEach(e=>e.style.display='none');
@@ -492,7 +509,7 @@ async function loadLive(){
 }
 function renderGrupal(){
   const vMeta=(GRUPAL&&GRUPAL.ventaMeta)?GRUPAL.ventaMeta:200000000;
-  const ventaTotal=DEMO.reduce((s,r)=>s+(r.venta||0),0);   // suma venta de garzones del ranking
+  const ventaTotal=(GRUPAL&&GRUPAL.ventaTotal>0)?GRUPAL.ventaTotal:DEMO.reduce((s,r)=>s+(r.venta||0),0); // celda Grupal si está; si no, suma garzones
   const rMeta=(GRUPAL&&GRUPAL.resMeta)?GRUPAL.resMeta:100;
   const rNuevas=GRUPAL?GRUPAL.resNuevas:0;
   const vp=Math.max(0,Math.min(100,ventaTotal/vMeta*100));
@@ -582,7 +599,7 @@ let navStack=[],current='hoy';
 function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
-  const navV=(v==='estudiar'||v==='venta')?'carta':(v==='doc'?'mi':v);
+  const navV=(v==='estudiar'||v==='venta')?'carta':((v==='doc'||v==='qrs')?'mi':v);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
   window.scrollTo({top:0,behavior:'instant'});
