@@ -170,6 +170,7 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 .concurso p{font-size:13px;line-height:1.5;margin-top:6px;}
 /* qr */
 .qrwrap{text-align:center;} .qrwrap img{width:100%;max-width:300px;border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.14);}
+.tiplink{color:var(--ocre);font-weight:700;text-decoration:underline;cursor:pointer;}
 .qrh{font-family:'Belgan';font-size:18px;color:var(--rojo);margin-bottom:2px;}
 .qrp{font-size:12.5px;color:var(--mute);margin-bottom:10px;}
 /* ranking */
@@ -593,10 +594,18 @@ function renderMine(me){
   $('miPts').textContent=r.pts; $('miPos').innerHTML=(i+1)+'<small>º</small>';
   $('miCards').textContent=r.cards; $('miTicket').innerHTML='$'+(r.ticket/1000).toFixed(0)+'<small>K</small>';
   $('miFc').textContent=r.fc.toFixed(2);
-  let tip=''; if(r.fc<0.95)tip='Tu factor calidad está bajo 0.95: cuida el servicio, ahí se te van los puntos.';
-  else if(i>0)tip='Estás a '+(DEMO[i-1].pts-r.pts)+' puntos del siguiente. Crea más tarjetas Welcome Back: es lo que más depende de ti.';
-  else tip='Vas primero. Mantén el factor calidad en 1.00 y la corona es tuya.';
-  $('miTip').textContent=tip;
+  let tip='', tk=r.ticket;
+  if(r.fc<0.95){
+    tip='Tu factor calidad está bajo 0.95 — cuida el servicio, ahí se te borran los puntos que ganaste vendiendo.';
+  } else {
+    let lead=(i>0)?('Estás a '+Math.round(DEMO[i-1].pts-r.pts)+' puntos del '+i+'°. '):'Vas primero 👑. ';
+    if(tk>0 && tk<40000){
+      tip=lead+'Tu ticket promedio ($'+(tk/1000).toFixed(0)+'K) tiene espacio para crecer: ofrece más en cada mesa (agua, entrada, postre, bajativo) y revisa los <a onclick="go(\'carta\')" class="tiplink">tips de venta</a> — el ticket es lo que más pesa en tu puntaje. Y sigue sumando tarjetas Welcome Back.';
+    } else {
+      tip=lead+'Tu ticket va bien. Donde más fácil subes es creando <b>tarjetas Welcome Back</b>: depende 100% de ti.';
+    }
+  }
+  $('miTip').innerHTML=tip;
 }
 let navStack=[],current='hoy';
 function showView(v){
