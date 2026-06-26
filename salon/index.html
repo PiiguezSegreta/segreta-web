@@ -509,7 +509,7 @@ async function loadLive(){
 }
 function renderGrupal(){
   const vMeta=(GRUPAL&&GRUPAL.ventaMeta)?GRUPAL.ventaMeta:200000000;
-  const ventaTotal=(GRUPAL&&GRUPAL.ventaTotal>0)?GRUPAL.ventaTotal:DEMO.reduce((s,r)=>s+(r.venta||0),0); // celda Grupal si está; si no, suma garzones
+  const ventaTotal=DEMO.reduce((s,r)=>s+(r.venta||0),0); // suma la venta real por garzón del ranking
   const rMeta=(GRUPAL&&GRUPAL.resMeta)?GRUPAL.resMeta:100;
   const rNuevas=GRUPAL?GRUPAL.resNuevas:0;
   const vp=Math.max(0,Math.min(100,ventaTotal/vMeta*100));
