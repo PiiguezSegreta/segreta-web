@@ -481,7 +481,7 @@ function startApp(){
   goRoot('hoy');
   loadLive().then(()=>{ renderRanking(g.name); renderMine(g.name); renderGrupal(); renderAviso(); });
 }
-function numCL(s){ if(s==null) return 0; s=String(s).trim().replace(/[.]/g,'').replace(',','.'); const n=parseFloat(s); return isNaN(n)?0:n; }
+function numCL(s){ if(s==null) return 0; s=String(s).replace(/[^0-9.,-]/g,'').replace(/[.]/g,'').replace(',','.'); const n=parseFloat(s); return isNaN(n)?0:n; } // ignora $ y formato
 function parseCSV(t){
   return t.split(/\r?\n/).map(line=>{
     const out=[]; let f='', q=false;
