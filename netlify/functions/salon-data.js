@@ -25,7 +25,7 @@ exports.handler = async () => {
       headers: {
         'Content-Type': 'application/json',
         // CDN cachea 2 min; sirve stale hasta 5 min más mientras revalida
-        'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=300',
+        'Cache-Control': 'no-store',
       },
       body: JSON.stringify(out),
     };
