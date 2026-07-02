@@ -404,7 +404,7 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
       <p class="note" style="text-align:left;margin-top:9px">Hay que llenar las dos barras para ganar el premio del equipo.</p>
     </div>
     <div class="rtable" id="rtable"></div>
-    <p class="note">El ranking se mueve cada semana. Cierre y premio a fin de mes.</p>
+    <p class="note">«prov.» = posición provisional hasta llegar a 120 mesas. Cierre y premio a fin de mes.</p>
   </section>
 
   <!-- MI -->
@@ -543,10 +543,21 @@ async function loadLive(){
     const res=await fetch(SALON_DATA);
     const d=await res.json();
     const rk=parseCSV(d.ranking||''), gr=parseCSV(d.grupal||''), an=parseCSV(d.anuncios||'');
-    const live=rk.slice(1).filter(r=>r[1]&&r[1].trim()&&numCL(r[8])>0)
-      .map(r=>({name:r[1].trim(),cards:numCL(r[2]),ticket:numCL(r[3]),venta:numCL(r[4]),mesas:numCL(r[5]),fc:numCL(r[7]),pts:numCL(r[8])}))
-      .sort((x,y)=>y.pts-x.pts);
-    if(live.length){ DEMO=live; isLive=true; }
+    const MIN_MESAS=120,WB_TARGET=80;
+    const cands=rk.slice(1).filter(r=>r[1]&&r[1].trim()&&numCL(r[4])>0)
+      .map(r=>({name:r[1].trim(),cards:numCL(r[2]),ticket:numCL(r[3]),venta:numCL(r[4]),mesas:numCL(r[5]),fc:numCL(r[7]),pts:numCL(r[8]),elegible:(r[9]||'').trim().toLowerCase()==='sí'}));
+    if(cands.length){
+      const mxK=Math.max(...cands.map(r=>r.ticket))||1;
+      const mxV=Math.max(...cands.map(r=>r.venta))||1;
+      const live=cands.map(r=>{
+        if(!r.elegible){
+          const p=((r.cards/WB_TARGET)*0.25+(r.ticket/mxK)*0.45+(r.venta/mxV)*0.30)*100*r.fc;
+          return Object.assign({},r,{pts:Math.round(p*10)/10,provisional:true});
+        }
+        return Object.assign({},r,{provisional:false});
+      }).sort((x,y)=>y.pts-x.pts);
+      DEMO=live; isLive=true;
+    }
     const gv=lbl=>{ const row=gr.find(r=>r[0]&&r[0].trim().toLowerCase().startsWith(lbl)); return row?(row[1]||'').trim():''; };
     GRUPAL={ventaTotal:numCL(gv('venta total del mes')),ventaMeta:numCL(gv('meta de venta')),ventaCumple:gv('¿cumple venta'),resNuevas:numCL(gv('reseñas nuevas')),resMeta:numCL(gv('meta de reseñas')),cumplida:gv('¿meta grupal')};
     const av=an.map(r=>(r[0]||'').trim()).filter(x=>x&&!x.includes('AVISO DEL DÍA')&&!x.toLowerCase().startsWith('escribe aquí'));
@@ -646,8 +657,9 @@ function renderDishes(){
 }
 function renderRanking(me){
   let h=''; DEMO.forEach((r,i)=>{
-    const cls=(r.name===me?' me':'')+(i===0?' top1':'');
-    h+=`<div class="rrow${cls}"><div class="rpos">${i+1}</div><div class="rname">${r.name}<small>${r.cards} tarjetas · $${(r.ticket/1000).toFixed(0)}K ticket</small></div><div class="rpts">${r.pts}</div></div>`;
+    const cls=(r.name===me?' me':'')+(i===0&&!r.provisional?' top1':'');
+    const prov=r.provisional?'<span style="font-size:9px;color:var(--mute);margin-left:4px">prov.</span>':'';
+    h+=`<div class="rrow${cls}"><div class="rpos">${i+1}</div><div class="rname">${r.name}${prov}<small>${r.cards} tarjetas · $${(r.ticket/1000).toFixed(0)}K ticket</small></div><div class="rpts">${r.pts}</div></div>`;
   });
   $('rtable').innerHTML=h;
 }
@@ -664,14 +676,15 @@ function renderMine(me){
   $('miCards').textContent=r.cards; $('miTicket').innerHTML='$'+(r.ticket/1000).toFixed(0)+'<small>K</small>';
   $('miFc').textContent=r.fc.toFixed(2);
   let tip='', tk=r.ticket;
+  const pNote=r.provisional?'<b>Posición provisional</b> — necesitas 120 mesas para confirmarla. ':'';
   if(r.fc<0.95){
-    tip='Tu factor calidad está bajo 0.95 — cuida el servicio, ahí se te borran los puntos que ganaste vendiendo.';
+    tip=pNote+'Tu factor calidad está bajo 0.95 — cuida el servicio, ahí se te borran los puntos que ganaste vendiendo.';
   } else {
     let lead=(i>0)?('Estás a '+Math.round(DEMO[i-1].pts-r.pts)+' puntos del '+i+'°. '):'Vas primero 👑. ';
     if(tk>0 && tk<40000){
-      tip=lead+'Tu ticket promedio ($'+(tk/1000).toFixed(0)+'K) tiene espacio para crecer: ofrece más en cada mesa (agua, entrada, postre, bajativo) y revisa los <a onclick="go(\'carta\')" class="tiplink">tips de venta</a> — el ticket es lo que más pesa en tu puntaje. Y sigue sumando tarjetas Welcome Back.';
+      tip=pNote+lead+'Tu ticket promedio ($'+(tk/1000).toFixed(0)+'K) tiene espacio para crecer: ofrece más en cada mesa (agua, entrada, postre, bajativo) y revisa los <a onclick="go(\'carta\')" class="tiplink">tips de venta</a> — el ticket es lo que más pesa en tu puntaje. Y sigue sumando tarjetas Welcome Back.';
     } else {
-      tip=lead+'Tu ticket va bien. Donde más fácil subes es creando <b>tarjetas Welcome Back</b>: depende 100% de ti.';
+      tip=pNote+lead+'Tu ticket va bien. Donde más fácil subes es creando <b>tarjetas Welcome Back</b>: depende 100% de ti.';
     }
   }
   $('miTip').innerHTML=tip;
