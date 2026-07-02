@@ -421,9 +421,8 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     </div>
     <div class="card"><div class="eyebrow">Para subir</div><p style="font-size:13px;line-height:1.5" id="miTip">—</p></div>
 
-    <h2 class="vt" style="margin-top:22px">Historial de Rendimiento</h2>
-    <div class="vsub">Tu evolución mes a mes.</div>
-    <div id="histSection"></div>
+    <div class="linkrow" id="histToggle" onclick="toggleHistorial()" style="margin-top:18px">📅 Historial de Rendimiento<span class="arr" id="histArr">›</span></div>
+    <div id="histSection" style="display:none"></div>
 
     <div class="linkrow" onclick="go('qrs')" style="margin-top:18px">🎟️ Mis QRs <span style="color:var(--mute);font-weight:400">· Welcome Back · Google · TripAdvisor</span><span class="arr">›</span></div>
 
@@ -568,6 +567,11 @@ function renderGrupal(){
   $('grStatus').textContent=ok?'¡Meta cumplida!':'En curso';
 }
 function renderAviso(){ if(AVISO) $('aviso').textContent=AVISO; }
+function toggleHistorial(){
+  const el=$('histSection'); const open=el.style.display==='none';
+  el.style.display=open?'block':'none';
+  $('histArr').textContent=open?'▾':'›';
+}
 function renderHistorial(me){
   const hist=(HISTORIAL[me]||[]).slice().reverse(); // más reciente primero
   const el=$('histSection');
