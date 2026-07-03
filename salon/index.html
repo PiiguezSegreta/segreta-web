@@ -284,7 +284,7 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     </div>
     <div class="card">
       <div class="eyebrow">Aviso del equipo</div>
-      <p style="font-size:13.5px;line-height:1.5" id="aviso">Bienvenido al portal. Aquí la jefatura dejará el aviso del día — reemplaza el caos del WhatsApp.</p>
+      <p style="font-size:13.5px;line-height:1.5;white-space:pre-line" id="aviso">Bienvenido al portal. Aquí la jefatura dejará el aviso del día, reemplaza el caos del WhatsApp.</p>
     </div>
     <div class="qbtns">
       <div class="qbtn" onclick="go('qrs')"><div class="qi">🎟️</div><div class="ql">QRs</div></div>
@@ -529,14 +529,21 @@ function startApp(){
 }
 function numCL(s){ if(s==null) return 0; s=String(s).replace(/[^0-9.,-]/g,'').replace(/[.]/g,'').replace(',','.'); const n=parseFloat(s); return isNaN(n)?0:n; } // ignora $ y formato
 function parseCSV(t){
-  return t.split(/\r?\n/).map(line=>{
-    const out=[]; let f='', q=false;
-    for(let i=0;i<line.length;i++){ const c=line[i];
-      if(q){ if(c==='"'){ if(line[i+1]==='"'){f+='"';i++;} else q=false; } else f+=c; }
-      else { if(c==='"')q=true; else if(c===','){out.push(f);f='';} else f+=c; }
+  const rows=[]; let row=[], f='', q=false;
+  for(let i=0;i<t.length;i++){ const c=t[i];
+    if(q){
+      if(c==='"'){ if(t[i+1]==='"'){f+='"';i++;} else q=false; }
+      else f+=c;                       // saltos de línea dentro de comillas se conservan
+    } else {
+      if(c==='"') q=true;
+      else if(c===','){ row.push(f); f=''; }
+      else if(c==='\n'){ row.push(f); rows.push(row); row=[]; f=''; }
+      else if(c==='\r'){}
+      else f+=c;
     }
-    out.push(f); return out;
-  });
+  }
+  row.push(f); rows.push(row);
+  return rows;
 }
 async function loadLive(){
   try{
