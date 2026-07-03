@@ -194,6 +194,16 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 /* qr */
 .qrwrap{text-align:center;} .qrwrap img{width:100%;max-width:300px;border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.14);}
 .tiplink{color:var(--ocre);font-weight:700;text-decoration:underline;cursor:pointer;}
+.fstep{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;line-height:1.5;margin-bottom:10px;}
+.fstep:last-child{margin-bottom:0;}
+.fstep .fnum{flex-shrink:0;background:var(--ocre);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin-top:1px;}
+.fpts{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;}
+.fpts:last-child{border:none;}
+.fpts .fpc{color:var(--tinta);} .fpts .fpv{font-weight:700;color:var(--rojo);white-space:nowrap;}
+.ftier{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 10px;-webkit-overflow-scrolling:touch;}
+.ftcard{flex:0 0 41%;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.ftcard img{width:100%;border-radius:11px;box-shadow:0 2px 8px rgba(0,0,0,.16);}
+.ftcard span{font-size:12px;font-weight:600;color:var(--tinta);}
 .qrh{font-family:'Belgan';font-size:18px;color:var(--rojo);margin-bottom:2px;}
 .qrp{font-size:12.5px;color:var(--mute);margin-bottom:10px;}
 /* ranking */
@@ -300,7 +310,8 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     <div class="vsub">La ruta de venta y qué conviene empujar.</div>
     <div class="linkrow" onclick="go('ruta')" style="margin-bottom:9px">🗺️ La ruta de oferta perfecta<span class="arr">›</span></div>
     <div class="linkrow" onclick="go('estudiar')" style="margin-bottom:9px">📖 Estudiar la carta · ingredientes y tags<span class="arr">›</span></div>
-    <div class="linkrow" onclick="go('venta')" style="margin-bottom:14px">🎯 Técnicas de venta y buenas prácticas<span class="arr">›</span></div>
+    <div class="linkrow" onclick="go('venta')" style="margin-bottom:9px">🎯 Técnicas de venta y buenas prácticas<span class="arr">›</span></div>
+    <div class="linkrow" onclick="go('fideliza')" style="margin-bottom:14px">💳 Fidelización de clientes · Welcome Back<span class="arr">›</span></div>
     <div class="card">
       <div class="eyebrow">Qué empujar por categoría</div>
       <div class="tprow"><b>Pizzas</b><span>Las Estrellas se aseguran solas (Insuperabile, Nuvole, Caramelata, Diavolissima, Affascinante). Donde ganas margen empujando: Vulcano y Speziata, y las Burrata Degustazione, Rilasciata e Insolenza — se piden poco y dejan harto.</span></div><div class="tprow"><b>Piqueos</b><span>En tierra empuja Entraña Gnocci Pesto, La Nostra Provoleta y los Filetto: alto margen y poca salida. En mar, Crocantes de Salmón y Erizos. El Tártaro y el Ceviche Tradicional son venta segura.</span></div><div class="tprow"><b>Tragos</b><span>Ofrece Segreta Espresso Martini, Spicy Kiwi y los Don Julio (Paloma, Margarita): se piden poco y dejan buen margen. El Saint Germain Spritz también.</span></div><div class="tprow"><b>Postres</b><span>Cierra siempre la mesa con postre: parte por Tiramisú o Bastoncini. Si el cliente quiere algo más dulce, los Brownies y el Dolce Vita salen solos.</span></div>
@@ -356,6 +367,49 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
     <div class="vhdr" style="margin-top:24px">Buenas prácticas</div>
     <p class="vhdrsub">La operativa de salón que sostiene la experiencia: presencia, tiempos, montaje y actitud.</p>
     <div class="vgroup"><div class="vghead" onclick="toggleVenta(this)"><span class="vgic">🍽️</span><span class="vgti">Presencia y atención en la mesa</span><span class="vgn">7</span><span class="vgcar">▸</span></div><div class="vgbody" style="display:none"><p class="vgintro">El cliente debe sentir que estás, sin sentirse vigilado. Se logra con la mirada, no con preguntas.</p><div class="vcard"><div class="vct">Atento a los ceniceros</div><p>Retira los ceniceros sucios apenas vas a servir la comida, y cámbialos durante la estadía. Un cenicero lleno arruina la presentación de la mesa y la experiencia.</p></div><div class="vcard"><div class="vct">Contacto visual, no interrogatorio</div><p>Mantén contacto visual frecuente con tu plaza y acércate cuando el cliente te busca, sin interrumpir conversaciones. Evita el “¿todo bien?” cada cinco minutos: lees la mesa con la mirada.</p></div><div class="vcard"><div class="vct">Recarga y orden constante</div><p>Ofrece recargas de bebida y mantén la mesa ordenada: retira copas vacías, platos terminados y lo que ya no se usa. Una mesa despejada se ve cuidada.</p></div><div class="vcard"><div class="vct">Cómo tomar y servir los platos</div><p>Recibe el plato del runner como filtro final: nombra cada plato al cliente y tómalo desde el fondo con pulgar y meñique, sin tocar nunca la pizza ni la preparación. Verifica que la presentación sea igual a la carta y que la pizza llegue caliente.</p></div><div class="vcard"><div class="vct">Cubiertos según el plato</div><p>Dispón cuchara cuando pidan tiraditos, ceviches o platos con salsa (ñoquis, pastas). Para el postre, monta los cubiertos arriba del plato y dispón azúcar o endulzante; retira antes aderezos, platos y cubiertos previos.</p></div><div class="vcard"><div class="vct">Retira cuando todos terminaron</div><p>Levanta los platos solo cuando toda la mesa terminó, y pregunta antes de hacerlo. Retirar el plato de uno mientras otros comen apura y se siente descortés.</p></div><div class="vcard"><div class="vct">Lee al cliente</div><p>Hay quien quiere interactuar (disfruta conversar y recibir recomendaciones: dale conversación y guíalo) y quien prefiere privacidad (se le cuida desde la distancia, anticipando lo que necesita sin interrumpir).</p></div></div></div><div class="vgroup"><div class="vghead" onclick="toggleVenta(this)"><span class="vgic">🤝</span><span class="vgti">Bienvenida y despedida</span><span class="vgn">3</span><span class="vgcar">▸</span></div><div class="vgbody" style="display:none"><div class="vcard"><div class="vct">Recibe como si los esperaras</div><p>Actitud cordial y cercana desde el primer gesto: el cliente debe sentir que lo estaban esperando. Asiste siempre a adultos mayores, niños y personas con movilidad reducida; acomoda sillas para niños y ofrece agua para la mascota si llega con una.</p></div><div class="vcard"><div class="vct">Apertura del servicio</div><p>Acércate a la mesa dentro de 2 minutos e indica el QR de la carta. Preséntate entre 2 y 5 minutos: “Buenas tardes, mi nombre es [nombre], los acompaño hoy.” Consulta con discreción si es su primera visita, para guiar la experiencia.</p></div><div class="vcard"><div class="vct">La despedida es el último recuerdo</div><p>Agradece con sinceridad: “Gracias por su visita, los esperamos pronto.” Nunca apurada ni mecánica. Con el cliente frecuente, recuerda su nombre, sus preferencias y sus favoritos: ese detalle convierte una visita en una relación, y a un cliente en un embajador.</p></div></div></div><div class="vgroup"><div class="vghead" onclick="toggleVenta(this)"><span class="vgic">⏱️</span><span class="vgti">Tiempos y gestión de la espera</span><span class="vgn">2</span><span class="vgcar">▸</span></div><div class="vgbody" style="display:none"><p class="vgintro">Un cliente informado espera tranquilo; uno ignorado se impacienta aunque el tiempo sea el mismo.</p><div class="vcard"><div class="vct">La tabla de tiempos</div><p>Saludo en mesa máx. 2 min · indicar el QR dentro de 2 min · presentación 2 a 5 min · salida de entradas 10 a 15 min · fondos (pizzas) 15 a 20 min · check-in tras servir 3 a 5 min · montaje tras la salida máx. 3 min.</p></div><div class="vcard"><div class="vct">Gestiona el retraso, no desaparezcas</div><p>Cuando cocina o barra se atrasan, la diferencia la hace la comunicación activa. Pasa por la mesa aunque no traigas el plato: la presencia baja la ansiedad. Informa con frases que tranquilizan: “Su plato ya viene en camino”, “Estamos dando los últimos detalles a su preparación”.</p></div></div></div><div class="vgroup"><div class="vghead" onclick="toggleVenta(this)"><span class="vgic">🧹</span><span class="vgti">Montaje y mise en place</span><span class="vgn">3</span><span class="vgcar">▸</span></div><div class="vgbody" style="display:none"><div class="vcard"><div class="vct">Mesa lista en 3 minutos</div><p>Una mesa se monta en máximo 3 minutos tras la salida del cliente. No se sienta a nadie en una mesa sin montar: la siguiente mesa merece la misma primera impresión que la anterior.</p></div><div class="vcard"><div class="vct">Montaje correcto</div><p>Plato al centro; servilleta a la derecha; tenedor y cuchillo sobre la servilleta con el filo hacia adentro. El QR está fijo en la mesa: no se mueve ni se retira. Verifica que la mesa quede firme y sacude las sillas.</p></div><div class="vcard"><div class="vct">Llega preparado</div><p>Mise en place es “todo en su lugar”: antes del turno, limpieza del salón, revisión de materiales, montaje y nivelación de mesas, estaciones listas y conocer el producto del día. Lleva siempre encima lito, descorchador, lápiz, encendedor y celular cargado.</p></div></div></div><div class="vgroup"><div class="vghead" onclick="toggleVenta(this)"><span class="vgic">✨</span><span class="vgti">Actitud y voz Segreta</span><span class="vgn">5</span><span class="vgcar">▸</span></div><div class="vgbody" style="display:none"><div class="vcard"><div class="vct">Las 3 S</div><p>Servicial (anticipa y resuelve; el cliente nunca debería pedir dos veces ni levantar la mano), Sonrisa (genuina, se percibe hasta en el tono de tu voz) y Sociabilidad (cercanía auténtica, leyendo cuánto quiere conversar sin invadir).</p></div><div class="vcard"><div class="vct">El mal día se queda en la puerta</div><p>El cliente percibe tu actitud en todo momento y no sabe si tuviste un mal día — ni debe saberlo. Dejar lo negativo afuera y entrar con disposición positiva es la marca de un profesional.</p></div><div class="vcard"><div class="vct">Habla como Segreta</div><p>Tono sobrio, cálido y elegante, nunca forzado. Sí: “Bienvenidos a Segreta”, “Con gusto”, “Excelente elección”, “¿Me permite retirar?”. No: “hey”, “bacán”, “sí po”, “al tiro”, frases de grito o “no tenemos” a secas.</p></div><div class="vcard"><div class="vct">Equipo y caja</div><p>Una mesa es de todos: si un compañero está sobrepasado, se apoya sin que lo pidan. Honestidad con el cliente y con la caja: las normas de caja son falta grave si se incumplen (solo jefatura y cajeros la manipulan). Quien recibe una plaza asume su información.</p></div><div class="vcard"><div class="vct">La precisión también es venta</div><p>Un producto caído es pérdida directa y se cobra al garzón. Digita con cuidado, confirma antes de marchar y anula a tiempo (dentro de los 5 minutos). Cobrar sin diferencias es parte de tu evaluación.</p></div></div></div>
+  </section>
+
+  <!-- FIDELIZACIÓN DE CLIENTES -->
+  <section class="view" id="v-fideliza">
+    <h2 class="vt">Fidelización de clientes</h2>
+    <div class="vsub">En Segreta cuidamos y premiamos a nuestros mejores clientes. Aquí, cómo funciona y cómo lo ofreces.</div>
+
+    <div class="card">
+      <div class="eyebrow">Qué es</div>
+      <p style="font-size:13.5px;line-height:1.55">Usamos <b>Welcome Back</b>: tarjetas virtuales que el cliente guarda en su celular (Apple o Google Wallet). Cada vez que vuelve y consume, suma puntos, sube de tarjeta y desbloquea mejores premios. Mientras más lo cuidamos, más vuelve.</p>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Cómo se registra el cliente</div>
+      <div class="fstep"><span class="fnum">1</span><span>Le ofreces tu <b>QR</b> y lo escanea. Lo lleva a un formulario cortito de inicio.</span></div>
+      <div class="fstep"><span class="fnum">2</span><span>Al enviarlo, descarga su <b>Red Pass</b> (la primera tarjeta) en Apple o Google Wallet.</span></div>
+      <div class="fstep"><span class="fnum">3</span><span>Con solo activarla ya suma <b>2 puntos</b> de bienvenida. Después suma cada vez que viene.</span></div>
+      <p style="font-size:12px;color:var(--mute);margin-top:10px">Tu QR es el mismo de tu ranking: cada tarjeta que creas suma también a tu posición. Ofrécelo siempre.</p>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Cómo suma puntos al pagar</div>
+      <p style="font-size:13px;line-height:1.5;margin-bottom:10px">Al momento de pagar, <b>Adelfa e Isaac</b> (jefa y capitán, los únicos facultados) escanean la tarjeta del cliente e ingresan el monto que gastó:</p>
+      <div class="fpts"><span class="fpc">Menos de $10.000</span><span class="fpv">0 pts</span></div>
+      <div class="fpts"><span class="fpc">Entre $10.000 y $50.000</span><span class="fpv">1 pt</span></div>
+      <div class="fpts"><span class="fpc">Más de $50.000</span><span class="fpv">2 pts</span></div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Las 4 tarjetas · cada 10 puntos subes de nivel</div>
+      <div class="ftier">
+        <div class="ftcard"><img src="assets/tarjetas/red.png" alt="Red Pass"><span>Red Pass</span></div>
+        <div class="ftcard"><img src="assets/tarjetas/silver.png" alt="Silver Pass"><span>Silver Pass</span></div>
+        <div class="ftcard"><img src="assets/tarjetas/black.png" alt="Black Pass"><span>Black Pass</span></div>
+        <div class="ftcard"><img src="assets/tarjetas/gold.png" alt="Golden Pass"><span>Golden Pass</span></div>
+      </div>
+      <p style="font-size:12.5px;color:var(--mute);line-height:1.5;margin-top:4px">Todos parten en Red. Cada 10 puntos suben de tarjeta y los premios mejoran: Red → Silver → Black → Golden.</p>
+    </div>
+
+    <div class="card" style="background:linear-gradient(135deg,#3a2f12,#000);color:#f4e6c8;border:none">
+      <div class="eyebrow" style="color:#d9b25a">La cima: Golden Pass</div>
+      <p style="font-size:13.5px;line-height:1.55;color:#f4e6c8">Al llegar a <b>Golden</b> el cliente se queda ahí, dando vueltas en el nivel más alto: <b>cada 10 puntos gana $50.000 de consumo</b>. Es nuestro cliente más fiel y hay que tratarlo como tal.</p>
+    </div>
   </section>
 
   <!-- RUTA DE OFERTA -->
@@ -700,7 +754,7 @@ let navStack=[],current='hoy';
 function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
-  const navV=(v==='estudiar'||v==='venta'||v==='ruta')?'carta':((v==='doc'||v==='qrs')?'mi':v);
+  const navV=(v==='estudiar'||v==='venta'||v==='ruta'||v==='fideliza')?'carta':((v==='doc'||v==='qrs')?'mi':v);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
   window.scrollTo({top:0,behavior:'instant'});
