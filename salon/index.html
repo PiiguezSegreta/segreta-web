@@ -197,6 +197,13 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
 .vbadge{position:absolute;top:12px;right:15px;font-family:'Belgan';font-size:16px;color:rgba(255,255,255,.55);letter-spacing:.04em;}
 .crank{margin-top:13px;width:100%;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:600;padding:10px 14px;border-radius:11px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
 .crbody{margin-top:10px;padding:11px 13px;background:rgba(0,0,0,.22);border-radius:11px;} .crbody p{margin-top:0;color:#E8EEF6;font-size:12.5px;}
+.crtab{width:100%;border-collapse:collapse;font-size:11.5px;}
+.crtab th{text-align:right;padding:4px 3px;border-bottom:1px solid rgba(255,255,255,.22);color:#9DBDE2;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.02em;}
+.crtab th:nth-child(2),.crtab td:nth-child(2){text-align:left;}
+.crtab td{padding:4px 3px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);color:#E8EEF6;}
+.crtab td:first-child{color:#9DBDE2;width:16px;}
+.crtab tr.win td{color:#F2D492;font-weight:700;}
+.crtab tr.tot td{border-top:1px solid rgba(255,255,255,.28);border-bottom:none;color:#fff;font-weight:700;padding-top:6px;}
 .impbtn{margin-top:12px;width:100%;background:#FBEEDA;border:1px solid #E7C692;color:#8A5A12;font-size:12px;font-weight:700;padding:10px 13px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-transform:uppercase;letter-spacing:.05em;}
 .impbody{margin-top:10px;font-size:12.5px;line-height:1.5;color:var(--tinta);} .impbody p{margin:0;} .impbody ol{margin:9px 0 0;padding-left:19px;} .impbody li{margin-bottom:9px;} .impbody li:last-child{margin-bottom:0;}
 /* qr */
@@ -449,7 +456,31 @@ h2.vt{font-family:'Belgan';font-size:23px;color:var(--rojo);margin-bottom:3px;}
       <h3 style="font-family:'Belgan';font-size:18px;margin-top:3px">Concurso Royal · Valle Nevado</h3>
       <p>Terminó en junio. Los clientes que consumían Royal participaban por premios de Valle Nevado (un par de skis, un snowboard o un pase de temporada). El garzón con más venta de productos Royal gana una <b>Gift Card Cencosud de $100.000 CLP</b>.</p>
       <button class="crank" onclick="toggleConc('c1')">🏆 Ranking final y premiación<span id="c1arr">›</span></button>
-      <div id="c1" class="crbody" style="display:none"><p>Tanto el ranking final como la entrega del premio se realizarán hoy a las 16:00 hrs. Si el ganador no se encuentra en el local en ese momento, no se preocupen, le entregaremos su Gift Card apenas llegue.</p></div>
+      <div id="c1" class="crbody" style="display:none">
+        <p style="margin-bottom:9px">🏆 <b>Ganador: Miguel Ángel</b> — se lleva la Gift Card Cencosud de $100.000 CLP por la mayor venta de productos Royal. ¡Felicitaciones!</p>
+        <table class="crtab">
+          <thead><tr><th>#</th><th>Garzón</th><th>C/Alc</th><th>S/Alc</th><th>Total</th></tr></thead>
+          <tbody>
+          <tr class="win"><td>1</td><td>Miguel Ángel</td><td>220</td><td>35</td><td>255</td></tr>
+          <tr><td>2</td><td>Edu Castro</td><td>189</td><td>11</td><td>200</td></tr>
+          <tr><td>3</td><td>Steve García</td><td>166</td><td>19</td><td>185</td></tr>
+          <tr><td>4</td><td>Eduardo Martínez</td><td>165</td><td>12</td><td>177</td></tr>
+          <tr><td>5</td><td>Samuel</td><td>146</td><td>20</td><td>166</td></tr>
+          <tr><td>6</td><td>Maykoll Romero</td><td>97</td><td>18</td><td>115</td></tr>
+          <tr><td>7</td><td>Gabriela Victoria</td><td>105</td><td>10</td><td>115</td></tr>
+          <tr><td>8</td><td>Jean Carlos</td><td>74</td><td>25</td><td>99</td></tr>
+          <tr><td>9</td><td>Benjamín Bravo</td><td>83</td><td>7</td><td>90</td></tr>
+          <tr><td>10</td><td>Luis Aguirre</td><td>77</td><td>9</td><td>86</td></tr>
+          <tr><td>11</td><td>Leidy Varelas</td><td>75</td><td>11</td><td>86</td></tr>
+          <tr><td>12</td><td>Sebastián Yanchina</td><td>61</td><td>5</td><td>66</td></tr>
+          <tr><td>13</td><td>Isaac</td><td>25</td><td>1</td><td>26</td></tr>
+          <tr><td>14</td><td>Adelfa</td><td>24</td><td>2</td><td>26</td></tr>
+          <tr><td>15</td><td>Jose Buergo</td><td>2</td><td>1</td><td>3</td></tr>
+          <tr><td>16</td><td>Luis Briceño</td><td>3</td><td>0</td><td>3</td></tr>
+          <tr class="tot"><td></td><td>TOTAL</td><td>1.512</td><td>186</td><td>1.698</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card concurso c2" style="position:relative">
