@@ -120,6 +120,11 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .codes{display:flex;gap:8px;margin-top:6px;}
 .codebox{flex:1;text-align:center;background:#FAF6EE;border:1px solid var(--line);border-radius:12px;padding:10px 6px;}
 .codebox .cc{font-family:'Belgan';font-size:18px;color:var(--rojo);} .codebox .cd{font-size:10.5px;color:var(--mute);margin-top:2px;}
+.stocklist{margin-top:12px;}
+.strow{display:flex;gap:9px;align-items:flex-start;padding:9px 0;border-top:1px solid var(--line);}
+.stcode{flex-shrink:0;font-weight:800;font-size:12px;width:32px;text-align:center;padding:3px 0;border-radius:7px;}
+.st101 .stcode{background:#E3EFD9;color:#3F6B22;} .st85 .stcode{background:#F6E5C9;color:#9A6A12;} .st86 .stcode{background:#F6D9D5;color:#A32A1C;}
+.stitems{margin:0;padding-left:16px;font-size:12.5px;line-height:1.5;color:var(--tinta);} .stitems li{margin-bottom:2px;}
 /* qué ofrecer primero */
 .algrupo{font-family:'Belgan';font-size:15px;color:var(--rojo);margin:18px 0 4px;padding-bottom:4px;border-bottom:2px solid var(--ocre);} .algrupo:first-child{margin-top:2px;}
 .alrow{padding:13px 0;border-bottom:1px solid var(--line);} .alrow:last-child{border:none;}
@@ -345,7 +350,8 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
         <div class="codebox"><div class="cc">85</div><div class="cd">Por agotarse</div></div>
         <div class="codebox"><div class="cc">86</div><div class="cd">Sin stock</div></div>
       </div>
-      <p style="font-size:12px;color:var(--mute);margin-top:9px">La jefatura avisa los 101/85/86 del día. Prioriza los 101 en tu sugerencia.</p>
+      <div class="stocklist"><div class="strow st101"><span class="stcode">101</span><ul class="stitems"><li>Tragos de la activación de hoy: Whiscola, Whiskey Black Sour y Cóctel El Colorado</li><li>Whiskey Hatozaki Blended</li><li>Jarras</li></ul></div><div class="strow st86"><span class="stcode">86</span><ul class="stitems"><li>Whiskey Johnnie Walker Blue Label</li><li>Whiskey Johnnie Walker Gold Label</li></ul></div></div>
+      <p style="font-size:12px;color:var(--mute);margin-top:10px">Actualizado por jefatura. Prioriza los 101 en tu sugerencia.</p>
     </div>
     </div>
     <h2 class="vt vtoggle" onclick="toggleSec('secCarta')">Carta inteligente<span class="vchev" id="secCartachev">▸</span></h2>
