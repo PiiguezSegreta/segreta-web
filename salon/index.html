@@ -350,7 +350,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
         <div class="codebox"><div class="cc">85</div><div class="cd">Por agotarse</div></div>
         <div class="codebox"><div class="cc">86</div><div class="cd">Sin stock</div></div>
       </div>
-      <div class="stocklist"><div class="strow st101"><span class="stcode">101</span><ul class="stitems"><li>Tragos de la activación de hoy: Whiscola, Whiskey Black Sour y Cóctel El Colorado</li><li>Whiskey Hatozaki Blended</li><li>Jarras</li></ul></div><div class="strow st86"><span class="stcode">86</span><ul class="stitems"><li>Whiskey Johnnie Walker Blue Label</li><li>Whiskey Johnnie Walker Gold Label</li></ul></div></div>
+      <div class="stocklist"><div class="strow st101" id="st101row"><span class="stcode">101</span><ul class="stitems" id="st101list"><li>Whiskey Hatozaki Blended</li><li>Jarras</li></ul></div><div class="strow st86"><span class="stcode">86</span><ul class="stitems"><li>Whiskey Johnnie Walker Blue Label</li><li>Whiskey Johnnie Walker Gold Label</li></ul></div></div>
       <p style="font-size:12px;color:var(--mute);margin-top:10px">Actualizado por jefatura. Prioriza los 101 en tu sugerencia.</p>
     </div>
     </div>
@@ -643,6 +643,13 @@ const FOCO={
 const FOCO_FECHA={
  '2026-07-02':["Hoy nos visita Diageo","Johnnie Walker · Tanqueray · Don Julio","Desde las 19:00 viene la gerencia internacional de Diageo, nuestro partner. El foco de hoy es ofrecer FULL los tragos Diageo (detalle en Marcas): Johnnie Walker, Tanqueray y Don Julio. Para acompañar, armamos el Johnnie Walker Take Over: Whiscola a $3.990 de 19:00 a 22:00 con DJ Mille Sound en vivo. Hay que meterle con todo por hoy."]
 };
+// 101 de la activación del día (por día de semana: 0=Dom … 6=Sáb). Lun/Mar/Vie sin activación.
+const ACTIV_101={
+ 0:"Coctelería Bossa Nova",
+ 3:"Tragos Mistral",
+ 4:"Whiscola, Whiskey Black Sour y El Colorado",
+ 6:"Carajillo, Spritz 43 y Licor 43 puro"
+};
 const $=id=>document.getElementById(id);
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));if(id)$(id).classList.add('on');}
@@ -655,7 +662,7 @@ function startApp(){
   const d=new Date(); $('todayDate').textContent=DIAS[d.getDay()].replace(/^./,c=>c.toUpperCase())+' · foco del día';
   const fk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   const f=FOCO_FECHA[fk]||FOCO[d.getDay()]; $('focusTitle').textContent=f[0]; $('focusMarca').textContent=f[1]==='—'?'':f[1]; $('focusDet').textContent=f[2];
-  renderRanking(g.name); renderMine(g.name); renderHistorial(g.name); buildTagFilter(); buildCatPanel(); renderDishes();
+  renderRanking(g.name); renderMine(g.name); renderHistorial(g.name); buildTagFilter(); buildCatPanel(); renderDishes(); renderStockActiv();
   goRoot('hoy');
   loadLive().then(()=>{ renderRanking(g.name); renderMine(g.name); renderGrupal(); renderAviso(); });
 }
@@ -719,6 +726,13 @@ function renderGrupal(){
 function renderAviso(){ if(AVISO) $('aviso').textContent=AVISO; }
 function toggleConc(id){ const el=$(id); const open=el.style.display==='none'; el.style.display=open?'block':'none'; $(id+'arr').textContent=open?'▾':'›'; }
 function toggleSec(id){ const el=$(id); const open=el.style.display!=='none'; el.style.display=open?'none':'block'; $(id+'chev').textContent=open?'▸':'▾'; }
+function renderStockActiv(){
+  const ul=$('st101list'); if(!ul) return;
+  const prev=$('stActivItem'); if(prev) prev.remove();
+  const t=ACTIV_101[new Date().getDay()];
+  if(t){ const li=document.createElement('li'); li.id='stActivItem'; li.innerHTML='<b>Activación de hoy:</b> '+t; ul.insertBefore(li, ul.firstChild); }
+  const row=$('st101row'); if(row) row.style.display=ul.children.length?'':'none';
+}
 function toggleHistorial(){
   const el=$('histSection'); const open=el.style.display==='none';
   el.style.display=open?'block':'none';
