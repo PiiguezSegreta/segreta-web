@@ -229,6 +229,10 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .ftcard span{font-size:12px;font-weight:600;color:var(--tinta);}
 .qrh{font-family:'Belgan';font-size:18px;color:var(--rojo);margin-bottom:2px;}
 .qrp{font-size:12.5px;color:var(--mute);margin-bottom:10px;}
+.wifibox{background:#FAF6EE;border:1px solid var(--line);border-radius:12px;padding:6px 14px;margin-bottom:12px;}
+.wifirow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;} .wifirow+.wifirow{border-top:1px solid var(--line);}
+.wifirow .wl{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:700;}
+.wifirow .wv{font-size:15px;font-weight:700;color:var(--tinta);font-family:ui-monospace,Menlo,monospace;}
 /* ranking */
 .metacard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px;}
 .metacard .gtop{font-family:'Belgan';font-size:16px;color:var(--rojo);margin-bottom:8px;}
@@ -593,6 +597,14 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <div class="qrh" style="margin-top:26px">Reseña en TripAdvisor</div>
     <div class="qrp">La que más suma a la meta del equipo.</div>
     <div class="qrwrap"><img src="assets/qr/tripadvisor.jpg" alt="QR TripAdvisor"></div>
+
+    <div class="qrh" style="margin-top:26px">WiFi del Salón</div>
+    <div class="qrp">Para que el cliente se conecte. Si no puede escanear, dale la red y la clave:</div>
+    <div class="wifibox">
+      <div class="wifirow"><span class="wl">Red</span><span class="wv">Segreta Salon</span></div>
+      <div class="wifirow"><span class="wl">Clave</span><span class="wv">radar_9426</span></div>
+    </div>
+    <div class="qrwrap"><img src="assets/qr/wifi.jpg" alt="QR WiFi Segreta Salon"></div>
   </section>
 
   <!-- VISOR DE DOCUMENTO -->
