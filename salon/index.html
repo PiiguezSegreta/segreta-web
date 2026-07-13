@@ -795,7 +795,7 @@ function renderPlazas(){
   const rb=(PLAZAS.runnerBarra||'').trim(), rc=(PLAZAS.runnerCocina||'').trim(), bs=(PLAZAS.busser||'').trim();
   if(rb){ ex+='<div class="prow"><span class="prl">🏃 Runner de barra</span><span class="prv">'+rb+'</span></div>'; any=true; }
   if(rc){ ex+='<div class="prow"><span class="prl">🏃 Runner de cocina</span><span class="prv">'+rc+'</span></div>'; any=true; }
-  if(bs){ ex+='<div class="prow"><span class="prl">🧹 Busser</span><span class="prv">'+bs+'</span></div>'; any=true; }
+  if(bs){ ex+='<div class="prow"><span class="prl">🫡 Busser</span><span class="prv">'+bs+'</span></div>'; any=true; }
   $('plazaExtra').innerHTML=ex;
   card.style.display=any?'':'none';
 }
