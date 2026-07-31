@@ -71,6 +71,16 @@
   to = "/.netlify/functions/get-reviews"
   status = 200
 
+[[redirects]]
+  from = "/politicas-de-privacidad"
+  to = "/politicas-de-privacidad.html"
+  status = 200
+
+[[redirects]]
+  from = "/politicas_de_privacidad"
+  to = "/politicas-de-privacidad.html"
+  status = 200
+
 # Dashboard interno
 [[redirects]]
   from = "/dashboardinterno"
