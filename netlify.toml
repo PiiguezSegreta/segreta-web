@@ -61,6 +61,22 @@
   to = "/.netlify/functions/send-partner"
   status = 200
 
+[[redirects]]
+  from = "/api/toteat"
+  to = "/.netlify/functions/toteat"
+  status = 200
+
+[[redirects]]
+  from = "/api/get-reviews"
+  to = "/.netlify/functions/get-reviews"
+  status = 200
+
+# Dashboard interno
+[[redirects]]
+  from = "/dashboardinterno"
+  to = "/dashboardinterno.html"
+  status = 200
+
 # Headers de seguridad
 [[headers]]
   for = "/*"
