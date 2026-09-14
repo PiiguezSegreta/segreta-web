@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Cocina Segreta</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#6E1717">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Cocina Segreta">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/app-icon.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600;700&display=swap');
+@font-face{font-family:'Belgan';src:url('assets/belgan.ttf') format('truetype');font-display:swap;}
+
+:root{
+  --rojo:#6E1717; --rojod:#561111; --negro:#161311;
+  --ocre:#967B38; --ocrel:#B89A52;
+  --paper:#FCFBF8; --crema:#F4EEE3; --oro:#E3CE9B;
+  --text:#2A2724; --mute:#7A736B; --line:#E7E1D6;
+  --v101bg:#E3EFD9; --v101fg:#3F6B22;
+  --v85bg:#F6E5C9;  --v85fg:#9A6A12;
+  --v86bg:#F6D9D5;  --v86fg:#A32A1C;
+  --nav:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{font-family:'Red Hat Display',system-ui,-apple-system,sans-serif;background:var(--rojo);color:var(--text);}
+body{min-height:100dvh;overflow-x:hidden;}
+.belgan{font-family:'Belgan',Georgia,serif;font-weight:400;letter-spacing:.01em;}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;}
+button{cursor:pointer;border:none;background:none;}
+img{display:block;max-width:100%;}
+
+/* ══════════ PIN ══════════ */
+#pinScreen{position:fixed;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(170deg,#7E1B1B 0%,var(--rojo) 50%,#4A0E0E 100%);padding:32px 24px;}
+#pinScreen.on{display:flex;}
+#pinScreen .iso{width:74px;opacity:1;margin-bottom:22px;}
+#pinScreen h1{font-family:'Belgan',serif;font-size:30px;color:var(--crema);letter-spacing:.06em;font-weight:400;}
+#pinScreen .sub{color:#D9BFA8;font-size:13.5px;margin:8px 0 30px;letter-spacing:.02em;}
+.pinbox{display:flex;gap:11px;}
+.pinbox input{width:56px;height:66px;text-align:center;font-size:27px;font-weight:600;border-radius:13px;
+  border:1.5px solid rgba(255,255,255,.35);background:rgba(0,0,0,.22);color:#fff;outline:none;}
+.pinbox input:focus{border-color:var(--oro);background:rgba(0,0,0,.34);}
+#pinErr{color:#E08C7E;font-size:13px;height:18px;margin-top:16px;}
+
+/* ══════════ APP SHELL ══════════ */
+#app{display:none;min-height:100dvh;background:var(--paper);}
+#app.on{display:block;}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px calc(var(--nav) + 26px);}
+
+.topbar{position:sticky;top:0;z-index:20;background:var(--rojo);color:var(--crema);
+  padding:calc(env(safe-area-inset-top) + 13px) 16px 13px;display:flex;align-items:center;gap:11px;}
+.topbar .iso{width:26px;flex:0 0 26px;}
+.topbar .tt{font-family:'Belgan',serif;font-size:17px;letter-spacing:.05em;flex:1;}
+.topbar .date{font-size:11px;color:#D9BFA8;letter-spacing:.04em;text-transform:uppercase;}
+.topbar .back{font-size:22px;color:var(--oro);width:30px;margin-left:-6px;display:none;}
+.topbar.sub .back{display:block;}
+.topbar.sub .iso{display:none;}
+
+.view{display:none;} .view.on{display:block;animation:fade .18s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+/* ══════════ HOME ══════════ */
+.aviso{background:linear-gradient(160deg,var(--rojo),var(--rojod));color:#fff;border-radius:16px;padding:18px 18px 16px;margin-top:18px;}
+.aviso .lab{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ocrel);margin-bottom:7px;}
+.aviso .txt{font-size:14.5px;line-height:1.55;white-space:pre-line;}
+.aviso .firma{font-size:11.5px;color:rgba(255,255,255,.62);margin-top:11px;font-style:italic;}
+
+.stock{margin-top:16px;}
+.stock h2,.sect-h{font-family:'Belgan',serif;font-size:14px;color:var(--rojo);letter-spacing:.04em;
+  padding-bottom:6px;border-bottom:2px solid var(--line);margin-bottom:11px;}
+.strow{display:flex;gap:11px;align-items:flex-start;padding:11px 12px;border-radius:12px;margin-bottom:8px;}
+.strow .code{font-family:'Belgan',serif;font-size:17px;flex:0 0 40px;text-align:center;line-height:1.15;}
+.strow .body .t{font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.75;}
+.strow .body .p{font-size:13.5px;line-height:1.45;margin-top:2px;font-weight:500;}
+.st101{background:var(--v101bg);color:var(--v101fg);} .st85{background:var(--v85bg);color:var(--v85fg);}
+.st86{background:var(--v86bg);color:var(--v86fg);}
+.stock .empty{color:var(--mute);font-size:13px;padding:10px 2px;}
+.leyenda{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--mute);line-height:1.4;}
+.leyenda b{font-family:'Belgan',serif;font-size:13px;margin-right:7px;display:inline-block;min-width:26px;}
+.c101{color:var(--v101fg);} .c85{color:var(--v85fg);} .c86{color:var(--v86fg);}
+
+.bigbtn{display:block;width:100%;margin-top:18px;background:var(--crema);border:1px solid var(--line);
+  border-radius:16px;padding:20px 18px;text-align:left;}
+.bigbtn .k{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ocre);}
+.bigbtn .n{font-family:'Belgan',serif;font-size:23px;color:var(--rojo);margin:4px 0 3px;}
+.bigbtn .d{font-size:12.5px;color:var(--mute);line-height:1.45;}
+.bigbtn:active{background:#EDE5D6;}
+.homesecs{margin-top:26px;}
+
+/* ══════════ DOSSIER ══════════ */
+.searchwrap{display:none;position:sticky;top:var(--tb,0px);z-index:15;background:var(--paper);
+  padding-top:14px;box-shadow:0 10px 16px -14px rgba(42,39,36,.5);}
+.searchwrap.on{display:block;}
+#v-dossier .wrap, #v-sec .wrap{padding-top:20px;}
+.searchwrap .wrap{padding-bottom:0;}
+.search{position:relative;margin:0 0 14px;}
+.search input{width:100%;padding:14px 15px 14px 42px;border:1px solid var(--line);border-radius:13px;
+  background:#fff;font-size:15px;outline:none;}
+.search input:focus{border-color:var(--ocrel);}
+.search .ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:15px;opacity:.5;}
+.search .clr{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px;
+  color:var(--mute);font-size:19px;display:none;}
+.search.has .clr{display:block;}
+
+.secgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.seccard{background:var(--crema);border:1px solid var(--line);border-radius:14px;padding:15px 13px;text-align:left;}
+.seccard .i{font-size:21px;}
+.seccard .n{font-family:'Belgan',serif;font-size:15px;color:var(--rojo);margin:6px 0 2px;line-height:1.2;}
+.seccard .c{font-size:11.5px;color:var(--mute);}
+.seccard:active{background:#EDE5D6;}
+.seccard.off{background:#FBF1EF;border-color:#EFD8D3;} .seccard.off .n{color:#A32A1C;}
+
+.chips{display:flex;gap:7px;overflow-x:auto;padding:0 0 15px;scrollbar-width:none;}
+.fbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:20px;}
+.fbar .cnt{font-size:12px;color:var(--mute);letter-spacing:.02em;}
+.orden{display:flex;gap:6px;}
+.ord{padding:8px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;
+  font-size:12px;color:var(--mute);white-space:nowrap;}
+.ord.on{background:var(--crema);border-color:var(--ocrel);color:var(--rojo);font-weight:600;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{flex:0 0 auto;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;
+  font-size:12.5px;color:var(--mute);white-space:nowrap;}
+.chip.on{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:500;}
+
+.rlist{display:flex;flex-direction:column;gap:9px;}
+.ritem{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:9px;text-align:left;width:100%;}
+.ritem img{width:64px;height:64px;object-fit:cover;border-radius:9px;flex:0 0 64px;background:var(--crema);}
+.ritem .n{font-family:'Belgan',serif;font-size:15.5px;color:var(--rojo);line-height:1.2;}
+.ritem .m{font-size:11.5px;color:var(--mute);margin-top:3px;}
+.ritem:active{background:var(--crema);}
+.nores{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 20px;line-height:1.6;}
+
+/* ══════════ FICHA ══════════ */
+.rhero{margin:0 -16px;background:var(--crema);}
+.rhero img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+.rhead{padding-top:24px;}
+.rhead .tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px;}
+.tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 9px;border-radius:999px;
+  background:var(--crema);color:var(--ocre);font-weight:600;}
+.tag.off{background:#F6D9D5;color:#A32A1C;}
+.rhead h1{font-family:'Belgan',serif;font-size:27px;color:var(--rojo);line-height:1.12;font-weight:400;}
+.rdesc{font-size:14px;line-height:1.6;color:#4A443D;margin-top:11px;}
+
+.blk{margin-top:26px;}
+.blk h3{font-family:'Belgan',serif;font-size:14px;color:var(--rojo);letter-spacing:.05em;
+  padding-bottom:6px;border-bottom:2px solid var(--line);margin-bottom:12px;
+  display:flex;justify-content:space-between;align-items:center;}
+.scaler{display:flex;gap:5px;}
+.scaler button{padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:#fff;
+  font-size:13px;color:var(--mute);font-weight:700;letter-spacing:.03em;}
+.scaler button.on{background:var(--ocre);border-color:var(--ocre);color:#fff;}
+.ing{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:10px 2px;border-bottom:1px solid #F1ECE3;}
+.ing:last-child{border-bottom:none;}
+.ing .n{font-size:14.5px;line-height:1.35;}
+.ing .n.lk{color:var(--rojo);font-weight:500;border-bottom:1px dotted var(--ocrel);}
+.ing .n .arrow{font-size:13px;color:var(--ocre);margin-left:5px;font-weight:700;}
+.ing .q{font-size:14px;font-weight:600;color:var(--ocre);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.step{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #F1ECE3;}
+.step:last-child{border-bottom:none;}
+.step .nu{flex:0 0 26px;height:26px;border-radius:50%;background:var(--crema);color:var(--rojo);
+  font-family:'Belgan',serif;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.step .tx{font-size:14.5px;line-height:1.6;padding-top:3px;}
+.reportbtn{display:block;width:100%;margin-top:28px;padding:14px;border-radius:13px;border:1px solid var(--line);
+  background:#fff;color:var(--mute);font-size:13.5px;font-weight:500;}
+.reportbtn:active{background:var(--crema);}
+
+/* ══════════ MENSAJES ══════════ */
+.intro{background:var(--crema);border-radius:14px;padding:17px;margin-top:18px;font-size:13.5px;line-height:1.6;color:#4A443D;}
+.intro b{color:var(--rojo);}
+.field{margin-top:16px;}
+.field label{display:block;font-size:11px;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);margin-bottom:7px;}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1px solid var(--line);
+  border-radius:12px;background:#fff;font-size:15px;outline:none;}
+.field textarea{min-height:130px;resize:vertical;line-height:1.5;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--ocrel);}
+.sendbtn{width:100%;margin-top:20px;background:var(--rojo);color:#fff;border-radius:13px;padding:16px;
+  font-size:15px;font-weight:600;letter-spacing:.02em;}
+.sendbtn:active{background:var(--rojod);} .sendbtn:disabled{opacity:.55;}
+.fmsg{margin-top:12px;font-size:13.5px;line-height:1.5;text-align:center;min-height:20px;}
+.fmsg.ok{color:var(--v101fg);} .fmsg.err{color:#A32A1C;}
+.ctxbox{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--crema);
+  border-radius:11px;padding:11px 13px;margin-top:16px;font-size:13px;}
+.ctxbox .l{color:var(--mute);} .ctxbox .v{font-family:'Belgan',serif;font-size:15px;color:var(--rojo);}
+.ctxbox button{color:var(--mute);font-size:18px;padding:0 4px;}
+
+/* ══════════ TABBAR ══════════ */
+.tabbar{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--rojo);
+  padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(0,0,0,.18);}
+.tabbar button{flex:1;padding:10px 2px 9px;color:rgba(255,255,255,.58);}
+.tabbar button .i{font-size:19px;line-height:1.1;}
+.tabbar button .l{font-size:10.5px;letter-spacing:.05em;margin-top:3px;}
+.tabbar button.on{color:var(--oro);}
+
+/* ══════════ PANTALLA DE COCINA (≥1024px) ══════════ */
+@media (min-width:1024px){
+  :root{--nav:0px;}
+  body{font-size:17px;}
+  #app.on{display:grid;grid-template-columns:248px 1fr;grid-template-rows:auto 1fr;
+    height:100dvh;overflow:hidden;}
+  .topbar{grid-column:1/-1;grid-row:1;padding:16px 26px;position:static;}
+  .searchwrap{top:0;padding-top:20px;}
+  .topbar .iso{width:30px;flex:0 0 30px;} .topbar .tt{font-size:20px;} .topbar .date{font-size:13px;}
+  .topbar .back{font-size:27px;width:38px;}
+  .tabbar{position:static;grid-column:1;grid-row:2;flex-direction:column;border-top:none;
+    border-right:1px solid rgba(0,0,0,.18);padding:18px 12px;gap:4px;}
+  .tabbar button{flex:0 0 auto;display:flex;align-items:center;gap:13px;padding:15px 16px;border-radius:12px;text-align:left;}
+  .tabbar button .i{font-size:21px;} .tabbar button .l{font-size:15px;margin-top:0;letter-spacing:.02em;}
+  .tabbar button.on{background:rgba(0,0,0,.26);}
+  main{grid-column:2;grid-row:2;overflow-y:auto;}
+  .wrap{max-width:1180px;padding:0 34px 44px;}
+  .homegrid{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:stretch;}
+  .homesecs{display:block;grid-column:1/-1;margin-top:30px;}
+  .homesecs .secgrid{grid-template-columns:repeat(5,1fr);gap:12px;}
+  .homesecs .seccard{padding:15px 14px;} .homesecs .seccard .i{font-size:20px;}
+  .homesecs .seccard .n{font-size:15.5px;} .homesecs .seccard .c{font-size:12px;}
+  .aviso{margin-top:24px;padding:26px;} .aviso .txt{font-size:18px;}
+  .sect-h{font-size:17px;}
+  .stock{margin-top:24px;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);
+    border-radius:16px;padding:24px 24px 22px;}
+  .stock h2{font-size:18px;margin-bottom:16px;}
+  .stock .empty{font-size:15px;padding:14px 2px;}
+  .strow{padding:18px;margin-bottom:11px;} .strow .code{font-size:27px;flex:0 0 58px;}
+  .strow .body .t{font-size:11px;} .strow .body .p{font-size:18px;margin-top:4px;}
+  .leyenda{margin-top:auto;padding-top:20px;font-size:14px;gap:13px;}
+  .leyenda b{font-size:17px;min-width:34px;}
+  .bigbtn{margin-top:22px;padding:26px;} .bigbtn .n{font-size:29px;}
+  .search input{padding:17px 18px 17px 48px;font-size:18px;}
+  .search .ico{left:18px;font-size:17px;}
+  .secgrid{grid-template-columns:repeat(4,1fr);gap:14px;}
+  .seccard{padding:20px 17px;} .seccard .i{font-size:27px;} .seccard .n{font-size:18px;} .seccard .c{font-size:13px;}
+  .chip{padding:11px 18px;font-size:14.5px;}
+  .rlist{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .ritem{flex-direction:column;align-items:stretch;gap:0;padding:0;overflow:hidden;}
+  .ritem img{width:100%;height:150px;flex:none;border-radius:0;}
+  .ritem .tx{padding:13px 14px 15px;}
+  .ritem .n{font-size:18px;} .ritem .m{font-size:13px;}
+  /* ficha: foto + ingredientes a la izquierda, pasos a la derecha */
+  .rdetail{display:grid;grid-template-columns:400px 1fr;gap:34px;align-items:start;padding-top:24px;}
+  .rhero{margin:0;border-radius:16px;overflow:hidden;}
+  .rhero img{aspect-ratio:4/3;}
+  .rhead{padding-top:22px;} .rhead h1{font-size:34px;} .rdesc{font-size:16px;}
+  .blk{margin-top:24px;} .blk h3{font-size:17px;}
+  .ing .n{font-size:17px;} .ing .q{font-size:17px;} .ing{padding:12px 2px;}
+  .step .tx{font-size:17px;} .step .nu{flex:0 0 30px;height:30px;font-size:15px;}
+  .scaler button{padding:8px 14px;font-size:14px;}
+  .reportbtn{max-width:340px;}
+  .msgwrap{max-width:660px;margin:0 auto;}
+  .intro{font-size:16px;padding:22px;}
+  .field input,.field select,.field textarea{padding:16px;font-size:17px;}
+  .sendbtn{padding:18px;font-size:17px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ PIN ══════════ -->
+<div id="pinScreen" class="screen">
+  <img class="iso" src="assets/iso-blanco.png" alt="">
+  <h1>COCINA</h1>
+  <p class="sub">Ingresa el PIN del equipo</p>
+  <div class="pinbox">
+    <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off">
+    <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off">
+    <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off">
+    <input type="tel" inputmode="numeric" maxlength="1" autocomplete="off">
+  </div>
+  <div id="pinErr"></div>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div id="app">
+  <header class="topbar" id="topbar">
+    <button class="back" onclick="goBack()" aria-label="Volver">‹</button>
+    <img class="iso" src="assets/iso-blanco.png" alt="">
+    <div class="tt" id="topTitle">COCINA SEGRETA</div>
+    <div class="date" id="topDate"></div>
+  </header>
+
+  <main>
+    <!-- ── HOME ── -->
+    <section class="view on" id="v-home"><div class="wrap"><div class="homegrid">
+      <div>
+        <div class="aviso">
+          <div class="lab">Aviso para el equipo</div>
+          <div class="txt" id="avisoTxt">Bienvenidos al Portal de Cocina. Acá está el recetario completo, siempre actualizado.</div>
+          <div class="firma" id="avisoFirma"></div>
+        </div>
+        <button class="bigbtn" onclick="go('#/dossier')">
+          <div class="k">Recetario</div>
+          <div class="n">Dossier de Cocina</div>
+          <div class="d"><span id="homeCount">140</span> recetas · busca por plato o por ingrediente</div>
+        </button>
+      </div>
+      <div class="stock">
+        <h2>STOCK DEL DÍA</h2>
+        <div id="stockBox"></div>
+        <div class="leyenda">
+          <div><b class="c101">101</b> Hay mucho o sale poco: sácalo primero.</div>
+          <div><b class="c85">85</b> Queda poco, está por agotarse.</div>
+          <div><b class="c86">86</b> Sin stock, no se puede vender.</div>
+        </div>
+      </div>
+      <div class="homesecs">
+        <h2 class="sect-h">IR DIRECTO A</h2>
+        <div id="homeSecs" class="secgrid"></div>
+      </div>
+    </div></div></section>
+
+    <!-- ── BUSCADOR (fijo en Dossier y en Sección) ── -->
+    <div id="searchWrap" class="searchwrap"><div class="wrap">
+      <div class="search" id="searchBox">
+        <span class="ico">🔍</span>
+        <input id="q" type="search" placeholder="Buscar plato o ingrediente..." autocomplete="off" enterkeyhint="search">
+        <button class="clr" onclick="clearSearch()" aria-label="Limpiar">×</button>
+      </div>
+    </div></div>
+
+    <!-- ── DOSSIER ── -->
+    <section class="view" id="v-dossier"><div class="wrap">
+      <div class="fbar" id="dosBar">
+        <div class="cnt" id="dosCount"></div>
+        <div class="orden">
+          <button class="ord on" onclick="setDosView('sec',this)">Por sección</button>
+          <button class="ord" onclick="setDosView('az',this)">Todas · A–Z</button>
+        </div>
+      </div>
+      <div id="secGrid" class="secgrid"></div>
+      <div id="allList" class="rlist" style="display:none"></div>
+      <div id="searchRes" style="display:none"></div>
+    </div></section>
+
+    <!-- ── SECCIÓN ── -->
+    <section class="view" id="v-sec"><div class="wrap">
+      <div class="chips" id="subChips"></div>
+      <div class="fbar">
+        <div class="cnt" id="secCount"></div>
+        <div class="orden">
+          <button class="ord on" onclick="setOrd('carta',this)">Orden de la carta</button>
+          <button class="ord" onclick="setOrd('az',this)">A – Z</button>
+        </div>
+      </div>
+      <div class="rlist" id="secList"></div>
+    </div></section>
+
+    <!-- ── FICHA ── -->
+    <section class="view" id="v-rec"><div class="wrap"><div class="rdetail" id="recBody"></div></div></section>
+
+    <!-- ── MENSAJES ── -->
+    <section class="view" id="v-msg"><div class="wrap"><div class="msgwrap">
+      <div class="intro">
+        Este es el canal directo con la jefatura. Úsalo para <b>pedir lo que haga falta</b>: un insumo,
+        una herramienta, algo que se rompió. También para <b>corregir el recetario</b> si encuentras un
+        error o para <b>proponer ideas</b> para esta app. Todo lo que envíes se lee.
+      </div>
+      <div class="ctxbox" id="ctxBox" style="display:none">
+        <div><div class="l">Sobre la receta</div><div class="v" id="ctxName"></div></div>
+        <button onclick="clearCtx()" aria-label="Quitar">×</button>
+      </div>
+      <div class="field">
+        <label for="fName">Tu nombre</label>
+        <input id="fName" type="text" placeholder="¿Quién envía?" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="fType">¿De qué se trata?</label>
+        <select id="fType">
+          <option>Falta algo (insumo o equipo)</option>
+          <option>Corrección de receta</option>
+          <option>Idea para la app</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="fMsg">Tu mensaje</label>
+        <textarea id="fMsg" placeholder="Cuéntanos con detalle..."></textarea>
+      </div>
+      <button class="sendbtn" id="fSend" onclick="sendMsg()">Enviar</button>
+      <div class="fmsg" id="fState"></div>
+    </div></div></section>
+  </main>
+
+  <nav class="tabbar">
+    <button class="on" data-v="home" onclick="go('#/home')"><div class="i">🏠</div><div class="l">Inicio</div></button>
+    <button data-v="dossier" onclick="go('#/dossier')"><div class="i">📖</div><div class="l">Dossier</div></button>
+    <button data-v="msg" onclick="go('#/mensajes')"><div class="i">✉️</div><div class="l">Mensajes</div></button>
+  </nav>
+</div>
+
+<script>
+const PIN = "1926";
+const $ = id => document.getElementById(id);
+let DB = null, SEC = {}, BYSLUG = {}, curSec = null, curSub = null, curRec = null, scale = 1;
+let curView = 'home', curOrd = 'carta', dosView = 'sec';
+
+/* ══════════ utilidades ══════════ */
+const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+const esc  = s => (s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const imgOf = (r,thumb) => r.img ? (thumb?'img/thumb/':'img/recetas/') + r.img : 'img/placeholder.webp';
+
+function fmtQty(q, mult){
+  if(q === null || q === undefined || q === '') return '';
+  const n = parseFloat(String(q).replace(',','.'));
+  if(isNaN(n) || !/^[\d.,\s]+$/.test(String(q))) return q;      // "c/n", "al gusto", etc.
+  const v = n * mult;
+  return v.toLocaleString('es-CL', {maximumFractionDigits: 2});
+}
+
+/* ══════════ router ══════════ */
+function go(hash){ location.hash = hash; }
+function goBack(){ history.length > 1 ? history.back() : go('#/home'); }
+
+function route(){
+  const h = (location.hash || '#/home').slice(2).split('/');
+  const [head, arg] = [h[0] || 'home', decodeURIComponent(h[1] || '')];
+  if(head === 'r' && BYSLUG[arg])      showRecipe(arg);
+  else if(head === 'sec' && SEC[arg])  showSection(arg);
+  else if(head === 'dossier')          showView('dossier', 'DOSSIER DE COCINA', false);
+  else if(head === 'mensajes')         showView('msg', 'MENSAJES', false);
+  else                                 showView('home', 'COCINA SEGRETA', false);
+}
+
+function showView(v, title, isSub){
+  curView = v;
+  document.querySelectorAll('.view').forEach(s => s.classList.remove('on'));
+  $('v-' + v).classList.add('on');
+  $('searchWrap').classList.toggle('on', v === 'dossier' || v === 'sec');
+  $('q').placeholder = v === 'sec' ? 'Buscar en ' + SEC[curSec].label + '...' : 'Buscar plato o ingrediente...';
+  $('topTitle').textContent = title;
+  $('topbar').classList.toggle('sub', !!isSub);
+  const tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg'}[v];
+  document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.v === tab));
+  window.scrollTo(0,0);
+  const m = document.querySelector('main'); if(m) m.scrollTop = 0;
+}
+
+/* ══════════ home ══════════ */
+const STOCK_DEF = {'101':[], '85':[], '86':[]};
+const STOCK_LBL = {'101':'Ofrécelo primero', '85':'Por agotarse', '86':'Sin stock'};
+
+function renderStock(st){
+  const box = $('stockBox');
+  const rows = ['101','85','86'].filter(k => st[k] && st[k].length);
+  if(!rows.length){
+    box.innerHTML = '<div class="empty">Sin novedades de stock por ahora. Todo disponible.</div>';
+    return;
+  }
+  box.innerHTML = rows.map(k => `
+    <div class="strow st${k}">
+      <div class="code">${k}</div>
+      <div class="body"><div class="t">${STOCK_LBL[k]}</div><div class="p">${esc(st[k].join(' · '))}</div></div>
+    </div>`).join('');
+}
+
+async function loadSheet(){
+  try{
+    const r = await fetch('/.netlify/functions/cocina-data', {cache:'no-store'});
+    if(!r.ok) throw 0;
+    const d = await r.json();
+    const rows = parseCSV(d.anuncios || '');
+    const find = lab => {
+      const row = rows.find(x => norm(x[0]) === norm(lab));
+      return row ? {v:(row[1]||'').trim(), f:(row[2]||'').trim()} : null;
+    };
+    const av = find('AVISO');
+    if(av && av.v){ $('avisoTxt').textContent = av.v; $('avisoFirma').textContent = av.f || ''; }
+    const st = {};
+    ['101','85','86'].forEach(k => {
+      const c = find('STOCK ' + k);
+      st[k] = c && c.v ? c.v.split(',').map(s => s.trim()).filter(Boolean) : [];
+    });
+    renderStock(st);
+    localStorage.setItem('coc_sheet', JSON.stringify({st, av}));
+  }catch(e){
+    const cached = localStorage.getItem('coc_sheet');   // sin red: lo último que vimos
+    if(cached){
+      const {st, av} = JSON.parse(cached);
+      if(av && av.v){ $('avisoTxt').textContent = av.v; $('avisoFirma').textContent = av.f || ''; }
+      renderStock(st);
+    } else renderStock(STOCK_DEF);
+  }
+}
+
+function parseCSV(t){
+  const out = []; let row = [], cell = '', q = false;
+  for(let i = 0; i < t.length; i++){
+    const c = t[i];
+    if(q){
+      if(c === '"' && t[i+1] === '"'){ cell += '"'; i++; }
+      else if(c === '"') q = false;
+      else cell += c;
+    } else if(c === '"') q = true;
+    else if(c === ','){ row.push(cell); cell = ''; }
+    else if(c === '\n'){ row.push(cell); out.push(row); row = []; cell = ''; }
+    else if(c !== '\r') cell += c;
+  }
+  if(cell || row.length){ row.push(cell); out.push(row); }
+  return out;
+}
+
+/* ══════════ dossier ══════════ */
+function setDosView(v, el){
+  dosView = v;
+  document.querySelectorAll('#dosBar .ord').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  paintDossier();
+}
+
+function paintDossier(){
+  const porSec = dosView === 'sec';
+  $('secGrid').style.display = porSec ? '' : 'none';
+  $('allList').style.display = porSec ? 'none' : '';
+  $('dosCount').textContent = porSec
+    ? `${DB.recipes.length} recetas en ${DB.sections.length} secciones`
+    : `${DB.recipes.length} recetas de la A a la Z`;
+  if(!porSec && !$('allList').innerHTML){
+    const todas = DB.recipes.slice().sort((a,b) => a.name.localeCompare(b.name, 'es'));
+    $('allList').innerHTML = todas.map(cardHTML).join('');
+  }
+}
+
+function renderSecGrid(){
+  const html = DB.sections.map(s => `
+    <button class="seccard${s.id === 'FUERA DE CARTA' ? ' off' : ''}" onclick="go('#/sec/${encodeURIComponent(s.id)}')">
+      <div class="i">${s.icon}</div>
+      <div class="n">${esc(s.label)}</div>
+      <div class="c">${s.n} ${s.n === 1 ? 'receta' : 'recetas'}</div>
+    </button>`).join('');
+  $('secGrid').innerHTML = html;
+  $('homeSecs').innerHTML = html;
+}
+
+function recsOf(secId){ return DB.recipes.filter(r => r.sec === secId || (r.also||[]).includes(secId)); }
+
+function showSection(id){
+  curSec = id; curSub = null; curOrd = 'carta';
+  $('q').value = ''; $('searchBox').classList.remove('has');
+  const s = SEC[id];
+  showView('sec', s.label.toUpperCase(), true);
+  const subs = s.subs || [];
+  $('subChips').innerHTML = subs.length
+    ? [`<button class="chip on" onclick="setSub(null,this)">Todas · ${recsOf(id).length}</button>`]
+        .concat(subs.map(x => {
+          const n = recsOf(id).filter(r => r.sub === x).length;
+          return `<button class="chip" onclick="setSub('${esc(x)}',this)">${esc(x)} · ${n}</button>`;
+        })).join('')
+    : '';
+  document.querySelectorAll('#subChips .chip').forEach(c => c.style.display = '');
+  [...document.querySelectorAll('.ord')].forEach((b,i) => b.classList.toggle('on', i === 0));
+  paintSection();
+}
+
+function setSub(sub, el){
+  curSub = sub;
+  document.querySelectorAll('#subChips .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  paintSection();
+}
+
+function setOrd(o, el){
+  curOrd = o;
+  document.querySelectorAll('.ord').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  paintSection();
+}
+
+function paintSection(){
+  let rs = recsOf(curSec);
+  if(curSub) rs = rs.filter(r => r.sub === curSub);
+  const term = norm($('q').value.trim()).split(' ').filter(Boolean);
+  if(term.length) rs = rs.filter(r => term.every(t => r.q.includes(t)));
+  if(curOrd === 'az')   rs = rs.slice().sort((a,b) => a.name.localeCompare(b.name, 'es'));
+  const total = recsOf(curSec).length;
+  $('secCount').textContent = rs.length === total
+    ? `${total} ${total === 1 ? 'receta' : 'recetas'}`
+    : `${rs.length} de ${total}`;
+  $('secList').innerHTML = rs.map(cardHTML).join('')
+    || '<div class="nores">Nada con esos filtros.<br>Prueba quitando alguno.</div>';
+}
+
+function cardHTML(r){
+  const meta = r.sub || SEC[r.sec].label;
+  return `<button class="ritem" onclick="go('#/r/${r.slug}')">
+    <img src="${imgOf(r,true)}" alt="" loading="lazy">
+    <div class="tx"><div class="n">${esc(r.name)}</div><div class="m">${esc(meta)}</div></div>
+  </button>`;
+}
+
+/* ══════════ búsqueda ══════════ */
+function onSearch(){
+  const v = $('q').value.trim();
+  $('searchBox').classList.toggle('has', !!v);
+  if(curView === 'sec'){ paintSection(); return; }     // dentro de una sección filtra ahí mismo
+  const res = $('searchRes');
+  if(!v){ $('dosBar').style.display = ''; res.style.display = 'none'; paintDossier(); return; }
+  $('dosBar').style.display = 'none'; $('secGrid').style.display = 'none';
+  $('allList').style.display = 'none'; res.style.display = '';
+  const terms = norm(v).split(' ').filter(Boolean);
+  const hits = DB.recipes.filter(r => terms.every(t => r.q.includes(t)));
+  if(!hits.length){
+    res.innerHTML = `<div class="nores">Nada con <b>${esc(v)}</b>.<br>Prueba con parte del nombre o con un ingrediente.</div>`;
+    return;
+  }
+  const byName = hits.filter(r => terms.every(t => norm(r.name).includes(t)));
+  const byIng  = hits.filter(r => !byName.includes(r));
+  let html = '';
+  if(byName.length) html += `<div class="sect-h">${byName.length} ${byName.length===1?'plato':'platos'}</div><div class="rlist">${byName.map(cardHTML).join('')}</div>`;
+  if(byIng.length)  html += `<div class="sect-h" style="margin-top:22px">Lleva "${esc(v)}" · ${byIng.length}</div><div class="rlist">${byIng.map(cardHTML).join('')}</div>`;
+  res.innerHTML = html;
+}
+
+function clearSearch(){ $('q').value = ''; onSearch(); $('q').focus(); }
+
+/* alto real de la barra superior, para que el buscador se fije justo debajo */
+function setTopOffset(){
+  const h = document.querySelector('.topbar').offsetHeight;
+  document.documentElement.style.setProperty('--tb', h + 'px');
+}
+
+/* ══════════ ficha ══════════ */
+function showRecipe(slug){
+  curRec = BYSLUG[slug]; scale = 1;
+  showView('rec', SEC[curRec.sec].label.toUpperCase(), true);
+  paintRecipe();
+}
+
+function paintRecipe(){
+  const r = curRec;
+  const tags = [`<span class="tag${r.sec === 'FUERA DE CARTA' ? ' off' : ''}">${esc(SEC[r.sec].label)}</span>`];
+  if(r.sub) tags.push(`<span class="tag">${esc(r.sub)}</span>`);
+  (r.also || []).forEach(a => tags.push(`<span class="tag">También en ${esc(SEC[a].label)}</span>`));
+
+  const mults = r.sec === 'INTERMEDIAS' ? [1,2,4,10] : [1,2,4,6];
+  const scaler = `<div class="scaler">${mults.map(m =>
+      `<button class="${m===scale?'on':''}" onclick="setScale(${m})">x${m}</button>`).join('')}</div>`;
+
+  const ings = r.ings.map(i => {
+    const q = fmtQty(i.q, scale);
+    const nm = i.link
+      ? `<a class="n lk" href="#/r/${i.link}">${esc(i.n)}<span class="arrow">→</span></a>`
+      : `<div class="n">${esc(i.n)}</div>`;
+    return `<div class="ing">${nm}<div class="q">${esc(q)} ${esc(i.u||'')}</div></div>`;
+  }).join('');
+
+  const steps = r.steps.map((s,i) =>
+    `<div class="step"><div class="nu">${i+1}</div><div class="tx">${esc(s)}</div></div>`).join('');
+
+  $('recBody').innerHTML = `
+    <div>
+      <div class="rhero"><img src="${imgOf(r,false)}" alt="${esc(r.name)}"></div>
+      <div class="rhead">
+        <div class="tags">${tags.join('')}</div>
+        <h1>${esc(r.name)}</h1>
+        ${r.desc ? `<p class="rdesc">${esc(r.desc)}</p>` : ''}
+      </div>
+      <div class="blk"><h3>INGREDIENTES ${scaler}</h3>${ings}</div>
+    </div>
+    <div>
+      <div class="blk"><h3>PREPARACIÓN</h3>${steps}</div>
+      <button class="reportbtn" onclick="reportRecipe()">⚠︎ Reportar un error en esta receta</button>
+    </div>`;
+}
+
+function setScale(m){ scale = m; paintRecipe(); }
+
+/* ══════════ mensajes ══════════ */
+let ctxRecipe = '';
+function reportRecipe(){
+  ctxRecipe = curRec.name;
+  $('fType').value = 'Corrección de receta';
+  go('#/mensajes');
+  paintCtx();
+}
+function paintCtx(){
+  $('ctxBox').style.display = ctxRecipe ? '' : 'none';
+  $('ctxName').textContent = ctxRecipe;
+}
+function clearCtx(){ ctxRecipe = ''; paintCtx(); }
+
+async function sendMsg(){
+  const nombre = $('fName').value.trim(), mensaje = $('fMsg').value.trim(), tipo = $('fType').value;
+  const st = $('fState');
+  if(!nombre){ st.textContent = 'Escribe tu nombre para saber quién avisa.'; st.className = 'fmsg err'; return; }
+  if(!mensaje){ st.textContent = 'Escribe el mensaje antes de enviar.'; st.className = 'fmsg err'; return; }
+  const payload = {nombre, tipo, mensaje, receta: ctxRecipe};
+  $('fSend').disabled = true; st.textContent = 'Enviando...'; st.className = 'fmsg';
+  const ok = await postMsg(payload);
+  $('fSend').disabled = false;
+  if(ok){
+    st.textContent = '✓ Enviado. Gracias, lo vamos a revisar.'; st.className = 'fmsg ok';
+    $('fMsg').value = ''; clearCtx();
+  }else{
+    queueMsg(payload);
+    st.textContent = 'Sin conexión. Lo guardamos y se envía solo cuando vuelva la señal.'; st.className = 'fmsg err';
+    $('fMsg').value = ''; clearCtx();
+  }
+  localStorage.setItem('coc_nombre', nombre);
+}
+
+async function postMsg(p){
+  try{
+    const r = await fetch('/.netlify/functions/cocina-feedback', {
+      method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(p)});
+    return r.ok;
+  }catch(e){ return false; }
+}
+function queueMsg(p){
+  const q = JSON.parse(localStorage.getItem('coc_cola') || '[]');
+  q.push(p); localStorage.setItem('coc_cola', JSON.stringify(q));
+}
+async function flushQueue(){
+  const q = JSON.parse(localStorage.getItem('coc_cola') || '[]');
+  if(!q.length) return;
+  const left = [];
+  for(const p of q){ if(!await postMsg(p)) left.push(p); }
+  localStorage.setItem('coc_cola', JSON.stringify(left));
+}
+
+/* ══════════ arranque ══════════ */
+async function startApp(){
+  $('pinScreen').classList.remove('on');
+  $('app').classList.add('on');
+  const d = new Date();
+  $('topDate').textContent = d.toLocaleDateString('es-CL', {weekday:'short', day:'numeric', month:'short'}).toUpperCase();
+  if(!DB){
+    DB = await (await fetch('data/recetas.json')).json();
+    DB.sections.forEach(s => SEC[s.id] = s);
+    DB.recipes.forEach(r => BYSLUG[r.slug] = r);
+    $('homeCount').textContent = DB.recipes.length;
+    renderSecGrid();
+    paintDossier();
+    $('q').addEventListener('input', onSearch);
+    setTopOffset();
+    window.addEventListener('resize', setTopOffset);
+    $('fName').value = localStorage.getItem('coc_nombre') || '';
+  }
+  route();
+  loadSheet();
+  flushQueue();
+}
+
+window.addEventListener('hashchange', () => { if(DB) route(); });
+window.addEventListener('online', flushQueue);
+
+/* PIN */
+const pinInputs = [...document.querySelectorAll('.pinbox input')];
+pinInputs.forEach((inp, i) => {
+  inp.addEventListener('input', () => {
+    inp.value = inp.value.replace(/\D/g, '');
+    if(inp.value && i < 3) pinInputs[i+1].focus();
+    const code = pinInputs.map(x => x.value).join('');
+    if(code.length === 4){
+      if(code === PIN){ localStorage.setItem('coc_pin', '1'); startApp(); }
+      else{
+        $('pinErr').textContent = 'PIN incorrecto';
+        pinInputs.forEach(x => x.value = ''); pinInputs[0].focus();
+      }
+    }
+  });
+  inp.addEventListener('keydown', e => {
+    if(e.key === 'Backspace' && !inp.value && i > 0) pinInputs[i-1].focus();
+  });
+});
+
+if(localStorage.getItem('coc_pin') === '1') startApp();
+else{ $('pinScreen').classList.add('on'); setTimeout(() => pinInputs[0].focus(), 300); }
+
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
