@@ -321,6 +321,26 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .lightbox{display:none;position:fixed;inset:0;z-index:100;background:rgba(20,6,6,.92);align-items:center;justify-content:center;padding:18px;}
 .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.5);}
 .lbclose{position:absolute;top:16px;right:16px;width:42px;height:42px;border:none;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:20px;cursor:pointer;line-height:1;}
+/* checklist de salón */
+.cktabs{display:flex;gap:7px;margin-bottom:13px;}
+.cktab{flex:1;padding:10px 4px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--mute);font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
+.cktab.on{background:var(--rojo);color:#fff;border-color:var(--rojo);}
+.ckbar{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:14px;}
+.ckbarhead{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--rojo);margin-bottom:8px;}
+.ckpct{color:var(--ocre);}
+.cktrack{height:8px;border-radius:5px;background:var(--line);overflow:hidden;}
+.ckbarfill{height:100%;border-radius:5px;background:var(--rojo);transition:width .2s;}
+.ckgrp{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);font-weight:700;margin:16px 0 7px;}
+.ckitem{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 13px;margin-bottom:7px;cursor:pointer;}
+.ckitem input{display:none;}
+.ckmark{flex-shrink:0;width:22px;height:22px;border:2px solid var(--line);border-radius:6px;margin-top:1px;position:relative;transition:all .15s;}
+.ckitem.on .ckmark{background:var(--rojo);border-color:var(--rojo);}
+.ckitem.on .ckmark::after{content:'';position:absolute;left:6px;top:2px;width:6px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg);}
+.cktext{font-size:13.5px;line-height:1.4;color:var(--text);}
+.ckitem.on .cktext{color:var(--mute);text-decoration:line-through;}
+.ckreset{width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;background:var(--rojo);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;}
+.ckreset:active{background:var(--rojod);}
+.ckok{color:#3F6B22;font-weight:600;} .ckerr{color:#9A6A12;font-weight:600;}
 </style></head>
 <body>
 
@@ -378,6 +398,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <div class="qbtn" onclick="go('carta')"><div class="qi">🍕</div><div class="ql">Qué empujar hoy</div></div>
       <div class="qbtn" onclick="go('marcas')"><div class="qi">🤝</div><div class="ql">Alianzas y activaciones</div></div>
     </div>
+    <div class="linkrow" id="chkAccessHome" onclick="go('checklist')" style="margin-top:12px;display:none">📋 Checklist de Salón <span style="color:var(--mute);font-weight:400">· apertura · intermedios · cierre</span><span class="arr">›</span></div>
   </section>
 
   <!-- CARTA + TIPS -->
@@ -612,6 +633,8 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     </div>
     <div class="card"><div class="eyebrow">Para subir</div><p style="font-size:13px;line-height:1.5" id="miTip">—</p></div>
 
+    <div class="linkrow" id="chkAccessMi" onclick="go('checklist')" style="margin-top:18px;display:none">📋 Checklist de Salón <span style="color:var(--mute);font-weight:400">· apertura · intermedios · cierre</span><span class="arr">›</span></div>
+
     <div class="linkrow" id="histToggle" onclick="toggleHistorial()" style="margin-top:18px">📅 Historial de Rendimiento<span class="arr" id="histArr">›</span></div>
     <div id="histSection" style="display:none"></div>
 
@@ -675,6 +698,22 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <p class="note" style="margin-top:10px">¿No se ve el PDF? Usa «Abrir en pestaña». Para volver, toca la flecha ‹ de arriba.</p>
   </section>
 
+  <!-- CHECKLIST (solo capitanes) -->
+  <section class="view" id="v-checklist">
+    <h2 class="vt">Checklist de Salón</h2>
+    <div class="vsub" id="ckWho">Jefatura de salón</div>
+    <div class="cktabs">
+      <button class="cktab on" data-l="apertura" onclick="chkTab('apertura')">Apertura</button>
+      <button class="cktab" data-l="intermedios" onclick="chkTab('intermedios')">Intermedios</button>
+      <button class="cktab" data-l="cierre" onclick="chkTab('cierre')">Cierre</button>
+    </div>
+    <div class="ckbar"><div class="ckbarhead"><span id="ckProgress">0 / 0</span><span id="ckPct" class="ckpct">0%</span></div><div class="cktrack"><div class="ckbarfill" id="ckBarFill" style="width:0%"></div></div></div>
+    <div id="ckList"></div>
+    <button class="ckreset" onclick="chkReset()">Guardar y reiniciar</button>
+    <p class="note" id="ckMsg" style="margin-top:8px"></p>
+    <p class="note">Al guardar queda registrado quién completó el checklist y qué quedó pendiente.</p>
+  </section>
+
   <!-- NAV -->
   <div class="nav">
     <button class="on" data-v="hoy" onclick="goRoot('hoy')"><div class="ni">🏠</div><div class="nl">Hoy</div></button>
@@ -697,6 +736,9 @@ let DEMO=[{"name": "Miguel", "pts": 454, "cards": 31, "ticket": 53000, "venta": 
 const NORANK=["Adelfa", "David", "Isaac", "Johann Hearing", "Miguel Bracho", "Nicolás Naveda"];
 const CAPITANES=["David", "Isaac"];
 let CAPS=[{"name": "David", "cards": 12, "ticket": 31000, "venta": 6800000}, {"name": "Isaac", "cards": 8, "ticket": 29000, "venta": 5400000}];
+const CHECKLIST={"apertura": [["Salón y ambiente", ["Barrer y trapear con cloro (terraza y sillas 1×/semana)", "Quitar cadenas; guardar candados y llaves ordenados", "Ordenar plazas: mesas y sillas niveladas", "Limpiar y montar mesas (plato al centro, cubiertos a la derecha)", "Bajar servilletas", "Limpiar mampara, cristales, ventanales y riel", "Limpiar área de caja y de anfitriona", "Cambiar agua de las flores y limpiar jardineras", "Colocar y rellenar antorchas", "Quitasoles / estufas según clima", "Roller de las T a la altura de la cabeza (12:30) y correr Florentino", "Dispersores de agua y ventiladores (verano)", "Encender iluminación", "Música ARCA DAY (12:30)", "Revisar A/C o calefacción"]], ["Mise en place y descansos", ["Aderezos: saleros, pimenteros, oréganos, aceite, aceto, peperoncino", "Cubeta con agua y jabón (repasadores) en descanso de línea", "Cubeta con agua caliente para repasar cubiertos", "Ordenar paños repasadores y de mesas", "Mamaderas llenas de aceto y aceite", "Rellenar pulverizadores (lustramuebles, limpiavidrios, limpiapisos)"]], ["Personal y briefing", ["Verificar asistencia, uniforme e higiene del equipo", "Briefing previo al servicio", "Distribuir plazas y responsabilidades", "Informar reservas y eventos del día (montaje reservas AM)", "Enviar 86 / 85 / 101 y promos del día (12:30)", "Revisar pendientes del turno anterior", "Equipo listo y vestido a las 12:30"]], ["Operación", ["Abrir sistema (POS) y prueba de comanda", "Revisar impresoras / comanderas", "Revisar carga de las máquinas de cobro", "Revisar reservas y pedidos especiales"]], ["Listo para abrir", ["Escaleras y baños listos", "Revisar salidas de emergencia y seguridad", "Confirmar que el salón está listo para recibir clientes"]]], "intermedios": [["Aseo y mantención", ["Limpiar mampara, cristales y superficies; barrer por fuera", "Barrer y trapear el salón; repasar baños de personal", "Jardineras y maceteros: limpiar y regar (verificar humedad)", "Limpiar bases de mesas y sillas; ordenar descansos", "Limpiar y colocar velas (si aplica)", "Limpiar bandejas", "Revisar montaje y repasar platos"]], ["Transición a PM", ["Cerrar quitasoles 18:00; apagar el agua 18:00 (si aplica)", "Montaje de reservas PM (18:00)", "Roller: 15:30 cerrar M y abrir T; 19:00 subir M", "Correr Florentino 19:00", "Revisar carga de las máquinas de cobro", "Encender velas (19:00 verano / 18:00 invierno)", "Música ARCA NIGHT (18:00)", "Encender antorchas (18:00)", "Revisar reservas PM y novedades del turno"]]], "cierre": [["Salón", ["Confirmar salida del último cliente", "Retirar loza, vasos y cubiertos; lustrar cubiertos y platos", "Encadenar mesas por sector; limpiar mesas con lustramuebles", "Barrer y trapear (manchas grandes y zona de cumpleaños)", "Desmontar descansos; botar agua; lavar repasadores; limpiar bandejas", "Guardar velas (limpias y rellenas) y antorchas", "Adelantar mise en place de aderezos", "Subir todos los roller; cerrar quitasoles Florentino", "Sacar basura de la caja; cerrar basurero", "Apagar luces de zona de cumpleaños", "Repaso y limpieza final de baños"]], ["Personal y novedades", ["Confirmar que cada área terminó sus tareas", "Registrar incidencias y desperfectos del turno", "Informar faltantes y productos agotados para mañana", "Confirmar salida del personal autorizado"]], ["Seguridad y cierre final", ["Contar balones de gas vacíos; revisar gas según procedimiento", "Revisar puertas, ventanas, llaves de agua y equipos eléctricos", "Activar alarma; cerrar puerta principal", "📸 Foto por grupo de las tareas de cierre", "📸 Foto de las llaves en su sitio"]]]};
+const CHK_NOMBRE={apertura:'Apertura',intermedios:'Intermedios',cierre:'Cierre'};
+let chkActive='apertura';
 const HISTORIAL={"Miguel": [{"mes": "Jun 2026", "pts": 115.5, "pos": 1, "cards": 190, "ticket": 30363, "fc": 1.0}, {"mes": "Jul 2026", "pts": 176.7, "pos": 1, "cards": 169, "ticket": 26531, "fc": 1.0}, {"mes": "Ago 2026", "pts": 98.1, "pos": 1, "cards": 257, "ticket": 30932, "fc": 1.0}], "Stevee": [{"mes": "Jun 2026", "pts": 86.3, "pos": 2, "cards": 87, "ticket": 27176, "fc": 1.0}, {"mes": "Jul 2026", "pts": 140.7, "pos": 2, "cards": 120, "ticket": 27996, "fc": 1.0}, {"mes": "Ago 2026", "pts": 64.9, "pos": 6, "cards": 85, "ticket": 25639, "fc": 1.0}], "Eduardo": [{"mes": "Jun 2026", "pts": 82.6, "pos": 3, "cards": 37, "ticket": 33251, "fc": 1.0}, {"mes": "Jul 2026", "pts": 104.7, "pos": 5, "cards": 72, "ticket": 25509, "fc": 0.98}, {"mes": "Ago 2026", "pts": 73.6, "pos": 5, "cards": 69, "ticket": 28557, "fc": 1.0}], "Benjamin": [{"mes": "Jun 2026", "pts": 69.1, "pos": 4, "cards": 29, "ticket": 35085, "fc": 1.0}, {"mes": "Jul 2026", "pts": 105.1, "pos": 4, "cards": 70, "ticket": 27375, "fc": 1.0}, {"mes": "Ago 2026", "pts": 78.9, "pos": 4, "cards": 108, "ticket": 30773, "fc": 1.0}], "Edu Castro": [{"mes": "Jun 2026", "pts": 66.9, "pos": 5, "cards": 4, "ticket": 33690, "fc": 1.0}, {"mes": "Jul 2026", "pts": 55.7, "pos": 10, "cards": 1, "ticket": 25395, "fc": 1.0}, {"mes": "Ago 2026", "pts": 59.5, "pos": 8, "cards": 4, "ticket": 27747, "fc": 1.0}], "Samuel": [{"mes": "Jun 2026", "pts": 65.7, "pos": 6, "cards": 36, "ticket": 26847, "fc": 1.0}, {"mes": "Jul 2026", "pts": 78.0, "pos": 6, "cards": 28, "ticket": 25676, "fc": 0.94}, {"mes": "Ago 2026", "pts": 60.5, "pos": 7, "cards": 21, "ticket": 25992, "fc": 1.0}], "Luis Aguirre": [{"mes": "Jun 2026", "pts": 60.6, "pos": 7, "cards": 30, "ticket": 28771, "fc": 1.0}, {"mes": "Jul 2026", "pts": 74.8, "pos": 7, "cards": 18, "ticket": 28273, "fc": 0.93}, {"mes": "Ago 2026", "pts": 88.8, "pos": 2, "cards": 171, "ticket": 32273, "fc": 1.0}], "Jean Carlos": [{"mes": "Jun 2026", "pts": 58.3, "pos": 8, "cards": 11, "ticket": 28109, "fc": 1.0}, {"mes": "Jul 2026", "pts": 131.4, "pos": 3, "cards": 99, "ticket": 28439, "fc": 1.0}, {"mes": "Ago 2026", "pts": 83.1, "pos": 3, "cards": 239, "ticket": 28616, "fc": 1.0}], "Maykoll": [{"mes": "Jun 2026", "pts": 55.5, "pos": 9, "cards": 7, "ticket": 27330, "fc": 1.0}, {"mes": "Jul 2026", "pts": 56.3, "pos": 9, "cards": 9, "ticket": 23067, "fc": 0.93}, {"mes": "Ago 2026", "pts": 47.1, "pos": 10, "cards": 8, "ticket": 25844, "fc": 1.0}], "Gabriela": [{"mes": "Jun 2026", "pts": 54.7, "pos": 10, "cards": 13, "ticket": 26759, "fc": 1.0}, {"mes": "Jul 2026", "pts": 54.7, "pos": 11, "cards": 8, "ticket": 21856, "fc": 1.0}, {"mes": "Ago 2026", "pts": 58.2, "pos": 9, "cards": 17, "ticket": 26249, "fc": 1.0}], "Isaac": [{"mes": "Jun 2026", "pts": null, "pos": null, "cards": 51, "ticket": 28727, "fc": 1.0}, {"mes": "Jul 2026", "pts": 46.1, "pos": 12, "cards": 21, "ticket": 19739, "fc": 1.0}, {"mes": "Ago 2026", "pts": 46.9, "pos": 11, "cards": 13, "ticket": 39002, "fc": 1.0}], "David": [{"mes": "Jul 2026", "pts": 68.2, "pos": 8, "cards": 15, "ticket": 29044, "fc": 0.95}, {"mes": "Ago 2026", "pts": 46.2, "pos": 12, "cards": 21, "ticket": 26361, "fc": 1.0}], "Leidy": [{"mes": "Jun 2026", "pts": 42.9, "pos": 11, "cards": 9, "ticket": 22937, "fc": 1.0}, {"mes": "Ago 2026", "pts": 42.9, "pos": 13, "cards": 0, "ticket": 27817, "fc": 1.0}], "Adelfa": [{"mes": "Jun 2026", "pts": null, "pos": null, "cards": 8, "ticket": 31866, "fc": 1.0}, {"mes": "Jul 2026", "pts": null, "pos": null, "cards": 0, "ticket": 35268, "fc": 1.0}, {"mes": "Ago 2026", "pts": null, "pos": null, "cards": 0, "ticket": 0, "fc": 1.0}], "Alejandro": [{"mes": "Jul 2026", "pts": null, "pos": null, "cards": 0, "ticket": 0, "fc": 1.0}, {"mes": "Ago 2026", "pts": null, "pos": null, "cards": 0, "ticket": 0, "fc": 1.0}], "Matias": [{"mes": "Jul 2026", "pts": null, "pos": null, "cards": 0, "ticket": 0, "fc": 1.0}, {"mes": "Ago 2026", "pts": null, "pos": null, "cards": 0, "ticket": 0, "fc": 1.0}]};
 const RANK_MES={"Jun 2026": [{"pos": 1, "name": "Miguel", "pts": 115.5}, {"pos": 2, "name": "Stevee", "pts": 86.3}, {"pos": 3, "name": "Eduardo", "pts": 82.6}, {"pos": 4, "name": "Benjamin", "pts": 69.1}, {"pos": 5, "name": "Edu Castro", "pts": 66.9}, {"pos": 6, "name": "Samuel", "pts": 65.7}, {"pos": 7, "name": "Luis Aguirre", "pts": 60.6}, {"pos": 8, "name": "Jean Carlos", "pts": 58.3}, {"pos": 9, "name": "Maykoll", "pts": 55.5}, {"pos": 10, "name": "Gabriela", "pts": 54.7}, {"pos": 11, "name": "Leidy", "pts": 42.9}], "Jul 2026": [{"pos": 1, "name": "Miguel", "pts": 176.7}, {"pos": 2, "name": "Stevee", "pts": 140.7}, {"pos": 3, "name": "Jean Carlos", "pts": 131.4}, {"pos": 4, "name": "Benjamin", "pts": 105.1}, {"pos": 5, "name": "Eduardo", "pts": 104.7}, {"pos": 6, "name": "Samuel", "pts": 78.0}, {"pos": 7, "name": "Luis Aguirre", "pts": 74.8}, {"pos": 8, "name": "David", "pts": 68.2}, {"pos": 9, "name": "Maykoll", "pts": 56.3}, {"pos": 10, "name": "Edu Castro", "pts": 55.7}, {"pos": 11, "name": "Gabriela", "pts": 54.7}, {"pos": 12, "name": "Isaac", "pts": 46.1}], "Ago 2026": [{"pos": 1, "name": "Miguel", "pts": 98.1}, {"pos": 2, "name": "Luis Aguirre", "pts": 88.8}, {"pos": 3, "name": "Jean Carlos", "pts": 83.1}, {"pos": 4, "name": "Benjamin", "pts": 78.9}, {"pos": 5, "name": "Eduardo", "pts": 73.6}, {"pos": 6, "name": "Stevee", "pts": 64.9}, {"pos": 7, "name": "Samuel", "pts": 60.5}, {"pos": 8, "name": "Edu Castro", "pts": 59.5}, {"pos": 9, "name": "Gabriela", "pts": 58.2}, {"pos": 10, "name": "Maykoll", "pts": 47.1}, {"pos": 11, "name": "Isaac", "pts": 46.9}, {"pos": 12, "name": "David", "pts": 46.2}, {"pos": 13, "name": "Leidy", "pts": 42.9}]};
 const METAS_MES={"Jun 2026": {"ventaPct": true, "resPct": 90, "cumplida": false}, "Jul 2026": {"ventaPct": 104, "resPct": 117, "cumplida": true}, "Ago 2026": {"ventaPct": 102, "resPct": 103, "cumplida": true}};
@@ -749,6 +791,11 @@ function startApp(){
   const fk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
   const f=FOCO_FECHA[fk]||FOCO[d.getDay()]; $('focusTitle').textContent=f[0]; $('focusMarca').textContent=f[1]==='—'?'':f[1]; $('focusDet').textContent=f[2];
   renderRanking(g.name); renderMine(g.name); renderHistorial(g.name); buildTagFilter(); buildCatPanel(); renderDishes(); renderStock();
+  const esCap=CAPITANES.includes(g.name);  // checklist solo para capitanes (David/Isaac)
+  const cm=$('chkAccessMi'), ch=$('chkAccessHome');
+  if(cm) cm.style.display=esCap?'flex':'none';
+  if(ch) ch.style.display=esCap?'flex':'none';
+  if(esCap){ $('ckWho').textContent=g.name+' · Jefatura de salón'; renderChecklist(); }
   goRoot('hoy');
   loadLive().then(()=>{ renderRanking(g.name); renderMine(g.name); renderGrupal(); renderAviso(); renderStock(); renderPlazas(); });
 }
@@ -875,6 +922,49 @@ function renderStock(){
     });
     row.style.display=ul.children.length?'':'none';
   });
+}
+// ── Checklist de salón (capitanes) ──
+function chkKey(l){ return 'seg_chk_'+l; }
+function chkGet(l){ try{ return JSON.parse(localStorage.getItem(chkKey(l))||'[]'); }catch(e){ return []; } }
+function chkSet(l,arr){ try{ localStorage.setItem(chkKey(l),JSON.stringify(arr)); }catch(e){} }
+function chkTab(l){ chkActive=l; renderChecklist(); }
+function chkToggle(i){
+  const s=new Set(chkGet(chkActive));
+  if(s.has(i)) s.delete(i); else s.add(i);
+  chkSet(chkActive,[...s]); renderChecklist();
+}
+function renderChecklist(){
+  const l=chkActive, groups=CHECKLIST[l]||[], checked=new Set(chkGet(l));
+  document.querySelectorAll('.cktab').forEach(t=>t.classList.toggle('on',t.dataset.l===l));
+  let idx=0,total=0,done=0,h='';
+  groups.forEach(gr=>{
+    h+='<div class="ckgrp">'+gr[0]+'</div>';
+    gr[1].forEach(it=>{
+      const on=checked.has(idx); if(on)done++; total++;
+      h+=`<label class="ckitem${on?' on':''}"><input type="checkbox" ${on?'checked':''} onchange="chkToggle(${idx})"><span class="ckmark"></span><span class="cktext">${it}</span></label>`;
+      idx++;
+    });
+  });
+  $('ckList').innerHTML=h;
+  $('ckProgress').textContent=done+' / '+total;
+  const pct=total?Math.round(done/total*100):0;
+  $('ckPct').textContent=pct+'%';
+  $('ckBarFill').style.width=pct+'%';
+}
+async function chkReset(){
+  const l=chkActive, groups=CHECKLIST[l]||[], checked=new Set(chkGet(l));
+  const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
+  let idx=0,total=0,done=0,pend=[];
+  groups.forEach(gr=>gr[1].forEach(it=>{ if(checked.has(idx))done++; else pend.push(it); total++; idx++; }));
+  if(!confirm('¿Guardar el checklist de '+CHK_NOMBRE[l]+' ('+done+'/'+total+' completados) y reiniciar para un nuevo día?')) return;
+  const msg=$('ckMsg'); msg.textContent='Guardando…'; msg.className='note';
+  try{
+    const r=await fetch('/.netlify/functions/salon-checklist',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({lista:CHK_NOMBRE[l],responsable:(g.name||''),completados:done,total:total,pendientes:pend.join(' · ')})});
+    if(!r.ok) throw new Error('http');
+    msg.textContent='Guardado ('+done+'/'+total+') y reiniciado. ¡Buen turno!'; msg.className='note ckok';
+  }catch(e){ msg.textContent='Se reinició, pero no se pudo guardar el registro (revisa la conexión).'; msg.className='note ckerr'; }
+  chkSet(l,[]); renderChecklist();
 }
 function toggleHistorial(){
   const el=$('histSection'); const open=el.style.display==='none';
@@ -1023,7 +1113,7 @@ let navStack=[],current='hoy';
 function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
-  const navV=(v==='estudiar'||v==='venta'||v==='ruta'||v==='fideliza')?'carta':((v==='doc'||v==='qrs')?'mi':v);
+  const navV=(v==='estudiar'||v==='venta'||v==='ruta'||v==='fideliza')?'carta':((v==='doc'||v==='qrs'||v==='checklist')?'mi':v);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
   window.scrollTo({top:0,behavior:'instant'});
