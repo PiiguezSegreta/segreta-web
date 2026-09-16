@@ -330,6 +330,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .ckpct{color:var(--ocre);}
 .cktrack{height:8px;border-radius:5px;background:var(--line);overflow:hidden;}
 .ckbarfill{height:100%;border-radius:5px;background:var(--rojo);transition:width .2s;}
+.cklast{font-size:12px;color:var(--mute);margin:-4px 0 10px;font-style:italic;}
 .ckgrp{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);font-weight:700;margin:16px 0 7px;}
 .ckitem{display:flex;align-items:flex-start;gap:11px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 13px;margin-bottom:7px;cursor:pointer;}
 .ckitem input{display:none;}
@@ -708,6 +709,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <button class="cktab" data-l="cierre" onclick="chkTab('cierre')">Cierre</button>
     </div>
     <div class="ckbar"><div class="ckbarhead"><span id="ckProgress">0 / 0</span><span id="ckPct" class="ckpct">0%</span></div><div class="cktrack"><div class="ckbarfill" id="ckBarFill" style="width:0%"></div></div></div>
+    <div class="cklast" id="ckLast"></div>
     <div id="ckList"></div>
     <button class="ckreset" onclick="chkReset()">Guardar y reiniciar</button>
     <p class="note" id="ckMsg" style="margin-top:8px"></p>
@@ -946,6 +948,8 @@ function renderChecklist(){
     });
   });
   $('ckList').innerHTML=h;
+  let last=null; try{ last=JSON.parse(localStorage.getItem('seg_chk_last_'+l)||'null'); }catch(e){}
+  $('ckLast').textContent = last ? ('Último guardado: '+last.f+' · por '+last.w+' ('+last.c+'/'+last.t+')') : 'Esta lista aún no se ha guardado.';
   $('ckProgress').textContent=done+' / '+total;
   const pct=total?Math.round(done/total*100):0;
   $('ckPct').textContent=pct+'%';
@@ -964,6 +968,9 @@ async function chkReset(){
     if(!r.ok) throw new Error('http');
     msg.textContent='Guardado ('+done+'/'+total+') y reiniciado. ¡Buen turno!'; msg.className='note ckok';
   }catch(e){ msg.textContent='Se reinició, pero no se pudo guardar el registro (revisa la conexión).'; msg.className='note ckerr'; }
+  const dt=new Date(), p=n=>String(n).padStart(2,'0');
+  const fecha=p(dt.getDate())+'-'+p(dt.getMonth()+1)+'-'+dt.getFullYear()+' '+p(dt.getHours())+':'+p(dt.getMinutes());
+  try{ localStorage.setItem('seg_chk_last_'+l, JSON.stringify({f:fecha,w:(g.name||''),c:done,t:total})); }catch(e){}
   chkSet(l,[]); renderChecklist();
 }
 function toggleHistorial(){
