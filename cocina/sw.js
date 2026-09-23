@@ -1,6 +1,6 @@
 /* Portal de Cocina — cache offline.
    Shell y datos: stale-while-revalidate. Fotos: cache permanente al abrirlas. */
-const V = 'cocina-v2';   // subir al corregir recetas: fuerza recarga del recetario
+const V = 'cocina-v3';   // subir al corregir recetas: fuerza recarga del recetario
 const SHELL = ['./', 'index.html', 'data/recetas.json', 'img/placeholder.webp',
                'assets/belgan.ttf', 'assets/iso-blanco.png', 'assets/iso-ocre.png', 'assets/favicon.png', 'assets/app-icon.png'];
 
