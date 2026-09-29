@@ -404,12 +404,19 @@ const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').
 const esc  = s => (s||'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const imgOf = (r,thumb) => r.img ? (thumb?'img/thumb/':'img/recetas/') + r.img : 'img/placeholder.webp';
 
+function parseQty(q){
+  const s = String(q).trim();
+  if(!/^[\d.,\s]+$/.test(s)) return null;                          // "al gusto", "c/n", "5–10"
+  if(/^\d{1,3}(\.\d{3})+$/.test(s)) return parseFloat(s.replace(/\./g,''));  // 10.000 = diez mil
+  const n = parseFloat(s.replace(',','.'));
+  return isNaN(n) ? null : n;
+}
+
 function fmtQty(q, mult){
   if(q === null || q === undefined || q === '') return '';
-  const n = parseFloat(String(q).replace(',','.'));
-  if(isNaN(n) || !/^[\d.,\s]+$/.test(String(q))) return q;      // "c/n", "al gusto", etc.
-  const v = n * mult;
-  return v.toLocaleString('es-CL', {maximumFractionDigits: 2});
+  const n = parseQty(q);
+  if(n === null) return q;
+  return (n * mult).toLocaleString('es-CL', {maximumFractionDigits: 2});
 }
 
 /* ══════════ router ══════════ */
