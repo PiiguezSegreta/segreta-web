@@ -345,6 +345,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .ckitem.on .cktext{color:var(--mute);text-decoration:line-through;}
 .ckreset{width:100%;margin-top:16px;padding:14px;border:none;border-radius:12px;background:var(--rojo);color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;}
 .ckreset:active{background:var(--rojod);}
+.ckreset.armed{background:var(--ocre);}
 .ckok{color:#3F6B22;font-weight:600;} .ckerr{color:#9A6A12;font-weight:600;}
 </style></head>
 <body>
@@ -715,7 +716,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <div class="ckbar"><div class="ckbarhead"><span id="ckProgress">0 / 0</span><span id="ckPct" class="ckpct">0%</span></div><div class="cktrack"><div class="ckbarfill" id="ckBarFill" style="width:0%"></div></div></div>
     <div class="cklast" id="ckLast"></div>
     <div id="ckList"></div>
-    <button class="ckreset" onclick="chkReset()">Guardar y reiniciar</button>
+    <button class="ckreset" id="ckResetBtn" onclick="chkResetClick()">Guardar y reiniciar</button>
     <p class="note" id="ckMsg" style="margin-top:8px"></p>
     <p class="note">Al guardar queda registrado quién completó el checklist y qué quedó pendiente.</p>
   </section>
@@ -958,24 +959,41 @@ function renderChecklist(){
   const pct=total?Math.round(done/total*100):0;
   $('ckPct').textContent=pct+'%';
   $('ckBarFill').style.width=pct+'%';
+  // desarmar el botón de reinicio al re-renderizar
+  chkArmed=false; if(chkArmTimer) clearTimeout(chkArmTimer);
+  var rb=$('ckResetBtn'); if(rb){ rb.textContent='Guardar y reiniciar'; rb.classList.remove('armed'); }
 }
-async function chkReset(){
+// Confirmación de doble toque (sin confirm() nativo, que se bloquea en el PWA de iOS)
+var chkArmed=false, chkArmTimer=null;
+function chkResetClick(){
+  var b=$('ckResetBtn');
+  if(!chkArmed){
+    chkArmed=true; b.textContent='Toca otra vez para confirmar'; b.classList.add('armed');
+    chkArmTimer=setTimeout(function(){ chkArmed=false; b.textContent='Guardar y reiniciar'; b.classList.remove('armed'); }, 4000);
+    return;
+  }
+  clearTimeout(chkArmTimer); chkArmed=false; b.textContent='Guardar y reiniciar'; b.classList.remove('armed');
+  chkDoReset();
+}
+async function chkDoReset(){
   const l=chkActive, groups=CHECKLIST[l]||[], checked=new Set(chkGet(l));
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
   let idx=0,total=0,done=0,pend=[];
   groups.forEach(gr=>gr[1].forEach(it=>{ if(checked.has(idx))done++; else pend.push(it); total++; idx++; }));
-  if(!confirm('¿Guardar el checklist de '+CHK_NOMBRE[l]+' ('+done+'/'+total+' completados) y reiniciar para un nuevo día?')) return;
   const msg=$('ckMsg'); msg.textContent='Guardando…'; msg.className='note';
   try{
     const r=await fetch('/.netlify/functions/salon-checklist',{method:'POST',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({lista:CHK_NOMBRE[l],responsable:(g.name||''),completados:done,total:total,pendientes:pend.join(' · ')})});
     if(!r.ok) throw new Error('http');
-    msg.textContent='Guardado ('+done+'/'+total+') y reiniciado. ¡Buen turno!'; msg.className='note ckok';
-  }catch(e){ msg.textContent='Se reinició, pero no se pudo guardar el registro (revisa la conexión).'; msg.className='note ckerr'; }
+  }catch(e){
+    msg.textContent='No se pudo guardar el registro. Revisa la conexión e intenta de nuevo (no se reinició).'; msg.className='note ckerr';
+    return; // no limpiar si no se guardó: así no se pierde el registro
+  }
   const dt=new Date(), p=n=>String(n).padStart(2,'0');
   const fecha=p(dt.getDate())+'-'+p(dt.getMonth()+1)+'-'+dt.getFullYear()+' '+p(dt.getHours())+':'+p(dt.getMinutes());
   try{ localStorage.setItem('seg_chk_last_'+l, JSON.stringify({f:fecha,w:(g.name||''),c:done,t:total})); }catch(e){}
   chkSet(l,[]); renderChecklist();
+  msg.textContent='Guardado ('+done+'/'+total+') y reiniciado. ¡Buen turno!'; msg.className='note ckok';
 }
 function toggleHistorial(){
   const el=$('histSection'); const open=el.style.display==='none';
@@ -1124,6 +1142,7 @@ let navStack=[],current='hoy';
 function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
+  if(v==='checklist') renderChecklist();  // siempre refrescar desde localStorage al entrar
   const navV=(v==='estudiar'||v==='venta'||v==='ruta'||v==='fideliza')?'carta':((v==='doc'||v==='qrs'||v==='checklist')?'mi':v);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
