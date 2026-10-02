@@ -428,11 +428,13 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 
   <section class="view" id="v-vender">
     <h2 class="vt">Vender bien</h2>
-      <div class="vsub">La ruta de venta y qué conviene empujar.</div>
-    <div class="linkrow" onclick="go('ruta')" style="margin-bottom:9px">🗺️ La ruta de oferta perfecta<span class="arr">›</span></div>
-    <div class="linkrow" onclick="go('estudiar')" style="margin-bottom:9px">📖 Estudiar la carta · ingredientes y tags<span class="arr">›</span></div>
-    <div class="linkrow" onclick="go('venta')" style="margin-bottom:9px">🎯 Técnicas de venta y buenas prácticas<span class="arr">›</span></div>
-    <div class="linkrow" onclick="go('fideliza')" style="margin-bottom:4px">💳 Fidelización de clientes · Welcome Back<span class="arr">›</span></div>
+    <div class="vsub">La ruta de venta y qué conviene empujar.</div>
+    <div class="hubgrid">
+      <div class="hubcard" onclick="go('ruta')"><span class="hubemo">🗺️</span><span class="hubtxt"><span class="hubtit">La ruta de oferta perfecta</span><span class="hubsub">El orden ideal para ofrecer en cada mesa</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('estudiar')"><span class="hubemo">📖</span><span class="hubtxt"><span class="hubtit">Estudiar la carta</span><span class="hubsub">Ingredientes y tags de cada plato</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('venta')"><span class="hubemo">🎯</span><span class="hubtxt"><span class="hubtit">Técnicas de venta</span><span class="hubsub">Buenas prácticas para vender más y mejor</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('fideliza')"><span class="hubemo">💳</span><span class="hubtxt"><span class="hubtit">Fidelización de clientes</span><span class="hubsub">Welcome Back: haz que vuelvan</span></span><span class="hubarr">›</span></div>
+    </div>
     </section>
 
   <section class="view" id="v-empujar">
