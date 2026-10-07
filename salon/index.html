@@ -259,9 +259,20 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .almnomlist li{display:flex;justify-content:space-between;gap:8px;padding:7px 11px;font-size:12.5px;color:var(--text);border-bottom:1px solid var(--line);}
 .almnomlist li:last-child{border-bottom:none;}
 .almmail{color:var(--mute);font-size:11px;}
-.avsello{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;}
 .avtag{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--ocre);background:var(--crema);border-radius:999px;padding:4px 11px;}
-.avquitar{flex:none;background:none;border:1px solid var(--line);color:var(--mute);font-size:11px;font-weight:600;border-radius:999px;padding:3px 11px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.avblock{padding:10px 0;border-top:1px solid var(--line);}
+.avblock:first-child{padding-top:4px;border-top:none;}
+.avtext{font-size:13.5px;line-height:1.5;white-space:pre-line;margin-top:7px;color:var(--text);}
+.admvislbl{margin:16px 0 8px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);}
+.admvislist{}
+.avrow{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line);}
+.avrow:first-child{border-top:none;}
+.avrowtxt{flex:1;display:flex;flex-direction:column;min-width:0;}
+.avrowtxt b{font-size:12.5px;color:var(--text);}
+.avrowtxt span{font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.avtoggle{flex:none;width:58px;padding:7px 0;border-radius:999px;border:none;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.avtoggle.on{background:#1d7a4c;color:#fff;}
+.avtoggle.off{background:var(--line);color:var(--mute);}
 .admactual{margin:2px 0 10px;}
 .admnone{font-size:12px;color:var(--mute);}
 .admta{width:100%;box-sizing:border-box;margin-top:4px;padding:11px 13px;font-size:14px;line-height:1.45;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);resize:vertical;-webkit-appearance:none;font-family:inherit;}
@@ -442,8 +453,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     </div>
     <div class="card">
       <div class="eyebrow">Aviso del equipo</div>
-      <div id="avisoSello" class="avsello" style="display:none"></div>
-      <p style="font-size:13.5px;line-height:1.5;white-space:pre-line" id="aviso">Bienvenidos al Portal de Salón. Junto con desearles un muy buen turno, aprovecho de pedirles foco en la activación del día, la venta sugestiva, fidelización y reseñas.</p>
+      <div id="avisoList"></div>
     </div>
     <div class="card" id="plazasCard" style="display:none">
       <div class="eyebrow">Plazas de hoy</div>
@@ -840,10 +850,12 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 
     <div class="card">
       <div class="eyebrow">Anuncio de equipo</div>
-      <div id="admAvisoActual" class="admactual"></div>
       <textarea id="admAviso" class="admta" rows="3" placeholder="Escribe el anuncio para el equipo…"></textarea>
-      <div class="admrow"><button class="admbtn" onclick="adminEnviarAviso()">Enviar anuncio</button><button class="admbtn ghost" onclick="adminQuitarAviso()">Quitar el mío</button></div>
+      <div class="admrow"><button class="admbtn" onclick="adminEnviarAviso()">Publicar el mío</button><button class="admbtn ghost" onclick="adminQuitarAviso()">Quitar el mío</button></div>
       <p class="note" id="admAvisoMsg"></p>
+      <div class="admvislbl">Anuncios visibles</div>
+      <div id="admVisList" class="admvislist"></div>
+      <p class="note">Puedes prender o apagar cada uno. Siempre queda al menos uno prendido; al reiniciar el día vuelve solo al de base.</p>
     </div>
 
     <div class="card">
@@ -1044,23 +1056,29 @@ function renderGrupal(){
   $('grStatus').textContent=ok?'¡Meta cumplida!':'En curso';
 }
 const ADM_ROL={David:'Jefe de Salón',Isaac:'Capitán'};
-function admAvisoActivo(){ if(!ADMIN||!ADMIN.aviso) return null;
-  for(const a of ['David','Isaac']){ const x=ADMIN.aviso[a]; if(x&&x.activo&&x.texto) return {by:a,texto:x.texto}; }
-  return null; }
+const BASE_AVISO_DEFAULT='Bienvenidos al Portal de Salón. Junto con desearles un muy buen turno, aprovecho de pedirles foco en la activación del día, la venta sugestiva, fidelización y reseñas.';
+function escHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function baseAviso(){ return AVISO || BASE_AVISO_DEFAULT; }
+function sheetVisible(){ return !(ADMIN&&ADMIN.aviso&&ADMIN.aviso.sheetVis===false); }
+// Anuncios a mostrar (apilados): David, Isaac y el de base, cada uno si está activo Y visible
+function avisoEntries(){
+  const out=[];
+  if(ADMIN&&ADMIN.aviso){
+    ['David','Isaac'].forEach(a=>{ const x=ADMIN.aviso[a];
+      if(x&&x.activo&&x.vis&&x.texto) out.push({key:a,label:'📢 Anuncio de '+a+' · '+(ADM_ROL[a]||''),texto:x.texto}); });
+  }
+  if(sheetVisible()) out.push({key:'sheet',label:'📢 Anuncio de base',texto:baseAviso()});
+  if(!out.length) out.push({key:'sheet',label:'📢 Anuncio de base',texto:baseAviso()});  // regla: siempre ≥1
+  return out;
+}
 function admStockActivo(){ if(!ADMIN||!ADMIN.stock) return null;
   for(const a of ['David','Isaac']){ const x=ADMIN.stock[a]; if(x&&x.activo) return {by:a,st:x}; }
   return null; }
 function renderAviso(){
-  const a=admAvisoActivo(), sello=$('avisoSello');
-  const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  if(a){
-    $('aviso').textContent=a.texto;
-    if(sello){ sello.style.display='';
-      sello.innerHTML='<span class="avtag">📢 Anuncio de '+a.by+' · '+(ADM_ROL[a.by]||'')+'</span>'+(CAPITANES.includes(g.name)&&g.name===a.by?'<button class="avquitar" onclick="adminQuitarAviso()">quitar</button>':''); }
-  } else {
-    if(AVISO) $('aviso').textContent=AVISO;
-    if(sello) sello.style.display='none';
-  }
+  const list=$('avisoList'); if(!list) return;
+  list.innerHTML=avisoEntries().map(e=>
+    '<div class="avblock"><div class="avtag">'+e.label+'</div><p class="avtext">'+escHtml(e.texto)+'</p></div>'
+  ).join('');
 }
 function toggleConc(id){ const el=$(id); const open=el.style.display==='none'; el.style.display=open?'block':'none'; $(id+'arr').textContent=open?'▾':'›'; }
 const ALM_SEARCH=[{"n": "Adrián Valenzuela", "e": "Summa Partners"}, {"n": "Alejandra Aranis", "e": "Summa Partners"}, {"n": "Alejandro Velasco", "e": "Summa Partners"}, {"n": "Andrés Rodriguez", "e": "Summa Partners"}, {"n": "Angela Montes", "e": "Summa Partners"}, {"n": "Anita Zaror", "e": "Summa Partners"}, {"n": "Antonia Calvo", "e": "Summa Partners"}, {"n": "Antonia Pino", "e": "Summa Partners"}, {"n": "Benjamín Tacchi", "e": "Summa Partners"}, {"n": "Diego Ayala", "e": "Summa Partners"}, {"n": "Dominga Browne", "e": "Summa Partners"}, {"n": "Felipe Abarca", "e": "Summa Partners"}, {"n": "Felipe Guevara", "e": "Summa Partners"}, {"n": "Felipe Kruuse", "e": "Summa Partners"}, {"n": "Felipe Martin", "e": "Summa Partners"}, {"n": "Felipe Quileñan", "e": "Summa Partners"}, {"n": "Francisco Yañez", "e": "Summa Partners"}, {"n": "Gonzalo Irarrázaval", "e": "Summa Partners"}, {"n": "Javiera Dawabe", "e": "Summa Partners"}, {"n": "Joaquín Bustamante", "e": "Summa Partners"}, {"n": "Jorge Salas", "e": "Summa Partners"}, {"n": "José Manuel Bustamante", "e": "Summa Partners"}, {"n": "Josefina Bay", "e": "Summa Partners"}, {"n": "Juan José Varela", "e": "Summa Partners"}, {"n": "Juan Molteni", "e": "Summa Partners"}, {"n": "Juan Pablo León", "e": "Summa Partners"}, {"n": "Luis Felipe Fuenzalida", "e": "Summa Partners"}, {"n": "María del Pilar Zuñiga", "e": "Summa Partners"}, {"n": "María Gloria Sánchez", "e": "Summa Partners"}, {"n": "María José Guarda", "e": "Summa Partners"}, {"n": "Martín Riquelme", "e": "Summa Partners"}, {"n": "Nicolás Cruz", "e": "Summa Partners"}, {"n": "Pedro Taladriz", "e": "Summa Partners"}, {"n": "Ricardo Sonneborn", "e": "Summa Partners"}, {"n": "Rosario Morales", "e": "Summa Partners"}, {"n": "Santiago Lira", "e": "Summa Partners"}, {"n": "Santiago Pau", "e": "Summa Partners"}, {"n": "Sebastián Ruiz", "e": "Summa Partners"}, {"n": "Sofía Gastaldi", "e": "Summa Partners"}, {"n": "Valentina Yañez", "e": "Summa Partners"}, {"n": "Vicente Besa", "e": "Summa Partners"}, {"n": "Vicente Migone", "e": "Summa Partners"}, {"n": "Vicente Urrutia", "e": "Summa Partners"}, {"n": "Cristian Croxatto", "e": "Coca-Cola / Andina"}, {"n": "Sebastián Cornejo", "e": "Coca-Cola / Andina"}, {"n": "Santiago Izurieta", "e": "Coca-Cola / Andina"}, {"n": "Fernando Pérez", "e": "Coca-Cola / Andina"}, {"n": "Valentina Alarcón", "e": "Coca-Cola / Andina"}, {"n": "Alexis Fuentes", "e": "Coca-Cola / Andina"}, {"n": "Antonio Gonel", "e": "Coca-Cola / Andina"}, {"n": "Alan Corral", "e": "MGC"}, {"n": "Alberto Fernandez", "e": "MGC"}, {"n": "Alejandra Perez", "e": "MGC"}, {"n": "Alemendra de Rosas", "e": "MGC"}, {"n": "Alexis Amestica", "e": "MGC"}, {"n": "Allan Venegas", "e": "MGC"}, {"n": "Alonso Bahamondes", "e": "MGC"}, {"n": "Álvaro Arroyo", "e": "MGC"}, {"n": "Alvaro Vergara", "e": "MGC"}, {"n": "Amparo Urrejola", "e": "MGC"}, {"n": "Ana Leiva", "e": "MGC"}, {"n": "Analytics Externo", "e": "MGC"}, {"n": "Andre Melelli", "e": "MGC"}, {"n": "Andres Morales Burgos", "e": "MGC"}, {"n": "Andrés Muñoz", "e": "MGC"}, {"n": "Angélica Reyes", "e": "MGC"}, {"n": "Antonella Arrigo", "e": "MGC"}, {"n": "Arturo Montecinos", "e": "MGC"}, {"n": "Bárbara Ledezma", "e": "MGC"}, {"n": "Bárbara Osorio", "e": "MGC"}, {"n": "Benjamin Cartagena", "e": "MGC"}, {"n": "Benjamin Ibañez", "e": "MGC"}, {"n": "Benjamín Ríos", "e": "MGC"}, {"n": "Betsabe Saez", "e": "MGC"}, {"n": "Camila Barrera", "e": "MGC"}, {"n": "Camila Barrios", "e": "MGC"}, {"n": "Camila Cortés", "e": "MGC"}, {"n": "Camila Peñaloza", "e": "MGC"}, {"n": "Camille Pérez", "e": "MGC"}, {"n": "Camilo Peña", "e": "MGC"}, {"n": "Canal Interno", "e": "MGC"}, {"n": "Carlos Rivas", "e": "MGC"}, {"n": "Carlos Soto", "e": "MGC"}, {"n": "Carmen Gloria González", "e": "MGC"}, {"n": "Carolina Sepúlveda", "e": "MGC"}, {"n": "Catalina Bravo", "e": "MGC"}, {"n": "Catalina Correa", "e": "MGC"}, {"n": "Catalina Diaz", "e": "MGC"}, {"n": "Catalina Morandé Estévez", "e": "MGC"}, {"n": "Catalina Salinas", "e": "MGC"}, {"n": "Catalina Vera", "e": "MGC"}, {"n": "Celine Mahou", "e": "MGC"}, {"n": "Claudia Meza", "e": "MGC"}, {"n": "Claudia Rivera", "e": "MGC"}, {"n": "Claudia Torreblanca", "e": "MGC"}, {"n": "Claudio Urrea", "e": "MGC"}, {"n": "Constanza Lackington", "e": "MGC"}, {"n": "Cristian Donoso", "e": "MGC"}, {"n": "Cristóbal Chellew", "e": "MGC"}, {"n": "Cristobal Muller", "e": "MGC"}, {"n": "Dalia Salama", "e": "MGC"}, {"n": "Damaris Rueda", "e": "MGC"}, {"n": "Daniela Castro", "e": "MGC"}, {"n": "Daniela Toro", "e": "MGC"}, {"n": "David Fuentes", "e": "MGC"}, {"n": "Deborah González", "e": "MGC"}, {"n": "Diego Calderón", "e": "MGC"}, {"n": "Diego Céspedes", "e": "MGC"}, {"n": "Diego Fuentes", "e": "MGC"}, {"n": "Diego Jorquera", "e": "MGC"}, {"n": "Diego Marinovic", "e": "MGC"}, {"n": "Emanuel Robella", "e": "MGC"}, {"n": "Felipe Cruz", "e": "MGC"}, {"n": "Felipe Gatica", "e": "MGC"}, {"n": "Felipe Mackenney", "e": "MGC"}, {"n": "Fernanda Belmar", "e": "MGC"}, {"n": "Fernanda Llanten", "e": "MGC"}, {"n": "Fernando Cruces", "e": "MGC"}, {"n": "Fernando Ibacache", "e": "MGC"}, {"n": "Florencia Garcia Huidobro", "e": "MGC"}, {"n": "Florencia Undurraga", "e": "MGC"}, {"n": "Francisca Carvajal", "e": "MGC"}, {"n": "Francisca González", "e": "MGC"}, {"n": "Francisco Gómez", "e": "MGC"}, {"n": "Franz Albornoz", "e": "MGC"}, {"n": "Gabriel Koenig", "e": "MGC"}, {"n": "Gabriel Munita", "e": "MGC"}, {"n": "Gonzalo Rojas", "e": "MGC"}, {"n": "Grecia Vallenilla", "e": "MGC"}, {"n": "Humberto Senarega", "e": "MGC"}, {"n": "Ignacia Sanhueza", "e": "MGC"}, {"n": "Ignacio Sánchez", "e": "MGC"}, {"n": "Ignacio Sarroca", "e": "MGC"}, {"n": "Isabel Leiva", "e": "MGC"}, {"n": "Isamar Hernández", "e": "MGC"}, {"n": "Isidora Otero", "e": "MGC"}, {"n": "Ivania Camacho", "e": "MGC"}, {"n": "Javier Escalona", "e": "MGC"}, {"n": "Javier Fauré", "e": "MGC"}, {"n": "Javiera Mesías", "e": "MGC"}, {"n": "Jessica Lopez", "e": "MGC"}, {"n": "Jorge Valdebenito", "e": "MGC"}, {"n": "José Guerrero", "e": "MGC"}, {"n": "Joyce Herrera", "e": "MGC"}, {"n": "Juan Carlos Mediavilla", "e": "MGC"}, {"n": "Juan José Díaz", "e": "MGC"}, {"n": "Juan Luis Santana", "e": "MGC"}, {"n": "Juan Pablo Gaete", "e": "MGC"}, {"n": "Juan Pablo Galaz", "e": "MGC"}, {"n": "Juan Pablo Ríos", "e": "MGC"}, {"n": "Juan Valenzuela", "e": "MGC"}, {"n": "Juliana Henríquez", "e": "MGC"}, {"n": "Karina Valenzuela", "e": "MGC"}, {"n": "Kensel Campusano", "e": "MGC"}, {"n": "Kibel Leiva", "e": "MGC"}, {"n": "Leyla Ibarra", "e": "MGC"}, {"n": "Lorena Olivares", "e": "MGC"}, {"n": "Lucero Arteaga", "e": "MGC"}, {"n": "Luciana Guiterrez", "e": "MGC"}, {"n": "Macarena Cortés", "e": "MGC"}, {"n": "Macarena Martinez", "e": "MGC"}, {"n": "Manuela Boetsch", "e": "MGC"}, {"n": "Marcela Torres", "e": "MGC"}, {"n": "María Fernanda Castillo", "e": "MGC"}, {"n": "María Ignacia Peña", "e": "MGC"}, {"n": "María Jesús Sielfeld", "e": "MGC"}, {"n": "María Villavicencio", "e": "MGC"}, {"n": "Mariana Oyarzun", "e": "MGC"}, {"n": "Marina Roque", "e": "MGC"}, {"n": "Martín Perdomo", "e": "MGC"}, {"n": "Mary Ingrid Heredia Bustos", "e": "MGC"}, {"n": "Matias Díaz", "e": "MGC"}, {"n": "Matias Fernández", "e": "MGC"}, {"n": "Matías Gallardo", "e": "MGC"}, {"n": "Maximiliano González", "e": "MGC"}, {"n": "Maximiliano Uribe", "e": "MGC"}, {"n": "Natalia González", "e": "MGC"}, {"n": "Nayareth Valenzuela", "e": "MGC"}, {"n": "Nicolás Espinoza", "e": "MGC"}, {"n": "Óscar Canelo", "e": "MGC"}, {"n": "Pablo Díaz", "e": "MGC"}, {"n": "Pablo Ramirez", "e": "MGC"}, {"n": "Pedro Aldana", "e": "MGC"}, {"n": "Polo Díaz", "e": "MGC"}, {"n": "Rafael Gutierrez", "e": "MGC"}, {"n": "Raimundo Vega", "e": "MGC"}, {"n": "Raúl Mella", "e": "MGC"}, {"n": "Renata Valenzuela", "e": "MGC"}, {"n": "Ricardo Leiva", "e": "MGC"}, {"n": "Rodrigo Alberto Valdés", "e": "MGC"}, {"n": "Rodrigo Campos", "e": "MGC"}, {"n": "Rodrigo Delorenzo", "e": "MGC"}, {"n": "Rodrigo Garrido", "e": "MGC"}, {"n": "Rodrigo Valdés", "e": "MGC"}, {"n": "Samanta Navarro", "e": "MGC"}, {"n": "Samuel Reyes", "e": "MGC"}, {"n": "Scarleth Martínez", "e": "MGC"}, {"n": "Sebastián Pérez", "e": "MGC"}, {"n": "Sky Molina", "e": "MGC"}, {"n": "Sofía Córdova", "e": "MGC"}, {"n": "Sofía Migliaro", "e": "MGC"}, {"n": "Sofía Townsend", "e": "MGC"}, {"n": "Soledad Hidalgo", "e": "MGC"}, {"n": "Soledad Nazal", "e": "MGC"}, {"n": "Soledad Zuñiga", "e": "MGC"}, {"n": "Stephan Monsalve", "e": "MGC"}, {"n": "Sthefany Morales", "e": "MGC"}, {"n": "Tatiana Guiloff", "e": "MGC"}, {"n": "Tomas Figueroa", "e": "MGC"}, {"n": "Tomás Gálvez", "e": "MGC"}, {"n": "Tomas Mir", "e": "MGC"}, {"n": "Trinidad Santos", "e": "MGC"}, {"n": "Valentina Killinger", "e": "MGC"}, {"n": "Valentina Pozo", "e": "MGC"}, {"n": "Valentina Yavar", "e": "MGC"}, {"n": "Valentina Zepeda", "e": "MGC"}, {"n": "Valeria de la Torre", "e": "MGC"}, {"n": "Vicente Aguirre", "e": "MGC"}, {"n": "Vicente Gómez", "e": "MGC"}, {"n": "Yinha Zamora", "e": "MGC"}, {"n": "Zulay Murillo", "e": "MGC"}, {"n": "Mauricio Chiong", "e": "Eclectic"}, {"n": "Martín Raddatz", "e": "Eclectic"}];
@@ -1129,21 +1147,46 @@ async function adminEnviarAviso(){
   if(!t){ admMsg('admAvisoMsg','Escribe el anuncio antes de enviar.',false); return; }
   if(!admClave()){ admMsg('admAvisoMsg','Ingresa la clave de admin abajo.',false); return; }
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  ensureAdmin(); ADMIN.aviso[g.name]={texto:t,activo:true}; renderAviso();  // optimista
-  admMsg('admAvisoMsg','Enviando…',null);
+  ensureAdmin(); ADMIN.aviso[g.name]={texto:t,activo:true,vis:true}; renderAviso(); renderAdminPanel();  // optimista
+  admMsg('admAvisoMsg','Publicando…',null);
   try{ const r=await admPost({tipo:'anuncio',accion:'enviar',texto:t});
     if(r.status===401){ admMsg('admAvisoMsg','Clave incorrecta.',false); return; }
-    admMsg('admAvisoMsg', r.ok?'✅ Anuncio publicado al equipo.':'No se pudo publicar.', r.ok);
+    admMsg('admAvisoMsg', r.ok?'✅ Tu anuncio quedó visible para el equipo.':'No se pudo publicar.', r.ok);
   }catch(e){ admMsg('admAvisoMsg','Sin conexión, intenta de nuevo.',false); }
   loadAdmin().then(()=>{ renderAviso(); renderAdminPanel(); });
 }
 async function adminQuitarAviso(){
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  ensureAdmin(); if(ADMIN.aviso[g.name]) ADMIN.aviso[g.name]={texto:'',activo:false}; renderAviso();
+  ensureAdmin(); if(ADMIN.aviso[g.name]) ADMIN.aviso[g.name]={texto:'',activo:false,vis:false}; renderAviso(); renderAdminPanel();
   admMsg('admAvisoMsg','Quitando…',null);
   try{ const r=await admPost({tipo:'anuncio',accion:'quitar'});
     if(r.status===401){ admMsg('admAvisoMsg','Clave incorrecta.',false); return; }
-    admMsg('admAvisoMsg', r.ok?'Anuncio quitado. Vuelve el aviso del Sheet.':'No se pudo quitar.', r.ok);
+    admMsg('admAvisoMsg', r.ok?'Anuncio quitado.':'No se pudo quitar.', r.ok);
+  }catch(e){ admMsg('admAvisoMsg','Sin conexión, intenta de nuevo.',false); }
+  loadAdmin().then(()=>{ renderAviso(); renderAdminPanel(); });
+}
+// cuántos anuncios quedarían visibles si 'key' pasa a 'nuevoEstado'
+function visiblesCount(overKey,overVal){
+  let n=0;
+  ['David','Isaac'].forEach(a=>{ const x=ADMIN&&ADMIN.aviso&&ADMIN.aviso[a];
+    if(x&&x.activo&&x.texto){ const v=(overKey===a)?overVal:!!x.vis; if(v) n++; } });
+  const sv=(overKey==='sheet')?overVal:sheetVisible(); if(sv) n++;
+  return n;
+}
+async function adminToggleAviso(key){
+  if(!admClave()){ admMsg('admAvisoMsg','Ingresa la clave de admin abajo.',false); return; }
+  ensureAdmin();
+  const estadoActual = key==='sheet'? sheetVisible() : !!(ADMIN.aviso[key]&&ADMIN.aviso[key].vis);
+  const nuevo=!estadoActual;
+  if(!nuevo && visiblesCount(key,false)<1){ admMsg('admAvisoMsg','Tiene que quedar al menos un anuncio prendido.',false); return; }
+  // optimista
+  if(key==='sheet'){ if(!ADMIN.aviso) ADMIN.aviso={}; ADMIN.aviso.sheetVis=nuevo; }
+  else { if(ADMIN.aviso[key]) ADMIN.aviso[key].vis=nuevo; }
+  renderAviso(); renderAdminPanel();
+  admMsg('admAvisoMsg', nuevo?'Prendido.':'Apagado.', true);
+  try{ const r=await admPost({tipo:'anuncio',accion:'visibilidad',target:key,vis:nuevo});
+    if(r.status===401){ admMsg('admAvisoMsg','Clave incorrecta.',false); return; }
+    if(!r.ok) admMsg('admAvisoMsg','No se pudo guardar el cambio.',false);
   }catch(e){ admMsg('admAvisoMsg','Sin conexión, intenta de nuevo.',false); }
   loadAdmin().then(()=>{ renderAviso(); renderAdminPanel(); });
 }
@@ -1169,9 +1212,23 @@ async function adminQuitarStock(){
   }catch(e){ admMsg('admStockMsg','Sin conexión, intenta de nuevo.',false); }
   loadAdmin().then(()=>{ renderStock(); renderAdminPanel(); });
 }
+function avRow(key,label,texto,on){
+  return '<div class="avrow"><div class="avrowtxt"><b>'+label+'</b><span>'+escHtml((texto||'').slice(0,70))+'</span></div>'
+    +'<button class="avtoggle '+(on?'on':'off')+'" onclick="adminToggleAviso(\''+key+'\')">'+(on?'ON':'OFF')+'</button></div>';
+}
 function renderAdminPanel(){
-  const av=admAvisoActivo(), st=admStockActivo();
-  const a=$('admAvisoActual'); if(a){ a.innerHTML = av?('<span class="avtag">Activo: '+av.by+'</span>'):'<span class="admnone">Sin anuncio de capitán. Rige el del Sheet.</span>'; }
+  // interruptores de visibilidad de anuncios
+  const vl=$('admVisList');
+  if(vl){
+    let rows=[];
+    const D=ADMIN&&ADMIN.aviso&&ADMIN.aviso.David, I=ADMIN&&ADMIN.aviso&&ADMIN.aviso.Isaac;
+    if(D&&D.activo&&D.texto) rows.push(avRow('David','Anuncio de David',D.texto,!!D.vis));
+    if(I&&I.activo&&I.texto) rows.push(avRow('Isaac','Anuncio de Isaac',I.texto,!!I.vis));
+    rows.push(avRow('sheet','Anuncio de base (Sheet)',baseAviso(),sheetVisible()));
+    vl.innerHTML=rows.join('');
+  }
+  // stock
+  const st=admStockActivo();
   const s=$('admStockActual'); if(s){ s.innerHTML = st?('<span class="avtag">Activo: '+st.by+'</span>'):'<span class="admnone">Sin stock de capitán. Rige el del Sheet.</span>'; }
   if(st){ $('adm101').value=(st.st.s101||[]).join(', '); $('adm85').value=(st.st.s85||[]).join(', '); $('adm86').value=(st.st.s86||[]).join(', '); }
   const ck=$('admClave'); if(ck&&!ck.value) ck.value=admClave();

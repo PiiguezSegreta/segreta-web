@@ -46,11 +46,16 @@ exports.handler = async (event) => {
     if (data.tipo !== 'anuncio' && data.tipo !== 'stock') {
       return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'tipo' }) };
     }
+    var accion = 'enviar';
+    if (data.accion === 'quitar') accion = 'quitar';
+    else if (data.accion === 'visibilidad') accion = 'visibilidad';
     const payload = {
       tipo: data.tipo,
-      accion: data.accion === 'quitar' ? 'quitar' : 'enviar',
+      accion: accion,
       autor: data.autor,
       texto: (data.texto || '').toString().slice(0, 600),
+      target: ['sheet', 'David', 'Isaac'].indexOf(data.target) >= 0 ? data.target : '',
+      vis: data.vis === true,
       s101: arr(data.s101),
       s85: arr(data.s85),
       s86: arr(data.s86),
