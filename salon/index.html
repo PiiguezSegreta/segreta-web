@@ -455,12 +455,6 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <div class="eyebrow">Stock del día · 101 / 85 / 86</div>
       <div class="stocklist"><div class="strow st101" id="st101row_h"><span class="stcode">101</span><ul class="stitems" id="st101list_h"><li>Whiskey Hatozaki Blended</li><li>Jarras</li></ul></div><div class="strow st85" id="st85row_h" style="display:none"><span class="stcode">85</span><ul class="stitems" id="st85list_h"></ul></div><div class="strow st86" id="st86row_h" style="display:none"><span class="stcode">86</span><ul class="stitems" id="st86list_h"></ul></div></div>
     </div>
-    <div class="qbtns">
-      <div class="qbtn" onclick="go('qrs')"><div class="qi">🎟️</div><div class="ql">QRs</div></div>
-      <div class="qbtn" onclick="go('ranking')"><div class="qi">🏆</div><div class="ql">Mi posición</div></div>
-      <div class="qbtn" onclick="go('empujar')"><div class="qi">🍕</div><div class="ql">Qué empujar hoy</div></div>
-      <div class="qbtn" onclick="go('marcas')"><div class="qi">🤝</div><div class="ql">Alianzas y activaciones</div></div>
-    </div>
     <div class="linkrow" id="chkAccessHome" onclick="go('checklist')" style="margin-top:12px;display:none"><span class="lrleft">📋<span class="lrcol"><span class="lrtit">Checklist</span><span class="lrsub">Apertura · Intermedios · Cierre</span></span></span><span class="arr">›</span></div>
     <div class="linkrow" id="admAccessHome" onclick="go('admin')" style="margin-top:12px;display:none"><span class="lrleft">📢<span class="lrcol"><span class="lrtit">Panel de Capitán</span><span class="lrsub">Anuncio y stock del día</span></span></span><span class="arr">›</span></div>
   </section>
@@ -743,12 +737,17 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <h2 class="vt">Mi rendimiento de este mes</h2>
     <div class="vsub" id="miName">—</div>
     <div class="demoflag">⚠️ Datos de demostración — se vuelven reales al conectar la planilla.</div>
-    <div class="statg">
+    <div class="statg" id="miStatg">
       <div class="stat"><div class="sl">Puntaje</div><div class="sv" id="miPts">—</div></div>
       <div class="stat"><div class="sl">Posición</div><div class="sv" id="miPos">—</div></div>
       <div class="stat"><div class="sl">Tarjetas WB</div><div class="sv" id="miCards">—</div></div>
       <div class="stat"><div class="sl">Ticket prom.</div><div class="sv" id="miTicket">—</div></div>
       <div class="stat" style="grid-column:1/3"><div class="sl">Factor calidad</div><div class="sv" id="miFc">—</div></div>
+    </div>
+    <div class="statg" id="miCapStats" style="display:none">
+      <div class="stat"><div class="sl">Tarjetas WB</div><div class="sv" id="miCapCards">—</div></div>
+      <div class="stat"><div class="sl">Ticket prom.</div><div class="sv" id="miCapTicket">—</div></div>
+      <div class="stat" style="grid-column:1/3"><div class="sl">Venta del mes</div><div class="sv" id="miCapVenta">—</div></div>
     </div>
     <div class="card"><div class="eyebrow">Para subir</div><p style="font-size:13px;line-height:1.5" id="miTip">—</p></div>
 
@@ -1360,6 +1359,19 @@ function renderCapitanes(me){
   }).join('');
 }
 function renderMine(me){
+  $('miStatg').style.display=''; $('miCapStats').style.display='none';  // default: grid normal
+  // Capitanes (David/Isaac): no compiten, pero ven sus métricas del mes (tarjetas/ticket/venta)
+  if(CAPITANES.includes(me)){
+    $('miStatg').style.display='none'; $('miCapStats').style.display='';
+    const c=(CAPS||[]).find(x=>x.name===me);
+    if(c){
+      $('miCapCards').textContent=c.cards||0;
+      $('miCapTicket').innerHTML='$'+((c.ticket||0)/1000).toFixed(0)+'<small>K</small>';
+      $('miCapVenta').innerHTML='$'+(Math.floor((c.venta||0)/100000)/10).toFixed(1)+'<small>M</small>';
+    } else { $('miCapCards').textContent='—';$('miCapTicket').textContent='—';$('miCapVenta').textContent='—'; }
+    $('miTip').textContent='Como jefatura de salón no compites en el ranking, pero tu venta suma a la meta del equipo. Aquí ves tus tarjetas, ticket y venta del mes.';
+    return;
+  }
   const i=DEMO.findIndex(r=>r.name===me); const r=DEMO[i];
   if(!r||NORANK.includes(me)){
     $('miPts').textContent='—';$('miPos').textContent='—';$('miCards').textContent='—';$('miTicket').textContent='—';$('miFc').textContent='—';
