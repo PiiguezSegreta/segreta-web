@@ -273,6 +273,15 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .avtoggle{flex:none;width:58px;padding:7px 0;border-radius:999px;border:none;font-size:11.5px;font-weight:800;letter-spacing:.04em;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .avtoggle.on{background:#1d7a4c;color:#fff;}
 .avtoggle.off{background:var(--line);color:var(--mute);}
+.stgrp{margin-top:14px;}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:7px 0;}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--crema);color:var(--text);border-radius:999px;padding:6px 6px 6px 13px;font-size:13px;}
+.chipx{border:none;background:rgba(0,0,0,.08);color:var(--mute);width:20px;height:20px;border-radius:50%;font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;}
+.chipnone{color:var(--mute);font-size:12.5px;}
+.chipadd{display:flex;gap:8px;margin-top:4px;}
+.chipinput{flex:1;min-width:0;box-sizing:border-box;padding:9px 12px;font-size:14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);-webkit-appearance:none;}
+.chipinput:focus{outline:none;border-color:var(--ocre);}
+.chipbtn{flex:none;background:var(--ocre);color:#fff;border:none;font-size:13px;font-weight:600;padding:0 15px;border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .admactual{margin:2px 0 10px;}
 .admnone{font-size:12px;color:var(--mute);}
 .admta{width:100%;box-sizing:border-box;margin-top:4px;padding:11px 13px;font-size:14px;line-height:1.45;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);resize:vertical;-webkit-appearance:none;font-family:inherit;}
@@ -861,13 +870,22 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <div class="card">
       <div class="eyebrow">Stock del día · 101 / 85 / 86</div>
       <div id="admStockActual" class="admactual"></div>
-      <label class="admlbl st101lbl">101 · ofrécelo primero</label>
-      <input id="adm101" class="adminput" autocomplete="off" placeholder="Separa por comas">
-      <label class="admlbl st85lbl">85 · por agotarse</label>
-      <input id="adm85" class="adminput" autocomplete="off" placeholder="Separa por comas">
-      <label class="admlbl st86lbl">86 · sin stock</label>
-      <input id="adm86" class="adminput" autocomplete="off" placeholder="Separa por comas">
-      <div class="admrow"><button class="admbtn" onclick="adminEnviarStock()">Actualizar stock</button><button class="admbtn ghost" onclick="adminQuitarStock()">Quitar el mío</button></div>
+      <div class="stgrp">
+        <div class="admlbl st101lbl">101 · ofrécelo primero</div>
+        <div class="chips" id="chips101"></div>
+        <div class="chipadd"><input id="in101" class="chipinput" autocomplete="off" placeholder="Agregar producto…" onkeydown="stockKey(event,'101')"><button class="chipbtn" onclick="stockAdd('101')">Agregar</button></div>
+      </div>
+      <div class="stgrp">
+        <div class="admlbl st85lbl">85 · por agotarse</div>
+        <div class="chips" id="chips85"></div>
+        <div class="chipadd"><input id="in85" class="chipinput" autocomplete="off" placeholder="Agregar producto…" onkeydown="stockKey(event,'85')"><button class="chipbtn" onclick="stockAdd('85')">Agregar</button></div>
+      </div>
+      <div class="stgrp">
+        <div class="admlbl st86lbl">86 · sin stock</div>
+        <div class="chips" id="chips86"></div>
+        <div class="chipadd"><input id="in86" class="chipinput" autocomplete="off" placeholder="Agregar producto…" onkeydown="stockKey(event,'86')"><button class="chipbtn" onclick="stockAdd('86')">Agregar</button></div>
+      </div>
+      <div class="admrow"><button class="admbtn ghost" onclick="adminQuitarStock()">Quitar el mío (volver al Sheet)</button></div>
       <p class="note" id="admStockMsg"></p>
     </div>
 
@@ -1190,27 +1208,57 @@ async function adminToggleAviso(key){
   }catch(e){ admMsg('admAvisoMsg','Sin conexión, intenta de nuevo.',false); }
   loadAdmin().then(()=>{ renderAviso(); renderAdminPanel(); });
 }
-async function adminEnviarStock(){
-  if(!admClave()){ admMsg('admStockMsg','Ingresa la clave de admin abajo.',false); return; }
-  const s101=splitList($('adm101').value), s85=splitList($('adm85').value), s86=splitList($('adm86').value);
+// Stock por etiquetas: borrador local editable con chips + agregar
+let STOCK_DRAFT={s101:[],s85:[],s86:[]};
+function initStockDraft(){
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  ensureAdmin(); ADMIN.stock[g.name]={s101,s85,s86,activo:true}; renderStock();  // optimista
-  admMsg('admStockMsg','Enviando…',null);
-  try{ const r=await admPost({tipo:'stock',accion:'enviar',s101,s85,s86});
+  const mine=ADMIN&&ADMIN.stock&&ADMIN.stock[g.name];
+  if(mine&&mine.activo){ STOCK_DRAFT={s101:(mine.s101||[]).slice(),s85:(mine.s85||[]).slice(),s86:(mine.s86||[]).slice()}; }
+  else { const b=STOCK_LIVE||STOCK_FALLBACK; STOCK_DRAFT={s101:(b['101']||[]).slice(),s85:(b['85']||[]).slice(),s86:(b['86']||[]).slice()}; }
+}
+function renderChips(){
+  ['101','85','86'].forEach(code=>{
+    const box=$('chips'+code); if(!box) return;
+    const list=STOCK_DRAFT['s'+code]||[];
+    box.innerHTML=list.length
+      ? list.map((it,i)=>'<span class="chip">'+escHtml(it)+'<button class="chipx" onclick="stockRemove(\''+code+'\','+i+')">×</button></span>').join('')
+      : '<span class="chipnone">Sin productos</span>';
+  });
+}
+function stockKey(ev,code){ if(ev.key==='Enter'){ ev.preventDefault(); stockAdd(code); } }
+function stockAdd(code){
+  const inp=$('in'+code); const v=(inp.value||'').trim(); if(!v) return;
+  if(!admClave()){ admMsg('admStockMsg','Ingresa la clave de admin abajo.',false); return; }
+  const arr=STOCK_DRAFT['s'+code];
+  if(!arr.some(x=>x.toLowerCase()===v.toLowerCase())) arr.push(v);
+  inp.value=''; renderChips(); publishStock();
+}
+function stockRemove(code,i){ STOCK_DRAFT['s'+code].splice(i,1); renderChips(); publishStock(); }
+async function publishStock(){
+  const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
+  const empty=!STOCK_DRAFT.s101.length&&!STOCK_DRAFT.s85.length&&!STOCK_DRAFT.s86.length;
+  ensureAdmin();
+  ADMIN.stock[g.name]=empty?{s101:[],s85:[],s86:[],activo:false}:{s101:STOCK_DRAFT.s101.slice(),s85:STOCK_DRAFT.s85.slice(),s86:STOCK_DRAFT.s86.slice(),activo:true};
+  renderStock();  // optimista para el equipo
+  admMsg('admStockMsg','Guardando…',null);
+  try{
+    const payload=empty?{tipo:'stock',accion:'quitar'}:{tipo:'stock',accion:'enviar',s101:STOCK_DRAFT.s101,s85:STOCK_DRAFT.s85,s86:STOCK_DRAFT.s86};
+    const r=await admPost(payload);
     if(r.status===401){ admMsg('admStockMsg','Clave incorrecta.',false); return; }
-    admMsg('admStockMsg', r.ok?'✅ Stock del día actualizado.':'No se pudo actualizar.', r.ok);
+    admMsg('admStockMsg', r.ok?'✅ Stock actualizado.':'No se pudo guardar.', r.ok);
   }catch(e){ admMsg('admStockMsg','Sin conexión, intenta de nuevo.',false); }
-  loadAdmin().then(()=>{ renderStock(); renderAdminPanel(); });
+  loadAdmin().then(()=>{ renderStock(); });
 }
 async function adminQuitarStock(){
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  ensureAdmin(); if(ADMIN.stock[g.name]) ADMIN.stock[g.name]={s101:[],s85:[],s86:[],activo:false}; renderStock();
+  ensureAdmin(); if(ADMIN.stock[g.name]) ADMIN.stock[g.name]={s101:[],s85:[],s86:[],activo:false};
+  STOCK_DRAFT={s101:[],s85:[],s86:[]}; renderChips(); renderStock();
   admMsg('admStockMsg','Quitando…',null);
   try{ const r=await admPost({tipo:'stock',accion:'quitar'});
     if(r.status===401){ admMsg('admStockMsg','Clave incorrecta.',false); return; }
     admMsg('admStockMsg', r.ok?'Stock quitado. Vuelve el del Sheet.':'No se pudo quitar.', r.ok);
   }catch(e){ admMsg('admStockMsg','Sin conexión, intenta de nuevo.',false); }
-  loadAdmin().then(()=>{ renderStock(); renderAdminPanel(); });
+  loadAdmin().then(()=>{ renderStock(); });
 }
 function avRow(key,label,texto,on){
   return '<div class="avrow"><div class="avrowtxt"><b>'+label+'</b><span>'+escHtml((texto||'').slice(0,70))+'</span></div>'
@@ -1227,10 +1275,10 @@ function renderAdminPanel(){
     rows.push(avRow('sheet','Anuncio de base (Sheet)',baseAviso(),sheetVisible()));
     vl.innerHTML=rows.join('');
   }
-  // stock
+  // stock (etiquetas)
   const st=admStockActivo();
   const s=$('admStockActual'); if(s){ s.innerHTML = st?('<span class="avtag">Activo: '+st.by+'</span>'):'<span class="admnone">Sin stock de capitán. Rige el del Sheet.</span>'; }
-  if(st){ $('adm101').value=(st.st.s101||[]).join(', '); $('adm85').value=(st.st.s85||[]).join(', '); $('adm86').value=(st.st.s86||[]).join(', '); }
+  renderChips();
   const ck=$('admClave'); if(ck&&!ck.value) ck.value=admClave();
 }
 // ── Checklist de salón (capitanes) ──
@@ -1459,7 +1507,7 @@ function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
   if(v==='checklist') renderChecklist();  // siempre refrescar desde localStorage al entrar
-  if(v==='admin') renderAdminPanel();
+  if(v==='admin') loadAdmin().then(()=>{ initStockDraft(); renderAdminPanel(); });
   if(v==='hoy') loadAdmin().then(()=>{ renderAviso(); renderStock(); });  // overrides al toque al volver a Hoy
   const navV=['estudiar','venta','ruta','fideliza','vender','empujar','cartaint'].includes(v)?'carta':(['ofrecer','temporal','semana','almuerzo'].includes(v)?'marcas':((v==='doc'||v==='qrs'||v==='checklist'||v==='admin')?'mi':v));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
