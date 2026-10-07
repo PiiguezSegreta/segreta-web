@@ -451,6 +451,10 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <div class="plazarunners" id="plazaExtra"></div>
       <p style="font-size:12px;color:var(--mute);margin-top:12px">Asignado por jefatura y capitán.</p>
     </div>
+    <div class="card" id="stockHoyCard">
+      <div class="eyebrow">Stock del día · 101 / 85 / 86</div>
+      <div class="stocklist"><div class="strow st101" id="st101row_h"><span class="stcode">101</span><ul class="stitems" id="st101list_h"><li>Whiskey Hatozaki Blended</li><li>Jarras</li></ul></div><div class="strow st85" id="st85row_h" style="display:none"><span class="stcode">85</span><ul class="stitems" id="st85list_h"></ul></div><div class="strow st86" id="st86row_h" style="display:none"><span class="stcode">86</span><ul class="stitems" id="st86list_h"></ul></div></div>
+    </div>
     <div class="qbtns">
       <div class="qbtn" onclick="go('qrs')"><div class="qi">🎟️</div><div class="ql">QRs</div></div>
       <div class="qbtn" onclick="go('ranking')"><div class="qi">🏆</div><div class="ql">Mi posición</div></div>
@@ -1087,11 +1091,9 @@ function renderPlazas(){
   $('plazaExtra').innerHTML=ex;
   card.style.display=any?'':'none';
 }
-function renderStock(){
-  const adm=admStockActivo();
-  const src=adm?{'101':adm.st.s101||[],'85':adm.st.s85||[],'86':adm.st.s86||[]}:(STOCK_LIVE||STOCK_FALLBACK);
+function renderStockSet(src,sfx){
   ['101','85','86'].forEach(code=>{
-    const ul=$('st'+code+'list'), row=$('st'+code+'row'); if(!ul||!row) return;
+    const ul=$('st'+code+'list'+sfx), row=$('st'+code+'row'+sfx); if(!ul||!row) return;
     let items=(src[code]||[]).slice();
     if(code==='101'){ const t=ACTIV_101[new Date().getDay()]; if(t) items.unshift('__ACT__'+t); }
     ul.innerHTML='';
@@ -1103,6 +1105,11 @@ function renderStock(){
     });
     row.style.display=ul.children.length?'':'none';
   });
+}
+function renderStock(){
+  const adm=admStockActivo();
+  const src=adm?{'101':adm.st.s101||[],'85':adm.st.s85||[],'86':adm.st.s86||[]}:(STOCK_LIVE||STOCK_FALLBACK);
+  renderStockSet(src,''); renderStockSet(src,'_h');
 }
 // ── Panel de Capitán: anuncio y stock en vivo (David/Isaac) ──
 function ensureAdmin(){ if(!ADMIN) ADMIN={aviso:{},stock:{}}; if(!ADMIN.aviso) ADMIN.aviso={}; if(!ADMIN.stock) ADMIN.stock={}; }
