@@ -43,12 +43,16 @@ exports.handler = async (event) => {
     if (data.autor !== 'David' && data.autor !== 'Isaac') {
       return { statusCode: 403, body: JSON.stringify({ ok: false, error: 'autor' }) };
     }
-    if (data.tipo !== 'anuncio' && data.tipo !== 'stock') {
+    if (data.tipo !== 'anuncio' && data.tipo !== 'stock' && data.tipo !== 'plazas') {
       return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'tipo' }) };
     }
     var accion = 'enviar';
     if (data.accion === 'quitar') accion = 'quitar';
     else if (data.accion === 'visibilidad') accion = 'visibilidad';
+    const plz = {};
+    ['T', 'M', 'P', 'B', 'S', 'K'].forEach(function (L) {
+      plz[L] = ((data.plazas && data.plazas[L]) || '').toString().slice(0, 40);
+    });
     const payload = {
       tipo: data.tipo,
       accion: accion,
@@ -59,6 +63,10 @@ exports.handler = async (event) => {
       s101: arr(data.s101),
       s85: arr(data.s85),
       s86: arr(data.s86),
+      plazas: plz,
+      runnerBarra: (data.runnerBarra || '').toString().slice(0, 40),
+      runnerCocina: (data.runnerCocina || '').toString().slice(0, 40),
+      busser: (data.busser || '').toString().slice(0, 40),
     };
     const r = await fetch(APPS_URL, {
       method: 'POST',

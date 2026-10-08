@@ -282,6 +282,9 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .chipinput{flex:1;min-width:0;box-sizing:border-box;padding:9px 12px;font-size:14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);-webkit-appearance:none;}
 .chipinput:focus{outline:none;border-color:var(--ocre);}
 .chipbtn{flex:none;background:var(--ocre);color:#fff;border:none;font-size:13px;font-weight:600;padding:0 15px;border-radius:10px;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.plzrow{display:flex;align-items:center;gap:10px;margin-top:9px;}
+.plzlbl{flex:none;width:135px;font-size:12.5px;color:var(--mute);font-weight:600;}
+.plzin{flex:1;min-width:0;}
 .admactual{margin:2px 0 10px;}
 .admnone{font-size:12px;color:var(--mute);}
 .admta{width:100%;box-sizing:border-box;margin-top:4px;padding:11px 13px;font-size:14px;line-height:1.45;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);resize:vertical;-webkit-appearance:none;font-family:inherit;}
@@ -854,22 +857,39 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
     <p class="note">Al guardar queda registrado quién completó el checklist y qué quedó pendiente.</p>
   </section>
 
+  <!-- PANEL DE CAPITÁN · hub -->
   <section class="view" id="v-admin">
     <h2 class="vt">Panel de Capitán</h2>
-    <div class="vsub">Publica el aviso y el stock del día. Lo que mandes manda sobre lo del Sheet, hasta la medianoche.</div>
-
+    <div class="vsub">Gestiona lo que ve el equipo. Lo que pongas manda sobre lo del Sheet.</div>
+    <div class="hubgrid">
+      <div class="hubcard" onclick="go('adm-aviso')"><span class="hubemo">📢</span><span class="hubtxt"><span class="hubtit">Anuncio de equipo</span><span class="hubsub">Publica avisos y prende o apaga cada uno</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('adm-stock')"><span class="hubemo">📦</span><span class="hubtxt"><span class="hubtit">Stock del día</span><span class="hubsub">101 · 85 · 86 por etiquetas</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('adm-plazas')"><span class="hubemo">🧭</span><span class="hubtxt"><span class="hubtit">Asignar plazas</span><span class="hubsub">Garzones y runners en cada plaza y función</span></span><span class="hubarr">›</span></div>
+    </div>
     <div class="card">
-      <div class="eyebrow">Anuncio de equipo</div>
+      <div class="eyebrow">Clave de admin</div>
+      <input id="admClave" class="adminput" type="password" autocomplete="off" oninput="admSaveClave()" placeholder="Clave para publicar">
+      <p class="note">Se pide una vez por dispositivo. Solo David e Isaac la tienen.</p>
+    </div>
+  </section>
+
+  <section class="view" id="v-adm-aviso">
+    <h2 class="vt">Anuncio de equipo</h2>
+    <div class="vsub">Lo que publiques se suma a los anuncios visibles. Se limpian solos al cierre del día (2 AM).</div>
+    <div class="card">
       <textarea id="admAviso" class="admta" rows="3" placeholder="Escribe el anuncio para el equipo…"></textarea>
       <div class="admrow"><button class="admbtn" onclick="adminEnviarAviso()">Publicar el mío</button><button class="admbtn ghost" onclick="adminQuitarAviso()">Quitar el mío</button></div>
       <p class="note" id="admAvisoMsg"></p>
       <div class="admvislbl">Anuncios visibles</div>
       <div id="admVisList" class="admvislist"></div>
-      <p class="note">Puedes prender o apagar cada uno. Siempre queda al menos uno prendido; al reiniciar el día vuelve solo al de base.</p>
+      <p class="note">Puedes prender o apagar cada uno. Siempre queda al menos uno prendido.</p>
     </div>
+  </section>
 
+  <section class="view" id="v-adm-stock">
+    <h2 class="vt">Stock del día · 101 / 85 / 86</h2>
+    <div class="vsub">Agrega o saca productos. No se limpia solo: lo que pongas queda hasta que lo saques a mano.</div>
     <div class="card">
-      <div class="eyebrow">Stock del día · 101 / 85 / 86</div>
       <div id="admStockActual" class="admactual"></div>
       <div class="stgrp">
         <div class="admlbl st101lbl">101 · ofrécelo primero</div>
@@ -886,14 +906,26 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
         <div class="chips" id="chips86"></div>
         <div class="chipadd"><input id="in86" class="chipinput" autocomplete="off" placeholder="Agregar producto…" onkeydown="stockKey(event,'86')"><button class="chipbtn" onclick="stockAdd('86')">Agregar</button></div>
       </div>
-      <div class="admrow"><button class="admbtn ghost" onclick="adminQuitarStock()">Quitar el mío (volver al Sheet)</button></div>
+      <div class="admrow"><button class="admbtn ghost" onclick="adminQuitarStock()">Vaciar todo (volver al Sheet)</button></div>
       <p class="note" id="admStockMsg"></p>
     </div>
+  </section>
 
+  <section class="view" id="v-adm-plazas">
+    <h2 class="vt">Asignar plazas</h2>
+    <div class="vsub">Quién va en cada plaza y función. El equipo lo ve al instante en Hoy, sin tocar el Sheet.</div>
     <div class="card">
-      <div class="eyebrow">Clave de admin</div>
-      <input id="admClave" class="adminput" type="password" autocomplete="off" oninput="admSaveClave()" placeholder="Clave para publicar">
-      <p class="note">Se pide una vez por dispositivo. Solo David e Isaac la tienen.</p>
+      <div class="plzrow"><span class="plzlbl">Plaza T</span><input id="plzT" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">Plaza M</span><input id="plzM" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">Plaza P</span><input id="plzP" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">Plaza B</span><input id="plzB" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">Plaza S</span><input id="plzS" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">Plaza K</span><input id="plzK" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">🏃 Runner de barra</span><input id="plzRB" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">🏃 Runner de cocina</span><input id="plzRC" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="plzrow"><span class="plzlbl">🫡 Busser</span><input id="plzBS" class="adminput plzin" autocomplete="off" placeholder="Nombre"></div>
+      <div class="admrow"><button class="admbtn" onclick="plazasGuardar()">Guardar plazas</button><button class="admbtn ghost" onclick="plazasQuitar()">Vaciar</button></div>
+      <p class="note" id="plzMsg"></p>
     </div>
   </section>
 
@@ -985,7 +1017,7 @@ function startApp(){
   if(esCap){ $('ckWho').textContent=g.name+' · Jefatura de salón'; renderChecklist(); const ck=$('admClave'); if(ck) ck.value=admClave(); }
   goRoot('hoy');
   loadLive().then(()=>{ renderRanking(g.name); renderMine(g.name); renderGrupal(); renderAviso(); renderStock(); renderPlazas(); });
-  loadAdmin().then(()=>{ renderAviso(); renderStock(); });
+  loadAdmin().then(()=>{ renderAviso(); renderStock(); renderPlazas(); });
 }
 function numCL(s){ if(s==null) return 0; s=String(s).replace(/[^0-9.,-]/g,'').replace(/[.]/g,'').replace(',','.'); const n=parseFloat(s); return isNaN(n)?0:n; } // ignora $ y formato
 function parseCSV(t){
@@ -1113,15 +1145,16 @@ function almSearch(){
 function toggleSec(id){ const el=$(id); const open=el.style.display!=='none'; el.style.display=open?'none':'block'; $(id+'chev').textContent=open?'▸':'▾'; }
 function renderPlazas(){
   const card=$('plazasCard'); if(!card) return;
-  if(!PLAZAS){ card.style.display='none'; return; }
+  const SRC=admPlazas()||PLAZAS;  // prioridad: lo que asignan David/Isaac en la app; si no, el Sheet
+  if(!SRC){ card.style.display='none'; return; }
   let any=false, g='';
   ['T','M','P','B','S','K'].forEach(L=>{
-    const nm=(PLAZAS.plazas[L]||'').trim(); if(nm) any=true;
+    const nm=((SRC.plazas||{})[L]||'').trim(); if(nm) any=true;
     g+='<div class="plazachip'+(nm?'':' vacia')+'"><span class="pletter">'+L+'</span><span class="pname">'+(nm||'🔐')+'</span></div>';
   });
   $('plazaGrid').innerHTML=g;
   let ex='';
-  const rb=(PLAZAS.runnerBarra||'').trim(), rc=(PLAZAS.runnerCocina||'').trim(), bs=(PLAZAS.busser||'').trim();
+  const rb=(SRC.runnerBarra||'').trim(), rc=(SRC.runnerCocina||'').trim(), bs=(SRC.busser||'').trim();
   if(rb){ ex+='<div class="prow"><span class="prl">🏃 Runner de barra</span><span class="prv">'+rb+'</span></div>'; any=true; }
   if(rc){ ex+='<div class="prow"><span class="prl">🏃 Runner de cocina</span><span class="prv">'+rc+'</span></div>'; any=true; }
   if(bs){ ex+='<div class="prow"><span class="prl">🫡 Busser</span><span class="prv">'+bs+'</span></div>'; any=true; }
@@ -1151,7 +1184,7 @@ function renderStock(){
 // ── Panel de Capitán: anuncio y stock en vivo (David/Isaac) ──
 function ensureAdmin(){ if(!ADMIN) ADMIN={aviso:{},stock:{}}; if(!ADMIN.aviso) ADMIN.aviso={}; if(!ADMIN.stock) ADMIN.stock={}; }
 async function loadAdmin(){
-  try{ const r=await fetch(SALON_ADMIN); const d=await r.json(); ADMIN={aviso:d.aviso||{},stock:d.stock||{}}; }catch(e){}
+  try{ const r=await fetch(SALON_ADMIN); const d=await r.json(); ADMIN={aviso:d.aviso||{},stock:d.stock||{},plazas:d.plazas||null}; }catch(e){}
 }
 function admClave(){ try{ return localStorage.getItem('seg_adm_clave')||''; }catch(e){ return ''; } }
 function admSaveClave(){ try{ localStorage.setItem('seg_adm_clave',$('admClave').value); }catch(e){} }
@@ -1266,22 +1299,60 @@ function avRow(key,label,texto,on){
   return '<div class="avrow"><div class="avrowtxt"><b>'+label+'</b><span>'+escHtml((texto||'').slice(0,70))+'</span></div>'
     +'<button class="avtoggle '+(on?'on':'off')+'" onclick="adminToggleAviso(\''+key+'\')">'+(on?'ON':'OFF')+'</button></div>';
 }
-function renderAdminPanel(){
-  // interruptores de visibilidad de anuncios
-  const vl=$('admVisList');
-  if(vl){
-    let rows=[];
-    const D=ADMIN&&ADMIN.aviso&&ADMIN.aviso.David, I=ADMIN&&ADMIN.aviso&&ADMIN.aviso.Isaac;
-    if(D&&D.activo&&D.texto) rows.push(avRow('David','Anuncio de David',D.texto,!!D.vis));
-    if(I&&I.activo&&I.texto) rows.push(avRow('Isaac','Anuncio de Isaac',I.texto,!!I.vis));
-    rows.push(avRow('sheet','Anuncio de base (Sheet)',baseAviso(),sheetVisible()));
-    vl.innerHTML=rows.join('');
-  }
-  // stock (etiquetas)
+function renderAvisoPanel(){
+  const vl=$('admVisList'); if(!vl) return;
+  let rows=[];
+  const D=ADMIN&&ADMIN.aviso&&ADMIN.aviso.David, I=ADMIN&&ADMIN.aviso&&ADMIN.aviso.Isaac;
+  if(D&&D.activo&&D.texto) rows.push(avRow('David','Anuncio de David',D.texto,!!D.vis));
+  if(I&&I.activo&&I.texto) rows.push(avRow('Isaac','Anuncio de Isaac',I.texto,!!I.vis));
+  rows.push(avRow('sheet','Anuncio de base (Sheet)',baseAviso(),sheetVisible()));
+  vl.innerHTML=rows.join('');
+}
+function renderStockPanel(){
   const st=admStockActivo();
   const s=$('admStockActual'); if(s){ s.innerHTML = st?('<span class="avtag">Activo: '+st.by+'</span>'):'<span class="admnone">Sin stock de capitán. Rige el del Sheet.</span>'; }
   renderChips();
-  const ck=$('admClave'); if(ck&&!ck.value) ck.value=admClave();
+}
+function fillClave(){ const ck=$('admClave'); if(ck&&!ck.value) ck.value=admClave(); }
+function renderAdminPanel(){ renderAvisoPanel(); renderStockPanel(); fillClave(); }
+// ── Plazas (David/Isaac asignan; el equipo las ve en Hoy) ──
+const PLZ_LETRAS=['T','M','P','B','S','K'];
+function admPlazas(){
+  if(!ADMIN||!ADMIN.plazas) return null;
+  const p=ADMIN.plazas, pl=p.plazas||{};
+  const any=PLZ_LETRAS.some(L=>(pl[L]||'').trim())||(p.runnerBarra||'').trim()||(p.runnerCocina||'').trim()||(p.busser||'').trim();
+  return any?{plazas:pl,runnerBarra:p.runnerBarra||'',runnerCocina:p.runnerCocina||'',busser:p.busser||''}:null;
+}
+function renderPlazasEditor(){
+  const src=admPlazas()||PLAZAS||{plazas:{},runnerBarra:'',runnerCocina:'',busser:''};
+  const pl=src.plazas||{};
+  PLZ_LETRAS.forEach(L=>{ const el=$('plz'+L); if(el) el.value=pl[L]||''; });
+  if($('plzRB')) $('plzRB').value=src.runnerBarra||'';
+  if($('plzRC')) $('plzRC').value=src.runnerCocina||'';
+  if($('plzBS')) $('plzBS').value=src.busser||'';
+}
+async function plazasGuardar(){
+  if(!admClave()){ admMsg('plzMsg','Ingresa la clave de admin en el Panel.',false); return; }
+  const plazas={}; PLZ_LETRAS.forEach(L=>{ plazas[L]=($('plz'+L).value||'').trim(); });
+  const runnerBarra=($('plzRB').value||'').trim(), runnerCocina=($('plzRC').value||'').trim(), busser=($('plzBS').value||'').trim();
+  ensureAdmin(); ADMIN.plazas={plazas,runnerBarra,runnerCocina,busser}; renderPlazas();  // optimista
+  admMsg('plzMsg','Guardando…',null);
+  try{ const r=await admPost({tipo:'plazas',accion:'enviar',plazas,runnerBarra,runnerCocina,busser});
+    if(r.status===401){ admMsg('plzMsg','Clave incorrecta.',false); return; }
+    admMsg('plzMsg', r.ok?'✅ Plazas actualizadas. El equipo ya las ve.':'No se pudo guardar.', r.ok);
+  }catch(e){ admMsg('plzMsg','Sin conexión, intenta de nuevo.',false); }
+  loadAdmin().then(()=>{ renderPlazas(); renderPlazasEditor(); });
+}
+async function plazasQuitar(){
+  ensureAdmin(); ADMIN.plazas=null;
+  PLZ_LETRAS.forEach(L=>{ if($('plz'+L)) $('plz'+L).value=''; });
+  if($('plzRB')) $('plzRB').value=''; if($('plzRC')) $('plzRC').value=''; if($('plzBS')) $('plzBS').value='';
+  renderPlazas(); admMsg('plzMsg','Vaciando…',null);
+  try{ const r=await admPost({tipo:'plazas',accion:'quitar'});
+    if(r.status===401){ admMsg('plzMsg','Clave incorrecta.',false); return; }
+    admMsg('plzMsg', r.ok?'Plazas vaciadas. Vuelve lo del Sheet (si hay).':'No se pudo vaciar.', r.ok);
+  }catch(e){ admMsg('plzMsg','Sin conexión, intenta de nuevo.',false); }
+  loadAdmin().then(()=>{ renderPlazas(); renderPlazasEditor(); });
 }
 // ── Checklist de salón (capitanes) ──
 function chkKey(l){ return 'seg_chk_'+l; }
@@ -1509,9 +1580,12 @@ function showView(v){
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
   $('v-'+v).classList.add('on');
   if(v==='checklist') renderChecklist();  // siempre refrescar desde localStorage al entrar
-  if(v==='admin') loadAdmin().then(()=>{ initStockDraft(); renderAdminPanel(); });
-  if(v==='hoy') loadAdmin().then(()=>{ renderAviso(); renderStock(); });  // overrides al toque al volver a Hoy
-  const navV=['estudiar','venta','ruta','fideliza','vender','empujar','cartaint'].includes(v)?'carta':(['ofrecer','temporal','semana','almuerzo'].includes(v)?'marcas':((v==='doc'||v==='qrs'||v==='checklist'||v==='admin')?'mi':v));
+  if(v==='admin') fillClave();
+  if(v==='adm-aviso') loadAdmin().then(()=>{ renderAvisoPanel(); fillClave(); });
+  if(v==='adm-stock') loadAdmin().then(()=>{ initStockDraft(); renderStockPanel(); });
+  if(v==='adm-plazas') loadAdmin().then(()=>{ renderPlazasEditor(); });
+  if(v==='hoy') loadAdmin().then(()=>{ renderAviso(); renderStock(); renderPlazas(); });  // overrides al toque al volver a Hoy
+  const navV=['estudiar','venta','ruta','fideliza','vender','empujar','cartaint'].includes(v)?'carta':(['ofrecer','temporal','semana','almuerzo'].includes(v)?'marcas':((v==='doc'||v==='qrs'||v==='checklist'||v==='admin'||v==='adm-aviso'||v==='adm-stock'||v==='adm-plazas')?'mi':v));
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===navV));
   $('backBtn').style.display=navStack.length?'flex':'none';
   window.scrollTo({top:0,behavior:'instant'});
