@@ -40,7 +40,7 @@ exports.handler = async (event) => {
     if (!ADMIN_KEY || data.clave !== ADMIN_KEY) {
       return { statusCode: 401, body: JSON.stringify({ ok: false, error: 'clave' }) };
     }
-    if (data.autor !== 'David' && data.autor !== 'Isaac') {
+    if (['David', 'Isaac', 'Peter'].indexOf(data.autor) < 0) {
       return { statusCode: 403, body: JSON.stringify({ ok: false, error: 'autor' }) };
     }
     if (data.tipo !== 'anuncio' && data.tipo !== 'stock' && data.tipo !== 'plazas') {
@@ -58,7 +58,7 @@ exports.handler = async (event) => {
       accion: accion,
       autor: data.autor,
       texto: (data.texto || '').toString().slice(0, 600),
-      target: ['sheet', 'David', 'Isaac'].indexOf(data.target) >= 0 ? data.target : '',
+      target: ['sheet', 'David', 'Isaac', 'Peter'].indexOf(data.target) >= 0 ? data.target : '',
       vis: data.vis === true,
       s101: arr(data.s101),
       s85: arr(data.s85),
