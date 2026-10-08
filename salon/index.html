@@ -230,6 +230,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .crtab td{padding:4px 3px;text-align:right;border-bottom:1px solid rgba(255,255,255,.08);color:#E8EEF6;}
 .crtab td:first-child{color:#9DBDE2;width:16px;}
 .crtab tr.win td{color:#F2D492;font-weight:700;}
+.crtab .crdet{display:block;font-size:9.5px;font-weight:400;color:rgba(255,255,255,.5);margin-top:2px;white-space:normal;line-height:1.3;}
 .crtab tr.tot td{border-top:1px solid rgba(255,255,255,.28);border-bottom:none;color:#fff;font-weight:700;padding-top:6px;}
 .blist{list-style:none;margin:6px 0 0;padding:0;}
 .blist li{position:relative;padding:5px 0 5px 20px;font-size:13px;line-height:1.5;color:var(--text);border-bottom:1px solid var(--line);}
@@ -681,13 +682,48 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <p>Mistral premió a los garzones que más vendieron sus nuevos <b>Pisco Mistral Nobel Berries</b> y <b>Nobel Apple</b>. El concurso fue válido del 1 de agosto al 30 de septiembre.</p>
       <p style="margin-top:9px"><b>🥇 1er lugar</b> — Gift card de $80.000 + Kit Mistral Nobel (Nobel Clásico, Nobel Cristalino y Nobel Barrica Tostada).</p>
       <p style="margin-top:6px"><b>🥈 2do lugar</b> — Set de vasos Mistral + Kit Mistral Nobel Sabores (Nobel Fire, Nobel Apple y Nobel Honey).</p>
-      <p style="margin-top:9px">Los resultados se publicarán y la premiación se realizará durante la semana del 5 al 9 de octubre.</p>
+      <p style="margin-top:9px">La premiación se realizó la semana del 5 al 9 de octubre.</p>
+      <button class="crank" onclick="toggleConc('cmist')">🏆 Ranking final<span id="cmistarr">›</span></button>
+      <div id="cmist" class="crbody" style="display:none">
+        <table class="crtab">
+          <thead><tr><th>#</th><th>Garzón</th><th>Total</th></tr></thead>
+          <tbody>
+          <tr class="win"><td>1</td><td>Miguel Quilaqueo<small class="crdet">20 Apple Mule · 10 Jungle Spritz</small></td><td>30</td></tr>
+          <tr><td>2</td><td>Eduardo Martínez<small class="crdet">7 Jungle Spritz · 2 cortos Apple · 1 Apple Mule</small></td><td>10</td></tr>
+          <tr><td>2</td><td>Luis Aguirre<small class="crdet">4 Apple Mule · 4 Jungle Spritz · 2 cortos Apple</small></td><td>10</td></tr>
+          <tr><td>4</td><td>Isaac Morales<small class="crdet">4 botellas Apple · 4 botellas Berries · 1 corto Berries</small></td><td>9</td></tr>
+          <tr><td>4</td><td>Samuel Rodríguez<small class="crdet">5 Jungle Spritz · 3 cortos Apple · 1 Apple Mule</small></td><td>9</td></tr>
+          <tr><td>6</td><td>Edu Castro<small class="crdet">6 Apple Mule · 2 cortos Apple</small></td><td>8</td></tr>
+          <tr><td>7</td><td>Jean Carlos Sánchez<small class="crdet">4 Apple Mule · 1 Jungle Spritz · 1 corto Apple</small></td><td>6</td></tr>
+          <tr><td>7</td><td>Samai Bravo<small class="crdet">4 Jungle Spritz · 2 cortos Apple</small></td><td>6</td></tr>
+          <tr><td>9</td><td>David Alfredo<small class="crdet">3 Apple Mule · 1 Jungle Spritz · 1 corto Apple</small></td><td>5</td></tr>
+          <tr><td>10</td><td>Gabriela Victoria<small class="crdet">2 Apple Mule · 2 Jungle Spritz</small></td><td>4</td></tr>
+          <tr><td>11</td><td>Leidy Varelas<small class="crdet">2 Apple Mule</small></td><td>2</td></tr>
+          <tr><td>11</td><td>Maykoll Romero<small class="crdet">2 Apple Mule</small></td><td>2</td></tr>
+          <tr><td>11</td><td>Miguel Bracho<small class="crdet">2 Jungle Spritz</small></td><td>2</td></tr>
+          <tr><td>11</td><td>Stevetk11 Garnica<small class="crdet">2 Apple Mule</small></td><td>2</td></tr>
+          <tr><td>15</td><td>Kolash Nikov<small class="crdet">1 Apple Mule</small></td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card concurso goodwinds">
       <div class="ctag">Finalizado · Septiembre</div>
       <h3 style="font-family:'Belgan';font-size:18px;margin-top:3px">Concurso Goodwinds</h3>
       <p>La marca de gin <b>Goodwinds</b> ofreció, durante el mes de septiembre, una <b>botella Goodwinds</b> de premio para el garzón que más vendiera Goodwinds.</p>
+      <button class="crank" onclick="toggleConc('cgood')">🏆 Ranking final<span id="cgoodarr">›</span></button>
+      <div id="cgood" class="crbody" style="display:none">
+        <table class="crtab">
+          <thead><tr><th>#</th><th>Garzón</th><th>Unidades</th></tr></thead>
+          <tbody>
+          <tr class="win"><td>1</td><td>David Alfredo</td><td>13</td></tr>
+          <tr><td>2</td><td>Samuel Rodríguez</td><td>5</td></tr>
+          <tr><td>3</td><td>Eduardo Martínez</td><td>3</td></tr>
+          <tr><td>4</td><td>Leidy Varelas</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card concurso jw">
@@ -734,6 +770,34 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <div class="ctag">Finalizado · Julio a septiembre</div>
       <h3 style="font-family:'Belgan';font-size:18px;margin-top:3px">Concurso Royal · Specialized</h3>
       <p>Segunda versión, desde julio hasta fines de septiembre. Los clientes que consumían Royal llenaban el formulario del QR físico para participar por una <b>bicicleta eléctrica Specialized</b>. El garzón con más venta de productos Royal se lleva una <b>Gift Card Cencosud de $100.000 CLP</b>.</p>
+      <button class="crank" onclick="toggleConc('croy2')">🏆 Ranking final<span id="croy2arr">›</span></button>
+      <div id="croy2" class="crbody" style="display:none">
+        <table class="crtab">
+          <thead><tr><th>#</th><th>Garzón</th><th>C/Alc</th><th>S/Alc</th><th>Total</th></tr></thead>
+          <tbody>
+          <tr class="win"><td>1</td><td>Miguel Quilaqueo</td><td>655</td><td>78</td><td>733</td></tr>
+          <tr><td>2</td><td>Eduardo Martínez</td><td>583</td><td>43</td><td>626</td></tr>
+          <tr><td>3</td><td>Luis Aguirre</td><td>434</td><td>70</td><td>504</td></tr>
+          <tr><td>4</td><td>Samuel Rodríguez</td><td>424</td><td>69</td><td>493</td></tr>
+          <tr><td>5</td><td>Jean Carlos Sánchez</td><td>426</td><td>60</td><td>486</td></tr>
+          <tr><td>6</td><td>Samai Bravo</td><td>429</td><td>54</td><td>483</td></tr>
+          <tr><td>7</td><td>Gabriela Victoria</td><td>381</td><td>49</td><td>430</td></tr>
+          <tr><td>8</td><td>Stevetk11 Garnica</td><td>377</td><td>49</td><td>426</td></tr>
+          <tr><td>9</td><td>Edu Castro</td><td>346</td><td>28</td><td>374</td></tr>
+          <tr><td>10</td><td>Maykoll Romero</td><td>201</td><td>54</td><td>255</td></tr>
+          <tr><td>11</td><td>David Alfredo</td><td>198</td><td>33</td><td>231</td></tr>
+          <tr><td>12</td><td>Leidy Varelas</td><td>172</td><td>18</td><td>190</td></tr>
+          <tr><td>13</td><td>Miguel Bracho</td><td>76</td><td>11</td><td>87</td></tr>
+          <tr><td>14</td><td>Isaac Morales</td><td>75</td><td>6</td><td>81</td></tr>
+          <tr><td>15</td><td>Kolash Nikov</td><td>40</td><td>2</td><td>42</td></tr>
+          <tr><td>16</td><td>Johann Haering</td><td>34</td><td>3</td><td>37</td></tr>
+          <tr><td>17</td><td>Sebastián Yanchina</td><td>11</td><td>5</td><td>16</td></tr>
+          <tr><td>18</td><td>Héctor Meléndez</td><td>10</td><td>0</td><td>10</td></tr>
+          <tr><td>19</td><td>Yurelis Camacho</td><td>4</td><td>0</td><td>4</td></tr>
+          <tr><td>20</td><td>José Buergo</td><td>1</td><td>0</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     </section>
 
