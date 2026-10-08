@@ -1197,8 +1197,8 @@ function avisoEntries(){
   if(!out.length) out.push({key:'sheet',label:'📢 Anuncio de base',texto:baseAviso()});  // regla: siempre ≥1
   return out;
 }
-function admStockActivo(){ if(!ADMIN||!ADMIN.stock) return null;
-  for(const a of CAPITANES){ const x=ADMIN.stock[a]; if(x&&x.activo) return {by:a,st:x}; }
+function admStockActivo(){ const s=ADMIN&&ADMIN.stock;
+  if(s&&(((s.s101||[]).length)||((s.s85||[]).length)||((s.s86||[]).length))) return {by:s.autor||'',st:s};
   return null; }
 function renderAviso(){
   const list=$('avisoList'); if(!list) return;
@@ -1320,9 +1320,8 @@ async function adminToggleAviso(key){
 // Stock por etiquetas: borrador local editable con chips + agregar
 let STOCK_DRAFT={s101:[],s85:[],s86:[]};
 function initStockDraft(){
-  const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  const mine=ADMIN&&ADMIN.stock&&ADMIN.stock[g.name];
-  if(mine&&mine.activo){ STOCK_DRAFT={s101:(mine.s101||[]).slice(),s85:(mine.s85||[]).slice(),s86:(mine.s86||[]).slice()}; }
+  const act=admStockActivo();  // stock compartido: todos editan lo mismo
+  if(act){ const s=act.st; STOCK_DRAFT={s101:(s.s101||[]).slice(),s85:(s.s85||[]).slice(),s86:(s.s86||[]).slice()}; }
   else { const b=STOCK_LIVE||STOCK_FALLBACK; STOCK_DRAFT={s101:(b['101']||[]).slice(),s85:(b['85']||[]).slice(),s86:(b['86']||[]).slice()}; }
 }
 function renderChips(){
@@ -1347,7 +1346,7 @@ async function publishStock(){
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
   const empty=!STOCK_DRAFT.s101.length&&!STOCK_DRAFT.s85.length&&!STOCK_DRAFT.s86.length;
   ensureAdmin();
-  ADMIN.stock[g.name]=empty?{s101:[],s85:[],s86:[],activo:false}:{s101:STOCK_DRAFT.s101.slice(),s85:STOCK_DRAFT.s85.slice(),s86:STOCK_DRAFT.s86.slice(),activo:true};
+  ADMIN.stock=empty?null:{s101:STOCK_DRAFT.s101.slice(),s85:STOCK_DRAFT.s85.slice(),s86:STOCK_DRAFT.s86.slice(),autor:g.name};
   renderStock();  // optimista para el equipo
   admMsg('admStockMsg','Guardando…',null);
   try{
@@ -1360,7 +1359,7 @@ async function publishStock(){
 }
 async function adminQuitarStock(){
   const g=JSON.parse(localStorage.getItem('seg_garzon')||'{}');
-  ensureAdmin(); if(ADMIN.stock[g.name]) ADMIN.stock[g.name]={s101:[],s85:[],s86:[],activo:false};
+  ensureAdmin(); ADMIN.stock=null;
   STOCK_DRAFT={s101:[],s85:[],s86:[]}; renderChips(); renderStock();
   admMsg('admStockMsg','Quitando…',null);
   try{ const r=await admPost({tipo:'stock',accion:'quitar'});
