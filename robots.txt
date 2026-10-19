@@ -3,5 +3,6 @@ Allow: /
 Disallow: /confirmacion
 Disallow: /salon
 Disallow: /cocina
+Disallow: /barra
 
 Sitemap: https://www.segreta.cl/sitemap.xml
