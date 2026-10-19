@@ -4,8 +4,8 @@
   "start_url": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#161311",
-  "theme_color": "#161311",
+  "background_color": "#6E1717",
+  "theme_color": "#6E1717",
   "icons": [
     {"src": "assets/app-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any"},
     {"src": "assets/favicon.png", "sizes": "64x64", "type": "image/png"}

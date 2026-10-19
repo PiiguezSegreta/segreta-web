@@ -1,8 +1,8 @@
 /* Portal de Barra — cache offline.
    Shell y datos: stale-while-revalidate. Fotos: cache permanente al abrirlas. */
-const V = 'barra-v1';   // subir al corregir recetas: fuerza recarga del recetario
+const V = 'barra-v2';   // subir al corregir recetas: fuerza recarga del recetario
 const SHELL = ['./', 'index.html', 'data/recetas.json', 'img/placeholder.webp',
-               'assets/belgan.ttf', 'assets/iso-ocre.png', 'assets/favicon.png', 'assets/app-icon.png'];
+               'assets/belgan.ttf', 'assets/iso-blanco.png', 'assets/favicon.png', 'assets/app-icon.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(V).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
