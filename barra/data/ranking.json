@@ -1,0 +1,38 @@
+{
+ "_como_actualizar": "Tragos: agregar a 'tragos' del competidor {nombre, slug (ficha en recetas.json o null), ventas: {'2026-10': n}}. Ventas: sumar el mes en 'meses' y actualizar 'ventas_al'. Subir const V en sw.js.",
+ "competencias": [
+  {
+   "id": "jw",
+   "nombre": "Innovación Johnnie Walker",
+   "corto": "Competencia Johnnie Walker",
+   "estado": "En curso",
+   "auspiciador": "Johnnie Walker",
+   "plazo": "2026-10-23",
+   "plazo_txt": "viernes 23 de octubre",
+   "meses": ["2026-10"],
+   "ventas_al": "",
+   "intro": "Competencia interna de creación de coctelería en base a Johnnie Walker. Cada mes se premia con premios del auspiciador.",
+   "pasos": [
+    "Crea uno o más cócteles en base a Johnnie Walker.",
+    "Preséntalo a Ronald, jefe de barra, para su aprobación.",
+    "Si lo aprueba, se lanza según el conducto regular: ficha de lanzamiento, carga en el sistema y carta.",
+    "Desde su lanzamiento se cuentan las unidades vendidas, mes a mes."
+   ],
+   "reglas": [
+    ["Quién gana", "El cóctel de autor que más venda en el mes es el cóctel premiado, junto a su legítimo autor."],
+    ["Plazo", "Los nuevos tragos tienen que estar publicados a más tardar el viernes 23 de octubre."],
+    ["Qué buscamos", "Tragos ricos, frescos, bonitos y creativos, hasta en el nombre: un buen nombre llama la atención en la carta y suma opciones de ganar."],
+    ["Exposición", "Todos los tragos tienen la misma exposición: van en la carta dentro de Coctelería de Autor, en la carta especial de los lunes y en la de los martes."],
+    ["Ronald también compite", "Como jefe de barra aprueba los tragos y además participa con los suyos."]
+   ],
+   "competidores": [
+    {"nombre": "Abi", "rol": "Bartender", "tragos": []},
+    {"nombre": "Franchesco", "rol": "Bartender", "tragos": []},
+    {"nombre": "Ronald", "rol": "Jefe de barra", "tragos": []},
+    {"nombre": "Gonzalo", "rol": "Bartender", "tragos": []},
+    {"nombre": "Cristhian", "rol": "Bartender", "tragos": []},
+    {"nombre": "Martín", "rol": "Bartender", "tragos": []}
+   ]
+  }
+ ]
+}

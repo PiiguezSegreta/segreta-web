@@ -229,6 +229,74 @@ a{color:inherit;text-decoration:none;}
   transition:all .2s;z-index:60;}
 #toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
 
+/* ══════════ RANKING DE AUTORES ══════════ */
+#v-ranking .wrap, #v-comp .wrap{padding-top:18px;}
+.rkintro{font-size:14px;line-height:1.6;color:#4A443D;margin:2px 0 16px;}
+.compbtn{display:flex;gap:14px;align-items:center;width:100%;text-align:left;background:linear-gradient(160deg,var(--rojo),var(--rojod));
+  color:#fff;border-radius:16px;padding:18px;margin-bottom:12px;}
+.compbtn .ic{flex:0 0 48px;height:48px;border-radius:12px;background:rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:24px;}
+.compbtn .k{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);}
+.compbtn .n{font-family:'Belgan',serif;font-size:20px;margin:3px 0 2px;line-height:1.15;}
+.compbtn .d{font-size:12px;color:rgba(255,255,255,.72);}
+.compbtn .ar{margin-left:auto;font-size:22px;color:var(--oro);}
+.compbtn.soon{background:var(--crema);color:var(--mute);border:1px dashed var(--line);}
+.compbtn.soon .ic{background:#EDE5D6;} .compbtn.soon .n{color:var(--mute);}
+.compbtn.soon .k{color:var(--ocre);} .compbtn.soon .d{color:var(--mute);}
+
+.chero{background:linear-gradient(160deg,var(--rojo),var(--rojod));color:#fff;border-radius:16px;padding:20px 18px;}
+.chero .k{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--oro);}
+.chero h2{font-family:'Belgan',serif;font-size:25px;font-weight:400;margin:5px 0 8px;line-height:1.12;}
+.chero p{font-size:14px;line-height:1.55;color:rgba(255,255,255,.88);}
+.chero .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.chero .pill{font-size:11.5px;padding:6px 11px;border-radius:999px;background:rgba(0,0,0,.25);color:var(--oro);letter-spacing:.02em;}
+.instr{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+.instr summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;justify-content:space-between;align-items:center;
+  font-family:'Belgan',serif;font-size:15px;color:var(--rojo);letter-spacing:.03em;}
+.instr summary::-webkit-details-marker{display:none;}
+.instr summary:after{content:'+';font-family:'Red Hat Display',sans-serif;font-size:20px;color:var(--ocre);}
+.instr[open] summary:after{content:'–';}
+.instr .in{padding:0 16px 16px;}
+.instr h4{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ocre);margin:14px 0 8px;}
+.instr ol{padding-left:0;list-style:none;counter-reset:p;}
+.instr ol li{counter-increment:p;display:flex;gap:11px;font-size:14px;line-height:1.5;padding:6px 0;}
+.instr ol li:before{content:counter(p);flex:0 0 24px;height:24px;border-radius:50%;background:var(--crema);color:var(--rojo);
+  font-family:'Belgan',serif;font-size:12.5px;display:flex;align-items:center;justify-content:center;}
+.regla{padding:10px 0;border-top:1px solid #F1ECE3;font-size:14px;line-height:1.5;}
+.regla b{display:block;font-size:12.5px;color:var(--rojo);margin-bottom:2px;}
+
+.lider{margin-top:16px;display:flex;gap:12px;align-items:center;background:var(--crema);border:1px solid var(--line);border-radius:14px;padding:12px;}
+.lider img{width:58px;height:58px;border-radius:10px;object-fit:cover;flex:0 0 58px;}
+.lider .k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);}
+.lider .n{font-family:'Belgan',serif;font-size:16px;color:var(--rojo);margin-top:2px;}
+.lider .d{font-size:12px;color:var(--mute);margin-top:1px;}
+
+.rkhead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:24px 0 12px;flex-wrap:wrap;}
+.rkhead .sect-h{margin:0;border:none;padding:0;}
+.rkhead .upd{font-size:11.5px;color:var(--mute);}
+.comps{display:flex;flex-direction:column;gap:12px;}
+.compcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;}
+.compcard .top{display:flex;align-items:center;gap:12px;}
+.compcard .pos{flex:0 0 38px;height:38px;border-radius:50%;background:var(--crema);color:var(--rojo);
+  font-family:'Belgan',serif;font-size:17px;display:flex;align-items:center;justify-content:center;}
+.compcard.p1 .pos{background:var(--ocre);color:#fff;}
+.compcard .who .n{font-family:'Belgan',serif;font-size:18px;color:var(--rojo);line-height:1.15;}
+.compcard .who .r{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:2px;}
+.compcard .tot{margin-left:auto;text-align:right;}
+.compcard .tot .v{font-family:'Belgan',serif;font-size:22px;color:var(--rojo);line-height:1;font-variant-numeric:tabular-nums;}
+.compcard .tot .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:3px;}
+.compcard .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);margin:14px 0 8px;}
+.tragos{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.tragos::-webkit-scrollbar{display:none;}
+.tcard{flex:0 0 132px;background:var(--paper);border:1px solid var(--line);border-radius:12px;overflow:hidden;text-align:left;}
+.tcard img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--crema);}
+.tcard .tx{padding:8px 9px 9px;}
+.tcard .n{font-family:'Belgan',serif;font-size:13.5px;color:var(--rojo);line-height:1.2;}
+.tcard .s{font-size:11.5px;color:var(--mute);margin-top:3px;}
+.tcard .s b{color:var(--ocre);font-weight:700;}
+.tcard.ph{border-style:dashed;} .tcard.ph .n{color:var(--mute);font-family:'Red Hat Display',sans-serif;font-size:12px;font-weight:500;}
+.tcard:not(.ph):active{background:var(--crema);}
+.mesbar{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;}
+
 /* ══════════ TABBAR ══════════ */
 .tabbar{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--rojo);
   padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(0,0,0,.18);}
@@ -283,6 +351,13 @@ a{color:inherit;text-decoration:none;}
   .falta li{font-size:16px;}
   .reportbtn{max-width:340px;}
   .msgwrap{max-width:660px;margin:0 auto;}
+  .rkwrap{max-width:980px;}
+  .compbtn{max-width:620px;padding:22px;} .compbtn .n{font-size:24px;}
+  .chero{padding:28px;} .chero h2{font-size:32px;} .chero p{font-size:16px;}
+  .instr summary{font-size:17px;} .instr ol li,.regla{font-size:16px;}
+  .comps{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .compcard .who .n{font-size:21px;}
+  .tcard{flex:0 0 150px;}
   .intro{font-size:16px;padding:22px;}
   .field input,.field select,.field textarea{padding:16px;font-size:17px;}
   .sendbtn{padding:18px;font-size:17px;}
@@ -327,6 +402,11 @@ a{color:inherit;text-decoration:none;}
           <div class="k">Recetario</div>
           <div class="n">Dossier de Barra</div>
           <div class="d"><span id="homeCount"></span> · busca por trago, producto o ingrediente</div>
+        </button>
+        <button class="bigbtn" onclick="go('#/ranking')">
+          <div class="k">Competencia interna</div>
+          <div class="n">🏆 Ranking de Autores</div>
+          <div class="d" id="homeComp">Innovación Johnnie Walker · en curso</div>
         </button>
         <button class="bigbtn pend" onclick="go('#/sec/PENDIENTES')">
           <div class="k">Para el jefe de barra</div>
@@ -389,6 +469,16 @@ a{color:inherit;text-decoration:none;}
     <!-- ── FICHA ── -->
     <section class="view" id="v-rec"><div class="wrap"><div class="rdetail" id="recBody"></div></div></section>
 
+    <!-- ── RANKING DE AUTORES ── -->
+    <section class="view" id="v-ranking"><div class="wrap"><div class="rkwrap">
+      <p class="rkintro">Competencias internas de innovación en coctelería. Cada competencia tiene sus reglas, su
+        auspiciador y su premio. Elige una para ver las instrucciones, a los competidores y el ranking del mes.</p>
+      <div id="compList"></div>
+    </div></div></section>
+
+    <!-- ── COMPETENCIA ── -->
+    <section class="view" id="v-comp"><div class="wrap"><div class="rkwrap" id="compBody"></div></div></section>
+
     <!-- ── MENSAJES ── -->
     <section class="view" id="v-msg"><div class="wrap"><div class="msgwrap">
       <div class="intro">
@@ -427,6 +517,7 @@ a{color:inherit;text-decoration:none;}
     <button class="on" data-v="home" onclick="go('#/home')"><div class="i">🏠</div><div class="l">Inicio</div></button>
     <button data-v="dossier" onclick="go('#/dossier')"><div class="i">📖</div><div class="l">Dossier</div></button>
     <button data-v="pend" onclick="go('#/sec/PENDIENTES')"><div class="i">📝</div><div class="l">Por completar</div></button>
+    <button data-v="rank" onclick="go('#/ranking')"><div class="i">🏆</div><div class="l">Ranking</div></button>
     <button data-v="msg" onclick="go('#/mensajes')"><div class="i">✉️</div><div class="l">Mensajes</div></button>
   </nav>
 </div>
@@ -435,6 +526,7 @@ a{color:inherit;text-decoration:none;}
 <script>
 const PIN = "1925";
 const $ = id => document.getElementById(id);
+let RK = null, curComp = null, curMes = null;
 let DB = null, SEC = {}, BYSLUG = {}, curSec = null, curSub = null, curRec = null, scale = 1;
 let curView = 'home', curOrd = 'carta', dosView = 'sec';
 
@@ -482,6 +574,8 @@ function route(){
   else if(head === 'sec' && SEC[arg])  showSection(arg);
   else if(head === 'dossier')          showView('dossier', 'DOSSIER DE BARRA', false);
   else if(head === 'mensajes')         showView('msg', 'MENSAJES', false);
+  else if(head === 'ranking')          showRanking();
+  else if(head === 'comp' && RK && RK.competencias.find(c => c.id === arg)) showComp(arg);
   else                                 showView('home', 'BARRA SEGRETA', false);
 }
 
@@ -493,7 +587,7 @@ function showView(v, title, isSub){
   $('q').placeholder = v === 'sec' ? 'Buscar en ' + SEC[curSec].label + '...' : 'Buscar trago, producto o ingrediente...';
   $('topTitle').textContent = title;
   $('topbar').classList.toggle('sub', !!isSub);
-  let tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg'}[v];
+  let tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg', ranking:'rank', comp:'rank'}[v];
   if((v === 'sec' && curSec === 'PENDIENTES') || (v === 'rec' && curRec && isPend(curRec))) tab = 'pend';
   document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.v === tab));
   window.scrollTo(0,0);
@@ -723,6 +817,7 @@ function paintRecipe(){
     tags.push(`<span class="tag">${esc(SEC[r.sec].label)}</span>`);
     if(r.sub) tags.push(`<span class="tag">${esc(r.sub)}</span>`);
     (r.also || []).forEach(a => SEC[a] && tags.push(`<span class="tag">También en ${esc(SEC[a].label)}</span>`));
+    compOf(r.slug).forEach(x => tags.push(`<a class="tag pend" href="#/comp/${x.c.id}">🏆 ${esc(x.c.corto)} · ${esc(x.autor)}</a>`));
   }
 
   const hasRec = r.ings && r.ings.length;
@@ -779,7 +874,103 @@ function paintRecipe(){
       ${report}
     </div>`;
 }
+function compOf(slug){
+  if(!RK) return [];
+  return RK.competencias.flatMap(c => c.competidores.flatMap(p =>
+    p.tragos.filter(t => t.slug === slug).map(() => ({c, autor: p.nombre}))));
+}
 function setScale(m){ scale = m; paintRecipe(); }
+
+/* ══════════ ranking de autores ══════════ */
+const MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const mesTxt = m => { const [y,mm] = m.split('-'); return MESES[+mm-1][0].toUpperCase() + MESES[+mm-1].slice(1) + ' ' + y; };
+const nfmt = n => (n||0).toLocaleString('es-CL');
+
+function showRanking(){
+  showView('ranking', 'RANKING DE AUTORES', false);
+  $('compList').innerHTML = RK.competencias.map(c => `
+    <button class="compbtn" onclick="go('#/comp/${c.id}')">
+      <div class="ic">🥃</div>
+      <div><div class="k">${esc(c.estado)}</div><div class="n">${esc(c.corto)}</div>
+        <div class="d">${c.competidores.length} competidores · premio mensual del auspiciador</div></div>
+      <div class="ar">›</div>
+    </button>`).join('') + `
+    <div class="compbtn soon"><div class="ic">＋</div>
+      <div><div class="k">Próximamente</div><div class="n">Nuevas competencias</div>
+        <div class="d">Las próximas marcas y desafíos aparecen acá.</div></div></div>`;
+}
+
+function showComp(id){
+  curComp = RK.competencias.find(c => c.id === id);
+  if(!curMes || !curComp.meses.includes(curMes)) curMes = curComp.meses[curComp.meses.length - 1];
+  showView('comp', curComp.corto.toUpperCase(), true);
+  paintComp();
+}
+function setMes(m){ curMes = m; paintComp(); }
+
+function compRows(c){
+  return c.competidores.map((p, i) => {
+    const tragos = p.tragos.map(t => ({...t, v: (t.ventas||{})[curMes] || 0}));
+    return {...p, i, tragos, total: tragos.reduce((a,t) => a + t.v, 0)};
+  }).sort((a,b) => b.total - a.total || a.i - b.i);
+}
+
+function paintComp(){
+  const c = curComp, rows = compRows(c);
+  const dias = Math.ceil((new Date(c.plazo + 'T23:59:00') - new Date()) / 864e5);
+  const plazo = dias > 1 ? `Faltan ${dias} días para el lanzamiento` : dias === 1 ? 'Mañana vence el plazo de lanzamiento'
+    : dias === 0 ? 'Hoy vence el plazo de lanzamiento' : 'Tragos lanzados';
+  const todos = rows.flatMap(r => r.tragos.map(t => ({...t, autor: r.nombre})));
+  const lider = todos.filter(t => t.v > 0).sort((a,b) => b.v - a.v)[0];
+  const hayVentas = rows.some(r => r.total > 0);
+
+  const tcard = t => {
+    const r = t.slug && BYSLUG[t.slug];
+    const img = r ? imgOf(r, true) : 'img/placeholder.webp';
+    return r
+      ? `<button class="tcard" onclick="go('#/r/${t.slug}')"><img src="${img}" alt="" loading="lazy">
+          <div class="tx"><div class="n">${esc(t.nombre || r.name)}</div><div class="s"><b>${nfmt(t.v)}</b> vendidos</div></div></button>`
+      : `<div class="tcard ph"><img src="${img}" alt=""><div class="tx"><div class="n">${esc(t.nombre || 'En creación')}</div>
+          <div class="s">${t.nombre ? 'Por lanzar' : 'Por presentar'}</div></div></div>`;
+  };
+
+  $('compBody').innerHTML = `
+    <div class="chero">
+      <div class="k">Ranking de Autores · ${esc(c.estado)}</div>
+      <h2>${esc(c.nombre)}</h2>
+      <p>${esc(c.intro)}</p>
+      <div class="meta"><span class="pill">${plazo}</span><span class="pill">Premio mensual · ${esc(c.auspiciador)}</span></div>
+    </div>
+    <details class="instr" ${hayVentas ? '' : 'open'}>
+      <summary>INSTRUCCIONES</summary>
+      <div class="in">
+        <h4>Cómo se participa</h4>
+        <ol>${c.pasos.map(x => `<li>${esc(x)}</li>`).join('')}</ol>
+        <h4>Reglas</h4>
+        ${c.reglas.map(([k,v]) => `<div class="regla"><b>${esc(k)}</b>${esc(v)}</div>`).join('')}
+      </div>
+    </details>
+    ${lider ? `<div class="lider"><img src="${BYSLUG[lider.slug] ? imgOf(BYSLUG[lider.slug],true) : 'img/placeholder.webp'}" alt="">
+      <div><div class="k">Cóctel líder · ${mesTxt(curMes)}</div><div class="n">${esc(lider.nombre || BYSLUG[lider.slug].name)}</div>
+      <div class="d">de ${esc(lider.autor)} · ${nfmt(lider.v)} vendidos</div></div></div>` : ''}
+    <div class="rkhead">
+      <h2 class="sect-h">RANKING · ${mesTxt(curMes).toUpperCase()}</h2>
+      <div class="upd">${c.ventas_al ? 'Ventas al ' + esc(c.ventas_al) : 'Las ventas se cuentan desde el lanzamiento'}</div>
+    </div>
+    ${c.meses.length > 1 ? `<div class="mesbar chips">${c.meses.map(m =>
+      `<button class="chip${m === curMes ? ' on' : ''}" onclick="setMes('${m}')">${mesTxt(m)}</button>`).join('')}</div>` : ''}
+    <div class="comps">${rows.map((r, k) => `
+      <div class="compcard${hayVentas && k === 0 ? ' p1' : ''}">
+        <div class="top">
+          <div class="pos">${hayVentas ? k + 1 : '–'}</div>
+          <div class="who"><div class="n">${esc(r.nombre)}</div><div class="r">${esc(r.rol)}</div></div>
+          <div class="tot"><div class="v">${nfmt(r.total)}</div><div class="l">Vendidos en el mes</div></div>
+        </div>
+        <div class="lbl">Coctelería de competencia</div>
+        <div class="tragos">${(r.tragos.length ? r.tragos : [{}]).map(tcard).join('')}</div>
+      </div>`).join('')}
+    </div>`;
+}
 
 /* ══════════ mensajes ══════════ */
 let ctxRecipe = '';
@@ -842,7 +1033,8 @@ async function startApp(){
   $('app').classList.add('on');
   $('topDate').textContent = new Date().toLocaleDateString('es-CL', {weekday:'short', day:'numeric', month:'short'}).toUpperCase();
   if(!DB){
-    DB = await (await fetch('data/recetas.json')).json();
+    [DB, RK] = await Promise.all([fetch('data/recetas.json').then(r => r.json()),
+                                  fetch('data/ranking.json').then(r => r.json())]);
     DB.sections.forEach(s => SEC[s.id] = s);
     DB.recipes.forEach(r => BYSLUG[r.slug] = r);
     const vig = DB.recipes.filter(r => !isOff(r) && r.kind !== 'batch').length;
