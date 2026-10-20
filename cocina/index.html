@@ -138,6 +138,14 @@ img{display:block;max-width:100%;}
 .ritem:active{background:var(--crema);}
 .nores{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 20px;line-height:1.6;}
 
+.tag.foto{background:#F6E5C9;color:#9A6A12;}
+.fotoaviso{margin-top:13px;background:#F6E5C9;color:#7A5410;border-radius:12px;
+  padding:13px 15px;font-size:13px;line-height:1.55;}
+.fotoaviso b{color:#9A6A12;}
+.seccard.foto{background:#FBF4E8;border-color:#EADDC4;} .seccard.foto .n{color:#9A6A12;}
+.secnota{background:#F6E5C9;color:#7A5410;border-radius:12px;padding:13px 15px;
+  font-size:13px;line-height:1.55;margin-bottom:16px;}
+
 /* ══════════ FICHA ══════════ */
 .rhero{margin:0 -16px;background:var(--crema);}
 .rhero img{width:100%;aspect-ratio:16/10;object-fit:cover;}
@@ -448,6 +456,7 @@ img{display:block;max-width:100%;}
 
     <!-- ── SECCIÓN ── -->
     <section class="view" id="v-sec"><div class="wrap">
+      <div class="secnota" id="secNota" style="display:none"></div>
       <div class="chips" id="subChips"></div>
       <div class="fbar">
         <div class="cnt" id="secCount"></div>
@@ -739,10 +748,11 @@ function paintDossier(){
 
 function renderSecGrid(){
   const html = DB.sections.map(s => `
-    <button class="seccard${s.id === 'FUERA DE CARTA' ? ' off' : ''}" onclick="go('#/sec/${encodeURIComponent(s.id)}')">
+    <button class="seccard${s.id === 'FUERA DE CARTA' ? ' off' : ''}${
+      s.id === 'FOTO_PENDIENTE' ? ' foto' : ''}" onclick="go('#/sec/${encodeURIComponent(s.id)}')">
       <div class="i">${s.icon}</div>
       <div class="n">${esc(s.label)}</div>
-      <div class="c">${s.n} ${s.n === 1 ? 'receta' : 'recetas'}</div>
+      <div class="c">${s.n} ${s.id === 'FOTO_PENDIENTE' ? (s.n === 1 ? 'pendiente' : 'pendientes') : (s.n === 1 ? 'receta' : 'recetas')}</div>
     </button>`).join('');
   $('secGrid').innerHTML = html;
   $('homeSecs').innerHTML = html;
@@ -755,6 +765,11 @@ function showSection(id){
   $('q').value = ''; $('searchBox').classList.remove('has');
   const s = SEC[id];
   showView('sec', s.label.toUpperCase(), true);
+  $('secNota').innerHTML = id === 'FOTO_PENDIENTE'
+    ? `Estos platos necesitan foto nueva. <b>La receta y la presentación escritas están correctas</b>:
+       si la foto se contradice con el texto, manda el texto.`
+    : '';
+  $('secNota').style.display = id === 'FOTO_PENDIENTE' ? '' : 'none';
   const subs = s.subs || [];
   $('subChips').innerHTML = subs.length
     ? [`<button class="chip on" onclick="setSub(null,this)">Todas · ${recsOf(id).length}</button>`]
@@ -800,7 +815,8 @@ function cardHTML(r){
   const meta = r.sub || SEC[r.sec].label;
   return `<button class="ritem" onclick="go('#/r/${r.slug}')">
     <img src="${imgOf(r,true)}" alt="" loading="lazy">
-    <div class="tx"><div class="n">${esc(r.name)}</div><div class="m">${esc(meta)}</div></div>
+    <div class="tx"><div class="n">${esc(r.name)}</div><div class="m">${esc(meta)}${
+      r.foto_pend ? ' · 📸 foto por actualizar' : ''}</div></div>
   </button>`;
 }
 
@@ -846,7 +862,9 @@ function paintRecipe(){
   const r = curRec;
   const tags = [`<span class="tag${r.sec === 'FUERA DE CARTA' ? ' off' : ''}">${esc(SEC[r.sec].label)}</span>`];
   if(r.sub) tags.push(`<span class="tag">${esc(r.sub)}</span>`);
-  (r.also || []).forEach(a => tags.push(`<span class="tag">También en ${esc(SEC[a].label)}</span>`));
+  (r.also || []).filter(a => a !== 'FOTO_PENDIENTE')
+    .forEach(a => tags.push(`<span class="tag">También en ${esc(SEC[a].label)}</span>`));
+  if(r.foto_pend) tags.push(`<span class="tag foto">📸 Actualizar foto</span>`);
 
   const mults = r.sec === 'INTERMEDIAS' ? [1,2,4,10] : [1,2,4,6];
   const scaler = `<div class="scaler">${mults.map(m =>
@@ -866,6 +884,8 @@ function paintRecipe(){
   $('recBody').innerHTML = `
     <div>
       <div class="rhero"><img src="${imgOf(r,false)}" alt="${esc(r.name)}"></div>
+      ${r.foto_pend ? `<div class="fotoaviso"><b>📸 Esta foto está desactualizada.</b> ${esc(r.foto_pend)}
+        Los ingredientes y la preparación de abajo sí están al día: hazle caso al texto, no a la foto.</div>` : ''}
       <div class="rhead">
         <div class="tags">${tags.join('')}</div>
         <h1>${esc(r.name)}</h1>
