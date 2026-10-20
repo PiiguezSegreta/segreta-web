@@ -840,12 +840,16 @@ function itemsDe(t){
     .map(x => x.replace(/^[-•·*•\s]+/, '').trim()).filter(Boolean);
 }
 function hechosDe(t){
-  return new Set(String(t.hechos || '').split(',').filter(x => x !== '').map(Number));
+  return new Set(String(t.hechos || '').split(',')
+    .map(x => Number(x.trim())).filter(Number.isInteger));
 }
 function haceRato(v){
-  const m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})$/.exec(String(v || '').trim());
-  if(!m) return '';
-  const min = Math.round((Date.now() - new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5])) / 60000);
+  const txt = String(v || '').trim();
+  if(!txt) return '';
+  const m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})$/.exec(txt);
+  const d = m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : new Date(txt);
+  if(isNaN(d)) return '';
+  const min = Math.round((Date.now() - d) / 60000);
   if(min < 1)  return 'recién';
   if(min < 60) return 'hace ' + min + ' min';
   const h = Math.round(min / 60);
