@@ -253,6 +253,31 @@ img{display:block;max-width:100%;}
   background:#fff;font-size:13.5px;color:var(--mute);}
 .pribtns button.on{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:600;}
 
+.fila{display:grid;grid-template-columns:62px 68px 1fr 30px;gap:6px;align-items:center;margin-bottom:7px;}
+.fila input,.fila select{padding:11px 9px;border:1px solid var(--line);border-radius:10px;
+  background:#fff;font-size:14px;outline:none;width:100%;}
+.fila select{padding-right:4px;}
+.fila .fdel{color:var(--mute);font-size:19px;}
+.fila .fotro{grid-column:1/-1;}
+.fila input:focus,.fila select:focus{border-color:var(--ocrel);}
+
+.hcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:15px 16px;margin-bottom:11px;}
+.hcard.alta{border-left:4px solid #A32A1C;}
+.hhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
+.hcard h3{font-family:'Belgan',serif;font-size:17px;color:var(--rojo);line-height:1.2;}
+.hcard .hest{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;
+  padding:3px 9px;border-radius:999px;background:var(--crema);color:var(--ocre);white-space:nowrap;}
+.hcard .hest.fin{background:var(--v101bg);color:var(--v101fg);}
+.linea{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-bottom:1px solid #F1ECE3;font-size:13px;}
+.linea:last-child{border-bottom:none;}
+.linea .ev{flex:0 0 112px;color:var(--rojo);font-weight:600;}
+.linea .ho{flex:0 0 118px;color:var(--text);font-variant-numeric:tabular-nums;}
+.linea .qn{color:var(--mute);}
+.hdur{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute);}
+.hdur b{color:var(--rojo);}
+.hitems{margin-top:9px;font-size:12.5px;color:var(--mute);line-height:1.6;}
+.htl{margin-top:11px;}
+
 /* ══════════ TABBAR ══════════ */
 .tabbar{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--rojo);
   padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(0,0,0,.18);}
@@ -321,6 +346,11 @@ img{display:block;max-width:100%;}
   .tkb{padding:10px 15px;font-size:13.5px;}
   .prodtop{padding-top:24px;} .prodtop .yo{font-size:13.5px;}
   .modalbox{max-width:620px;padding:28px;}
+  .fila{grid-template-columns:90px 92px 1fr 34px;gap:9px;}
+  .fila input,.fila select{padding:13px 11px;font-size:16px;}
+  .hcard{padding:20px 22px;} .hcard h3{font-size:20px;}
+  .linea{font-size:15px;padding:9px 0;} .linea .ev{flex:0 0 140px;} .linea .ho{flex:0 0 150px;}
+  .histwrap{max-width:860px;}
   .intro{font-size:16px;padding:22px;}
   .field input,.field select,.field textarea{padding:16px;font-size:17px;}
   .sendbtn{padding:18px;font-size:17px;}
@@ -430,10 +460,22 @@ img{display:block;max-width:100%;}
     <section class="view" id="v-prod"><div class="wrap">
       <div class="prodtop">
         <div class="yo" id="prodYo"></div>
+        <button class="btnline" onclick="go('#/historial')">Historial</button>
         <button class="btnline" onclick="cargarProd(true)" id="prodRef">Actualizar</button>
         <button class="btnmain" onclick="abrirNueva()">+ Publicar necesidad</button>
       </div>
       <div id="prodBoard" class="board"></div>
+    </div></section>
+
+    <!-- ── HISTORIAL ── -->
+    <section class="view" id="v-hist"><div class="wrap">
+      <div class="chips" id="histChips" style="padding-top:20px">
+        <button class="chip on" onclick="setHist('todas',this)">Todas</button>
+        <button class="chip" onclick="setHist('entregadas',this)">Entregadas</button>
+        <button class="chip" onclick="setHist('curso',this)">En curso</button>
+      </div>
+      <div class="fbar"><div class="cnt" id="histCount"></div></div>
+      <div id="histList" class="histwrap"></div>
     </div></section>
 
     <!-- ── MENSAJES ── -->
@@ -487,9 +529,10 @@ img{display:block;max-width:100%;}
       <input id="nTit" type="text" placeholder="Ej: Producción del lunes" autocomplete="off">
     </div>
     <div class="field">
-      <label for="nDet">Lista de producción</label>
-      <textarea id="nDet" placeholder="Una línea por ítem:&#10;20 kg de masa&#10;5 L de leche de tigre&#10;3 kg de pesto"></textarea>
-      <p class="hint" style="margin-top:7px">Cada línea se convierte en un ítem que se marca al terminarlo.</p>
+      <label>Qué hay que producir</label>
+      <div id="filas"></div>
+      <button class="btnline" style="margin-top:10px;width:100%" onclick="agregarFila()">+ Agregar producto</button>
+      <p class="hint" style="margin-top:8px">Cada línea es un ítem que producción marca al terminarlo.</p>
     </div>
     <div class="field">
       <label>Prioridad</label>
@@ -506,6 +549,24 @@ img{display:block;max-width:100%;}
     <div class="modalfoot">
       <button class="cancel" onclick="cerrarNueva()">Cancelar</button>
       <button class="save" id="nSave" onclick="publicarNecesidad()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ comanda entregada ══════════ -->
+<div class="modal" id="modalArch">
+  <div class="modalbox">
+    <h3>Comanda entregada</h3>
+    <p class="hint">Queda archivada con la hora y el nombre de quien la terminó. Sale de la pizarra
+      pero queda en el historial.</p>
+    <div class="field">
+      <label for="aQuien">¿Quién de producción la terminó?</label>
+      <input id="aQuien" type="text" placeholder="Nombre" autocomplete="name">
+    </div>
+    <div class="fmsg" id="aState"></div>
+    <div class="modalfoot">
+      <button class="cancel" onclick="$('modalArch').classList.remove('on')">Cancelar</button>
+      <button class="save" onclick="confirmarEntrega()">Archivar</button>
     </div>
   </div>
 </div>
@@ -562,6 +623,7 @@ function route(){
   else if(head === 'sec' && SEC[arg])  showSection(arg);
   else if(head === 'dossier')          showView('dossier', 'DOSSIER DE COCINA', false);
   else if(head === 'produccion')       showView('prod', 'PRODUCCIÓN', false);
+  else if(head === 'historial')        showView('hist', 'HISTORIAL DE PRODUCCIÓN', true);
   else if(head === 'mensajes')         showView('msg', 'MENSAJES', false);
   else                                 showView('home', 'COCINA SEGRETA', false);
 }
@@ -574,12 +636,14 @@ function showView(v, title, isSub){
   $('q').placeholder = v === 'sec' ? 'Buscar en ' + SEC[curSec].label + '...' : 'Buscar plato o ingrediente...';
   $('topTitle').textContent = title;
   $('topbar').classList.toggle('sub', !!isSub);
-  const tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', prod:'prod', msg:'msg'}[v];
+  const tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier',
+               prod:'prod', hist:'prod', msg:'msg'}[v];
   document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.v === tab));
   window.scrollTo(0,0);
   const m = document.querySelector('main'); if(m) m.scrollTop = 0;
   if(prodTimer){ clearInterval(prodTimer); prodTimer = null; }
   if(v === 'prod'){ cargarProd(); prodTimer = setInterval(cargarProd, 25000); }
+  if(v === 'hist') cargarHist();
 }
 
 /* ══════════ home ══════════ */
@@ -962,7 +1026,9 @@ function cambioLocal(id, cambios){
 async function enviarCambio(id){
   const envio = pendientes.get(id);
   if(!envio) return;
-  const payload = {accion:'produccion.hechos', id, quien:yo(), hechos:envio.hechos, estado:envio.estado};
+  const t0 = PROD.find(x => x.id === id);
+  const nota = t0 ? hechosDe(t0).size + ' de ' + itemsDe(t0).length : '';
+  const payload = {accion:'produccion.hechos', id, quien:yo(), hechos:envio.hechos, estado:envio.estado, nota};
   const ok = await postProd(payload);
   const actual = pendientes.get(id);
   if(!actual) return;
@@ -986,12 +1052,23 @@ function toggleItem(id, i){
 
 function setEstado(id, estado){ cambioLocal(id, {estado}); }
 
+let archId = null;
 function archivar(id){
-  if(!confirm('¿Archivar esta producción? Deja de verse en la pizarra, pero queda en la planilla.')) return;
+  archId = id;
+  $('aQuien').value = yo(); $('aState').textContent = '';
+  $('modalArch').classList.add('on');
+  setTimeout(() => $('aQuien').focus(), 150);
+}
+function confirmarEntrega(){
+  const recibio = $('aQuien').value.trim();
+  if(!recibio){ $('aState').textContent = 'Escribe quién la terminó.'; $('aState').className = 'fmsg err'; return; }
+  localStorage.setItem('coc_nombre', recibio);
+  const id = archId;
+  $('modalArch').classList.remove('on');
   PROD = PROD.filter(x => x.id !== id);
   pendientes.delete(id); clearTimeout(envios.get(id)); envios.delete(id);
   pintarProd();
-  const payload = {accion:'produccion.estado', id, estado:'Archivado', quien:yo()};
+  const payload = {accion:'produccion.estado', id, estado:'Archivado', quien:recibio, recibio};
   postProd(payload).then(ok => { if(!ok) colaProd(payload); });
 }
 
@@ -1011,9 +1088,56 @@ async function flushProd(){
   if(q.length !== left.length) pintarProd();
 }
 
+/* ══════════ formulario por filas ══════════ */
+const UNIDADES = ['gr', 'kg', 'ml', 'L', 'und'];
+
+/* Lo que se puede comandar sale de las recetas base del dossier: lo que pida cocina
+   tiene que existir como preparación. "Otro" queda como salida de emergencia. */
+function basesProd(){
+  if(!DB) return [];
+  return DB.recipes.filter(r => r.sec === 'INTERMEDIAS')
+    .map(r => r.name).sort((a, b) => a.localeCompare(b, 'es'));
+}
+
+function filaHTML(){
+  const ops = basesProd().map(n => `<option>${esc(n)}</option>`).join('');
+  return `<div class="fila">
+    <input class="fcant" type="number" inputmode="decimal" min="0" step="any" placeholder="Cant">
+    <select class="funi">${UNIDADES.map(u => `<option>${u}</option>`).join('')}</select>
+    <select class="fprod" onchange="cambiaProd(this)">
+      <option value="">Producto...</option>${ops}<option value="__otro">Otro...</option>
+    </select>
+    <button class="fdel" onclick="borrarFila(this)" aria-label="Quitar">×</button>
+    <input class="fotro" type="text" placeholder="¿Qué hay que producir?" hidden>
+  </div>`;
+}
+function agregarFila(){ $('filas').insertAdjacentHTML('beforeend', filaHTML()); }
+function borrarFila(b){
+  const f = b.closest('.fila');
+  if($('filas').children.length > 1) f.remove(); else { f.querySelector('.fcant').value = ''; f.querySelector('.fprod').value = ''; cambiaProd(f.querySelector('.fprod')); }
+}
+function cambiaProd(sel){
+  const otro = sel.closest('.fila').querySelector('.fotro');
+  otro.hidden = sel.value !== '__otro';
+  if(!otro.hidden) otro.focus(); else otro.value = '';
+}
+
+/** Cada fila se guarda como "20 kg · Pesto", una por línea. */
+function lineasDelForm(){
+  return [...$('filas').children].map(f => {
+    const cant = f.querySelector('.fcant').value.trim();
+    const uni  = f.querySelector('.funi').value;
+    const sel  = f.querySelector('.fprod').value;
+    const prod = sel === '__otro' ? f.querySelector('.fotro').value.trim() : sel;
+    if(!prod) return '';
+    return (cant ? cant + ' ' + uni + ' · ' : '') + prod;
+  }).filter(Boolean);
+}
+
 /* publicar */
 function abrirNueva(){
-  $('nTit').value = ''; $('nDet').value = ''; $('nState').textContent = '';
+  $('nTit').value = ''; $('nState').textContent = '';
+  $('filas').innerHTML = filaHTML() + filaHTML();
   $('nQuien').value = yo(); setPri('Normal');
   $('modalNueva').classList.add('on');
   setTimeout(() => $('nTit').focus(), 150);
@@ -1025,9 +1149,11 @@ function setPri(p){
   $('pAlta').classList.toggle('on', p === 'Alta');
 }
 async function publicarNecesidad(){
-  const titulo = $('nTit').value.trim(), detalle = $('nDet').value.trim(), quien = $('nQuien').value.trim();
+  const titulo = $('nTit').value.trim(), quien = $('nQuien').value.trim();
+  const detalle = lineasDelForm().join('\n');
   const st = $('nState');
   if(!titulo){ st.textContent = 'Ponle un título a la producción.'; st.className = 'fmsg err'; return; }
+  if(!detalle){ st.textContent = 'Agrega al menos un producto.'; st.className = 'fmsg err'; return; }
   if(!quien){ st.textContent = 'Escribe tu nombre.'; st.className = 'fmsg err'; return; }
   localStorage.setItem('coc_nombre', quien);
   $('nSave').disabled = true; st.textContent = 'Publicando...'; st.className = 'fmsg';
@@ -1045,6 +1171,82 @@ async function publicarNecesidad(){
     st.textContent = 'Sin conexión. Se publica sola cuando vuelva la señal.'; st.className = 'fmsg err';
     setTimeout(cerrarNueva, 2200);
   }
+}
+
+
+/* ══════════ historial · trazabilidad ══════════ */
+let HIST = [], histFiltro = 'todas';
+
+function aFecha(v){
+  const m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})$/.exec(String(v || '').trim());
+  return m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : null;
+}
+function duracion(a, b){
+  const d1 = aFecha(a), d2 = aFecha(b);
+  if(!d1 || !d2) return '';
+  const min = Math.round((d2 - d1) / 60000);
+  if(min < 1)  return 'menos de un minuto';
+  if(min < 60) return min + ' min';
+  const h = Math.floor(min / 60), r = min % 60;
+  return h + ' h' + (r ? ' ' + r + ' min' : '');
+}
+
+async function cargarHist(){
+  $('histCount').textContent = 'Cargando...';
+  try{
+    const r = await fetch('/.netlify/functions/cocina-produccion?q=historial', {cache:'no-store'});
+    const d = await r.json();
+    HIST = d.ok ? (d.items || []) : [];
+    localStorage.setItem('coc_hist', JSON.stringify(HIST));
+  }catch(e){
+    HIST = JSON.parse(localStorage.getItem('coc_hist') || '[]');
+  }
+  pintarHist();
+}
+
+function setHist(f, el){
+  histFiltro = f;
+  document.querySelectorAll('#histChips .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  pintarHist();
+}
+
+function pintarHist(){
+  let hs = HIST;
+  if(histFiltro === 'entregadas') hs = hs.filter(t => t.estado === 'Archivado');
+  if(histFiltro === 'curso')      hs = hs.filter(t => t.estado !== 'Archivado');
+  $('histCount').textContent = hs.length
+    ? hs.length + (hs.length === 1 ? ' comanda' : ' comandas')
+    : 'Sin comandas todavía.';
+  $('histList').innerHTML = hs.map(hcard).join('');
+}
+
+function hcard(t){
+  const items = itemsDe(t);
+  const entregada = t.estado === 'Archivado';
+  const etapas = [
+    ['Pedida',    t.creado,    t.publica],
+    ['Empezada',  t.inicio,    ''],
+    ['Terminada', t.fin,       t.por],
+    ['Entregada', t.archivado, t.recibio],
+  ].filter(e => e[1]);
+  const lineas = etapas.map(([ev, ho, qn]) =>
+    `<div class="linea"><span class="ev">${ev}</span><span class="ho">${esc(ho)}</span>
+       <span class="qn">${esc(qn || '')}</span></div>`).join('');
+  const total = duracion(t.creado, t.archivado || t.fin);
+  const prod  = duracion(t.inicio, t.fin);
+  return `<article class="hcard${t.prioridad === 'Alta' ? ' alta' : ''}">
+    <div class="hhead">
+      <h3>${esc(t.titulo)}</h3>
+      <span class="hest${entregada ? ' fin' : ''}">${esc(entregada ? 'Entregada' : (t.estado || 'Pendiente'))}</span>
+    </div>
+    <div class="htl">${lineas}</div>
+    ${total || prod ? `<div class="hdur">${
+      total ? `De la orden a la entrega: <b>${total}</b>` : ''}${
+      total && prod ? ' · ' : ''}${
+      prod ? `en producción: <b>${prod}</b>` : ''}</div>` : ''}
+    ${items.length ? `<div class="hitems">${items.length} ítems · ${esc(items.join(' / '))}</div>` : ''}
+  </article>`;
 }
 
 /* ══════════ mensajes ══════════ */

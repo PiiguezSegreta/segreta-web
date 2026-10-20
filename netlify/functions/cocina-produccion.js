@@ -2,8 +2,9 @@
  * Netlify Function: cocina-produccion
  * Pizarra de necesidades de producción del Portal de Cocina.
  *
- * GET  → devuelve las tarjetas vigentes (lee el Apps Script, no el CSV publicado: el CSV
- *        de Google se cachea varios minutos y la pizarra tiene que ir al día).
+ * GET            → tarjetas vigentes (lee el Apps Script, no el CSV publicado: el CSV de
+ *                  Google se cachea varios minutos y la pizarra tiene que ir al día).
+ * GET ?q=historial → todas, archivadas incluidas, con los sellos de cada etapa.
  * POST → crea una tarjeta, cambia su estado o marca ítems hechos.
  *
  * Usa el mismo Apps Script que los mensajes. La URL se puede sobrescribir con la variable
@@ -22,7 +23,8 @@ exports.handler = async (event) => {
 
   try {
     if (event.httpMethod === 'GET') {
-      const r = await fetch(APPS_URL + '?q=produccion', { redirect: 'follow' });
+      const q = (event.queryStringParameters || {}).q === 'historial' ? 'historial' : 'produccion';
+      const r = await fetch(APPS_URL + '?q=' + q, { redirect: 'follow' });
       if (!r.ok) throw new Error('upstream ' + r.status);
       return { statusCode: 200, headers: JSON_HEADERS, body: await r.text() };
     }
