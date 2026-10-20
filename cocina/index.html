@@ -847,9 +847,9 @@ function haceRato(v){
   const txt = String(v || '').trim();
   if(!txt) return '';
   const m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})$/.exec(txt);
-  const d = m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : new Date(txt);
-  if(isNaN(d)) return '';
-  const min = Math.round((Date.now() - d) / 60000);
+  const fecha = m ? new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5]) : new Date(txt);
+  if(isNaN(fecha)) return '';
+  const min = Math.round((Date.now() - fecha) / 60000);
   if(min < 1)  return 'recién';
   if(min < 60) return 'hace ' + min + ' min';
   const h = Math.round(min / 60);
