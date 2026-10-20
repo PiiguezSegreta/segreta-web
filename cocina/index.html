@@ -191,6 +191,68 @@ img{display:block;max-width:100%;}
 .ctxbox .l{color:var(--mute);} .ctxbox .v{font-family:'Belgan',serif;font-size:15px;color:var(--rojo);}
 .ctxbox button{color:var(--mute);font-size:18px;padding:0 4px;}
 
+
+/* ══════════ PRODUCCIÓN · pizarra ══════════ */
+.prodtop{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding-top:20px;}
+.prodtop .yo{font-size:12px;color:var(--mute);margin-right:auto;}
+.prodtop .yo b{color:var(--rojo);font-weight:600;}
+.prodtop .yo button{font-size:12px;color:var(--ocre);text-decoration:underline;margin-left:5px;}
+.btnline{padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:#fff;
+  font-size:13px;color:var(--mute);white-space:nowrap;}
+.btnline:active{background:var(--crema);}
+.btnmain{padding:11px 16px;border-radius:11px;background:var(--rojo);color:#fff;
+  font-size:13.5px;font-weight:600;white-space:nowrap;}
+.btnmain:active{background:var(--rojod);}
+
+.board{margin-top:18px;display:flex;flex-direction:column;gap:26px;}
+.col h4{font-family:'Belgan',serif;font-size:14px;color:var(--rojo);letter-spacing:.04em;
+  padding-bottom:7px;border-bottom:2px solid var(--line);margin-bottom:12px;
+  display:flex;justify-content:space-between;align-items:baseline;}
+.col h4 span{font-family:'Red Hat Display',sans-serif;font-size:11.5px;color:var(--mute);font-weight:500;}
+.colcards{display:flex;flex-direction:column;gap:11px;}
+.colvacia{font-size:12.5px;color:var(--mute);padding:12px 2px;}
+
+.tk{background:#fff;border:1px solid var(--line);border-left:4px solid var(--ocre);
+  border-radius:13px;padding:14px 15px;}
+.tk.alta{border-left-color:#A32A1C;}
+.tk.listo{opacity:.62;}
+.tkhead{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:11px;color:var(--mute);}
+.tkpri{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:700;
+  padding:3px 8px;border-radius:999px;background:var(--crema);color:var(--ocre);}
+.tkpri.alta{background:#F6D9D5;color:#A32A1C;}
+.tk h3{font-family:'Belgan',serif;font-size:17px;color:var(--rojo);margin:8px 0 11px;line-height:1.2;}
+.tkitems{list-style:none;}
+.tkit{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;
+  padding:10px 4px;border-bottom:1px solid #F1ECE3;background:none;}
+.tkit:last-child{border-bottom:none;}
+.tkit .bx{flex:0 0 23px;height:23px;border-radius:7px;border:1.6px solid var(--line);
+  background:#fff;color:transparent;font-size:13px;line-height:21px;text-align:center;font-weight:700;}
+.tkit.on .bx{background:var(--v101fg);border-color:var(--v101fg);color:#fff;}
+.tkit .tx{font-size:14.5px;line-height:1.45;padding-top:1px;}
+.tkit.on .tx{text-decoration:line-through;color:var(--mute);}
+.tkfoot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:13px;}
+.tkprog{font-size:11.5px;color:var(--mute);margin-right:auto;}
+.tkb{padding:8px 13px;border-radius:9px;border:1px solid var(--line);background:#fff;
+  font-size:12.5px;color:var(--mute);font-weight:500;}
+.tkb.go{background:var(--rojo);border-color:var(--rojo);color:#fff;}
+.tkb.ok{background:var(--v101bg);border-color:#C3DDB0;color:var(--v101fg);}
+
+.modal{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;
+  background:rgba(22,19,17,.55);padding:18px;}
+.modal.on{display:flex;}
+.modalbox{background:var(--paper);border-radius:18px;padding:22px;width:100%;max-width:520px;
+  max-height:88dvh;overflow-y:auto;}
+.modalbox h3{font-family:'Belgan',serif;font-size:21px;color:var(--rojo);margin-bottom:4px;}
+.modalbox .hint{font-size:12.5px;color:var(--mute);line-height:1.5;margin-bottom:4px;}
+.modalfoot{display:flex;gap:9px;margin-top:20px;}
+.modalfoot button{flex:1;padding:14px;border-radius:12px;font-size:14px;font-weight:600;}
+.modalfoot .cancel{background:#fff;border:1px solid var(--line);color:var(--mute);}
+.modalfoot .save{background:var(--rojo);color:#fff;}
+.pribtns{display:flex;gap:8px;}
+.pribtns button{flex:1;padding:12px;border-radius:11px;border:1px solid var(--line);
+  background:#fff;font-size:13.5px;color:var(--mute);}
+.pribtns button.on{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:600;}
+
 /* ══════════ TABBAR ══════════ */
 .tabbar{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--rojo);
   padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(0,0,0,.18);}
@@ -253,6 +315,12 @@ img{display:block;max-width:100%;}
   .scaler button{padding:8px 14px;font-size:14px;}
   .reportbtn{max-width:340px;}
   .msgwrap{max-width:660px;margin:0 auto;}
+  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;}
+  .col h4{font-size:16px;}
+  .tk h3{font-size:19px;} .tkit .tx{font-size:16px;} .tkit .bx{flex:0 0 26px;height:26px;line-height:24px;}
+  .tkb{padding:10px 15px;font-size:13.5px;}
+  .prodtop{padding-top:24px;} .prodtop .yo{font-size:13.5px;}
+  .modalbox{max-width:620px;padding:28px;}
   .intro{font-size:16px;padding:22px;}
   .field input,.field select,.field textarea{padding:16px;font-size:17px;}
   .sendbtn{padding:18px;font-size:17px;}
@@ -297,6 +365,11 @@ img{display:block;max-width:100%;}
           <div class="k">Recetario</div>
           <div class="n">Dossier de Cocina</div>
           <div class="d"><span id="homeCount">140</span> recetas · busca por plato o por ingrediente</div>
+        </button>
+        <button class="bigbtn" onclick="go('#/produccion')">
+          <div class="k">Pizarra</div>
+          <div class="n">Producción</div>
+          <div class="d" id="homeProd">Lo que hay que producir hoy</div>
         </button>
       </div>
       <div class="stock">
@@ -353,6 +426,16 @@ img{display:block;max-width:100%;}
     <!-- ── FICHA ── -->
     <section class="view" id="v-rec"><div class="wrap"><div class="rdetail" id="recBody"></div></div></section>
 
+    <!-- ── PRODUCCIÓN ── -->
+    <section class="view" id="v-prod"><div class="wrap">
+      <div class="prodtop">
+        <div class="yo" id="prodYo"></div>
+        <button class="btnline" onclick="cargarProd(true)" id="prodRef">Actualizar</button>
+        <button class="btnmain" onclick="abrirNueva()">+ Publicar necesidad</button>
+      </div>
+      <div id="prodBoard" class="board"></div>
+    </div></section>
+
     <!-- ── MENSAJES ── -->
     <section class="view" id="v-msg"><div class="wrap"><div class="msgwrap">
       <div class="intro">
@@ -389,8 +472,57 @@ img{display:block;max-width:100%;}
   <nav class="tabbar">
     <button class="on" data-v="home" onclick="go('#/home')"><div class="i">🏠</div><div class="l">Inicio</div></button>
     <button data-v="dossier" onclick="go('#/dossier')"><div class="i">📖</div><div class="l">Dossier</div></button>
+    <button data-v="prod" onclick="go('#/produccion')"><div class="i">📋</div><div class="l">Producción</div></button>
     <button data-v="msg" onclick="go('#/mensajes')"><div class="i">✉️</div><div class="l">Mensajes</div></button>
   </nav>
+</div>
+
+<!-- ══════════ publicar necesidad ══════════ -->
+<div class="modal" id="modalNueva">
+  <div class="modalbox">
+    <h3>Publicar necesidad</h3>
+    <p class="hint">Lo que escribas aparece en la pizarra para el área de producción.</p>
+    <div class="field">
+      <label for="nTit">¿Qué hay que producir?</label>
+      <input id="nTit" type="text" placeholder="Ej: Producción del lunes" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="nDet">Lista de producción</label>
+      <textarea id="nDet" placeholder="Una línea por ítem:&#10;20 kg de masa&#10;5 L de leche de tigre&#10;3 kg de pesto"></textarea>
+      <p class="hint" style="margin-top:7px">Cada línea se convierte en un ítem que se marca al terminarlo.</p>
+    </div>
+    <div class="field">
+      <label>Prioridad</label>
+      <div class="pribtns">
+        <button class="on" id="pNormal" onclick="setPri('Normal')">Normal</button>
+        <button id="pAlta" onclick="setPri('Alta')">Alta</button>
+      </div>
+    </div>
+    <div class="field">
+      <label for="nQuien">Tu nombre</label>
+      <input id="nQuien" type="text" placeholder="¿Quién publica?" autocomplete="name">
+    </div>
+    <div class="fmsg" id="nState"></div>
+    <div class="modalfoot">
+      <button class="cancel" onclick="cerrarNueva()">Cancelar</button>
+      <button class="save" id="nSave" onclick="publicarNecesidad()">Publicar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ quién eres ══════════ -->
+<div class="modal" id="modalYo">
+  <div class="modalbox">
+    <h3>¿Quién eres?</h3>
+    <p class="hint">Queda registrado quién toma y quién termina cada producción.</p>
+    <div class="field">
+      <input id="yoNombre" type="text" placeholder="Tu nombre" autocomplete="name">
+    </div>
+    <div class="modalfoot">
+      <button class="cancel" onclick="$('modalYo').classList.remove('on')">Cancelar</button>
+      <button class="save" onclick="guardarYo()">Listo</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -429,6 +561,7 @@ function route(){
   if(head === 'r' && BYSLUG[arg])      showRecipe(arg);
   else if(head === 'sec' && SEC[arg])  showSection(arg);
   else if(head === 'dossier')          showView('dossier', 'DOSSIER DE COCINA', false);
+  else if(head === 'produccion')       showView('prod', 'PRODUCCIÓN', false);
   else if(head === 'mensajes')         showView('msg', 'MENSAJES', false);
   else                                 showView('home', 'COCINA SEGRETA', false);
 }
@@ -441,10 +574,12 @@ function showView(v, title, isSub){
   $('q').placeholder = v === 'sec' ? 'Buscar en ' + SEC[curSec].label + '...' : 'Buscar plato o ingrediente...';
   $('topTitle').textContent = title;
   $('topbar').classList.toggle('sub', !!isSub);
-  const tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg'}[v];
+  const tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', prod:'prod', msg:'msg'}[v];
   document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.v === tab));
   window.scrollTo(0,0);
   const m = document.querySelector('main'); if(m) m.scrollTop = 0;
+  if(prodTimer){ clearInterval(prodTimer); prodTimer = null; }
+  if(v === 'prod'){ cargarProd(); prodTimer = setInterval(cargarProd, 25000); }
 }
 
 /* ══════════ home ══════════ */
@@ -676,6 +811,192 @@ function paintRecipe(){
 
 function setScale(m){ scale = m; paintRecipe(); }
 
+
+/* ══════════ producción · pizarra ══════════ */
+const COLS = [
+  {k:'Pendiente',  t:'Por producir'},
+  {k:'En proceso', t:'En proceso'},
+  {k:'Listo',      t:'Terminado'},
+];
+let PROD = [], prodTimer = null, prodPri = 'Normal';
+
+const yo = () => localStorage.getItem('coc_nombre') || '';
+
+function pintarYo(){
+  const n = yo();
+  $('prodYo').innerHTML = n
+    ? `Estás como <b>${esc(n)}</b><button onclick="pedirYo()">cambiar</button>`
+    : `<button onclick="pedirYo()">Dinos quién eres</button>`;
+}
+function pedirYo(){ $('yoNombre').value = yo(); $('modalYo').classList.add('on'); setTimeout(()=>$('yoNombre').focus(),150); }
+function guardarYo(){
+  const n = $('yoNombre').value.trim();
+  if(n) localStorage.setItem('coc_nombre', n);
+  $('modalYo').classList.remove('on'); pintarYo();
+}
+
+function itemsDe(t){
+  return String(t.detalle || '').split('\n')
+    .map(x => x.replace(/^[-•·*•\s]+/, '').trim()).filter(Boolean);
+}
+function hechosDe(t){
+  return new Set(String(t.hechos || '').split(',').filter(x => x !== '').map(Number));
+}
+function haceRato(v){
+  const m = /^(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2})$/.exec(String(v || '').trim());
+  if(!m) return '';
+  const min = Math.round((Date.now() - new Date(+m[3], +m[2]-1, +m[1], +m[4], +m[5])) / 60000);
+  if(min < 1)  return 'recién';
+  if(min < 60) return 'hace ' + min + ' min';
+  const h = Math.round(min / 60);
+  if(h < 24)   return 'hace ' + h + ' h';
+  const d = Math.round(h / 24);
+  return d === 1 ? 'ayer' : 'hace ' + d + ' días';
+}
+
+async function cargarProd(manual){
+  if(manual) $('prodRef').textContent = 'Actualizando...';
+  try{
+    const r = await fetch('/.netlify/functions/cocina-produccion', {cache:'no-store'});
+    const d = await r.json();
+    if(!d.ok) throw 0;
+    PROD = d.items || [];
+    localStorage.setItem('coc_prod', JSON.stringify(PROD));
+  }catch(e){
+    if(!PROD.length) PROD = JSON.parse(localStorage.getItem('coc_prod') || '[]');   // sin red: lo último
+  }
+  $('prodRef').textContent = 'Actualizar';
+  pintarProd();
+}
+
+function pintarProd(){
+  pintarYo();
+  const pend = PROD.filter(t => (t.estado || 'Pendiente') !== 'Listo').length;
+  const hp = $('homeProd');
+  if(hp) hp.textContent = pend
+    ? pend + (pend === 1 ? ' producción pendiente' : ' producciones pendientes')
+    : 'Nada pendiente por ahora';
+  $('prodBoard').innerHTML = COLS.map(c => {
+    const ts = PROD.filter(t => (t.estado || 'Pendiente') === c.k);
+    return `<div class="col">
+      <h4>${c.t}<span>${ts.length}</span></h4>
+      <div class="colcards">${ts.length ? ts.map(tarjeta).join('')
+        : `<div class="colvacia">${c.k === 'Pendiente' ? 'Nada pendiente por ahora.' : 'Vacío.'}</div>`}</div>
+    </div>`;
+  }).join('');
+}
+
+function tarjeta(t){
+  const items = itemsDe(t), hechos = hechosDe(t);
+  const alta  = t.prioridad === 'Alta', listo = t.estado === 'Listo';
+  const lis = items.map((x, i) =>
+    `<li><button class="tkit${hechos.has(i) ? ' on' : ''}" onclick="toggleItem('${t.id}',${i})">
+       <span class="bx">✓</span><span class="tx">${esc(x)}</span></button></li>`).join('');
+  const btns = listo
+    ? `<button class="tkb" onclick="setEstado('${t.id}','Pendiente')">Reabrir</button>
+       <button class="tkb" onclick="archivar('${t.id}')">Archivar</button>`
+    : t.estado === 'En proceso'
+      ? `<button class="tkb ok" onclick="setEstado('${t.id}','Listo')">Terminado</button>`
+      : `<button class="tkb go" onclick="setEstado('${t.id}','En proceso')">Tomar</button>
+         <button class="tkb ok" onclick="setEstado('${t.id}','Listo')">Terminado</button>`;
+  return `<article class="tk${alta ? ' alta' : ''}${listo ? ' listo' : ''}">
+    <div class="tkhead">
+      <span class="tkpri${alta ? ' alta' : ''}">${alta ? 'Alta' : 'Normal'}</span>
+      <span>${esc(t.publica || '')} · ${haceRato(t.creado)}</span>
+    </div>
+    <h3>${esc(t.titulo)}</h3>
+    ${items.length ? `<ul class="tkitems">${lis}</ul>` : ''}
+    <div class="tkfoot">
+      <span class="tkprog">${items.length ? hechos.size + ' de ' + items.length : ''}${
+        t.por && listo ? (items.length ? ' · ' : '') + esc(t.por) : ''}</span>
+      ${btns}
+    </div>
+  </article>`;
+}
+
+async function postProd(payload){
+  try{
+    const r = await fetch('/.netlify/functions/cocina-produccion', {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    const d = await r.json();
+    if(d && d.ok && d.items){ PROD = d.items; localStorage.setItem('coc_prod', JSON.stringify(PROD)); }
+    return !!(d && d.ok);
+  }catch(e){ return false; }
+}
+
+async function toggleItem(id, i){
+  const t = PROD.find(x => x.id === id); if(!t) return;
+  const h = hechosDe(t);
+  h.has(i) ? h.delete(i) : h.add(i);
+  const lista = [...h].sort((a,b) => a-b);
+  t.hechos = lista.join(',');                                   // optimista: se ve al instante
+  const total = itemsDe(t).length;
+  if(total && lista.length === total && t.estado !== 'Listo') t.estado = 'Listo';
+  else if(t.estado === 'Pendiente') t.estado = 'En proceso';
+  pintarProd();
+  const ok = await postProd({accion:'produccion.hechos', id, hechos:t.hechos, estado:t.estado, quien:yo()});
+  if(!ok) colaProd({accion:'produccion.hechos', id, hechos:t.hechos, estado:t.estado, quien:yo()});
+  pintarProd();
+}
+
+async function setEstado(id, estado){
+  const t = PROD.find(x => x.id === id); if(t){ t.estado = estado; pintarProd(); }
+  const p = {accion:'produccion.estado', id, estado, quien:yo()};
+  if(!await postProd(p)) colaProd(p);
+  pintarProd();
+}
+function archivar(id){
+  if(!confirm('¿Archivar esta producción? Deja de verse en la pizarra, pero queda en la planilla.')) return;
+  PROD = PROD.filter(x => x.id !== id); pintarProd();
+  postProd({accion:'produccion.estado', id, estado:'Archivado', quien:yo()}).then(ok => {
+    if(!ok) colaProd({accion:'produccion.estado', id, estado:'Archivado', quien:yo()});
+  });
+}
+
+function colaProd(p){
+  const q = JSON.parse(localStorage.getItem('coc_cola_prod') || '[]');
+  q.push(p); localStorage.setItem('coc_cola_prod', JSON.stringify(q));
+}
+async function flushProd(){
+  const q = JSON.parse(localStorage.getItem('coc_cola_prod') || '[]');
+  if(!q.length) return;
+  const left = [];
+  for(const p of q){ if(!await postProd(p)) left.push(p); }
+  localStorage.setItem('coc_cola_prod', JSON.stringify(left));
+  if(q.length !== left.length) pintarProd();
+}
+
+/* publicar */
+function abrirNueva(){
+  $('nTit').value = ''; $('nDet').value = ''; $('nState').textContent = '';
+  $('nQuien').value = yo(); setPri('Normal');
+  $('modalNueva').classList.add('on');
+  setTimeout(() => $('nTit').focus(), 150);
+}
+function cerrarNueva(){ $('modalNueva').classList.remove('on'); }
+function setPri(p){
+  prodPri = p;
+  $('pNormal').classList.toggle('on', p === 'Normal');
+  $('pAlta').classList.toggle('on', p === 'Alta');
+}
+async function publicarNecesidad(){
+  const titulo = $('nTit').value.trim(), detalle = $('nDet').value.trim(), quien = $('nQuien').value.trim();
+  const st = $('nState');
+  if(!titulo){ st.textContent = 'Ponle un título a la producción.'; st.className = 'fmsg err'; return; }
+  if(!quien){ st.textContent = 'Escribe tu nombre.'; st.className = 'fmsg err'; return; }
+  localStorage.setItem('coc_nombre', quien);
+  $('nSave').disabled = true; st.textContent = 'Publicando...'; st.className = 'fmsg';
+  const p = {accion:'produccion.crear', titulo, detalle, prioridad:prodPri, publica:quien};
+  const ok = await postProd(p);
+  $('nSave').disabled = false;
+  if(ok){ cerrarNueva(); pintarProd(); }
+  else{
+    colaProd(p);
+    st.textContent = 'Sin conexión. Se publica sola cuando vuelva la señal.'; st.className = 'fmsg err';
+    setTimeout(cerrarNueva, 2200);
+  }
+}
+
 /* ══════════ mensajes ══════════ */
 let ctxRecipe = '';
 function reportRecipe(){
@@ -750,10 +1071,12 @@ async function startApp(){
   route();
   loadSheet();
   flushQueue();
+  flushProd();
+  cargarProd();
 }
 
 window.addEventListener('hashchange', () => { if(DB) route(); });
-window.addEventListener('online', flushQueue);
+window.addEventListener('online', () => { flushQueue(); flushProd(); });
 
 /* PIN */
 const pinInputs = [...document.querySelectorAll('.pinbox input')];
