@@ -819,6 +819,8 @@ const COLS = [
   {k:'Listo',      t:'Terminado'},
 ];
 let PROD = [], prodTimer = null, prodPri = 'Normal';
+const pendientes = new Map();   // id → cambios locales que el Sheet todavía no confirma
+const envios     = new Map();   // id → envío agrupado pendiente
 
 const yo = () => localStorage.getItem('coc_nombre') || '';
 
@@ -839,10 +841,14 @@ function itemsDe(t){
   return String(t.detalle || '').split('\n')
     .map(x => x.replace(/^[-•·*•\s]+/, '').trim()).filter(Boolean);
 }
+
+/* Solo números enteros sueltos. Ojo: ''.split(',') devuelve [''] y Number('') es 0,
+   así que sin el filtro una comanda nueva arrancaba con el primer ítem marcado. */
 function hechosDe(t){
-  return new Set(String(t.hechos || '').split(',')
-    .map(x => Number(x.trim())).filter(Number.isInteger));
+  return new Set(String(t.hechos == null ? '' : t.hechos).split(',')
+    .map(x => x.trim()).filter(x => /^\d+$/.test(x)).map(Number));
 }
+
 function haceRato(v){
   const txt = String(v || '').trim();
   if(!txt) return '';
@@ -854,8 +860,14 @@ function haceRato(v){
   if(min < 60) return 'hace ' + min + ' min';
   const h = Math.round(min / 60);
   if(h < 24)   return 'hace ' + h + ' h';
-  const d = Math.round(h / 24);
-  return d === 1 ? 'ayer' : 'hace ' + d + ' días';
+  const dias = Math.round(h / 24);
+  return dias === 1 ? 'ayer' : 'hace ' + dias + ' días';
+}
+
+/* Lo que llega del Sheet nunca pisa un cambio local sin confirmar. Sin esto, el
+   refresco automático devolvía la tarjeta al estado anterior al toque. */
+function conPendientes(items){
+  return items.map(t => pendientes.has(t.id) ? Object.assign({}, t, pendientes.get(t.id)) : t);
 }
 
 async function cargarProd(manual){
@@ -864,7 +876,7 @@ async function cargarProd(manual){
     const r = await fetch('/.netlify/functions/cocina-produccion', {cache:'no-store'});
     const d = await r.json();
     if(!d.ok) throw 0;
-    PROD = d.items || [];
+    PROD = conPendientes(d.items || []);
     localStorage.setItem('coc_prod', JSON.stringify(PROD));
   }catch(e){
     if(!PROD.length) PROD = JSON.parse(localStorage.getItem('coc_prod') || '[]');   // sin red: lo último
@@ -918,43 +930,69 @@ function tarjeta(t){
   </article>`;
 }
 
-async function postProd(payload){
+async function postProdRaw(payload){
   try{
     const r = await fetch('/.netlify/functions/cocina-produccion', {
       method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
-    const d = await r.json();
-    if(d && d.ok && d.items){ PROD = d.items; localStorage.setItem('coc_prod', JSON.stringify(PROD)); }
-    return !!(d && d.ok);
-  }catch(e){ return false; }
+    return await r.json();
+  }catch(e){ return null; }
+}
+async function postProd(payload){
+  const d = await postProdRaw(payload);
+  return !!(d && d.ok);            // la respuesta NO reemplaza la pizarra: llegan fuera de orden
 }
 
-async function toggleItem(id, i){
-  const t = PROD.find(x => x.id === id); if(!t) return;
+function ahoraTxt(){
+  const d = new Date(), z = n => String(n).padStart(2, '0');
+  return `${z(d.getDate())}-${z(d.getMonth()+1)}-${d.getFullYear()} ${z(d.getHours())}:${z(d.getMinutes())}`;
+}
+
+/* Un toque se ve al instante y el envío se agrupa: cuatro tildes seguidos son una
+   sola escritura, no cuatro esperando el turno del candado del Sheet. */
+function cambioLocal(id, cambios){
+  const t = PROD.find(x => x.id === id);
+  if(!t) return;
+  Object.assign(t, cambios);
+  pendientes.set(id, {hechos: t.hechos || '', estado: t.estado || 'Pendiente'});
+  pintarProd();
+  clearTimeout(envios.get(id));
+  envios.set(id, setTimeout(() => enviarCambio(id), 450));
+}
+
+async function enviarCambio(id){
+  const envio = pendientes.get(id);
+  if(!envio) return;
+  const payload = {accion:'produccion.hechos', id, quien:yo(), hechos:envio.hechos, estado:envio.estado};
+  const ok = await postProd(payload);
+  const actual = pendientes.get(id);
+  if(!actual) return;
+  if(actual.hechos !== envio.hechos || actual.estado !== envio.estado) return;   // lo tocaron de nuevo
+  if(ok) pendientes.delete(id);
+  else   colaProd(payload);        // el cambio local se mantiene hasta que salga la cola
+}
+
+function toggleItem(id, i){
+  const t = PROD.find(x => x.id === id);
+  if(!t) return;
   const h = hechosDe(t);
   h.has(i) ? h.delete(i) : h.add(i);
-  const lista = [...h].sort((a,b) => a-b);
-  t.hechos = lista.join(',');                                   // optimista: se ve al instante
+  const lista = [...h].sort((a, b) => a - b);
   const total = itemsDe(t).length;
-  if(total && lista.length === total && t.estado !== 'Listo') t.estado = 'Listo';
-  else if(t.estado === 'Pendiente') t.estado = 'En proceso';
-  pintarProd();
-  const ok = await postProd({accion:'produccion.hechos', id, hechos:t.hechos, estado:t.estado, quien:yo()});
-  if(!ok) colaProd({accion:'produccion.hechos', id, hechos:t.hechos, estado:t.estado, quien:yo()});
-  pintarProd();
+  let estado = t.estado || 'Pendiente';
+  if(total && lista.length === total)                     estado = 'Listo';
+  else if(estado === 'Listo' || estado === 'Pendiente')   estado = 'En proceso';
+  cambioLocal(id, {hechos: lista.join(','), estado});
 }
 
-async function setEstado(id, estado){
-  const t = PROD.find(x => x.id === id); if(t){ t.estado = estado; pintarProd(); }
-  const p = {accion:'produccion.estado', id, estado, quien:yo()};
-  if(!await postProd(p)) colaProd(p);
-  pintarProd();
-}
+function setEstado(id, estado){ cambioLocal(id, {estado}); }
+
 function archivar(id){
   if(!confirm('¿Archivar esta producción? Deja de verse en la pizarra, pero queda en la planilla.')) return;
-  PROD = PROD.filter(x => x.id !== id); pintarProd();
-  postProd({accion:'produccion.estado', id, estado:'Archivado', quien:yo()}).then(ok => {
-    if(!ok) colaProd({accion:'produccion.estado', id, estado:'Archivado', quien:yo()});
-  });
+  PROD = PROD.filter(x => x.id !== id);
+  pendientes.delete(id); clearTimeout(envios.get(id)); envios.delete(id);
+  pintarProd();
+  const payload = {accion:'produccion.estado', id, estado:'Archivado', quien:yo()};
+  postProd(payload).then(ok => { if(!ok) colaProd(payload); });
 }
 
 function colaProd(p){
@@ -965,7 +1003,10 @@ async function flushProd(){
   const q = JSON.parse(localStorage.getItem('coc_cola_prod') || '[]');
   if(!q.length) return;
   const left = [];
-  for(const p of q){ if(!await postProd(p)) left.push(p); }
+  for(const p of q){
+    if(await postProd(p)){ if(p.id) pendientes.delete(p.id); }
+    else left.push(p);
+  }
   localStorage.setItem('coc_cola_prod', JSON.stringify(left));
   if(q.length !== left.length) pintarProd();
 }
@@ -991,9 +1032,14 @@ async function publicarNecesidad(){
   localStorage.setItem('coc_nombre', quien);
   $('nSave').disabled = true; st.textContent = 'Publicando...'; st.className = 'fmsg';
   const p = {accion:'produccion.crear', titulo, detalle, prioridad:prodPri, publica:quien};
-  const ok = await postProd(p);
+  const d = await postProdRaw(p);
   $('nSave').disabled = false;
-  if(ok){ cerrarNueva(); pintarProd(); }
+  if(d && d.ok){
+    cerrarNueva();
+    PROD.push({id: d.id || ('tmp' + Date.now()), creado: ahoraTxt(), publica: quien, titulo,
+               detalle, prioridad: prodPri, estado: 'Pendiente', hechos: '', por: quien});
+    pintarProd();
+  }
   else{
     colaProd(p);
     st.textContent = 'Sin conexión. Se publica sola cuando vuelva la señal.'; st.className = 'fmsg err';
