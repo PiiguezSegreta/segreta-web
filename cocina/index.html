@@ -276,6 +276,7 @@ img{display:block;max-width:100%;}
 .hdur{margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute);}
 .hdur b{color:var(--rojo);}
 .hitems{margin-top:9px;font-size:12.5px;color:var(--mute);line-height:1.6;}
+.hfoot{display:flex;gap:8px;margin-top:13px;}
 .htl{margin-top:11px;}
 
 /* ══════════ TABBAR ══════════ */
@@ -522,8 +523,8 @@ img{display:block;max-width:100%;}
 <!-- ══════════ publicar necesidad ══════════ -->
 <div class="modal" id="modalNueva">
   <div class="modalbox">
-    <h3>Publicar necesidad</h3>
-    <p class="hint">Lo que escribas aparece en la pizarra para el área de producción.</p>
+    <h3 id="modalTit">Publicar necesidad</h3>
+    <p class="hint" id="modalSub">Lo que escribas aparece en la pizarra para el área de producción.</p>
     <div class="field">
       <label for="nTit">¿Qué hay que producir?</label>
       <input id="nTit" type="text" placeholder="Ej: Producción del lunes" autocomplete="off">
@@ -542,12 +543,12 @@ img{display:block;max-width:100%;}
       </div>
     </div>
     <div class="field">
-      <label for="nQuien">Tu nombre</label>
+      <label for="nQuien" id="nQuienLab">Tu nombre</label>
       <input id="nQuien" type="text" placeholder="¿Quién publica?" autocomplete="name">
     </div>
     <div class="fmsg" id="nState"></div>
     <div class="modalfoot">
-      <button class="cancel" onclick="cerrarNueva()">Cancelar</button>
+      <button class="cancel" onclick="editandoId=null;cerrarNueva()">Cancelar</button>
       <button class="save" id="nSave" onclick="publicarNecesidad()">Publicar</button>
     </div>
   </div>
@@ -1099,16 +1100,27 @@ function basesProd(){
     .map(r => r.name).sort((a, b) => a.localeCompare(b, 'es'));
 }
 
-function filaHTML(){
-  const ops = basesProd().map(n => `<option>${esc(n)}</option>`).join('');
-  return `<div class="fila">
-    <input class="fcant" type="number" inputmode="decimal" min="0" step="any" placeholder="Cant">
-    <select class="funi">${UNIDADES.map(u => `<option>${u}</option>`).join('')}</select>
+/** Vuelve a partir "20 kg · Pesto" en sus pedazos para poder editarlo. */
+function partesDeLinea(l){
+  const m = /^\s*([\d.,]+)\s+(gr|kg|ml|L|und)\s*·\s*(.+)$/.exec(String(l || ''));
+  return m ? {cant: m[1], uni: m[2], prod: m[3].trim()}
+           : {cant: '', uni: 'gr', prod: String(l || '').trim()};
+}
+
+function filaHTML(v){
+  v = v || {cant:'', uni:'gr', prod:'', orig:-1};
+  const bases = basesProd(), enLista = bases.includes(v.prod), otro = v.prod && !enLista;
+  const ops = bases.map(n => `<option${n === v.prod ? ' selected' : ''}>${esc(n)}</option>`).join('');
+  const unis = UNIDADES.map(u => `<option${u === v.uni ? ' selected' : ''}>${u}</option>`).join('');
+  return `<div class="fila" data-orig="${v.orig === undefined ? -1 : v.orig}">
+    <input class="fcant" type="number" inputmode="decimal" min="0" step="any" placeholder="Cant" value="${esc(v.cant)}">
+    <select class="funi">${unis}</select>
     <select class="fprod" onchange="cambiaProd(this)">
-      <option value="">Producto...</option>${ops}<option value="__otro">Otro...</option>
+      <option value=""${!v.prod ? ' selected' : ''}>Producto...</option>${ops}
+      <option value="__otro"${otro ? ' selected' : ''}>Otro...</option>
     </select>
     <button class="fdel" onclick="borrarFila(this)" aria-label="Quitar">×</button>
-    <input class="fotro" type="text" placeholder="¿Qué hay que producir?" hidden>
+    <input class="fotro" type="text" placeholder="¿Qué hay que producir?" value="${otro ? esc(v.prod) : ''}"${otro ? '' : ' hidden'}>
   </div>`;
 }
 function agregarFila(){ $('filas').insertAdjacentHTML('beforeend', filaHTML()); }
@@ -1122,23 +1134,59 @@ function cambiaProd(sel){
   if(!otro.hidden) otro.focus(); else otro.value = '';
 }
 
-/** Cada fila se guarda como "20 kg · Pesto", una por línea. */
-function lineasDelForm(){
-  return [...$('filas').children].map(f => {
+/** Cada fila se guarda como "20 kg · Pesto", una por línea.
+ *  `mapa` dice de qué fila original viene cada línea, para no perder los tildes
+ *  ya marcados cuando se agregan o se quitan productos al editar. */
+function formAEstructura(){
+  const lineas = [], mapa = [];
+  [...$('filas').children].forEach(f => {
     const cant = f.querySelector('.fcant').value.trim();
     const uni  = f.querySelector('.funi').value;
     const sel  = f.querySelector('.fprod').value;
     const prod = sel === '__otro' ? f.querySelector('.fotro').value.trim() : sel;
-    if(!prod) return '';
-    return (cant ? cant + ' ' + uni + ' · ' : '') + prod;
-  }).filter(Boolean);
+    if(!prod) return;
+    lineas.push((cant ? cant + ' ' + uni + ' · ' : '') + prod);
+    mapa.push(Number(f.dataset.orig));
+  });
+  return {lineas, mapa};
 }
+function lineasDelForm(){ return formAEstructura().lineas; }
 
-/* publicar */
+/* publicar y editar comparten el mismo formulario */
+let editandoId = null;
+
 function abrirNueva(){
+  editandoId = null;
+  $('modalTit').textContent = 'Publicar necesidad';
+  $('modalSub').textContent = 'Lo que escribas aparece en la pizarra para el área de producción.';
+  $('nQuienLab').textContent = 'Tu nombre';
+  $('nSave').textContent = 'Publicar';
   $('nTit').value = ''; $('nState').textContent = '';
   $('filas').innerHTML = filaHTML() + filaHTML();
   $('nQuien').value = yo(); setPri('Normal');
+  $('modalNueva').classList.add('on');
+  setTimeout(() => $('nTit').focus(), 150);
+}
+
+function comandaPorId(id){
+  return HIST.find(x => x.id === id) || PROD.find(x => x.id === id) || null;
+}
+
+function abrirEditar(id){
+  const t = comandaPorId(id);
+  if(!t) return;
+  editandoId = id;
+  $('modalTit').textContent = 'Editar comanda';
+  $('modalSub').textContent = 'Se guarda la hora del pedido original y, aparte, cuándo y quién la editó.';
+  $('nQuienLab').textContent = '¿Quién edita?';
+  $('nSave').textContent = 'Guardar cambios';
+  $('nTit').value = t.titulo || '';
+  $('nState').textContent = '';
+  const ls = itemsDe(t);
+  $('filas').innerHTML = (ls.length ? ls : ['']).map((l, i) => {
+    const p = partesDeLinea(l); p.orig = i; return filaHTML(p);
+  }).join('');
+  $('nQuien').value = yo(); setPri(t.prioridad === 'Alta' ? 'Alta' : 'Normal');
   $('modalNueva').classList.add('on');
   setTimeout(() => $('nTit').focus(), 150);
 }
@@ -1150,12 +1198,31 @@ function setPri(p){
 }
 async function publicarNecesidad(){
   const titulo = $('nTit').value.trim(), quien = $('nQuien').value.trim();
-  const detalle = lineasDelForm().join('\n');
+  const {lineas, mapa} = formAEstructura();
+  const detalle = lineas.join('\n');
   const st = $('nState');
   if(!titulo){ st.textContent = 'Ponle un título a la producción.'; st.className = 'fmsg err'; return; }
   if(!detalle){ st.textContent = 'Agrega al menos un producto.'; st.className = 'fmsg err'; return; }
-  if(!quien){ st.textContent = 'Escribe tu nombre.'; st.className = 'fmsg err'; return; }
+  if(!quien){ st.textContent = quien === '' && editandoId ? 'Escribe quién edita.' : 'Escribe tu nombre.'; st.className = 'fmsg err'; return; }
   localStorage.setItem('coc_nombre', quien);
+
+  if(editandoId){
+    const t = comandaPorId(editandoId);
+    const viejos = hechosDe(t || {});
+    const hechos = mapa.map((o, i) => (o >= 0 && viejos.has(o)) ? i : -1).filter(i => i >= 0);
+    let estado = t ? (t.estado || 'Pendiente') : 'Pendiente';
+    if(estado !== 'Archivado'){
+      estado = !hechos.length ? 'Pendiente' : (hechos.length === lineas.length ? 'Listo' : 'En proceso');
+    }
+    $('nSave').disabled = true; st.textContent = 'Guardando...'; st.className = 'fmsg';
+    const ok = await postProd({accion:'produccion.editar', id:editandoId, titulo, detalle,
+                               prioridad:prodPri, hechos:hechos.join(','), estado, quien});
+    $('nSave').disabled = false;
+    if(ok){ cerrarNueva(); editandoId = null; cargarHist(); cargarProd(); }
+    else{ st.textContent = 'No se pudo guardar. Revisa la conexión.'; st.className = 'fmsg err'; }
+    return;
+  }
+
   $('nSave').disabled = true; st.textContent = 'Publicando...'; st.className = 'fmsg';
   const p = {accion:'produccion.crear', titulo, detalle, prioridad:prodPri, publica:quien};
   const d = await postProdRaw(p);
@@ -1229,7 +1296,8 @@ function hcard(t){
     ['Empezada',  t.inicio,    ''],
     ['Terminada', t.fin,       t.por],
     ['Entregada', t.archivado, t.recibio],
-  ].filter(e => e[1]);
+    ['Editada',   t.editado,   t.edito],
+  ].filter(e => e[1]).sort((a, b) => (aFecha(a[1]) || 0) - (aFecha(b[1]) || 0));
   const lineas = etapas.map(([ev, ho, qn]) =>
     `<div class="linea"><span class="ev">${ev}</span><span class="ho">${esc(ho)}</span>
        <span class="qn">${esc(qn || '')}</span></div>`).join('');
@@ -1246,7 +1314,22 @@ function hcard(t){
       total && prod ? ' · ' : ''}${
       prod ? `en producción: <b>${prod}</b>` : ''}</div>` : ''}
     ${items.length ? `<div class="hitems">${items.length} ítems · ${esc(items.join(' / '))}</div>` : ''}
+    <div class="hfoot">
+      <button class="tkb" onclick="abrirEditar('${t.id}')">Editar</button>
+      <button class="tkb" onclick="eliminarComanda('${t.id}')">Eliminar</button>
+    </div>
   </article>`;
+}
+
+async function eliminarComanda(id){
+  const t = comandaPorId(id);
+  if(!yo()){ pedirYo(); return; }
+  if(!confirm(`¿Eliminar la comanda "${t ? t.titulo : ''}"?\n\nDesaparece de la pizarra y del historial. El registro de lo que pasó queda en la pestaña Historial de la planilla.`)) return;
+  PROD = PROD.filter(x => x.id !== id);
+  HIST = HIST.filter(x => x.id !== id);
+  pintarProd(); pintarHist();
+  const ok = await postProd({accion:'produccion.eliminar', id, quien:yo()});
+  if(!ok){ alert('No se pudo eliminar. Revisa la conexión e intenta de nuevo.'); cargarHist(); cargarProd(); }
 }
 
 /* ══════════ mensajes ══════════ */
