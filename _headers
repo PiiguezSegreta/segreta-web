@@ -27,3 +27,9 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# Kit de marca para partners: descarga directa, fuera de Google
+/marca/*
+  Content-Disposition: attachment
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: public, max-age=3600
