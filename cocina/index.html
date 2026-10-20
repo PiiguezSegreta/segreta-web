@@ -557,9 +557,9 @@ img{display:block;max-width:100%;}
 <!-- ══════════ comanda entregada ══════════ -->
 <div class="modal" id="modalArch">
   <div class="modalbox">
-    <h3>Comanda entregada</h3>
-    <p class="hint">Queda archivada con la hora y el nombre de quien la terminó. Sale de la pizarra
-      pero queda en el historial.</p>
+    <h3>Guardar comanda</h3>
+    <p class="hint">Sale de la pizarra y queda en el historial, con la hora y el nombre de quien
+      la terminó.</p>
     <div class="field">
       <label for="aQuien">¿Quién de producción la terminó?</label>
       <input id="aQuien" type="text" placeholder="Nombre" autocomplete="name">
@@ -567,7 +567,7 @@ img{display:block;max-width:100%;}
     <div class="fmsg" id="aState"></div>
     <div class="modalfoot">
       <button class="cancel" onclick="$('modalArch').classList.remove('on')">Cancelar</button>
-      <button class="save" onclick="confirmarEntrega()">Archivar</button>
+      <button class="save" onclick="confirmarEntrega()">Guardar</button>
     </div>
   </div>
 </div>
@@ -973,13 +973,14 @@ function tarjeta(t){
   const lis = items.map((x, i) =>
     `<li><button class="tkit${hechos.has(i) ? ' on' : ''}" onclick="toggleItem('${t.id}',${i})">
        <span class="bx">✓</span><span class="tx">${esc(x)}</span></button></li>`).join('');
+  /* Por producir: solo Tomar. En proceso: ninguno, sale sola al marcar todo.
+     Terminado: Reabrir (vuelve a cero) o Guardar (sale del KDS al historial). */
   const btns = listo
-    ? `<button class="tkb" onclick="setEstado('${t.id}','Pendiente')">Reabrir</button>
-       <button class="tkb" onclick="archivar('${t.id}')">Archivar</button>`
+    ? `<button class="tkb" onclick="reabrir('${t.id}')">Reabrir</button>
+       <button class="tkb ok" onclick="archivar('${t.id}')">Guardar</button>`
     : t.estado === 'En proceso'
-      ? `<button class="tkb ok" onclick="setEstado('${t.id}','Listo')">Terminado</button>`
-      : `<button class="tkb go" onclick="setEstado('${t.id}','En proceso')">Tomar</button>
-         <button class="tkb ok" onclick="setEstado('${t.id}','Listo')">Terminado</button>`;
+      ? (items.length ? '' : `<button class="tkb ok" onclick="setEstado('${t.id}','Listo')">Terminado</button>`)
+      : `<button class="tkb go" onclick="setEstado('${t.id}','En proceso')">Tomar</button>`;
   return `<article class="tk${alta ? ' alta' : ''}${listo ? ' listo' : ''}">
     <div class="tkhead">
       <span class="tkpri${alta ? ' alta' : ''}">${alta ? 'Alta' : 'Normal'}</span>
@@ -989,6 +990,7 @@ function tarjeta(t){
     ${items.length ? `<ul class="tkitems">${lis}</ul>` : ''}
     <div class="tkfoot">
       <span class="tkprog">${items.length ? hechos.size + ' de ' + items.length : ''}${
+        t.estado === 'En proceso' && items.length ? ' · termina al marcarlos todos' : ''}${
         t.por && listo ? (items.length ? ' · ' : '') + esc(t.por) : ''}</span>
       ${btns}
     </div>
@@ -1052,6 +1054,9 @@ function toggleItem(id, i){
 }
 
 function setEstado(id, estado){ cambioLocal(id, {estado}); }
+
+/** Vuelve a Por producir con todos los ítems desmarcados. */
+function reabrir(id){ cambioLocal(id, {hechos: '', estado: 'Pendiente'}); }
 
 let archId = null;
 function archivar(id){
