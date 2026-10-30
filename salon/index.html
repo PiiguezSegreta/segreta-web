@@ -221,6 +221,10 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .concurso.jw{background:linear-gradient(150deg,#3a2f1a,#171310);} .concurso.jw .ctag{color:#D9B25A;}
 .concurso.goodwinds{background:linear-gradient(150deg,#3a3f45,#1c1f23);} .concurso.goodwinds .ctag{color:#C3C8CE;}
 .concurso.mistral{background:linear-gradient(150deg,#45285c,#241233);} .concurso.mistral .ctag{color:#CBA6E6;}
+.concurso.donjulio{background:linear-gradient(150deg,#3a1430,#190a16);} .concurso.donjulio .ctag{color:#E8B84B;}
+.djcmd{display:block;margin-top:3px;font-size:11.5px;font-weight:700;color:#E8B84B;}
+.djfrase{margin-top:12px;font-style:italic;color:#E8B84B;font-size:13px;line-height:1.5;}
+.djcard{margin-top:10px;} .djcard p{margin-top:9px!important;} .djcard p:first-child{margin-top:0!important;}
 .vbadge{position:absolute;top:12px;right:15px;font-family:'Belgan';font-size:16px;color:rgba(255,255,255,.55);letter-spacing:.04em;}
 .crank{margin-top:13px;width:100%;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);color:#fff;font-size:13px;font-weight:600;padding:10px 14px;border-radius:11px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
 .crbody{margin-top:10px;padding:11px 13px;background:rgba(0,0,0,.22);border-radius:11px;} .crbody p{margin-top:0;color:#E8EEF6;font-size:12.5px;}
@@ -675,6 +679,30 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
   <section class="view" id="v-temporal">
     <h2 class="vt">Activaciones temporales</h2>
       <div class="vsub">Concursos y eventos por tiempo limitado.</div>
+
+    <div class="card concurso donjulio">
+      <div class="ctag">Este sábado · 31 de octubre · 19:00–23:00</div>
+      <h3 style="font-family:'Belgan';font-size:18px;margin-top:3px">¿Don Julio o Truco?</h3>
+      <p>Activación de <b>Noche de los Muertos</b> con <b>Don Julio</b>. La anfitriona pasa por cada mesa y pregunta: <b>“¿Don Julio o truco?”</b>. La mesa elige su camino:</p>
+      <p style="margin-top:9px"><b>🫙 Don Julio — a la segura.</b> Shots de Don Julio Blanco en <b>2×1 toda la noche</b>.</p>
+      <p style="margin-top:6px"><b>🃏 Truco — al riesgo.</b> La anfitriona saca una carta al azar de un mazo de 6, se la muestra a la mesa y te avisa. Si la mesa cumple la condición de la carta, tú comandas el truco. La carta vuelve al mazo (la mesa no se la queda).</p>
+      <p style="margin-top:6px"><b>🎭 Disfraces.</b> Quien llegue con disfraz, máscara, antifaz o cotillón recibe un <b>pin Don Julio</b> de regalo.</p>
+
+      <button class="crank" onclick="toggleConc('cdj')">🃏 Las 6 cartas y cómo comandar<span id="cdjarr">›</span></button>
+      <div id="cdj" class="crbody djcard" style="display:none">
+        <p><b>1 · Truco.</b> Se lleva un pin Don Julio de regalo, con buena cara: es parte del juego.<span class="djcmd">Comanda: Pin Don Julio · $0</span></p>
+        <p><b>2 · Catrina Shot.</b> Si pide un shot Don Julio (precio normal), se lo sirves en una Catrina mini y se la lleva.<span class="djcmd">Comanda: Shot Don Julio Catrina · $10.990</span></p>
+        <p><b>3 · Catrina Cóctel.</b> Si pide una Margarita Don Julio (precio normal), se la sirves en una Catrina grande y se la lleva.<span class="djcmd">Comanda: Margarita Don Julio Catrina · $13.990</span></p>
+        <p><b>4 · Pizza.</b> Si pide una pizza, la Paloma Don Julio va a mitad de precio, en Catrina grande que se lleva.<span class="djcmd">Comanda: Paloma Don Julio Truco · $6.490</span></p>
+        <p><b>5 · Piqueo.</b> Si pide un piqueo, dos rondas de shots Don Julio van a mitad de precio, en Catrinas mini que se llevan.<span class="djcmd">Comanda: Shot Don Julio Truco · $5.490 (uno por cada shot)</span></p>
+        <p><b>6 · Degustazione.</b> Si pide la Degustazione, el Spicy Kiwi Don Julio va a mitad de precio, en Catrina grande que se lleva.<span class="djcmd">Comanda: Spicy Kiwi Don Julio Truco · $4.990</span></p>
+        <p style="border-top:1px solid rgba(255,255,255,.18);padding-top:10px"><b>Reglas:</b> las cartas valen solo esta noche, no son acumulables, y lo que pidan (pizza, piqueo o Degustazione) tiene que ser en esa misma mesa. Antes de comandar un truco a mitad de precio, <b>confirma que la mesa ya pidió</b> la condición.</p>
+        <p><b>Catrinas:</b> solo se entregan con las cartas 2 a 6, nunca con el 2×1 de la opción Don Julio. Si sobran al final, se regalan, pero eso lo decide el encargado.</p>
+        <p><b>El 2×1</b> se comanda como <b>Shot Don Julio 2×1 Halloween · $10.990</b> (una unidad = dos shots). Nunca cargues nada como descuento: siempre con estos productos.</p>
+      </div>
+
+      <p class="djfrase">“Esta noche puedes ir a la segura con el 2×1 en Don Julio o arriesgarte al truco: una carta sorpresa de la Noche de los Muertos.”</p>
+    </div>
 
     <div class="card concurso mistral">
       <div class="ctag">Finalizado · 1 de agosto al 30 de septiembre</div>
