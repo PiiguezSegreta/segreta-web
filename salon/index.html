@@ -222,6 +222,12 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .concurso.goodwinds{background:linear-gradient(150deg,#3a3f45,#1c1f23);} .concurso.goodwinds .ctag{color:#C3C8CE;}
 .concurso.mistral{background:linear-gradient(150deg,#45285c,#241233);} .concurso.mistral .ctag{color:#CBA6E6;}
 .concurso.donjulio{background:linear-gradient(150deg,#3a1430,#190a16);} .concurso.donjulio .ctag{color:#E8B84B;}
+.concurso.extras{background:linear-gradient(150deg,#20392b,#0e1d15);} .concurso.extras .ctag{color:#8FD6AC;}
+.exwin{margin-top:12px;padding:11px 13px;background:rgba(143,214,172,.12);border:1px solid rgba(143,214,172,.3);border-radius:12px;font-size:13px;line-height:1.5;}
+.exwin b{color:#B8ECCB;}
+.expodio{margin-top:12px;} .expodio p{margin-top:10px!important;} .expodio p:first-child{margin-top:0!important;}
+.expodio .expn{color:#B8ECCB;font-weight:700;}
+.exleg{margin-top:11px;font-size:11px;line-height:1.5;color:rgba(232,238,246,.6);}
 .djcmd{display:block;margin-top:3px;font-size:11.5px;font-weight:700;color:#E8B84B;}
 .djfrase{margin-top:12px;font-style:italic;color:#E8B84B;font-size:13px;line-height:1.5;}
 .djcard{margin-top:10px;} .djcard p{margin-top:9px!important;} .djcard p:first-child{margin-top:0!important;}
@@ -863,6 +869,43 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <h3 class="capshd">Jefaturas de Salón</h3>
       <div class="capsub">Capitanes — no compiten en el ranking, pero su venta suma a la meta del equipo.</div>
       <div class="capstable" id="capsTable"></div>
+    </div>
+
+    <div class="card concurso extras" style="margin-top:16px">
+      <div class="ctag">Octubre 2026 · Ranking extra</div>
+      <h3 style="font-family:'Belgan';font-size:18px;margin-top:3px">Competencia de venta de extras</h3>
+      <p>Ranking aparte del juego del mes: mide todo lo que sumamos a la mesa sin que nadie lo pida. Bordes de queso y pesto, cerveza preparada, sabores, extras de cocina y upgrades premium. Es la venta que depende 100% de ti.</p>
+      <div class="exwin">🥇 <b>Ganador — Eduardo Martínez</b> · $582.695 en extras. Se lleva un <b>menú de almuerzo</b> de premio. ¡Felicitaciones!</div>
+      <div class="expodio">
+        <p><span class="expn">1. Eduardo Martínez</span> — $582.695 · 328 un · 27 días · 318 mesas. Gana por los bordes, no por el volumen: 95 bordes (55 de queso + 40 de pesto) son los más de la casa, y sus 40 de pesto son casi un cuarto de todos los bordes de pesto del local. Sirvió 462 pizzas, también el máximo, con 20,6% de conversión a borde. El perfil más completo del equipo: lidera en michelada (85), maracuyá y Red Bull.</p>
+        <p><span class="expn">2. Samai Bravo</span> — $563.601 · 310 un · 25 días · 296 mesas. Queda a $19.094 del primero, un 3,4%, con 22 mesas y dos días menos de trabajo. Es el único que vende el extra caro de cocina: $68.870 en gnocchi, jalapeños, burrata y prosciutto, cuatro veces el bloque de Eduardo, y el único que mueve el upgrade de bebida ($10.800). Por día trabajado sería el primero: $22.544 contra $21.581 de Eduardo.</p>
+        <p><span class="expn">3. Miguel Quilaqueo</span> — $483.586 · 312 un · 27 días · 377 mesas. El que más mesas atendió del local y el que más venta total hizo ($31,6M), pero tercero en extras. Su fuerza está toda en la barra: lidera chelada (102) y ojo rojo (57), $250.958 en cerveza preparada, el máximo. Ahí está su brecha: con 427 pizzas servidas solo convirtió 59 bordes, 13,8%. Al 20,6% de Eduardo habría sumado 29 bordes más, unos $87.000, y pelea el primer lugar.</p>
+      </div>
+      <button class="crank" onclick="toggleConc('cextra')">🏆 Ranking completo (16)<span id="cextraarr">›</span></button>
+      <div id="cextra" class="crbody" style="display:none">
+        <table class="crtab">
+          <thead><tr><th>#</th><th>Garzón</th><th>$ extras</th></tr></thead>
+          <tbody>
+          <tr class="win"><td>1</td><td>Eduardo Martínez<small class="crdet">328 un · Bordes $282.579 · Cerveza prep. $248.214 · Sabores $30.932 · Cocina $16.970 · Premium $4.000</small></td><td>$582.695</td></tr>
+          <tr><td>2</td><td>Samai Bravo González<small class="crdet">310 un · Bordes $222.312 · Cerveza prep. $226.439 · Sabores $35.180 · Cocina $68.870 · Premium $10.800</small></td><td>$563.601</td></tr>
+          <tr><td>3</td><td>Miguel Quilaqueo<small class="crdet">312 un · Bordes $173.124 · Cerveza prep. $250.958 · Sabores $38.380 · Cocina $10.084 · Premium $11.040</small></td><td>$483.586</td></tr>
+          <tr><td>4</td><td>Leidy Varelas<small class="crdet">245 un · Bordes $171.579 · Cerveza prep. $181.283 · Sabores $43.161 · Cocina $9.980 · Premium $800</small></td><td>$406.803</td></tr>
+          <tr><td>5</td><td>Miguel Bracho<small class="crdet">240 un · Bordes $132.812 · Cerveza prep. $196.171 · Sabores $35.309 · Cocina $27.440</small></td><td>$391.732</td></tr>
+          <tr><td>6</td><td>Kolash Nikov<small class="crdet">222 un · Bordes $181.136 · Cerveza prep. $164.809 · Sabores $31.820 · Cocina $9.302</small></td><td>$387.067</td></tr>
+          <tr><td>7</td><td>Johann Haering<small class="crdet">171 un · Bordes $182.390 · Cerveza prep. $101.050 · Sabores $20.500 · Cocina $21.669</small></td><td>$325.609</td></tr>
+          <tr><td>8</td><td>Daiana Casanova<small class="crdet">197 un · Bordes $98.334 · Cerveza prep. $164.505 · Sabores $23.550 · Cocina $30.950 · Premium $2.000</small></td><td>$319.339</td></tr>
+          <tr><td>9</td><td>Edu Castro Aguilar<small class="crdet">159 un · Bordes $128.570 · Cerveza prep. $107.813 · Sabores $24.850 · Cocina $6.990 · Premium $1.000</small></td><td>$269.223</td></tr>
+          <tr><td>10</td><td>Gabriela Victoria<small class="crdet">173 un · Bordes $17.630 · Cerveza prep. $170.636 · Sabores $30.213 · Cocina $35.442</small></td><td>$253.921</td></tr>
+          <tr><td>11</td><td>Samuel Rodríguez<small class="crdet">129 un · Bordes $95.680 · Cerveza prep. $98.604 · Sabores $16.450</small></td><td>$210.734</td></tr>
+          <tr><td>12</td><td>Victoria Quiroz<small class="crdet">80 un · Bordes $97.864 · Cerveza prep. $39.802 · Sabores $10.970 · Cocina $7.980</small></td><td>$156.616</td></tr>
+          <tr><td>13</td><td>David Alfredo<small class="crdet">42 un · Bordes $34.684 · Cerveza prep. $23.994 · Sabores $5.950 · Cocina $21.262</small></td><td>$85.890</td></tr>
+          <tr><td>14</td><td>Aniello Abarza<small class="crdet">20 un · Bordes $23.920 · Cerveza prep. $14.940</small></td><td>$38.860</td></tr>
+          <tr><td>15</td><td>Isaac Morales<small class="crdet">23 un · Bordes $8.970 · Cerveza prep. $16.230 · Sabores $6.930</small></td><td>$32.130</td></tr>
+          <tr><td>16</td><td>Yurelis Camacho<small class="crdet">12 un · Bordes $19.734 · Cerveza prep. $6.164</small></td><td>$25.898</td></tr>
+          </tbody>
+        </table>
+        <p class="exleg"><b>Bordes</b> = borde de queso y de pesto · <b>Cerveza prep.</b> = chelada, michelada, ojo rojo, clamato · <b>Sabores</b> = menta-jengibre, maracuyá, frambuesa, piña · <b>Cocina</b> = ingredientes extras, quesos italianos, gnocchi, burrata, prosciutto, salames · <b>Premium</b> = upgrades de bebida y destilado (Red Bull, Coca Zero Café, Grey Goose, Cîroc).</p>
+      </div>
     </div>
   </section>
 
