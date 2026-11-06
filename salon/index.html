@@ -379,6 +379,11 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
 .linkrow{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:9px;font-size:14px;font-weight:600;color:var(--rojo);cursor:pointer;}
 .linkrow .arr{color:var(--ocre);}
 .demoflag{background:#FBF1D8;border:1px solid #E8D08A;color:#8A6A12;font-size:11.5px;padding:8px 12px;border-radius:10px;margin-bottom:14px;text-align:center;}
+.calcnote{display:flex;flex-direction:column;gap:7px;align-items:center;margin:10px 0 2px;}
+.calchd{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);font-weight:600;}
+.calcchips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;}
+.cchip{font-size:11px;color:var(--rojo);background:var(--crema);border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap;}
+.cchip b{color:var(--ocre);font-weight:800;margin-right:2px;}
 .note{font-size:11.5px;color:var(--mute);text-align:center;margin:10px 0 4px;}
 /* nav */
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--line);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom);}
@@ -862,6 +867,15 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <p class="note" style="text-align:left;margin-top:9px">Hay que llenar las dos barras para ganar el premio del equipo.</p>
     </div>
     <div class="rtable" id="rtable"></div>
+    <div class="calcnote">
+      <span class="calchd">Cómo se calcula el puntaje</span>
+      <span class="calcchips">
+        <span class="cchip"><b>45%</b> Venta</span>
+        <span class="cchip"><b>20%</b> Extras</span>
+        <span class="cchip"><b>20%</b> Ticket</span>
+        <span class="cchip"><b>15%</b> Tarjetas WB</span>
+      </span>
+    </div>
     <p class="note">«prov.» = posición provisional hasta llegar a 120 mesas. Cierre y premio a fin de mes.</p>
     <div id="capsSection" style="display:none">
       <h3 class="capshd">Jefaturas de Salón</h3>
