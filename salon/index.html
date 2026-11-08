@@ -1240,9 +1240,12 @@ async function loadLive(){
     if(cands.length){
       const mxK=Math.max(...cands.map(r=>r.ticket))||1;
       const mxV=Math.max(...cands.map(r=>r.venta))||1;
+      const mxX=Math.max(...cands.map(r=>r.extras||0))||1;
+      const mxT=Math.max(...cands.map(r=>r.cards))||1;
       const live=cands.map(r=>{
         if(!r.elegible){
-          const p=((r.cards/WB_TARGET)*0.25+(r.ticket/mxK)*0.45+(r.venta/mxV)*0.30)*100*r.fc;
+          // pesos nuevos: Venta 45% · Extras 20% · Ticket 20% (tope 100%) · Tarjetas 15%
+          const p=((r.venta/mxV)*0.45+((r.extras||0)/mxX)*0.20+(Math.min(1,r.ticket/mxK))*0.20+(r.cards/mxT)*0.15)*100*r.fc;
           return Object.assign({},r,{pts:Math.round(p*10)/10,provisional:true});
         }
         return Object.assign({},r,{provisional:false});
