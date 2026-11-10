@@ -6,7 +6,9 @@
  *   POST { ops: [...] } → aplica las operaciones en orden  { ok, done: [opid], state: { dias, mixes } }
  * Sin la variable responde 503 { error: 'config' } y el portal deja todo en cola en el equipo.
  */
-const APPS_URL = process.env.BARRA_FEEDBACK_URL || '';
+// Apps Script del Sheet "Portal de Barra · Segreta" (implementación nov-2026). La variable de entorno, si existe, manda.
+const APPS_URL = process.env.BARRA_FEEDBACK_URL ||
+  'https://script.google.com/macros/s/AKfycbzjV9JIP6j9DGeV2umMdYl_edP_OCjX4AyA1tP7xq5tCXRdcLQWbl3Y7UKTzNSwi2mA/exec';
 
 const J = (code, body) => ({
   statusCode: code,

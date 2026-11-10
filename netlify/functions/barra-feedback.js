@@ -5,7 +5,9 @@
  *   2. si existe BARRA_FEEDBACK_URL (Apps Script del Sheet), los agrega también a la pestaña "Mensajes".
  * Responde ok si al menos uno de los dos canales funcionó.
  */
-const APPS_URL = process.env.BARRA_FEEDBACK_URL || '';
+// Apps Script del Sheet "Portal de Barra · Segreta" (implementación nov-2026). La variable de entorno, si existe, manda.
+const APPS_URL = process.env.BARRA_FEEDBACK_URL ||
+  'https://script.google.com/macros/s/AKfycbzjV9JIP6j9DGeV2umMdYl_edP_OCjX4AyA1tP7xq5tCXRdcLQWbl3Y7UKTzNSwi2mA/exec';
 const RESEND = process.env.RESEND_API_KEY || '';
 const TO = (process.env.BARRA_FEEDBACK_TO || 'pedro@segreta.cl').split(',').map(s => s.trim());
 
