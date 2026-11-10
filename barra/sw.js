@@ -1,6 +1,6 @@
 /* Portal de Barra — cache offline.
    Shell y datos: stale-while-revalidate. Fotos: cache permanente al abrirlas. */
-const V = 'barra-v5';   // subir al corregir recetas: fuerza recarga del recetario
+const V = 'barra-v6';   // subir al corregir recetas: fuerza recarga del recetario
 const SHELL = ['./', 'index.html', 'data/recetas.json', 'data/ranking.json', 'data/armatumix.json', 'img/placeholder.webp',
                'assets/belgan.ttf', 'assets/iso-blanco.png', 'assets/favicon.png', 'assets/app-icon.png'];
 

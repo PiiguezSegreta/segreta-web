@@ -371,7 +371,8 @@ a{color:inherit;text-decoration:none;}
 .qrow{display:flex;align-items:center;gap:10px;background:var(--crema);border-radius:12px;padding:6px 6px 6px 14px;margin-top:9px;}
 .qrow .ql{flex:1;font-size:14.5px;}
 .qrow .qb{width:46px;height:46px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:22px;color:var(--rojo);}
-.qrow .qv{min-width:74px;text-align:center;font-weight:700;color:var(--ocre);font-size:16px;font-variant-numeric:tabular-nums;}
+.qrow .qv{min-width:78px;min-height:46px;text-align:center;font-weight:700;color:var(--ocre);font-size:16px;font-variant-numeric:tabular-nums;
+  border-bottom:1.5px dashed var(--ocrel);border-radius:6px;line-height:1.15;}
 .fwarn{margin-top:10px;background:var(--pendbg);border:1px solid var(--pendln);color:#5E4310;border-radius:12px;padding:10px 12px;font-size:13.5px;}
 .savebar{position:sticky;bottom:calc(var(--nav) + env(safe-area-inset-bottom));z-index:10;background:linear-gradient(transparent,var(--paper) 30%);
   padding:16px 0 10px;display:flex;gap:10px;}
@@ -1473,20 +1474,32 @@ function fmPick(k, id){
   }
   paintForm();
 }
-function fmQ(which, dir){
-  const st = ATM.paso_oz * dir, f = v => Math.max(ATM.paso_oz, Math.round((v + st) * 100) / 100);
-  if(which === 'w') fm.whisky_oz = f(fm.whisky_oz);
-  else if(which === 'f') fm.fruta_oz = f(fm.fruta_oz);
-  else if(which === 'b') fm.burbuja.oz = f(fm.burbuja.oz);
-  else fm.toques[which].oz = f(fm.toques[which].oz);
+/* cantidades: − / + en pasos de paso_oz, o tocar el número para escribirla (ej. 1,5) */
+function fmGetQ(which){
+  return which === 'w' ? fm.whisky_oz : which === 'f' ? fm.fruta_oz : which === 'b' ? fm.burbuja.oz : fm.toques[+which].oz;
+}
+function fmSetQ(which, v){
+  v = Math.max(ATM.paso_oz, Math.round(v * 100) / 100);
+  if(which === 'w') fm.whisky_oz = v;
+  else if(which === 'f') fm.fruta_oz = v;
+  else if(which === 'b') fm.burbuja.oz = v;
+  else fm.toques[+which].oz = v;
   paintForm();
+}
+function fmQ(which, dir){ fmSetQ(which, fmGetQ(which) + ATM.paso_oz * dir); }
+function fmQEdit(which){
+  const t = prompt('Cantidad en oz (ej.: 1,5)', String(fmGetQ(which)).replace('.', ','));
+  if(t === null) return;
+  const v = parseFloat(t.replace(',', '.'));
+  if(isNaN(v) || v <= 0){ toast('Escribe un número mayor que 0'); return; }
+  fmSetQ(which, v);
 }
 function paintForm(){
   const ch = (k, o, on, cls) => `<button type="button" class="opt${cls ? ' ' + cls : ''}${on ? ' on' : ''}" onclick="fmPick('${k}','${o.id}')">${esc(o.label)}</button>`;
   const qrow = (label, val, w, top) => `<div class="qrow"><div class="ql">${esc(label)}</div>
-    <button type="button" class="qb" onclick="fmQ(${JSON.stringify(w)},-1)">−</button>
-    <div class="qv">${ozTxt(val)}${top ? '<br><small style="font-weight:500;color:var(--mute)">top</small>' : ''}</div>
-    <button type="button" class="qb" onclick="fmQ(${JSON.stringify(w)},1)">+</button></div>`;
+    <button type="button" class="qb" onclick="fmQ('${w}',-1)" aria-label="Menos">−</button>
+    <button type="button" class="qv" onclick="fmQEdit('${w}')" aria-label="Escribir cantidad">${ozTxt(val)}${top ? '<br><small style="font-weight:500;color:var(--mute)">top</small>' : ''}</button>
+    <button type="button" class="qb" onclick="fmQ('${w}',1)" aria-label="Más">+</button></div>`;
   const b = fm.burbuja, bo = b && opt('burbuja', b.id);
   const roca = fm.vaso === 'roca' && b && !(bo && bo.nada);
   $('atmBody').innerHTML = `<div class="fwrap">
