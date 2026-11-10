@@ -297,6 +297,89 @@ a{color:inherit;text-decoration:none;}
 .tcard:not(.ph):active{background:var(--crema);}
 .mesbar{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;}
 
+/* ══════════ ARMA TU MIX ══════════ */
+#v-atm .wrap{padding-top:16px;}
+.atmsync{font-size:12.5px;border-radius:11px;padding:9px 12px;margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;line-height:1.4;}
+.atmsync.ok{background:var(--v101bg);color:var(--v101fg);}
+.atmsync.pend{background:var(--pendbg);color:var(--pendfg);font-weight:600;}
+.atmsync.warn{background:#F6D9D5;color:#8A2418;}
+.atmsync button{margin-left:auto;padding:6px 11px;border-radius:8px;background:#fff;border:1px solid currentColor;font-size:12px;font-weight:600;color:inherit;}
+.addbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:62px;border-radius:15px;
+  background:var(--rojo);color:#fff;font-size:17px;font-weight:600;letter-spacing:.01em;margin-bottom:16px;}
+.addbtn:active{background:var(--rojod);} .addbtn .pl{font-size:26px;line-height:1;}
+.daycard{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:15px;padding:15px 16px;margin-bottom:10px;}
+.daycard .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);}
+.daycard .n{font-family:'Belgan',serif;font-size:20px;color:var(--rojo);margin:3px 0 4px;}
+.daycard .d{font-size:13.5px;color:var(--text);}
+.daycard .d b{color:var(--rojo);}
+.daycard .p{font-size:12px;color:var(--pendfg);font-weight:600;margin-top:5px;}
+.daycard:active{background:var(--crema);}
+.dayhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.dayhead .k{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);}
+.dayhead h2{font-family:'Belgan',serif;font-size:23px;color:var(--rojo);font-weight:400;margin-top:3px;}
+.atmtabs{margin-bottom:12px;} .atmtabs .ord{padding:11px 20px;font-size:14px;}
+.kline{font-size:13px;color:var(--mute);margin-bottom:12px;} .kline b{color:var(--rojo);}
+.mixcard{background:#fff;border:1px solid var(--line);border-radius:15px;margin-bottom:10px;overflow:hidden;}
+.mixcard .mtop{display:flex;gap:11px;align-items:flex-start;padding:13px 13px 10px;cursor:pointer;}
+.wb{flex:0 0 auto;font-size:11px;font-weight:700;letter-spacing:.1em;padding:5px 8px;border-radius:7px;color:#fff;margin-top:2px;}
+.wb.red{background:#B3261E;} .wb.black{background:#161311;color:var(--oro);}
+.mixcard .mtx{flex:1;min-width:0;}
+.mixcard .n{font-family:'Belgan',serif;font-size:18px;color:var(--rojo);line-height:1.15;}
+.mixcard .n i{font-family:'Red Hat Display',sans-serif;font-style:italic;font-size:14px;color:var(--mute);}
+.mixcard .a{font-size:12.5px;color:var(--mute);margin-top:2px;}
+.mixcard .r{font-size:13px;color:#4A443D;margin-top:6px;line-height:1.45;}
+.mixcard .vc{text-align:center;flex:0 0 56px;}
+.mixcard .vc .v{font-family:'Belgan',serif;font-size:30px;color:var(--rojo);line-height:1;font-variant-numeric:tabular-nums;}
+.mixcard .vc .l{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);}
+.mixcard .mbot{display:flex;align-items:center;gap:9px;padding:9px 13px 12px;border-top:1px solid #F1ECE3;}
+.mixcard .st{font-size:12px;color:var(--v101fg);margin-right:auto;} .mixcard .st.p{color:var(--pendfg);font-weight:600;}
+.minus{width:48px;height:48px;border-radius:12px;border:1px solid var(--line);background:#fff;font-size:22px;color:var(--mute);}
+.plus1{min-width:96px;height:52px;border-radius:13px;background:var(--rojo);color:#fff;font-size:20px;font-weight:700;padding:0 18px;}
+.plus1:active{background:var(--rojod);} .minus:active{background:var(--crema);}
+/* resumen */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.kpi{background:var(--crema);border:1px solid var(--line);border-radius:13px;padding:13px;}
+.kpi .v{font-family:'Belgan',serif;font-size:27px;color:var(--rojo);line-height:1.05;}
+.kpi .v small{font-size:15px;}
+.kpi .l{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:4px;}
+.kpi.w{grid-column:1/-1;} .kpi.w .v{font-size:21px;}
+.cgrp{margin-bottom:12px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:6px 14px 4px;}
+.cgrp h4{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ocre);padding:8px 0 4px;}
+.crow{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #F1ECE3;font-size:14.5px;}
+.crow b{color:var(--ocre);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.atbl{overflow-x:auto;border:1px solid var(--line);border-radius:13px;background:#fff;margin-bottom:14px;}
+.atbl table{border-collapse:collapse;font-size:12.5px;min-width:900px;width:100%;}
+.atbl th{background:var(--crema);color:var(--rojo);text-align:left;padding:9px 10px;font-weight:600;white-space:nowrap;}
+.atbl td{padding:8px 10px;border-top:1px solid #F1ECE3;vertical-align:top;}
+.atbl td.c{text-align:center;font-weight:700;color:var(--rojo);}
+.expbar{display:flex;gap:9px;flex-wrap:wrap;margin:6px 0 10px;}
+.expbar button{flex:1;min-width:150px;min-height:50px;border-radius:13px;border:1px solid var(--rojo);color:var(--rojo);background:#fff;font-size:14.5px;font-weight:600;}
+.expbar button.pri{background:var(--rojo);color:#fff;}
+/* formulario */
+.fs{margin-bottom:20px;}
+.fs h4{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rojo);font-weight:700;margin-bottom:9px;}
+.fs h4 span{color:var(--mute);font-weight:500;letter-spacing:.04em;text-transform:none;font-size:12px;margin-left:5px;}
+.fs h5{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin:10px 0 7px;font-weight:600;}
+.opts{display:flex;flex-wrap:wrap;gap:8px;}
+.opt{min-height:48px;padding:0 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:15px;color:var(--text);}
+.opt.on{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:600;}
+.opt.sm{min-height:42px;font-size:14px;}
+.wpick{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.wpick .opt{min-height:68px;font-family:'Belgan',serif;font-size:24px;letter-spacing:.06em;}
+.wpick .opt.red.on{background:#B3261E;border-color:#B3261E;}
+.wpick .opt.black.on{background:#161311;border-color:#161311;color:var(--oro);}
+.qrow{display:flex;align-items:center;gap:10px;background:var(--crema);border-radius:12px;padding:6px 6px 6px 14px;margin-top:9px;}
+.qrow .ql{flex:1;font-size:14.5px;}
+.qrow .qb{width:46px;height:46px;border-radius:11px;background:#fff;border:1px solid var(--line);font-size:22px;color:var(--rojo);}
+.qrow .qv{min-width:74px;text-align:center;font-weight:700;color:var(--ocre);font-size:16px;font-variant-numeric:tabular-nums;}
+.fwarn{margin-top:10px;background:var(--pendbg);border:1px solid var(--pendln);color:#5E4310;border-radius:12px;padding:10px 12px;font-size:13.5px;}
+.savebar{position:sticky;bottom:calc(var(--nav) + env(safe-area-inset-bottom));z-index:10;background:linear-gradient(transparent,var(--paper) 30%);
+  padding:16px 0 10px;display:flex;gap:10px;}
+.savebar .sv{flex:1;min-height:58px;border-radius:14px;background:var(--rojo);color:#fff;font-size:17px;font-weight:700;}
+.savebar .dl{min-height:58px;padding:0 16px;border-radius:14px;border:1px solid #E3B6AF;background:#fff;color:#A32A1C;font-size:14px;font-weight:600;}
+#fmErr{color:#A32A1C;font-size:13.5px;min-height:18px;}
+.tact{margin-left:10px;padding:4px 10px;border-radius:999px;background:#fff;color:var(--rojo);font-weight:700;font-size:12.5px;}
+
 /* ══════════ TABBAR ══════════ */
 .tabbar{position:fixed;bottom:0;left:0;right:0;z-index:30;display:flex;background:var(--rojo);
   padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(0,0,0,.18);}
@@ -304,6 +387,20 @@ a{color:inherit;text-decoration:none;}
 .tabbar button .i{font-size:19px;line-height:1.1;}
 .tabbar button .l{font-size:10.5px;letter-spacing:.05em;margin-top:3px;}
 .tabbar button.on{color:var(--oro);}
+
+@media (max-width:1023px){ .tabbar button[data-v="pend"]{display:none;} .tabbar button .l{font-size:10px;} }
+
+/* ══════════ IMPRESIÓN (resumen de Arma tu Mix) ══════════ */
+@media print{
+  @page{margin:12mm;}
+  html,body{background:#fff !important;}
+  .topbar,.tabbar,.noprint,#atmSync,#toast{display:none !important;}
+  #app.on{display:block !important;height:auto !important;overflow:visible !important;}
+  main{overflow:visible !important;}
+  .wrap{max-width:none !important;padding:0 !important;}
+  .atbl{overflow:visible;} .atbl table{min-width:0;font-size:10px;}
+  .cgrp,.kpi{break-inside:avoid;}
+}
 
 /* ══════════ PANTALLA GRANDE (≥1024px) ══════════ */
 @media (min-width:1024px){
@@ -351,6 +448,12 @@ a{color:inherit;text-decoration:none;}
   .falta li{font-size:16px;}
   .reportbtn{max-width:340px;}
   .msgwrap{max-width:660px;margin:0 auto;}
+  #v-atm .wrap{max-width:1000px;}
+  .atmlist{display:grid;grid-template-columns:1fr 1fr;gap:12px;} .atmlist .daycard{margin:0;}
+  .mixes{display:grid;grid-template-columns:1fr 1fr;gap:12px;} .mixes .mixcard{margin:0;}
+  .kpis{grid-template-columns:repeat(4,1fr);} .kpi.w{grid-column:auto;}
+  .cons{display:grid;grid-template-columns:1fr 1fr;gap:12px;} .cons .cgrp{margin:0;}
+  .fwrap{max-width:760px;}
   .rkwrap{max-width:980px;}
   .compbtn{max-width:620px;padding:22px;} .compbtn .n{font-size:24px;}
   .chero{padding:28px;} .chero h2{font-size:32px;} .chero p{font-size:16px;}
@@ -479,6 +582,9 @@ a{color:inherit;text-decoration:none;}
     <!-- ── COMPETENCIA ── -->
     <section class="view" id="v-comp"><div class="wrap"><div class="rkwrap" id="compBody"></div></div></section>
 
+    <!-- ── ARMA TU MIX ── -->
+    <section class="view" id="v-atm"><div class="wrap"><div id="atmSync"></div><div id="atmBody"></div></div></section>
+
     <!-- ── MENSAJES ── -->
     <section class="view" id="v-msg"><div class="wrap"><div class="msgwrap">
       <div class="intro">
@@ -518,6 +624,7 @@ a{color:inherit;text-decoration:none;}
     <button data-v="dossier" onclick="go('#/dossier')"><div class="i">📖</div><div class="l">Dossier</div></button>
     <button data-v="pend" onclick="go('#/sec/PENDIENTES')"><div class="i">📝</div><div class="l">Por completar</div></button>
     <button data-v="rank" onclick="go('#/ranking')"><div class="i">🏆</div><div class="l">Ranking</div></button>
+    <button data-v="atm" onclick="go('#/atm')"><div class="i">🍹</div><div class="l">Arma tu Mix</div></button>
     <button data-v="msg" onclick="go('#/mensajes')"><div class="i">✉️</div><div class="l">Mensajes</div></button>
   </nav>
 </div>
@@ -550,9 +657,13 @@ function fmtQty(q, mult){
   return (n * mult).toLocaleString('es-CL', {maximumFractionDigits: 1});
 }
 
-function toast(t){
-  const el = $('toast'); el.textContent = t; el.classList.add('on');
-  clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('on'), 2200);
+function toast(t, actLabel, fn){
+  const el = $('toast');
+  el.innerHTML = esc(t) + (actLabel ? `<button class="tact">${esc(actLabel)}</button>` : '');
+  if(actLabel) el.querySelector('.tact').onclick = () => { fn(); el.classList.remove('on'); };
+  el.style.pointerEvents = actLabel ? 'auto' : 'none';
+  el.classList.add('on');
+  clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove('on'), actLabel ? 5000 : 2200);
 }
 async function copyText(t){
   try{ await navigator.clipboard.writeText(t); }
@@ -575,6 +686,7 @@ function route(){
   else if(head === 'dossier')          showView('dossier', 'DOSSIER DE BARRA', false);
   else if(head === 'mensajes')         showView('msg', 'MENSAJES', false);
   else if(head === 'ranking')          showRanking();
+  else if(head === 'atm' && ATM)       showAtm(h.slice(1).map(decodeURIComponent));
   else if(head === 'comp' && RK && RK.competencias.find(c => c.id === arg)) showComp(arg);
   else                                 showView('home', 'BARRA SEGRETA', false);
 }
@@ -587,7 +699,7 @@ function showView(v, title, isSub){
   $('q').placeholder = v === 'sec' ? 'Buscar en ' + SEC[curSec].label + '...' : 'Buscar trago, producto o ingrediente...';
   $('topTitle').textContent = title;
   $('topbar').classList.toggle('sub', !!isSub);
-  let tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg', ranking:'rank', comp:'rank'}[v];
+  let tab = {home:'home', dossier:'dossier', sec:'dossier', rec:'dossier', msg:'msg', ranking:'rank', comp:'rank', atm:'atm'}[v];
   if((v === 'sec' && curSec === 'PENDIENTES') || (v === 'rec' && curRec && isPend(curRec))) tab = 'pend';
   document.querySelectorAll('.tabbar button').forEach(b => b.classList.toggle('on', b.dataset.v === tab));
   window.scrollTo(0,0);
@@ -972,6 +1084,462 @@ function paintComp(){
     </div>`;
 }
 
+/* ══════════ ARMA TU MIX ══════════
+   Datos en el Sheet vía barra-atm (Apps Script). Cada acción se aplica al tiro en el equipo y entra a
+   una cola local (bar_atm_q) que se sube sola; lo que muestra la app = estado del servidor + cola encima. */
+let ATM = null, atmScreen = '', atmDia = null, atmTab = 'mixes', fm = null, fd = null;
+/* Los formularios se abren con pushState marcado: al guardar, si la entrada es nuestra se vuelve con back
+   (el día no queda duplicado en el historial); si se llegó por enlace directo, se reemplaza por el día. */
+function atmOpen(hash){ history.pushState({atmForm: true}, '', here(hash)); route(); }
+function atmBackTo(hash){ if(history.state && history.state.atmForm) history.back(); else location.replace(here(hash)); }
+const here = h => location.href.split('#')[0] + h;   // URL absoluta: la relativa se resuelve distinto si la llama otro marco
+const AQ = 'bar_atm_q', AS = 'bar_atm_state';
+const lsGet = (k, d) => { try{ return JSON.parse(localStorage.getItem(k)) || d; }catch(e){ return d; } };
+const lsSet = (k, v) => { try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+let atmSrv = lsGet(AS, {dias: [], mixes: []}), atmQ = lsGet(AQ, []);
+const atmSync = {busy: false, err: '', t: null};
+const uid = p => p + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const hoyISO = () => { const d = new Date(); return new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
+const fechaTxt = f => f ? new Date(f + 'T12:00').toLocaleDateString('es-CL',
+  {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}).replace(/[.,]/g, '').toUpperCase() : '';
+const ozTxt = n => (+n).toLocaleString('es-CL', {maximumFractionDigits: 2}) + ' oz';
+const mlTxt = n => (+n).toLocaleString('es-CL', {maximumFractionDigits: 1});
+const igFix = s => { s = (s || '').trim().replace(/\s+/g, ''); return s && s[0] !== '@' ? '@' + s : s; };
+const clone = o => JSON.parse(JSON.stringify(o));
+
+/* ── opciones del cartón (data/armatumix.json) ── */
+function opt(kind, id){
+  if(!id) return null;
+  if(kind === 'whisky')  return ATM.whisky.items.find(x => x.id === id);
+  if(kind === 'vaso')    return ATM.vasos.find(x => x.id === id);
+  if(kind === 'fruta')   return ATM.frutas.items.find(x => x.id === id);
+  if(kind === 'burbuja') return ATM.burbujas.items.find(x => x.id === id);
+  if(kind === 'garnish') return ATM.garnish.items.find(x => x.id === id);
+  if(kind === 'toque')
+    for(const g of ATM.toques.grupos){ const x = g.items.find(y => y.id === id); if(x) return {...x, grupo: g}; }
+  return null;
+}
+const lbl = (k, id) => (opt(k, id) || {label: id || ''}).label;
+function burbujaLbl(b, insumo){
+  if(!b) return '';
+  const o = opt('burbuja', b.id);
+  let s = o ? (insumo && o.insumo ? o.insumo : o.label) : b.id;
+  return b.var ? s + ' ' + b.var.toLowerCase() : s;
+}
+function mixIngs(m){            // ingredientes líquidos: [{g: grupo, n: insumo, oz}]
+  const out = [], w = opt('whisky', m.whisky), f = opt('fruta', m.fruta);
+  if(w) out.push({g: 'Whisky', n: w.insumo || w.label, oz: m.whisky_oz});
+  if(f) out.push({g: 'Fruta', n: f.label, oz: m.fruta_oz});
+  (m.toques || []).forEach(t => { const o = opt('toque', t.id); if(o) out.push({g: o.grupo.label, n: o.label, oz: t.oz}); });
+  if(m.burbuja) out.push({g: 'Burbujas', n: burbujaLbl(m.burbuja, true), oz: m.burbuja.oz});
+  return out;
+}
+function mixResumen(m){
+  return [lbl('vaso', m.vaso), lbl('fruta', m.fruta), ...(m.toques || []).map(t => lbl('toque', t.id)),
+          burbujaLbl(m.burbuja, false), ...(m.garnish || []).map(g => lbl('garnish', g))].filter(Boolean).join(' · ');
+}
+function mixFila(m){            // columnas legibles para el Sheet
+  const t = m.toques || [];
+  return {whisky: (opt('whisky', m.whisky) || {}).insumo || '', vaso: lbl('vaso', m.vaso), fruta: lbl('fruta', m.fruta),
+          toque_1: t[0] ? lbl('toque', t[0].id) : '', toque_1_oz: t[0] ? t[0].oz : '',
+          toque_2: t[1] ? lbl('toque', t[1].id) : '', toque_2_oz: t[1] ? t[1].oz : '',
+          burbuja: burbujaLbl(m.burbuja, true), burbuja_oz: m.burbuja ? m.burbuja.oz : '',
+          garnish: (m.garnish || []).map(g => lbl('garnish', g)).join(', ')};
+}
+
+/* ── estado + cola ── */
+function applyLocal(s, op){
+  if(op.t === 'dia'){
+    const i = s.dias.findIndex(x => x.id === op.dia.id);
+    if(i < 0) s.dias.push(clone(op.dia)); else s.dias[i] = {...s.dias[i], ...clone(op.dia)};
+  } else if(op.t === 'mix'){
+    const i = s.mixes.findIndex(x => x.id === op.mix.id);
+    if(i < 0) s.mixes.push({...clone(op.mix), veces: op.mix.veces || 1});
+    else s.mixes[i] = {...clone(op.mix), veces: s.mixes[i].veces, borrado: s.mixes[i].borrado};
+  } else if(op.t === 'inc'){
+    const m = s.mixes.find(x => x.id === op.id); if(m) m.veces = Math.max(1, (m.veces || 1) + op.d);
+  } else if(op.t === 'del'){
+    const x = (op.kind === 'dia' ? s.dias : s.mixes).find(y => y.id === op.id); if(x) x.borrado = true;
+  }
+}
+function atmView(){ const s = clone(atmSrv); atmQ.forEach(op => applyLocal(s, op)); return s; }
+const mixesOf = (s, dia) => s.mixes.filter(m => m.dia === dia && !m.borrado);
+function pendSet(){
+  const p = new Set();
+  atmQ.forEach(o => p.add(o.id || (o.mix && o.mix.id) || (o.dia && o.dia.id)));
+  return p;
+}
+function atmPush(op){
+  op.opid = uid('op');
+  atmQ.push(op); lsSet(AQ, atmQ);
+  rerenderAtm();
+  atmFlush();
+}
+async function atmFlush(force){
+  clearTimeout(atmSync.t);
+  if(atmSync.busy || !atmQ.length || !ATM){ paintSync(); return; }
+  atmSync.busy = true; paintSync();
+  const batch = atmQ.slice();
+  try{
+    const r = await fetch('/.netlify/functions/barra-atm', {method: 'POST',
+      headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ops: batch})});
+    const d = await r.json().catch(() => ({}));
+    if(!r.ok || !d.ok) throw new Error(d.error || 'red');
+    const done = new Set(d.done || []);
+    atmQ = atmQ.filter(o => !done.has(o.opid)); lsSet(AQ, atmQ);
+    if(d.state){ atmSrv = d.state; lsSet(AS, atmSrv); }
+    atmSync.err = '';
+  }catch(e){ atmSync.err = e.message === 'config' ? 'config' : 'red'; }
+  atmSync.busy = false;
+  rerenderAtm();
+  if(atmQ.length) atmSync.t = setTimeout(atmFlush, atmSync.err ? 20000 : 500);
+}
+async function atmPull(){
+  try{
+    const r = await fetch('/.netlify/functions/barra-atm', {cache: 'no-store'});
+    const d = await r.json().catch(() => ({}));
+    if(!r.ok || !d.ok) throw new Error(d.error || 'red');
+    atmSrv = {dias: d.dias || [], mixes: d.mixes || []}; lsSet(AS, atmSrv);
+    if(!atmQ.length) atmSync.err = '';
+  }catch(e){ atmSync.err = e.message === 'config' ? 'config' : 'red'; }
+  rerenderAtm();
+}
+function syncHTML(){
+  const n = atmQ.length;
+  if(atmSync.err === 'config')
+    return `<div class="atmsync warn">Falta conectar el Sheet: lo que registres queda guardado en este equipo y se sube solo apenas esté conectado.${n ? ` (${n} pendientes)` : ''}</div>`;
+  if(n)
+    return `<div class="atmsync pend">⏳ ${n} ${n === 1 ? 'cambio pendiente' : 'cambios pendientes'} de subir${atmSync.busy ? ' · subiendo…' : atmSync.err ? ' · sin señal' : ''}<button onclick="atmFlush(true)">Reintentar</button></div>`;
+  if(atmSync.err === 'red') return `<div class="atmsync pend">Sin señal: mostrando lo último guardado en este equipo.<button onclick="atmPull()">Actualizar</button></div>`;
+  return `<div class="atmsync ok">✓ Todo guardado en el servidor</div>`;
+}
+function paintSync(){ if(curView === 'atm' && $('atmSync')) $('atmSync').innerHTML = syncHTML(); }
+function rerenderAtm(){
+  paintSync();
+  if(curView !== 'atm') return;
+  if(atmScreen === 'list') paintAtmList();
+  else if(atmScreen === 'day') paintAtmDay();
+}
+
+/* ── router ── */
+function showAtm(p){
+  if(p[0] === 'nuevo-dia' || p[0] === 'dia'){ atmDayForm(p[1]); return; }
+  if(p[0] === 'm' && p[1]){ atmMixForm(p[1], null); return; }
+  if(p[0] === 'd' && p[1]){
+    atmDia = p[1];
+    if(p[2] === 'nuevo'){ atmMixForm(null, p[1]); return; }
+    atmTab = p[2] === 'resumen' ? 'resumen' : 'mixes';
+    atmScreen = 'day';
+    const d = atmView().dias.find(x => x.id === atmDia);
+    showView('atm', d ? fechaTxt(d.fecha) : 'ARMA TU MIX', true);
+    paintAtmDay(); atmPull();
+    return;
+  }
+  atmScreen = 'list';
+  showView('atm', 'ARMA TU MIX', false);
+  paintAtmList(); atmPull();
+}
+
+/* ── 1 · lista de días ── */
+function paintAtmList(){
+  const st = atmView(), pend = pendSet();
+  const dias = st.dias.filter(d => !d.borrado)
+    .sort((a, b) => (b.fecha + (b.desde || '')).localeCompare(a.fecha + (a.desde || '')) || (b.creado || '').localeCompare(a.creado || ''));
+  $('atmBody').innerHTML = `
+    <button class="addbtn noprint" onclick="atmOpen('#/atm/nuevo-dia')"><span class="pl">＋</span> Agregar día de activación</button>
+    <div class="atmlist">${dias.map(d => {
+      const ms = mixesOf(st, d.id), tr = ms.reduce((a, m) => a + (m.veces || 1), 0);
+      const np = ms.filter(m => pend.has(m.id)).length + (pend.has(d.id) ? 1 : 0);
+      return `<button class="daycard" onclick="go('#/atm/d/${d.id}')">
+        <div class="k">${esc([d.desde && d.hasta ? d.desde + '–' + d.hasta : d.desde, d.bartender].filter(Boolean).join(' · ') || 'Arma tu Mix')}</div>
+        <div class="n">${esc(fechaTxt(d.fecha))}</div>
+        <div class="d"><b>${tr}</b> ${tr === 1 ? 'trago' : 'tragos'} · ${ms.length} ${ms.length === 1 ? 'mix' : 'mixes'}</div>
+        ${np ? `<div class="p">⏳ pendiente de subir</div>` : ''}
+      </button>`; }).join('')}</div>
+    ${dias.length ? '' : '<div class="nores">Todavía no hay días registrados.<br>Crea el primero con el botón de arriba.</div>'}`;
+}
+
+/* ── 2 · día: mixes y resumen ── */
+function paintAtmDay(){
+  const st = atmView(), d = st.dias.find(x => x.id === atmDia);
+  if(!d || d.borrado){ $('atmBody').innerHTML = '<div class="nores">No encontramos este día.<br>Si recién lo crearon en otro equipo, espera unos segundos.</div>'; return; }
+  const ms = mixesOf(st, d.id).sort((a, b) => (a.creado || '').localeCompare(b.creado || ''));
+  const num = {}; ms.forEach((m, i) => num[m.id] = i + 1);
+  const r = atmCalc(ms);
+  const head = `
+    <div class="dayhead">
+      <div><div class="k">${esc([d.desde && d.hasta ? d.desde + '–' + d.hasta : d.desde, d.bartender].filter(Boolean).join(' · '))}</div>
+        <h2>Arma tu Mix · ${esc(fechaTxt(d.fecha))}</h2></div>
+      <button class="ord noprint" onclick="atmOpen('#/atm/dia/${d.id}')">Editar día</button>
+    </div>
+    <div class="orden atmtabs noprint">
+      <button class="ord${atmTab === 'mixes' ? ' on' : ''}" onclick="location.replace(here('#/atm/d/${d.id}'))">Mixes</button>
+      <button class="ord${atmTab === 'resumen' ? ' on' : ''}" onclick="location.replace(here('#/atm/d/${d.id}/resumen'))">Resumen</button>
+    </div>`;
+  if(atmTab === 'resumen'){ $('atmBody').innerHTML = head + resumenHTML(d, ms, num, r); return; }
+  const pend = pendSet();
+  const wtxt = Object.entries(r.porWhisky).map(([k, v]) => `${v} ${esc(k)}`).join(' · ');
+  $('atmBody').innerHTML = head + `
+    <div class="kline"><b>${r.tragos}</b> ${r.tragos === 1 ? 'trago' : 'tragos'} · <b>${ms.length}</b> ${ms.length === 1 ? 'mix' : 'mixes'}${wtxt ? ' · ' + wtxt : ''}</div>
+    <button class="addbtn" onclick="atmOpen('#/atm/d/${d.id}/nuevo')"><span class="pl">＋</span> Nuevo mix</button>
+    <div class="mixes">${ms.slice().reverse().map(m => {
+      const w = m.whisky === 'black' ? 'black' : 'red';
+      return `<div class="mixcard">
+        <div class="mtop" onclick="atmOpen('#/atm/m/${m.id}')">
+          <span class="wb ${w}">${esc(lbl('whisky', m.whisky).toUpperCase())}</span>
+          <div class="mtx">
+            <div class="n">#${num[m.id]} · ${m.nombre ? esc(m.nombre) : '<i>Sin nombre</i>'}</div>
+            <div class="a">${esc([m.creador, m.ig].filter(Boolean).join(' · ') || 'Sin autor')}</div>
+            <div class="r">${esc(mixResumen(m))}</div>
+          </div>
+          <div class="vc"><div class="v">${m.veces || 1}</div><div class="l">${(m.veces || 1) === 1 ? 'vez' : 'veces'}</div></div>
+        </div>
+        <div class="mbot">
+          <span class="st${pend.has(m.id) ? ' p' : ''}">${pend.has(m.id) ? '⏳ pendiente de subir' : '✓ guardado'}</span>
+          <button class="minus" onclick="atmInc('${m.id}',-1)" aria-label="Restar uno">−</button>
+          <button class="plus1" onclick="atmInc('${m.id}',1)">＋1</button>
+        </div>
+      </div>`; }).join('')}</div>
+    ${ms.length ? '' : '<div class="nores">Sin mixes todavía. Toca "Nuevo mix" con el primer cartón.</div>'}`;
+}
+function atmInc(id, d){
+  const m = atmView().mixes.find(x => x.id === id); if(!m) return;
+  const v = m.veces || 1, nm = m.nombre || 'Sin nombre';
+  if(d < 0 && v <= 1){ toast('Ya está en 1. Para quitarlo, ábrelo y bórralo.'); return; }
+  atmPush({t: 'inc', id, d});
+  if(d > 0) toast(`${nm}: ${v} → ${v + 1}`, 'Deshacer', () => atmPush({t: 'inc', id, d: -1}));
+  else toast(`${nm}: ${v} → ${v - 1}`);
+}
+
+const GRUPOS = ['Whisky', 'Fruta', 'Licores', 'De la casa', 'Burbujas'];
+function atmCalc(ms){
+  const r = {tragos: 0, porWhisky: {}, top: [], ins: {}, un: {Garnish: {}, Vasos: {}}};
+  ATM.whisky.items.forEach(w => r.porWhisky[w.label] = 0);
+  ms.forEach(m => {
+    const n = m.veces || 1;
+    r.tragos += n;
+    const w = opt('whisky', m.whisky); if(w) r.porWhisky[w.label] += n;
+    mixIngs(m).forEach(i => {
+      const k = i.g + '|' + i.n;
+      (r.ins[k] = r.ins[k] || {g: i.g, n: i.n, ml: 0}).ml += (+i.oz || 0) * ATM.oz_ml * n;
+    });
+    (m.garnish || []).forEach(g => { const l = lbl('garnish', g); r.un.Garnish[l] = (r.un.Garnish[l] || 0) + n; });
+    if(m.vaso){ const l = lbl('vaso', m.vaso); r.un.Vasos[l] = (r.un.Vasos[l] || 0) + n; }
+  });
+  const max = ms.reduce((a, m) => Math.max(a, m.veces || 1), 0);
+  r.top = max ? ms.filter(m => (m.veces || 1) === max) : [];
+  r.cols = Object.values(r.ins).sort((a, b) =>
+    (GRUPOS.indexOf(a.g) + 99) % 99 - (GRUPOS.indexOf(b.g) + 99) % 99 || b.ml - a.ml);
+  return r;
+}
+function resumenHTML(d, ms, num, r){
+  if(!ms.length) return '<div class="nores">Sin mixes todavía.</div>';
+  const grupos = [...new Set(r.cols.map(c => c.g))];
+  const wtxt = Object.entries(r.porWhisky).map(([k, v]) => `${esc(k)} ${v}`).join(' <small>·</small> ');
+  const topTxt = r.top.map(m => esc(m.nombre || 'Sin nombre')).join(', ');
+  const un = Object.entries(r.un).filter(([, o]) => Object.keys(o).length);
+  return `
+    <div class="kpis">
+      <div class="kpi"><div class="v">${r.tragos}</div><div class="l">Tragos servidos</div></div>
+      <div class="kpi"><div class="v">${ms.length}</div><div class="l">Mixes distintos</div></div>
+      <div class="kpi"><div class="v">${wtxt}</div><div class="l">Tragos por whisky</div></div>
+      <div class="kpi w"><div class="v">${topTxt} <small>× ${r.top[0].veces || 1}</small></div><div class="l">Más pedido</div></div>
+    </div>
+    <div class="expbar noprint">
+      <button class="pri" onclick="atmCSV()">Exportar a Excel (CSV)</button>
+      <button onclick="window.print()">Imprimir / guardar PDF</button>
+    </div>
+    <h2 class="sect-h" style="margin-top:8px">CONSUMO DE INSUMOS · BODEGA</h2>
+    <div class="cons">
+      ${grupos.map(g => `<div class="cgrp"><h4>${esc(g)} · ml</h4>${r.cols.filter(c => c.g === g)
+        .map(c => `<div class="crow"><span>${esc(c.n)}</span><b>${mlTxt(c.ml)} ml</b></div>`).join('')}</div>`).join('')}
+      ${un.map(([g, o]) => `<div class="cgrp"><h4>${esc(g)} · unidades</h4>${Object.entries(o).sort((a, b) => b[1] - a[1])
+        .map(([k, v]) => `<div class="crow"><span>${esc(k)}</span><b>${v}</b></div>`).join('')}</div>`).join('')}
+    </div>
+    <h2 class="sect-h" style="margin-top:20px">MIXES DEL DÍA</h2>
+    <div class="atbl"><table>
+      <tr><th>#</th><th>Nombre</th><th>Creador</th><th>Instagram</th><th>Veces</th><th>Whisky</th><th>Vaso</th>
+        <th>Fruta</th><th>Toque</th><th>Burbuja</th><th>Garnish</th><th>Nota</th></tr>
+      ${ms.map(m => `<tr>
+        <td>${num[m.id]}</td><td>${esc(m.nombre || 'Sin nombre')}</td><td>${esc(m.creador || '')}</td><td>${esc(m.ig || '')}</td>
+        <td class="c">${m.veces || 1}</td>
+        <td>${esc(lbl('whisky', m.whisky))} ${ozTxt(m.whisky_oz)}</td><td>${esc(lbl('vaso', m.vaso))}</td>
+        <td>${esc(lbl('fruta', m.fruta))} ${ozTxt(m.fruta_oz)}</td>
+        <td>${(m.toques || []).map(t => esc(lbl('toque', t.id)) + ' ' + ozTxt(t.oz)).join('<br>')}</td>
+        <td>${m.burbuja ? esc(burbujaLbl(m.burbuja, false)) + ' ' + ozTxt(m.burbuja.oz) : '—'}</td>
+        <td>${(m.garnish || []).map(g => esc(lbl('garnish', g))).join(', ')}</td><td>${esc(m.nota || '')}</td>
+      </tr>`).join('')}
+    </table></div>`;
+}
+function atmCSV(){
+  const st = atmView(), d = st.dias.find(x => x.id === atmDia); if(!d) return;
+  const ms = mixesOf(st, d.id).sort((a, b) => (a.creado || '').localeCompare(b.creado || ''));
+  const r = atmCalc(ms);
+  const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"';
+  const nm = v => (+v).toLocaleString('es-CL', {maximumFractionDigits: 2, useGrouping: false});
+  const head = ['#', 'Nombre', 'Creador', 'Instagram', 'Veces', 'Whisky', 'Vaso', 'Fruta', 'Toques', 'Burbuja', 'Garnish', 'Nota',
+                ...r.cols.map(c => c.n + ' (ml)'), 'Garnish (un)'];
+  const lines = [head.map(q).join(';')];
+  ms.forEach((m, i) => {
+    const n = m.veces || 1, ings = mixIngs(m);
+    const ml = c => ings.filter(x => x.g === c.g && x.n === c.n).reduce((a, x) => a + (+x.oz || 0) * ATM.oz_ml * n, 0);
+    lines.push([i + 1, m.nombre || 'Sin nombre', m.creador || '', m.ig || '', n, `${lbl('whisky', m.whisky)} ${nm(m.whisky_oz)} oz`,
+      lbl('vaso', m.vaso), `${lbl('fruta', m.fruta)} ${nm(m.fruta_oz)} oz`,
+      (m.toques || []).map(t => `${lbl('toque', t.id)} ${nm(t.oz)} oz`).join(' + '),
+      m.burbuja ? `${burbujaLbl(m.burbuja, false)} ${nm(m.burbuja.oz)} oz` : '',
+      (m.garnish || []).map(g => lbl('garnish', g)).join(', '), m.nota || ''].map(q)
+      .concat(r.cols.map(c => nm(ml(c))), [String((m.garnish || []).length * n)]).join(';'));
+  });
+  lines.push(['', 'TOTAL', '', '', r.tragos, '', '', '', '', '', '', ''].map(q)
+    .concat(r.cols.map(c => nm(c.ml)), [String(Object.values(r.un.Garnish).reduce((a, b) => a + b, 0))]).join(';'));
+  const blob = new Blob(['﻿' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = `Arma tu Mix ${d.fecha}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+
+/* ── día nuevo / editar día ── */
+function atmDayForm(id){
+  const d = id ? atmView().dias.find(x => x.id === id) : null;
+  fd = d ? clone(d) : {id: null, fecha: hoyISO(), desde: ATM.horario[0], hasta: ATM.horario[1], bartender: ''};
+  atmScreen = 'dayform';
+  showView('atm', d ? 'EDITAR DÍA' : 'NUEVO DÍA', true);
+  paintDayForm();
+}
+function paintDayForm(){
+  const otros = fd.bartender && !ATM.bartenders.includes(fd.bartender) ? fd.bartender : '';
+  $('atmBody').innerHTML = `<div class="fwrap">
+    <div class="fs"><h4>Fecha</h4>
+      <div class="field" style="margin:0"><input type="date" value="${esc(fd.fecha)}" onchange="fd.fecha=this.value"></div></div>
+    <div class="fs"><h4>Horario <span>opcional</span></h4>
+      <div style="display:flex;gap:10px">
+        <div class="field" style="margin:0;flex:1"><input type="time" value="${esc(fd.desde || '')}" onchange="fd.desde=this.value"></div>
+        <div class="field" style="margin:0;flex:1"><input type="time" value="${esc(fd.hasta || '')}" onchange="fd.hasta=this.value"></div>
+      </div></div>
+    <div class="fs"><h4>Bartender a cargo <span>opcional</span></h4>
+      <div class="opts">${ATM.bartenders.map(b =>
+        `<button type="button" class="opt${fd.bartender === b ? ' on' : ''}" data-b="${esc(b)}" onclick="fd.bartender=fd.bartender===this.dataset.b?'':this.dataset.b;paintDayForm()">${esc(b)}</button>`).join('')}</div>
+      <div class="field"><input type="text" placeholder="Otro nombre" value="${esc(otros)}" oninput="fd.bartender=this.value"></div></div>
+    <div class="savebar">
+      ${fd.id ? `<button class="dl" onclick="fdDel()">Borrar día</button>` : ''}
+      <button class="sv" onclick="fdSave()">${fd.id ? 'Guardar cambios' : 'Crear día'}</button>
+    </div></div>`;
+}
+function fdSave(){
+  if(!fd.fecha){ toast('Elige la fecha'); return; }
+  const dia = {id: fd.id || uid('d'), fecha: fd.fecha, desde: fd.desde || '', hasta: fd.hasta || '',
+               bartender: (fd.bartender || '').trim(), creado: fd.creado || new Date().toISOString()};
+  atmPush({t: 'dia', dia});
+  toast(fd.id ? '✓ Día actualizado' : '✓ Día creado');
+  if(fd.id) atmBackTo('#/atm/d/' + dia.id);
+  else location.replace(here('#/atm/d/' + dia.id));   // día nuevo: el formulario se reemplaza por el día recién creado
+}
+function fdDel(){
+  const n = mixesOf(atmView(), fd.id).length;
+  if(!confirm(`¿Borrar este día${n ? ` y sus ${n} mixes` : ''}? Queda marcado como borrado en el Sheet y se puede recuperar desde ahí.`)) return;
+  atmPush({t: 'del', kind: 'dia', id: fd.id});
+  location.replace(here('#/atm'));
+}
+
+/* ── 3 · nuevo mix / editar mix ── */
+function atmMixForm(id, dia){
+  const m = id ? atmView().mixes.find(x => x.id === id) : null;
+  if(id && !m){ $('atmBody').innerHTML = '<div class="nores">No encontramos este mix.</div>'; showView('atm', 'MIX', true); return; }
+  fm = m ? clone(m) : {id: null, dia, whisky: null, whisky_oz: ATM.whisky.oz, vaso: null, fruta: null, fruta_oz: ATM.frutas.oz,
+                       toques: [], burbuja: null, garnish: [], nombre: '', creador: '', ig: '', nota: ''};
+  if(m && !m.burbuja) fm.burbuja = {id: 'sin'};
+  atmDia = fm.dia; atmScreen = 'form';
+  showView('atm', m ? 'EDITAR MIX' : 'NUEVO MIX', true);
+  paintForm();
+}
+function fmPick(k, id){
+  if(k === 'whisky' || k === 'vaso' || k === 'fruta') fm[k] = fm[k] === id ? null : id;
+  else if(k === 'toque'){
+    const i = fm.toques.findIndex(t => t.id === id);
+    if(i >= 0) fm.toques.splice(i, 1);
+    else if(fm.toques.length >= ATM.toques.max){ toast(`Máximo ${ATM.toques.max} toques`); return; }
+    else fm.toques.push({id, oz: opt('toque', id).grupo.oz});
+  } else if(k === 'burbuja'){
+    const o = opt('burbuja', id);
+    if(fm.burbuja && fm.burbuja.id === id) fm.burbuja = null;
+    else fm.burbuja = o.nada ? {id} : {id, oz: ATM.burbujas.oz, var: o.variedades ? o.variedades[0] : ''};
+  } else if(k === 'rbvar') fm.burbuja.var = id;
+  else if(k === 'garnish'){
+    const i = fm.garnish.indexOf(id);
+    if(i >= 0) fm.garnish.splice(i, 1);
+    else if(fm.garnish.length >= ATM.garnish.max){ toast(`Máximo ${ATM.garnish.max} garnish`); return; }
+    else fm.garnish.push(id);
+  }
+  paintForm();
+}
+function fmQ(which, dir){
+  const st = ATM.paso_oz * dir, f = v => Math.max(ATM.paso_oz, Math.round((v + st) * 100) / 100);
+  if(which === 'w') fm.whisky_oz = f(fm.whisky_oz);
+  else if(which === 'f') fm.fruta_oz = f(fm.fruta_oz);
+  else if(which === 'b') fm.burbuja.oz = f(fm.burbuja.oz);
+  else fm.toques[which].oz = f(fm.toques[which].oz);
+  paintForm();
+}
+function paintForm(){
+  const ch = (k, o, on, cls) => `<button type="button" class="opt${cls ? ' ' + cls : ''}${on ? ' on' : ''}" onclick="fmPick('${k}','${o.id}')">${esc(o.label)}</button>`;
+  const qrow = (label, val, w, top) => `<div class="qrow"><div class="ql">${esc(label)}</div>
+    <button type="button" class="qb" onclick="fmQ(${JSON.stringify(w)},-1)">−</button>
+    <div class="qv">${ozTxt(val)}${top ? '<br><small style="font-weight:500;color:var(--mute)">top</small>' : ''}</div>
+    <button type="button" class="qb" onclick="fmQ(${JSON.stringify(w)},1)">+</button></div>`;
+  const b = fm.burbuja, bo = b && opt('burbuja', b.id);
+  const roca = fm.vaso === 'roca' && b && !(bo && bo.nada);
+  $('atmBody').innerHTML = `<div class="fwrap">
+    <div class="fs"><h4>Whisky *</h4>
+      <div class="wpick">${ATM.whisky.items.map(o => ch('whisky', o, fm.whisky === o.id, o.id)).join('')}</div>
+      ${fm.whisky ? qrow(opt('whisky', fm.whisky).insumo, fm.whisky_oz, 'w') : ''}</div>
+    <div class="fs"><h4>Vaso *</h4><div class="opts">${ATM.vasos.filter(o => !o.oculto).map(o => ch('vaso', o, fm.vaso === o.id)).join('')}</div></div>
+    <div class="fs"><h4>Fruta *</h4><div class="opts">${ATM.frutas.items.filter(o => !o.oculto).map(o => ch('fruta', o, fm.fruta === o.id)).join('')}</div>
+      ${fm.fruta ? qrow(lbl('fruta', fm.fruta), fm.fruta_oz, 'f') : ''}</div>
+    <div class="fs"><h4>Toque <span>hasta ${ATM.toques.max}</span></h4>
+      ${ATM.toques.grupos.map(g => `<h5>${esc(g.label)}</h5><div class="opts">${g.items.filter(o => !o.oculto)
+        .map(o => ch('toque', o, fm.toques.some(t => t.id === o.id), 'sm')).join('')}</div>`).join('')}
+      ${fm.toques.map((t, i) => qrow(lbl('toque', t.id), t.oz, i)).join('')}</div>
+    <div class="fs"><h4>Burbuja <span>máximo 1</span></h4>
+      <div class="opts">${ATM.burbujas.items.filter(o => !o.oculto).map(o => ch('burbuja', o, b && b.id === o.id, 'sm')).join('')}</div>
+      ${bo && bo.variedades ? `<h5>Variedad de ${esc(bo.label)}</h5><div class="opts">${bo.variedades.map(v =>
+        `<button type="button" class="opt sm${b.var === v ? ' on' : ''}" onclick="fmPick('rbvar','${esc(v)}')">${esc(v)}</button>`).join('')}</div>` : ''}
+      ${b && bo && !bo.nada ? qrow(burbujaLbl(b, false), b.oz, 'b', true) : ''}
+      ${roca ? `<div class="fwarn">⚠ ${esc(ATM.aviso_roca_burbuja)}</div>` : ''}</div>
+    <div class="fs"><h4>Garnish <span>hasta ${ATM.garnish.max}</span></h4>
+      <div class="opts">${ATM.garnish.items.filter(o => !o.oculto).map(o => ch('garnish', o, fm.garnish.includes(o.id), 'sm')).join('')}</div></div>
+    <div class="fs"><h4>Autor</h4>
+      <div class="field" style="margin-top:0"><label>Nombre del mix</label><input type="text" placeholder="Sin nombre" value="${esc(fm.nombre)}" oninput="fm.nombre=this.value"></div>
+      <div class="field"><label>Creador</label><input type="text" placeholder="Nombre de quien lo creó" value="${esc(fm.creador)}" oninput="fm.creador=this.value"></div>
+      <div class="field"><label>Instagram</label><input type="text" placeholder="@usuario" autocapitalize="off" autocorrect="off" value="${esc(fm.ig)}" oninput="fm.ig=this.value" onblur="fm.ig=igFix(this.value);this.value=fm.ig"></div>
+      <div class="field"><label>Nota <span style="text-transform:none;letter-spacing:0">(opcional)</span></label><input type="text" placeholder="Ej.: frambuesa macerada con menta" value="${esc(fm.nota)}" oninput="fm.nota=this.value"></div>
+    </div>
+    <div id="fmErr"></div>
+    <div class="savebar">
+      ${fm.id ? `<button class="dl" onclick="fmDel()">Borrar</button>` : ''}
+      <button class="sv" onclick="fmSave()">${fm.id ? 'Guardar cambios' : 'Guardar'}</button>
+    </div></div>`;
+}
+function fmSave(){
+  const falta = [['whisky', 'whisky'], ['vaso', 'vaso'], ['fruta', 'fruta']].filter(([k]) => !fm[k]).map(x => x[1]);
+  if(falta.length){ const t = 'Falta elegir: ' + falta.join(', ') + '.'; $('fmErr').textContent = t; toast(t); return; }
+  const nuevo = !fm.id, ahora = new Date().toISOString();
+  const m = {id: fm.id || uid('m'), dia: fm.dia, creado: fm.creado || ahora, editado: ahora,
+    nombre: (fm.nombre || '').trim(), creador: (fm.creador || '').trim(), ig: igFix(fm.ig), nota: (fm.nota || '').trim(),
+    whisky: fm.whisky, whisky_oz: fm.whisky_oz, vaso: fm.vaso, fruta: fm.fruta, fruta_oz: fm.fruta_oz,
+    toques: fm.toques, burbuja: fm.burbuja && !(opt('burbuja', fm.burbuja.id) || {}).nada ? fm.burbuja : null, garnish: fm.garnish};
+  if(nuevo) m.veces = 1;
+  atmPush({t: 'mix', mix: m, fila: mixFila(m)});
+  toast(nuevo ? '✓ Mix guardado' : '✓ Cambios guardados');
+  atmBackTo('#/atm/d/' + m.dia);
+}
+function fmDel(){
+  if(!confirm(`¿Borrar "${fm.nombre || 'Sin nombre'}"? Queda marcado como borrado en el Sheet y se puede recuperar desde ahí.`)) return;
+  atmPush({t: 'del', kind: 'mix', id: fm.id});
+  toast('Mix borrado');
+  atmBackTo('#/atm/d/' + fm.dia);
+}
+
 /* ══════════ mensajes ══════════ */
 let ctxRecipe = '';
 function reportRecipe(){
@@ -1033,8 +1601,9 @@ async function startApp(){
   $('app').classList.add('on');
   $('topDate').textContent = new Date().toLocaleDateString('es-CL', {weekday:'short', day:'numeric', month:'short'}).toUpperCase();
   if(!DB){
-    [DB, RK] = await Promise.all([fetch('data/recetas.json').then(r => r.json()),
-                                  fetch('data/ranking.json').then(r => r.json())]);
+    [DB, RK, ATM] = await Promise.all([fetch('data/recetas.json').then(r => r.json()),
+                                       fetch('data/ranking.json').then(r => r.json()),
+                                       fetch('data/armatumix.json').then(r => r.json())]);
     DB.sections.forEach(s => SEC[s.id] = s);
     DB.recipes.forEach(r => BYSLUG[r.slug] = r);
     const vig = DB.recipes.filter(r => !isOff(r) && r.kind !== 'batch').length;
@@ -1050,10 +1619,12 @@ async function startApp(){
   route();
   loadSheet();
   flushQueue();
+  atmFlush();
 }
 
 window.addEventListener('hashchange', () => { if(DB) route(); });
 window.addEventListener('online', flushQueue);
+window.addEventListener('online', () => atmFlush(true));
 
 /* PIN */
 const pinInputs = [...document.querySelectorAll('.pinbox input')];

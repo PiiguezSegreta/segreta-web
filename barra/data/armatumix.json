@@ -1,0 +1,82 @@
+{
+ "_como_editar": "Opciones y cantidades por defecto del módulo Arma tu Mix. Cambiar un 'label' cambia lo que se ve; NO cambiar los 'id' de opciones ya usadas (los registros guardados los referencian). Para sacar una opción sin perder historial, agregar \"oculto\": true. Cantidades en oz. Subir const V en sw.js al desplegar.",
+ "oz_ml": 30,
+ "paso_oz": 0.25,
+ "whisky": {
+  "oz": 2,
+  "items": [
+   {"id": "red", "label": "Red", "insumo": "JW Red Label"},
+   {"id": "black", "label": "Black", "insumo": "JW Black Label"}
+  ]
+ },
+ "vasos": [
+  {"id": "roca", "label": "Roca"},
+  {"id": "tumbler", "label": "Tumbler"},
+  {"id": "copon", "label": "Copón"}
+ ],
+ "frutas": {
+  "oz": 1,
+  "items": [
+   {"id": "frambuesa", "label": "Frambuesa"},
+   {"id": "maracuya", "label": "Maracuyá"},
+   {"id": "pina", "label": "Piña"},
+   {"id": "pomelo", "label": "Pomelo"},
+   {"id": "naranja", "label": "Naranja"}
+  ]
+ },
+ "toques": {
+  "max": 2,
+  "grupos": [
+   {"id": "casa", "label": "De la casa", "oz": 0.5, "items": [
+    {"id": "syrup_simple", "label": "Syrup simple"},
+    {"id": "syrup_canela", "label": "Syrup de canela"},
+    {"id": "syrup_vino", "label": "Syrup de vino tinto"},
+    {"id": "jengibre", "label": "Jengibre"},
+    {"id": "menta_toque", "label": "Menta"}
+   ]},
+   {"id": "licores", "label": "Licores", "oz": 1, "items": [
+    {"id": "disaronno", "label": "Disaronno"},
+    {"id": "licor43", "label": "Licor 43"},
+    {"id": "licor_cafe", "label": "Licor de café"},
+    {"id": "st_germain", "label": "St-Germain"},
+    {"id": "aperol", "label": "Aperol"},
+    {"id": "campari", "label": "Campari"},
+    {"id": "chambord", "label": "Chambord"},
+    {"id": "limoncello", "label": "Limoncello"},
+    {"id": "vermouth_rosso", "label": "Vermouth rosso"},
+    {"id": "ramazzotti", "label": "Ramazzotti"},
+    {"id": "curacao", "label": "Curaçao"}
+   ]}
+  ]
+ },
+ "burbujas": {
+  "oz": 0.5,
+  "items": [
+   {"id": "soda", "label": "Soda Schweppes"},
+   {"id": "tonica", "label": "Tónica Schweppes"},
+   {"id": "tonica_zero", "label": "Tónica Schweppes Zero"},
+   {"id": "ginger_ale", "label": "Ginger ale Schweppes"},
+   {"id": "ginger_ale_zero", "label": "Ginger ale Schweppes Zero"},
+   {"id": "ginger_beer", "label": "Ginger beer", "insumo": "Ginger beer Thomas Henry"},
+   {"id": "redbull", "label": "Red Bull", "variedades": ["Clásico", "Zero", "Yellow", "Pomelo"]},
+   {"id": "sin", "label": "Sin burbuja", "nada": true}
+  ]
+ },
+ "garnish": {
+  "max": 3,
+  "items": [
+   {"id": "menta", "label": "Menta"},
+   {"id": "romero", "label": "Romero"},
+   {"id": "canela_rama", "label": "Canela en rama"},
+   {"id": "pomelo_fresco", "label": "Pomelo fresco"},
+   {"id": "piel_naranja", "label": "Piel de naranja"},
+   {"id": "citrico_deshidratado", "label": "Cítrico deshidratado"},
+   {"id": "flor", "label": "Flor comestible"},
+   {"id": "frutilla", "label": "Frutilla"},
+   {"id": "tajin", "label": "Borde de tajín"}
+  ]
+ },
+ "bartenders": ["Franchesco Bonetti", "Abi", "Ronald", "Gonzalo", "Cristhian", "Martín"],
+ "horario": ["15:00", "20:00"],
+ "aviso_roca_burbuja": "El cartón dice que en roca no va burbuja. Se puede guardar igual."
+}
