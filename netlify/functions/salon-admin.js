@@ -43,12 +43,14 @@ exports.handler = async (event) => {
     if (['José Buergo', 'Isaac', 'Peter'].indexOf(data.autor) < 0) {
       return { statusCode: 403, body: JSON.stringify({ ok: false, error: 'autor' }) };
     }
-    if (data.tipo !== 'anuncio' && data.tipo !== 'stock' && data.tipo !== 'plazas') {
+    if (['anuncio', 'stock', 'plazas', 'giftcard'].indexOf(data.tipo) < 0) {
       return { statusCode: 400, body: JSON.stringify({ ok: false, error: 'tipo' }) };
     }
     var accion = 'enviar';
     if (data.accion === 'quitar') accion = 'quitar';
     else if (data.accion === 'visibilidad') accion = 'visibilidad';
+    else if (data.accion === 'listar') accion = 'listar';
+    else if (data.accion === 'borrar') accion = 'borrar';
     const plz = {};
     ['T', 'M', 'P', 'B', 'S', 'K'].forEach(function (L) {
       plz[L] = ((data.plazas && data.plazas[L]) || '').toString().slice(0, 40);
@@ -67,6 +69,16 @@ exports.handler = async (event) => {
       runnerBarra: (data.runnerBarra || '').toString().slice(0, 40),
       runnerCocina: (data.runnerCocina || '').toString().slice(0, 40),
       busser: (data.busser || '').toString().slice(0, 40),
+      // Gift cards (ganadores): solo se reenvían cuando el tipo es 'giftcard'
+      id: (data.id || '').toString().slice(0, 40),
+      nombre: (data.nombre || '').toString().slice(0, 90),
+      rut: (data.rut || '').toString().slice(0, 20),
+      mail: (data.mail || '').toString().slice(0, 90),
+      telefono: (data.telefono || '').toString().slice(0, 30),
+      instagram: (data.instagram || '').toString().slice(0, 60),
+      monto: (data.monto || '').toString().slice(0, 20),
+      vencimiento: (data.vencimiento || '').toString().slice(0, 20),
+      numero: (data.numero || '').toString().slice(0, 40),
     };
     const r = await fetch(APPS_URL, {
       method: 'POST',
@@ -74,6 +86,11 @@ exports.handler = async (event) => {
       body: JSON.stringify(payload),
       redirect: 'follow',
     });
+    // Para gift cards devolvemos el cuerpo real de Apps Script (la lista viaja ahí).
+    if (data.tipo === 'giftcard') {
+      const txt = await r.text();
+      return { statusCode: r.ok ? 200 : 502, headers: { 'Content-Type': 'application/json' }, body: txt };
+    }
     return { statusCode: r.ok ? 200 : 502, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ok: r.ok }) };
   } catch (err) {
     console.error('salon-admin exception:', err);
