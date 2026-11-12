@@ -1014,7 +1014,7 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
       <div class="hubcard" onclick="go('adm-aviso')"><span class="hubemo">📢</span><span class="hubtxt"><span class="hubtit">Anuncio de equipo</span><span class="hubsub">Publica avisos y prende o apaga cada uno</span></span><span class="hubarr">›</span></div>
       <div class="hubcard" onclick="go('adm-stock')"><span class="hubemo">📦</span><span class="hubtxt"><span class="hubtit">Stock del día</span><span class="hubsub">101 · 85 · 86 por etiquetas</span></span><span class="hubarr">›</span></div>
       <div class="hubcard" onclick="go('adm-plazas')"><span class="hubemo">🧭</span><span class="hubtxt"><span class="hubtit">Asignar plazas</span><span class="hubsub">Garzones y runners en cada plaza y función</span></span><span class="hubarr">›</span></div>
-      <div class="hubcard" onclick="go('adm-giftcards')"><span class="hubemo">🎁</span><span class="hubtxt"><span class="hubtit">Ganadores gift card</span><span class="hubsub">Registra y guarda a quien se gana una gift card</span></span><span class="hubarr">›</span></div>
+      <div class="hubcard" onclick="go('adm-giftcards')"><span class="hubemo">🎁</span><span class="hubtxt"><span class="hubtit">Ganadores de premios</span><span class="hubsub">Registra gift cards, el vuelo en parapente y otros premios</span></span><span class="hubarr">›</span></div>
     </div>
     <div class="card">
       <div class="eyebrow">Clave de admin</div>
@@ -1080,15 +1080,15 @@ h2.vt.vtoggle{display:flex;justify-content:space-between;align-items:center;curs
   </section>
 
   <section class="view" id="v-adm-giftcards">
-    <h2 class="vt">Ganadores gift card</h2>
-    <div class="vsub">Registra a quien se gana una gift card. Queda guardado en el Sheet y solo se ve acá con la clave de admin.</div>
+    <h2 class="vt">Ganadores de premios</h2>
+    <div class="vsub">Registra a quien se gana un premio de la activación (gift card, vuelo en parapente, etc.). En "Premio" escribe qué se ganó. Queda guardado en el Sheet y solo se ve acá con la clave de admin.</div>
     <div class="card">
       <div class="plzrow"><span class="plzlbl">Nombre</span><input id="gcNombre" class="adminput plzin" autocomplete="off" placeholder="Nombre y apellido"></div>
       <div class="plzrow"><span class="plzlbl">RUT</span><input id="gcRut" class="adminput plzin" autocomplete="off" placeholder="12.345.678-9"></div>
       <div class="plzrow"><span class="plzlbl">Mail</span><input id="gcMail" class="adminput plzin" type="email" autocomplete="off" placeholder="correo@mail.com"></div>
       <div class="plzrow"><span class="plzlbl">Teléfono</span><input id="gcTel" class="adminput plzin" type="tel" autocomplete="off" placeholder="+56 9 ..."></div>
       <div class="plzrow"><span class="plzlbl">Instagram <span class="gcopt">(opcional)</span></span><input id="gcIg" class="adminput plzin" autocomplete="off" placeholder="@usuario"></div>
-      <div class="plzrow"><span class="plzlbl">Monto gift card</span><input id="gcMonto" class="adminput plzin" inputmode="numeric" autocomplete="off" placeholder="$50.000"></div>
+      <div class="plzrow"><span class="plzlbl">Premio</span><input id="gcMonto" class="adminput plzin" autocomplete="off" placeholder="Parapente / Gift card $50.000"></div>
       <div class="plzrow"><span class="plzlbl">Vencimiento</span><input id="gcVence" class="adminput plzin" autocomplete="off" placeholder="dd-mm-aaaa"></div>
       <div class="plzrow"><span class="plzlbl">N° gift card</span><input id="gcNum" class="adminput plzin" autocomplete="off" placeholder="Número de la gift card"></div>
       <div class="admrow"><button class="admbtn" onclick="gcGuardar()">Guardar ganador</button><button class="admbtn ghost" onclick="gcCargar()">Actualizar lista</button></div>
